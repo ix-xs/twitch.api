@@ -1,0 +1,129 @@
+/* ==========================================================================
+   What the twitch.api home page adds to the house stylesheet: the console,
+   the endpoint finder and the table that compares the three transports.
+
+   One thing moves on its own here: the console plays its first example when
+   it comes into view. Everything else moves only in answer to the visitor.
+   ========================================================================== */
+
+:root,
+:root[data-theme="dark"] {
+  --tw-ok: #a9c49f;
+  --tw-well: #0e0e0d;
+  --tw-name-l: 72%;
+  --tw-name-s: 62%;
+}
+:root[data-theme="light"] {
+  --tw-ok: #3c6a39;
+  --tw-well: #f2efe7;
+  --tw-name-l: 34%;
+  --tw-name-s: 58%;
+}
+
+/* -------------------------------- Console -------------------------------- */
+.tw-console { min-width: 0; border: 1px solid var(--at-line); border-radius: var(--at-radius); background: var(--at-surface); overflow: hidden; text-align: start; }
+.tw-tabs { display: flex; gap: 0.125rem; padding-inline: 0.5rem; border-bottom: 1px solid var(--at-line); overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+.tw-tab { flex: none; margin-bottom: -1px; padding: 0.875rem 0.75rem 0.75rem; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--at-muted); font: inherit; font-size: 0.875rem; white-space: nowrap; cursor: pointer; -webkit-touch-callout: none; }
+.tw-tab[aria-selected="true"] { color: var(--at-fg); border-bottom-color: var(--at-accent); }
+.tw-tab:focus-visible { outline-offset: -2px; }
+
+/* The two halves sit side by side when there is room: the program on the
+   left, what it does on the right. */
+.tw-scene:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 62rem) {
+  .tw-scene:not([hidden]) { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .tw-out { border-top: 0; border-inline-start: 1px solid var(--at-line); }
+}
+
+/* The code keeps one height whatever the example, so choosing a tab never moves the page. */
+.tw-code { height: 22.5rem; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--at-line) transparent; }
+.tw-code .expressive-code { margin: 0; --ec-codeFontSize: 0.8rem; --ec-codePadBlk: 1.125rem; }
+.tw-code .expressive-code .frame, .tw-code .expressive-code pre { border: 0; border-radius: 0; background: transparent; }
+.tw-code .expressive-code .copy { display: none; }
+
+.tw-out { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--at-line); background: var(--tw-well); }
+.tw-out-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.625rem 0.25rem 1.25rem; font-family: var(--sl-font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--at-faint); }
+.tw-run { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 2rem; padding: 0 0.625rem; border: 0; border-radius: 4px; background: none; color: var(--at-muted); font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+.tw-lines { flex: 1; height: 12.5rem; min-height: 0; margin: 0; padding: 0.25rem 1.25rem 1rem; list-style: none; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--at-line) transparent; font-family: var(--sl-font-mono); font-size: 0.8125rem; line-height: 1.75; }
+.tw-scene:has(.tw-say) .tw-lines { height: 8.75rem; }
+@media (min-width: 62rem) {
+  .tw-lines, .tw-scene:has(.tw-say) .tw-lines { height: auto; }
+}
+
+.tw-line { display: flex; align-items: baseline; gap: 0.625rem; min-width: 0; transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out); }
+/* Waiting lines keep their place, so the output never pushes itself around. */
+.tw-line[data-wait] { opacity: 0; transform: translateY(4px); transition: none; }
+.tw-method { flex: none; width: 3rem; color: var(--at-accent); }
+.tw-path { flex: 1; min-width: 0; overflow-wrap: anywhere; color: var(--at-fg); }
+.tw-status { flex: none; color: var(--tw-ok); font-variant-numeric: tabular-nums; }
+.tw-note { font-family: var(--sl-font); color: var(--at-faint); }
+.tw-log { color: var(--at-fg); overflow-wrap: anywhere; }
+.tw-log::before { content: ">"; flex: none; color: var(--at-faint); }
+.tw-event .tw-dot { flex: none; align-self: center; width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--at-accent); }
+.tw-event .tw-name { color: var(--at-fg); overflow-wrap: anywhere; }
+.tw-event .tw-detail { color: var(--at-muted); }
+.tw-chat { font-family: var(--sl-font); font-size: 0.875rem; line-height: 1.65; }
+.tw-who { flex: none; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; color: hsl(var(--hue, 265) var(--tw-name-s) var(--tw-name-l)); }
+.tw-chat small { flex: none; align-self: center; padding: 0 0.3125rem; border-radius: 3px; background: var(--sl-color-accent-low); color: var(--sl-color-accent-high); font-family: var(--sl-font-mono); font-size: 0.625rem; letter-spacing: 0.04em; line-height: 1.6; text-transform: uppercase; }
+.tw-text { min-width: 0; overflow-wrap: anywhere; color: var(--at-fg); }
+
+.tw-say { display: flex; gap: 0.5rem; padding: 0.625rem 0.75rem 0.75rem; border-top: 1px solid var(--at-line); }
+.tw-say input { flex: 1; min-width: 0; height: 2.5rem; padding: 0 0.75rem; border: 1px solid var(--at-line); border-radius: var(--at-radius); background: var(--at-surface); color: var(--at-fg); font: inherit; font-size: 1rem; }
+.tw-say input::placeholder { color: var(--at-faint); }
+.tw-say button { flex: none; height: 2.5rem; padding: 0 0.875rem; border: 0; border-radius: var(--at-radius); background: var(--at-accent); color: var(--at-on-accent); font: inherit; font-size: 0.875rem; font-weight: 600; cursor: pointer; }
+
+/* --------------------------------- Finder -------------------------------- */
+.tw-finder { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+.tw-find-box { display: flex; align-items: center; gap: 0.75rem; height: 3.25rem; padding-inline: 1rem; border: 1px solid var(--at-line); border-radius: var(--at-radius); background: var(--at-surface); color: var(--at-faint); }
+.tw-find-box:focus-within { border-color: var(--at-accent); outline: 2px solid color-mix(in srgb, var(--at-accent) 35%, transparent); outline-offset: 1px; }
+.tw-find-box svg { flex: none; }
+.tw-find-box input { flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; background: none; color: var(--at-fg); font: inherit; font-size: 1.0625rem; outline: none; -webkit-appearance: none; appearance: none; }
+.tw-find-box input::placeholder { color: var(--at-faint); }
+.tw-find-box input::-webkit-search-cancel-button { -webkit-appearance: none; }
+/* The list holds its height while you type, so what sits under it stays put. */
+.tw-results { min-height: 30rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
+.tw-results a { display: grid; grid-template-columns: minmax(0, 21rem) minmax(0, 1fr) auto; align-items: baseline; gap: 0.25rem 1.5rem; padding: 0.875rem 0; border-top: 1px solid var(--at-line); color: inherit; text-decoration: none; }
+.tw-results code { padding: 0; background: none; font-size: 0.875rem; color: var(--at-fg); overflow-wrap: anywhere; }
+.tw-sum { min-width: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--at-muted); }
+.tw-sum code { font-size: 0.875em; color: inherit; }
+.tw-results small { font-family: var(--sl-font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--at-faint); white-space: nowrap; }
+.tw-find-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--at-line); font-size: 0.875rem; color: var(--at-faint); }
+.tw-find-foot span { min-width: 0; overflow-wrap: anywhere; }
+.tw-find-foot a { color: var(--at-accent); }
+@media (max-width: 56rem) {
+  .tw-results { min-height: 0; }
+  .tw-results a { grid-template-columns: minmax(0, 1fr); }
+  .tw-results small { white-space: normal; }
+}
+
+/* The three transports, compared on what actually differs between them. */
+.tw-compare { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.tw-compare :is(th, td) { padding: 0.875rem 1.5rem 0.875rem 0; border-top: 1px solid var(--at-line); text-align: start; vertical-align: top; line-height: 1.5; }
+.tw-compare thead :is(th, td) { border-top: 0; padding-top: 0; }
+.tw-compare thead th { font-family: var(--at-display); font-weight: 650; font-size: 1.1875rem; letter-spacing: -0.012em; color: var(--at-fg); }
+.tw-compare thead th a { color: inherit; text-decoration: none; }
+.tw-compare tbody th { width: 11rem; font-family: var(--sl-font-mono); font-weight: 400; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--at-faint); padding-top: 1.0625rem; }
+.tw-compare td { color: var(--at-muted); }
+.tw-compare-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
+.tw-compare-wrap table { min-width: 40rem; }
+
+.tw-disclaimer { margin: 0; font-size: 0.8125rem; color: var(--at-faint); }
+
+/* --------------------------- Pointer and motion -------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .tw-tab, .tw-run, .tw-results a > code { transition: color 150ms ease; }
+  .tw-tab:hover, .tw-run:hover { color: var(--at-fg); }
+  .tw-results a:hover > code, .tw-compare thead th a:hover { color: var(--at-accent); }
+  .tw-say button { transition: background-color 150ms ease; }
+  .tw-say button:hover { background: var(--sl-color-accent-high); }
+}
+.tw-tab:active { color: var(--at-fg); }
+.tw-results a:active > code { color: var(--at-accent); }
+@media (prefers-reduced-motion: reduce) {
+  .tw-line { transition: none; }
+}
+
+/* ------------------------------ Small screens ---------------------------- */
+@media (max-width: 49.99rem) {
+  .tw-code { height: 17rem; }
+}

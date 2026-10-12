@@ -1,0 +1,78 @@
+---
+title: twitch.api
+description: Le client complet de l'API Twitch pour JavaScript et TypeScript. Tous les endpoints Helix et tous les événements EventSub typés, avec jetons, limites de débit, pagination et reconnexions gérés.
+template: splash
+hero:
+  title: Toute l'API&nbsp;Twitch, <em>typée.</em>
+  tagline: twitch.api est un client pour JavaScript et TypeScript qui couvre les 149 endpoints Helix et les 83 événements EventSub. Jetons, limites de débit, pagination et reconnexions sont pris en charge, sans aucune dépendance.
+  actions:
+    - text: Démarrage rapide
+      link: /quick-start/
+      variant: primary
+    - text: Parcourir l'API
+      link: /reference/overview/
+      variant: secondary
+---
+
+import Console from '../../../components/Console.astro';
+import Finder from '../../../components/Finder.astro';
+
+<div class="at-landing not-content">
+
+<section class="at-section">
+  <header data-reveal><span>01</span><h2>Appelez une méthode, recevez des données typées</h2></header>
+  <p data-reveal>Pas de jeton à demander, pas d'en-tête à poser, pas de curseur à transporter. Choisissez un exemple et lancez-le : à gauche le programme, à droite ce que la bibliothèque fait pour lui. Dans l'exemple du chat, écrivez un message et le bot répond.</p>
+  <div data-reveal><Console /></div>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>02</span><h2>Trouvez votre endpoint</h2></header>
+  <p data-reveal>Tapez ce que vous voulez faire. Chaque méthode et chaque type d'événement est ici, avec le jeton nécessaire, et renvoie vers ses paramètres, son type de retour et un exemple.</p>
+  <div data-reveal><Finder /></div>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>03</span><h2>Ce que vous n'écrivez plus</h2></header>
+  <ul class="at-points">
+    <li data-reveal><h3>La tuyauterie des jetons</h3><p>Le jeton d'application est demandé quand un appel en a besoin. Les jetons utilisateur sont renouvelés avant d'expirer, validés chaque heure comme Twitch l'exige, et enregistrés où vous voulez.</p></li>
+    <li data-reveal><h3>Quel jeton pour quel appel</h3><p>Chaque endpoint sait s'il lui faut le jeton d'application ou celui d'un utilisateur, et lequel. <code>moderator_id</code>, <code>broadcaster_id</code> et <code>sender_id</code> prennent par défaut l'identité de celui qui agit.</p></li>
+    <li data-reveal><h3>Curseurs et tailles de page</h3><p><code>await</code> sur une liste donne une page, <code>for await</code> les parcourt toutes. Les listes de plus de 100 identifiants sont découpées, récupérées en parallèle puis fusionnées.</p></li>
+    <li data-reveal><h3>La gestion des 429</h3><p>Les en-têtes de limite de débit sont suivis pour chaque jeton : les requêtes attendent leur tour au lieu d'échouer. Ce qui peut être retenté sans risque l'est.</p></li>
+    <li data-reveal><h3>La logique de reconnexion</h3><p>WebSocket, webhooks et conduits partagent un même <code>on()</code> typé. Reconnexions, réabonnements, vérification des signatures et livraisons en double sont gérés.</p></li>
+    <li data-reveal><h3>Deviner la forme des données</h3><p>Chaque paramètre, chaque réponse et chaque événement est typé. Les événements à plusieurs formes se précisent dès que vous testez leur discriminant.</p></li>
+  </ul>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>04</span><h2>Trois façons de recevoir les événements</h2></header>
+  <p data-reveal>Le même <code>on()</code> pour les trois. Choisissez selon l'endroit où tourne votre code.</p>
+  <div class="tw-compare-wrap" data-reveal>
+    <table class="tw-compare">
+      <thead>
+        <tr><td></td><th scope="col"><a href="/events/websocket/">WebSocket</a></th><th scope="col"><a href="/events/webhooks/">Webhooks</a></th><th scope="col"><a href="/events/conduits/">Conduits</a></th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Il vous faut</th><td>Rien à héberger</td><td>Une URL HTTPS publique</td><td>Un processus par shard</td></tr>
+        <tr><th scope="row">S'abonne avec</th><td>Un jeton utilisateur</td><td>Le jeton d'application</td><td>Le jeton d'application</td></tr>
+        <tr><th scope="row">Survit à un redémarrage</th><td>Non, il se réabonne</td><td>Oui</td><td>Oui</td></tr>
+        <tr><th scope="row">Convient pour</th><td>Bots, applications de bureau, quelques chaînes</td><td>Serveurs et fonctions serverless</td><td>Beaucoup de chaînes, réparties sur plusieurs processus</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>05</span><h2>Par où continuer</h2></header>
+  <ul class="at-paths">
+    <li data-reveal><a href="/quick-start/"><span>01</span><div><strong>Démarrage rapide</strong><small>Installer, créer une application sur Twitch, faire un premier appel.</small></div></a></li>
+    <li data-reveal><a href="/basics/acting-as-a-user/"><span>02</span><div><strong>Agir au nom d'un utilisateur</strong><small>Écrire dans le chat, modérer, lancer des sondages : comment le bon jeton est choisi pour vous.</small></div></a></li>
+    <li data-reveal><a href="/events/overview/"><span>03</span><div><strong>Événements</strong><small>Messages de chat, follows, abonnements, passages en direct, au moment où ils se produisent.</small></div></a></li>
+    <li data-reveal><a href="/recipes/chat-bot/"><span>04</span><div><strong>Recettes</strong><small>Des programmes complets à copier : bot de chat, alertes de direct, outils de modération.</small></div></a></li>
+    <li data-reveal><a href="/reference/overview/"><span>05</span><div><strong>Référence</strong><small>Chaque méthode, chaque type d'événement, chaque scope, chaque erreur.</small></div></a></li>
+    <li data-reveal><a href="/help/migrating-from-v1/"><span>06</span><div><strong>Depuis la version 1</strong><small>Ce qui a changé, et le nouveau nom de chaque ancienne méthode.</small></div></a></li>
+  </ul>
+</section>
+
+<p class="tw-disclaimer">twitch.api est un projet open source indépendant. Il n'est ni affilié à Twitch Interactive, Inc., ni approuvé par cette société.</p>
+
+</div>

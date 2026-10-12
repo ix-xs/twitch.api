@@ -1,0 +1,78 @@
+---
+title: twitch.api
+description: The complete Twitch API client for JavaScript and TypeScript. Every Helix endpoint and every EventSub event typed, with tokens, rate limits, pagination and reconnects handled.
+template: splash
+hero:
+  title: The whole Twitch&nbsp;API, <em>typed.</em>
+  tagline: twitch.api is a client for JavaScript and TypeScript that covers all 149 Helix endpoints and all 83 EventSub events. Tokens, rate limits, pagination and reconnects are taken care of, with no dependency.
+  actions:
+    - text: Quick start
+      link: /quick-start/
+      variant: primary
+    - text: Browse the API
+      link: /reference/overview/
+      variant: secondary
+---
+
+import Console from '../../components/Console.astro';
+import Finder from '../../components/Finder.astro';
+
+<div class="at-landing not-content">
+
+<section class="at-section">
+  <header data-reveal><span>01</span><h2>Call a method, get typed data</h2></header>
+  <p data-reveal>No token to fetch, no header to set, no cursor to carry around. Pick an example and run it: on the left the program, on the right what the library does for it. In the chat example, type a message and the bot answers.</p>
+  <div data-reveal><Console /></div>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>02</span><h2>Find your endpoint</h2></header>
+  <p data-reveal>Type what you want to do. Every method and every event type is here, with the token it needs, and each one links to its parameters, its return type and an example.</p>
+  <div data-reveal><Finder /></div>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>03</span><h2>What you stop writing</h2></header>
+  <ul class="at-points">
+    <li data-reveal><h3>Token plumbing</h3><p>The app token is requested when a call needs it. User tokens are refreshed before they expire, validated every hour as Twitch requires, and saved where you choose.</p></li>
+    <li data-reveal><h3>Which token goes with which call</h3><p>Each endpoint knows whether it wants the app token or a user's, and whose. <code>moderator_id</code>, <code>broadcaster_id</code> and <code>sender_id</code> default to whoever is acting.</p></li>
+    <li data-reveal><h3>Cursors and page sizes</h3><p><code>await</code> a list for one page, <code>for await</code> it for every item. Lists of more than 100 IDs are split, fetched in parallel and merged.</p></li>
+    <li data-reveal><h3>Handling 429</h3><p>The rate limit headers are followed for each token, so requests wait their turn instead of failing. What is safe to retry is retried.</p></li>
+    <li data-reveal><h3>Reconnect logic</h3><p>WebSocket, webhooks and conduits share one typed <code>on()</code>. Reconnects, resubscriptions, signature checks and duplicate deliveries are handled.</p></li>
+    <li data-reveal><h3>Guessing at shapes</h3><p>Every parameter, response and event is typed. Events that come in several shapes narrow when you check their discriminator.</p></li>
+  </ul>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>04</span><h2>Three ways to receive events</h2></header>
+  <p data-reveal>The same <code>on()</code> on all three. Pick by where your code runs.</p>
+  <div class="tw-compare-wrap" data-reveal>
+    <table class="tw-compare">
+      <thead>
+        <tr><td></td><th scope="col"><a href="/events/websocket/">WebSocket</a></th><th scope="col"><a href="/events/webhooks/">Webhooks</a></th><th scope="col"><a href="/events/conduits/">Conduits</a></th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">You need</th><td>Nothing to host</td><td>A public HTTPS URL</td><td>One process per shard</td></tr>
+        <tr><th scope="row">Subscribes with</th><td>A user token</td><td>The app token</td><td>The app token</td></tr>
+        <tr><th scope="row">Survives a restart</th><td>No, it subscribes again</td><td>Yes</td><td>Yes</td></tr>
+        <tr><th scope="row">Good for</th><td>Bots, desktop apps, a few channels</td><td>Servers and serverless functions</td><td>Many channels, scaled across processes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="at-section">
+  <header data-reveal><span>05</span><h2>Where to go next</h2></header>
+  <ul class="at-paths">
+    <li data-reveal><a href="/quick-start/"><span>01</span><div><strong>Quick start</strong><small>Install, create an application on Twitch, make your first call.</small></div></a></li>
+    <li data-reveal><a href="/basics/acting-as-a-user/"><span>02</span><div><strong>Acting as a user</strong><small>Send chat messages, moderate, run polls: how user tokens are chosen for you.</small></div></a></li>
+    <li data-reveal><a href="/events/overview/"><span>03</span><div><strong>Events</strong><small>Chat messages, follows, subscriptions, streams going live, as they happen.</small></div></a></li>
+    <li data-reveal><a href="/recipes/chat-bot/"><span>04</span><div><strong>Recipes</strong><small>Complete programs to copy: a chat bot, go-live alerts, moderation tools.</small></div></a></li>
+    <li data-reveal><a href="/reference/overview/"><span>05</span><div><strong>Reference</strong><small>Every method, every event type, every scope, every error.</small></div></a></li>
+    <li data-reveal><a href="/help/migrating-from-v1/"><span>06</span><div><strong>Coming from version 1</strong><small>What changed, and the new name of each old method.</small></div></a></li>
+  </ul>
+</section>
+
+<p class="tw-disclaimer">twitch.api is an independent open source project. It is not affiliated with or endorsed by Twitch Interactive, Inc.</p>
+
+</div>

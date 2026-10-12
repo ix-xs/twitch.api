@@ -1,0 +1,236 @@
+---
+// The console of the home page: four short programs, each with the output the
+// library produces. The first one plays when the console comes into view; the
+// others when their tab is chosen. In the chat example the visitor can type,
+// and the bot of the example answers.
+//
+// Everything is rendered on the server and readable without scripts. The
+// script only times the lines and wires the tabs and the chat box.
+import { Code } from "@astrojs/starlight/components";
+import { useT } from "../i18n";
+import { SCENES, type Line } from "../console/scenes";
+
+const { locale } = Astro.locals.starlightRoute;
+const t = useT(locale);
+const language = locale === "fr" ? "fr" : "en";
+const noteOf = (line: Extract<Line, { kind: "note" }>) => line.text[language];
+---
+
+<div class="tw-console" data-console data-you={t("console.you")}>
+  <div class="tw-tabs" role="tablist" aria-label={t("console.label")}>
+    {SCENES.map((scene, index) => (
+      <button
+        class="tw-tab"
+        type="button"
+        role="tab"
+        id={`tw-tab-${scene.id}`}
+        aria-controls={`tw-scene-${scene.id}`}
+        aria-selected={index === 0 ? "true" : "false"}
+        tabindex={index === 0 ? 0 : -1}
+      >
+        {t(scene.label)}
+      </button>
+    ))}
+  </div>
+
+  {SCENES.map((scene, index) => (
+    <div class="tw-scene" role="tabpanel" id={`tw-scene-${scene.id}`} aria-labelledby={`tw-tab-${scene.id}`} hidden={index !== 0}>
+      <div class="tw-code"><Code code={scene.code} lang="ts" frame="none" /></div>
+      <div class="tw-out">
+        <div class="tw-out-head">
+          <span>{t("console.simulated")}</span>
+          <button class="tw-run at-press" type="button" data-run>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg>
+            {t("console.again")}
+          </button>
+        </div>
+        <ol class="tw-lines" data-lines aria-label={t("console.output")}>
+          {scene.lines.map((line) => (
+            <li class={`tw-line tw-${line.kind}`} data-after={line.after}>
+              {line.kind === "call" && (
+                <>
+                  <span class="tw-method">{line.method}</span>
+                  <span class="tw-path">{line.path}</span>
+                  <span class="tw-status">{line.status}</span>
+                </>
+              )}
+              {line.kind === "note" && <span>{noteOf(line)}</span>}
+              {line.kind === "log" && <span>{line.text}</span>}
+              {line.kind === "event" && (
+                <>
+                  <span class="tw-dot" aria-hidden="true" />
+                  <span class="tw-name">{line.name}</span>
+                  <span class="tw-detail">{line.detail}</span>
+                </>
+              )}
+              {line.kind === "chat" && (
+                <>
+                  <span class="tw-who" style={`--hue: ${line.hue}`}>{line.from}</span>
+                  {line.bot && <small>bot</small>}
+                  <span class="tw-text">{line.text}</span>
+                </>
+              )}
+            </li>
+          ))}
+        </ol>
+        {scene.interactive && (
+          <form class="tw-say" data-say>
+            <label class="sr-only" for="tw-say-input">{t("console.say")}</label>
+            <input
+              id="tw-say-input"
+              type="text"
+              maxlength="120"
+              placeholder={t("console.hint")}
+              autocomplete="off"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              enterkeyhint="send"
+            />
+            <button class="at-press" type="submit">{t("console.send")}</button>
+          </form>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-console]");
+  if (root) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    const still = matchMedia("(prefers-reduced-motion: reduce)");
+    let timers: number[] = [];
+
+    const stop = (): void => {
+      for (const timer of timers) clearTimeout(timer);
+      timers = [];
+    };
+    const later = (callback: () => void, ms: number): void => {
+      timers.push(window.setTimeout(callback, ms));
+    };
+    const listOf = (panel: HTMLElement) => panel.querySelector<HTMLElement>("[data-lines]")!;
+    const settle = (list: HTMLElement): void => {
+      list.scrollTop = list.scrollHeight;
+    };
+
+    /** Plays a scene from the top. Without animation, every line is there. */
+    function play(panel: HTMLElement, animate: boolean): void {
+      stop();
+      const list = listOf(panel);
+      for (const added of list.querySelectorAll("[data-added]")) added.remove();
+      const lines = [...list.querySelectorAll<HTMLElement>(".tw-line")];
+      if (!animate || still.matches) {
+        for (const line of lines) line.removeAttribute("data-wait");
+        settle(list);
+        return;
+      }
+      for (const line of lines) line.setAttribute("data-wait", "");
+      list.scrollTop = 0;
+      let at = 0;
+      for (const line of lines) {
+        at += Number(line.dataset.after ?? 250);
+        later(() => {
+          line.removeAttribute("data-wait");
+          settle(list);
+        }, at);
+      }
+    }
+
+    function select(index: number, animate: boolean): void {
+      for (const [i, tab] of tabs.entries()) {
+        tab.setAttribute("aria-selected", String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+        panels[i]!.hidden = i !== index;
+      }
+      play(panels[index]!, animate);
+    }
+
+    for (const [index, tab] of tabs.entries()) {
+      tab.addEventListener("click", (event) => {
+        // A click that comes from the keyboard has no pointer behind it: no waiting then.
+        select(index, (event as PointerEvent).detail > 0);
+      });
+      tab.addEventListener("keydown", (event) => {
+        const move = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+        const target = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : move ? (index + move + tabs.length) % tabs.length : -1;
+        if (target < 0) return;
+        event.preventDefault();
+        select(target, false);
+        tabs[target]!.focus();
+      });
+    }
+
+    for (const panel of panels) {
+      panel.querySelector("[data-run]")?.addEventListener("click", () => play(panel, true));
+    }
+
+    /** Adds a line to the simulated chat, built from text only. */
+    function addLine(list: HTMLElement, build: (line: HTMLLIElement) => void): void {
+      const line = document.createElement("li");
+      line.className = "tw-line";
+      line.setAttribute("data-added", "");
+      build(line);
+      list.append(line);
+      // The chat keeps its last lines, like a real one.
+      const added = list.querySelectorAll("[data-added]");
+      if (added.length > 30) added[0]!.remove();
+      settle(list);
+    }
+    const span = (className: string, text: string): HTMLSpanElement => {
+      const element = document.createElement("span");
+      element.className = className;
+      element.textContent = text;
+      return element;
+    };
+
+    const form = root.querySelector<HTMLFormElement>("[data-say]");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = form.querySelector("input")!;
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+      const panel = form.closest<HTMLElement>('[role="tabpanel"]')!;
+      const list = listOf(panel);
+      // Typing while the scene is still playing shows the rest of it at once.
+      stop();
+      for (const line of list.querySelectorAll("[data-wait]")) line.removeAttribute("data-wait");
+      addLine(list, (line) => {
+        line.classList.add("tw-chat");
+        const who = span("tw-who", root.dataset.you ?? "you");
+        who.style.setProperty("--hue", "200");
+        line.append(who, span("tw-text", text));
+      });
+      if (text.toLowerCase() !== "!ping") return;
+      later(() => {
+        addLine(list, (line) => {
+          line.classList.add("tw-call");
+          line.append(span("tw-method", "POST"), span("tw-path", "/chat/messages"), span("tw-status", "200"));
+        });
+      }, 250);
+      later(() => {
+        addLine(list, (line) => {
+          line.classList.add("tw-chat");
+          const who = span("tw-who", "your_bot");
+          who.style.setProperty("--hue", "265");
+          const tag = document.createElement("small");
+          tag.textContent = "bot";
+          line.append(who, tag, span("tw-text", "pong"));
+        });
+      }, 450);
+    });
+
+    // The first example plays once, when the console is actually looked at.
+    const watcher = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        watcher.disconnect();
+        play(panels[0]!, true);
+      },
+      { threshold: 0.4 },
+    );
+    watcher.observe(root);
+  }
+</script>

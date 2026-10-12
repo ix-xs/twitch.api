@@ -1,0 +1,1675 @@
+{
+ "counts": {
+  "methods": 155,
+  "groups": 30,
+  "events": 83
+ },
+ "entries": [
+  {
+   "kind": "method",
+   "name": "twitch.ads.startCommercial()",
+   "summary": "Starts a commercial break on a channel.",
+   "token": "any",
+   "href": "/reference/api/ads/#startcommercial"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.ads.schedule()",
+   "summary": "Gets the ad schedule of a channel.",
+   "token": "any",
+   "href": "/reference/api/ads/#schedule"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.ads.snooze()",
+   "summary": "Pushes the next automatic mid-roll ad back by five minutes, at the cost of one snooze.",
+   "token": "any",
+   "href": "/reference/api/ads/#snooze"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.analytics.extensions()",
+   "summary": "Lists the reports available for the extensions of the user making the call.",
+   "token": "user",
+   "href": "/reference/api/analytics/#extensions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.analytics.games()",
+   "summary": "Lists the reports available for the games of the user making the call.",
+   "token": "user",
+   "href": "/reference/api/analytics/#games"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.bits.leaderboard()",
+   "summary": "Gets the Bits leaderboard of the channel of the user making the call, over its whole life or over a given day, week, month or year.",
+   "token": "user",
+   "href": "/reference/api/bits/#leaderboard"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.bits.cheermotes()",
+   "summary": "Lists the Cheermotes usable in every channel, plus the custom ones of a broadcaster when you name one.",
+   "token": "any",
+   "href": "/reference/api/bits/#cheermotes"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.bits.customPowerUps()",
+   "summary": "Lists the custom Power-ups a broadcaster created, enabled or not.",
+   "token": "user",
+   "href": "/reference/api/bits/#custompowerups"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.bits.extensionTransactions()",
+   "summary": "Lists the purchases made with Bits inside an extension.",
+   "token": "app",
+   "href": "/reference/api/bits/#extensiontransactions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channelPoints.createReward()",
+   "summary": "Adds a custom reward to a channel.",
+   "token": "user",
+   "href": "/reference/api/channel-points/#createreward"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channelPoints.deleteReward()",
+   "summary": "Deletes a custom reward.",
+   "token": "user",
+   "href": "/reference/api/channel-points/#deletereward"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channelPoints.rewards()",
+   "summary": "Lists the custom rewards of a channel, sorted by ID.",
+   "token": "user",
+   "href": "/reference/api/channel-points/#rewards"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channelPoints.redemptions()",
+   "summary": "Lists the redemptions of a custom reward.",
+   "token": "user",
+   "href": "/reference/api/channel-points/#redemptions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channelPoints.updateReward()",
+   "summary": "Changes a custom reward.",
+   "token": "user",
+   "href": "/reference/api/channel-points/#updatereward"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channelPoints.updateRedemptions()",
+   "summary": "Fulfills or cancels redemptions that are still waiting in the queue, and returns them.",
+   "token": "user",
+   "href": "/reference/api/channel-points/#updateredemptions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channels.get()",
+   "summary": "Gets the title, category, language and tags of one or more channels.",
+   "token": "any",
+   "href": "/reference/api/channels/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channels.update()",
+   "summary": "Changes the title, category, language, tags, delay or content labels of a channel.",
+   "token": "user",
+   "href": "/reference/api/channels/#update"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channels.editors()",
+   "summary": "Lists the editors of a channel.",
+   "token": "user",
+   "href": "/reference/api/channels/#editors"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channels.followed()",
+   "summary": "Lists the channels a user follows, most recent follow first.",
+   "token": "user",
+   "href": "/reference/api/channels/#followed"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.channels.followers()",
+   "summary": "Lists the followers of a channel, most recent first.",
+   "token": "any",
+   "href": "/reference/api/channels/#followers"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.charity.campaign()",
+   "summary": "Gets the charity campaign a broadcaster is running, or `null` when there is none.",
+   "token": "user",
+   "href": "/reference/api/charity/#campaign"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.charity.donations()",
+   "summary": "Lists the donations made to the campaign a broadcaster is running.",
+   "token": "user",
+   "href": "/reference/api/charity/#donations"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.chatters()",
+   "summary": "Lists the users connected to a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#chatters"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.channelEmotes()",
+   "summary": "Gets the custom emotes of a channel.",
+   "token": "any",
+   "href": "/reference/api/chat/#channelemotes"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.globalEmotes()",
+   "summary": "Gets the emotes made by Twitch that work in every chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#globalemotes"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.emoteSets()",
+   "summary": "Gets the emotes of one or more emote sets.",
+   "token": "any",
+   "href": "/reference/api/chat/#emotesets"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.channelBadges()",
+   "summary": "Gets the custom chat badges of a channel, such as its subscriber and Bits badges.",
+   "token": "any",
+   "href": "/reference/api/chat/#channelbadges"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.globalBadges()",
+   "summary": "Gets the chat badges made by Twitch that can show up in every chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#globalbadges"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.settings()",
+   "summary": "Gets the chat settings of a channel.",
+   "token": "any",
+   "href": "/reference/api/chat/#settings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.sharedSession()",
+   "summary": "Gets the shared chat session a channel is part of, or `null` when it is not in one.",
+   "token": "any",
+   "href": "/reference/api/chat/#sharedsession"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.userEmotes()",
+   "summary": "Lists every emote a user can post, across all channels.",
+   "token": "user",
+   "href": "/reference/api/chat/#useremotes"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.updateSettings()",
+   "summary": "Changes the chat settings of a channel and returns the new ones.",
+   "token": "any",
+   "href": "/reference/api/chat/#updatesettings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.announce()",
+   "summary": "Posts a highlighted announcement in a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#announce"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.shoutout()",
+   "summary": "Gives a shoutout to another broadcaster, which shows their channel with a follow button in chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#shoutout"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.send()",
+   "summary": "Sends a message to a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#send"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.pinnedMessage()",
+   "summary": "Gets the message pinned in a channel's chat, or `null` when nothing is pinned.",
+   "token": "any",
+   "href": "/reference/api/chat/#pinnedmessage"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.pin()",
+   "summary": "Pins a message at the top of a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#pin"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.updatePin()",
+   "summary": "Changes how long a pinned message stays pinned.",
+   "token": "any",
+   "href": "/reference/api/chat/#updatepin"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.unpin()",
+   "summary": "Removes a pinned message from the top of a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#unpin"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.colors()",
+   "summary": "Gets the color users have for their name in chat.",
+   "token": "any",
+   "href": "/reference/api/chat/#colors"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.chat.setColor()",
+   "summary": "Changes the color of a user's name in chat.",
+   "token": "user",
+   "href": "/reference/api/chat/#setcolor"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.clips.create()",
+   "summary": "Clips the last seconds of a live stream.",
+   "token": "user",
+   "href": "/reference/api/clips/#create"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.clips.createFromVod()",
+   "summary": "Clips a passage of a video, as the broadcaster or one of the channel's editors.",
+   "token": "any",
+   "href": "/reference/api/clips/#createfromvod"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.clips.get()",
+   "summary": "Lists the clips of a broadcaster or of a category, most viewed first, or gets clips by ID.",
+   "token": "any",
+   "href": "/reference/api/clips/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.clips.downloads()",
+   "summary": "Gets temporary links to the video files of clips, as the broadcaster or one of the channel's editors.",
+   "token": "any",
+   "href": "/reference/api/clips/#downloads"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.conduits.list()",
+   "summary": "Lists the conduits of your application.",
+   "token": "app",
+   "href": "/reference/api/conduits/#list"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.conduits.create()",
+   "summary": "Creates a conduit with the given number of shards.",
+   "token": "app",
+   "href": "/reference/api/conduits/#create"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.conduits.update()",
+   "summary": "Changes the number of shards of a conduit.",
+   "token": "app",
+   "href": "/reference/api/conduits/#update"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.conduits.delete()",
+   "summary": "Deletes a conduit.",
+   "token": "app",
+   "href": "/reference/api/conduits/#delete"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.conduits.shards()",
+   "summary": "Lists the shards of a conduit and where each one delivers events.",
+   "token": "app",
+   "href": "/reference/api/conduits/#shards"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.conduits.updateShards()",
+   "summary": "Points shards at a webhook callback or a WebSocket session.",
+   "token": "app",
+   "href": "/reference/api/conduits/#updateshards"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.contentLabels.list()",
+   "summary": "Lists every content classification label, with its name and description in the language you ask for.",
+   "token": "any",
+   "href": "/reference/api/content-labels/#list"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.entitlements.drops()",
+   "summary": "Lists the Drops entitlements of your organization, in no particular order.",
+   "token": "any",
+   "href": "/reference/api/entitlements/#drops"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.entitlements.updateDrops()",
+   "summary": "Sets the status of Drops entitlements, typically to `\"FULFILLED\"` once the reward was delivered in game.",
+   "token": "any",
+   "href": "/reference/api/entitlements/#updatedrops"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.eventsub.subscribe()",
+   "summary": "Creates a subscription by hand.",
+   "token": "user",
+   "href": "/reference/api/eventsub/#subscribe"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.eventsub.unsubscribe()",
+   "summary": "Deletes a subscription.",
+   "token": "user",
+   "href": "/reference/api/eventsub/#unsubscribe"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.eventsub.subscriptions()",
+   "summary": "Lists your subscriptions, oldest first.",
+   "token": "any",
+   "href": "/reference/api/eventsub/#subscriptions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.eventsub.websocket()",
+   "summary": "Opens a WebSocket listener.",
+   "token": "other",
+   "href": "/reference/api/eventsub/#websocket"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.eventsub.webhook()",
+   "summary": "Creates a webhook listener, for servers reachable from the internet.",
+   "token": "other",
+   "href": "/reference/api/eventsub/#webhook"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.eventsub.conduit()",
+   "summary": "Opens a WebSocket that serves one shard of a conduit.",
+   "token": "other",
+   "href": "/reference/api/eventsub/#conduit"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.configuration()",
+   "summary": "Reads one or more configuration segments of an extension, in the order you asked for them.",
+   "token": "other",
+   "href": "/reference/api/extensions/#configuration"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.setConfiguration()",
+   "summary": "Writes a configuration segment.",
+   "token": "other",
+   "href": "/reference/api/extensions/#setconfiguration"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.setRequiredConfiguration()",
+   "summary": "Sets the required configuration string of a channel, for extensions that must be configured by the broadcaster before they can be activated.",
+   "token": "other",
+   "href": "/reference/api/extensions/#setrequiredconfiguration"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.sendPubSub()",
+   "summary": "Pushes a message to the running copies of an extension.",
+   "token": "other",
+   "href": "/reference/api/extensions/#sendpubsub"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.liveChannels()",
+   "summary": "Lists the channels that are live with an extension installed or activated.",
+   "token": "any",
+   "href": "/reference/api/extensions/#livechannels"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.secrets()",
+   "summary": "Gets the shared secrets of an extension.",
+   "token": "other",
+   "href": "/reference/api/extensions/#secrets"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.createSecret()",
+   "summary": "Creates a new shared secret.",
+   "token": "other",
+   "href": "/reference/api/extensions/#createsecret"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.sendChatMessage()",
+   "summary": "Posts a message in a channel's chat under the name of the extension.",
+   "token": "other",
+   "href": "/reference/api/extensions/#sendchatmessage"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.get()",
+   "summary": "Gets the description of an extension, released or not.",
+   "token": "other",
+   "href": "/reference/api/extensions/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.released()",
+   "summary": "Gets the description of a released extension.",
+   "token": "any",
+   "href": "/reference/api/extensions/#released"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.bitsProducts()",
+   "summary": "Lists the Bits products of the extension your client ID belongs to, sorted by SKU.",
+   "token": "app",
+   "href": "/reference/api/extensions/#bitsproducts"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.extensions.updateBitsProduct()",
+   "summary": "Creates a Bits product, or updates the one that already has this SKU.",
+   "token": "app",
+   "href": "/reference/api/extensions/#updatebitsproduct"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.games.top()",
+   "summary": "Lists the categories with the most viewers right now, most watched first.",
+   "token": "any",
+   "href": "/reference/api/games/#top"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.games.get()",
+   "summary": "Gets categories by ID, by exact name, by IGDB ID, or any mix of them.",
+   "token": "any",
+   "href": "/reference/api/games/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.goals.get()",
+   "summary": "Lists the active goals of a broadcaster with their current progress.",
+   "token": "user",
+   "href": "/reference/api/goals/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.settings()",
+   "summary": "Gets the Guest Star settings of a channel.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#settings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.updateSettings()",
+   "summary": "Changes the Guest Star settings of a channel.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#updatesettings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.session()",
+   "summary": "Gets the Guest Star session a channel is running, or `null` when there is none.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#session"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.createSession()",
+   "summary": "Starts a Guest Star session with the broadcaster as its only member.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#createsession"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.endSession()",
+   "summary": "Ends a Guest Star session, like the host pressing \"End Call\".",
+   "token": "user",
+   "href": "/reference/api/guest-star/#endsession"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.invites()",
+   "summary": "Lists the pending invitations of a session, with how far each invited user is in the waiting room.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#invites"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.invite()",
+   "summary": "Invites a user to a session in progress.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#invite"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.deleteInvite()",
+   "summary": "Takes back an invitation to a session.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#deleteinvite"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.assignSlot()",
+   "summary": "Seats an invited user in a slot of the session, once they are ready to join.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#assignslot"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.updateSlot()",
+   "summary": "Moves a guest to another slot.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#updateslot"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.deleteSlot()",
+   "summary": "Removes a guest from their slot.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#deleteslot"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.guestStar.updateSlotSettings()",
+   "summary": "Changes what a slot may share and how it comes out on stream.",
+   "token": "user",
+   "href": "/reference/api/guest-star/#updateslotsettings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.hypeTrain.status()",
+   "summary": "Gets the Hype Train running on a channel, if any, along with the records of the channel.",
+   "token": "user",
+   "href": "/reference/api/hype-train/#status"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.checkAutoMod()",
+   "summary": "Tells whether AutoMod would let messages through in a channel, without sending them.",
+   "token": "any",
+   "href": "/reference/api/moderation/#checkautomod"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.manageAutoModMessage()",
+   "summary": "Approves or denies a message that AutoMod is holding for review.",
+   "token": "any",
+   "href": "/reference/api/moderation/#manageautomodmessage"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.autoModSettings()",
+   "summary": "Gets the AutoMod levels of a channel.",
+   "token": "any",
+   "href": "/reference/api/moderation/#automodsettings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.updateAutoModSettings()",
+   "summary": "Replaces the AutoMod levels of a channel.",
+   "token": "any",
+   "href": "/reference/api/moderation/#updateautomodsettings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.bans()",
+   "summary": "Lists the users who are banned or timed out in a channel.",
+   "token": "any",
+   "href": "/reference/api/moderation/#bans"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.ban()",
+   "summary": "Bans a user from a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/moderation/#ban"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.unban()",
+   "summary": "Lifts the ban or the timeout of a user.",
+   "token": "any",
+   "href": "/reference/api/moderation/#unban"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.unbanRequests()",
+   "summary": "Lists the unban requests of a channel that are in a given state.",
+   "token": "user",
+   "href": "/reference/api/moderation/#unbanrequests"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.resolveUnbanRequest()",
+   "summary": "Approves or denies an unban request.",
+   "token": "user",
+   "href": "/reference/api/moderation/#resolveunbanrequest"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.blockedTerms()",
+   "summary": "Lists the blocked terms of a channel, newest first.",
+   "token": "any",
+   "href": "/reference/api/moderation/#blockedterms"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.addBlockedTerm()",
+   "summary": "Blocks a word or phrase in a channel's chat.",
+   "token": "any",
+   "href": "/reference/api/moderation/#addblockedterm"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.removeBlockedTerm()",
+   "summary": "Removes a term from a channel's blocked terms.",
+   "token": "any",
+   "href": "/reference/api/moderation/#removeblockedterm"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.deleteMessages()",
+   "summary": "Removes one message from a channel's chat, or every message when no `message_id` is given.",
+   "token": "any",
+   "href": "/reference/api/moderation/#deletemessages"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.moderatedChannels()",
+   "summary": "Lists the channels in which a user is a moderator.",
+   "token": "any",
+   "href": "/reference/api/moderation/#moderatedchannels"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.moderators()",
+   "summary": "Lists the moderators of a channel.",
+   "token": "user",
+   "href": "/reference/api/moderation/#moderators"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.addModerator()",
+   "summary": "Makes a user a moderator of the channel.",
+   "token": "user",
+   "href": "/reference/api/moderation/#addmoderator"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.removeModerator()",
+   "summary": "Takes the moderator role away from a user.",
+   "token": "user",
+   "href": "/reference/api/moderation/#removemoderator"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.vips()",
+   "summary": "Lists the VIPs of a channel.",
+   "token": "user",
+   "href": "/reference/api/moderation/#vips"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.addVip()",
+   "summary": "Makes a user a VIP of the channel.",
+   "token": "user",
+   "href": "/reference/api/moderation/#addvip"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.removeVip()",
+   "summary": "Takes the VIP status away from a user.",
+   "token": "user",
+   "href": "/reference/api/moderation/#removevip"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.updateShieldMode()",
+   "summary": "Turns Shield Mode on or off in a channel.",
+   "token": "any",
+   "href": "/reference/api/moderation/#updateshieldmode"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.shieldMode()",
+   "summary": "Tells whether Shield Mode is on in a channel and who turned it on last.",
+   "token": "any",
+   "href": "/reference/api/moderation/#shieldmode"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.warn()",
+   "summary": "Sends a warning to a chat user, who cannot chat again until they acknowledge it.",
+   "token": "any",
+   "href": "/reference/api/moderation/#warn"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.addSuspiciousStatus()",
+   "summary": "Flags a chatter as suspicious in a channel, either to keep an eye on them or to restrict their messages.",
+   "token": "any",
+   "href": "/reference/api/moderation/#addsuspiciousstatus"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.moderation.removeSuspiciousStatus()",
+   "summary": "Clears the suspicious status of a chatter in a channel.",
+   "token": "any",
+   "href": "/reference/api/moderation/#removesuspiciousstatus"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.polls.get()",
+   "summary": "Lists the polls of a channel, most recent first.",
+   "token": "user",
+   "href": "/reference/api/polls/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.polls.create()",
+   "summary": "Starts a poll in a channel.",
+   "token": "user",
+   "href": "/reference/api/polls/#create"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.polls.end()",
+   "summary": "Ends a running poll before its time is up, and optionally hides it.",
+   "token": "user",
+   "href": "/reference/api/polls/#end"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.predictions.get()",
+   "summary": "Lists the predictions of a channel, most recent first.",
+   "token": "user",
+   "href": "/reference/api/predictions/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.predictions.create()",
+   "summary": "Starts a prediction in a channel.",
+   "token": "user",
+   "href": "/reference/api/predictions/#create"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.predictions.end()",
+   "summary": "Locks, resolves or cancels a prediction.",
+   "token": "user",
+   "href": "/reference/api/predictions/#end"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.raids.start()",
+   "summary": "Prepares a raid on another channel.",
+   "token": "user",
+   "href": "/reference/api/raids/#start"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.raids.cancel()",
+   "summary": "Cancels a raid that has not left yet.",
+   "token": "user",
+   "href": "/reference/api/raids/#cancel"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.schedule.get()",
+   "summary": "Lists the planned broadcasts of a channel.",
+   "token": "any",
+   "href": "/reference/api/schedule/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.schedule.icalendar()",
+   "summary": "Gets the schedule of a channel as iCalendar text, ready to be saved as an `.ics` file.",
+   "token": "any",
+   "href": "/reference/api/schedule/#icalendar"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.schedule.updateSettings()",
+   "summary": "Plans or cancels the vacation of a channel.",
+   "token": "user",
+   "href": "/reference/api/schedule/#updatesettings"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.schedule.createSegment()",
+   "summary": "Adds a one-time or weekly broadcast to the schedule of a channel.",
+   "token": "user",
+   "href": "/reference/api/schedule/#createsegment"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.schedule.updateSegment()",
+   "summary": "Changes or cancels a planned broadcast.",
+   "token": "user",
+   "href": "/reference/api/schedule/#updatesegment"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.schedule.deleteSegment()",
+   "summary": "Removes a planned broadcast.",
+   "token": "user",
+   "href": "/reference/api/schedule/#deletesegment"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.search.categories()",
+   "summary": "Finds the categories whose name contains every word of the query, in any order and whatever the case.",
+   "token": "any",
+   "href": "/reference/api/search/#categories"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.search.channels()",
+   "summary": "Finds channels that streamed in the last six months.",
+   "token": "any",
+   "href": "/reference/api/search/#channels"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.streams.get()",
+   "summary": "Lists live streams, most viewers first.",
+   "token": "any",
+   "href": "/reference/api/streams/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.streams.followed()",
+   "summary": "Lists the live streams of the channels a user follows, most viewers first.",
+   "token": "user",
+   "href": "/reference/api/streams/#followed"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.streams.key()",
+   "summary": "Gets the stream key of a channel.",
+   "token": "user",
+   "href": "/reference/api/streams/#key"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.streams.createMarker()",
+   "summary": "Marks the current position of a live stream.",
+   "token": "user",
+   "href": "/reference/api/streams/#createmarker"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.streams.markers()",
+   "summary": "Lists the markers of a user's most recent video, or of a given video.",
+   "token": "user",
+   "href": "/reference/api/streams/#markers"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.subscriptions.get()",
+   "summary": "Lists the subscribers of a channel.",
+   "token": "user",
+   "href": "/reference/api/subscriptions/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.subscriptions.check()",
+   "summary": "Gets the subscription of a user to a channel, or `null` when the user is not subscribed.",
+   "token": "user",
+   "href": "/reference/api/subscriptions/#check"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.tags.all()",
+   "summary": "Lists the stream tags defined by Twitch.",
+   "token": "any",
+   "href": "/reference/api/tags/#all"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.tags.ofChannel()",
+   "summary": "Lists the Twitch defined tags applied to a channel.",
+   "token": "any",
+   "href": "/reference/api/tags/#ofchannel"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.teams.ofChannel()",
+   "summary": "Lists the teams a broadcaster is a member of.",
+   "token": "any",
+   "href": "/reference/api/teams/#ofchannel"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.teams.get()",
+   "summary": "Gets a team and its members, by name or by ID.",
+   "token": "any",
+   "href": "/reference/api/teams/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.get()",
+   "summary": "Gets users by ID, by login name, or both.",
+   "token": "any",
+   "href": "/reference/api/users/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.getById()",
+   "summary": "Gets one user by ID, or `null` when there is no such user.",
+   "token": "any",
+   "href": "/reference/api/users/#getbyid"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.getByLogin()",
+   "summary": "Gets one user by login name, or `null` when there is no such user.",
+   "token": "any",
+   "href": "/reference/api/users/#getbylogin"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.me()",
+   "summary": "Gets the user who owns the token the call is made with.",
+   "token": "user",
+   "href": "/reference/api/users/#me"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.update()",
+   "summary": "Updates the description of the user making the call.",
+   "token": "user",
+   "href": "/reference/api/users/#update"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.authorization()",
+   "summary": "Tells which scopes the given users granted to your application.",
+   "token": "app",
+   "href": "/reference/api/users/#authorization"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.blocks()",
+   "summary": "Lists the users a broadcaster has blocked, most recent first.",
+   "token": "user",
+   "href": "/reference/api/users/#blocks"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.block()",
+   "summary": "Blocks a user on behalf of the user making the call.",
+   "token": "user",
+   "href": "/reference/api/users/#block"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.unblock()",
+   "summary": "Removes a block set by the user making the call.",
+   "token": "user",
+   "href": "/reference/api/users/#unblock"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.extensions()",
+   "summary": "Lists the extensions installed by the user making the call.",
+   "token": "user",
+   "href": "/reference/api/users/#extensions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.activeExtensions()",
+   "summary": "Gets the extensions a broadcaster has active in each slot.",
+   "token": "any",
+   "href": "/reference/api/users/#activeextensions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.users.updateExtensions()",
+   "summary": "Activates, deactivates or moves the extensions of the user making the call.",
+   "token": "user",
+   "href": "/reference/api/users/#updateextensions"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.videos.get()",
+   "summary": "Gets videos by ID, or lists the videos of a user or of a category.",
+   "token": "any",
+   "href": "/reference/api/videos/#get"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.videos.delete()",
+   "summary": "Deletes videos and resolves with the IDs that were deleted.",
+   "token": "user",
+   "href": "/reference/api/videos/#delete"
+  },
+  {
+   "kind": "method",
+   "name": "twitch.whispers.send()",
+   "summary": "Sends a whisper to a user.",
+   "token": "user",
+   "href": "/reference/api/whispers/#send"
+  },
+  {
+   "kind": "event",
+   "name": "automod.message.hold",
+   "summary": "AutoMod held a message for review.",
+   "token": "",
+   "href": "/reference/event-types/#automodmessagehold"
+  },
+  {
+   "kind": "event",
+   "name": "automod.message.hold@1",
+   "summary": "AutoMod held a message for review (older payload, without the reason).",
+   "token": "",
+   "href": "/reference/event-types/#automodmessagehold1"
+  },
+  {
+   "kind": "event",
+   "name": "automod.message.update",
+   "summary": "A message waiting in the AutoMod queue was approved, denied or expired.",
+   "token": "",
+   "href": "/reference/event-types/#automodmessageupdate"
+  },
+  {
+   "kind": "event",
+   "name": "automod.message.update@1",
+   "summary": "A message waiting in the AutoMod queue was approved, denied or expired (older payload, without the reason).",
+   "token": "",
+   "href": "/reference/event-types/#automodmessageupdate1"
+  },
+  {
+   "kind": "event",
+   "name": "automod.settings.update",
+   "summary": "The AutoMod settings of the channel changed.",
+   "token": "",
+   "href": "/reference/event-types/#automodsettingsupdate"
+  },
+  {
+   "kind": "event",
+   "name": "automod.terms.update",
+   "summary": "Permitted or blocked terms of the channel changed.",
+   "token": "",
+   "href": "/reference/event-types/#automodtermsupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.ad_break.begin",
+   "summary": "A midroll ad break started, run by hand or scheduled by Ads Manager.",
+   "token": "",
+   "href": "/reference/event-types/#channelad_breakbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.ban",
+   "summary": "A viewer was banned or timed out in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelban"
+  },
+  {
+   "kind": "event",
+   "name": "channel.bits.use",
+   "summary": "Bits were used in the channel, through a cheer or a Power-up.",
+   "token": "",
+   "href": "/reference/event-types/#channelbitsuse"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_automatic_reward_redemption.add",
+   "summary": "A viewer redeemed an automatic channel points reward (version 2, message split into fragments).",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_automatic_reward_redemptionadd"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_automatic_reward_redemption.add@1",
+   "summary": "A viewer redeemed an automatic channel points reward (version 1, message with emote positions).",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_automatic_reward_redemptionadd1"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_custom_reward_redemption.add",
+   "summary": "A viewer redeemed a custom channel points reward.",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_custom_reward_redemptionadd"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_custom_reward_redemption.update",
+   "summary": "A redemption of a custom channel points reward was fulfilled or canceled.",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_custom_reward_redemptionupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_custom_reward.add",
+   "summary": "The broadcaster created a custom channel points reward.",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_custom_rewardadd"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_custom_reward.remove",
+   "summary": "A custom channel points reward was deleted.",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_custom_rewardremove"
+  },
+  {
+   "kind": "event",
+   "name": "channel.channel_points_custom_reward.update",
+   "summary": "A custom channel points reward was edited.",
+   "token": "",
+   "href": "/reference/event-types/#channelchannel_points_custom_rewardupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.charity_campaign.donate",
+   "summary": "A viewer donated to the broadcaster's charity campaign.",
+   "token": "",
+   "href": "/reference/event-types/#channelcharity_campaigndonate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.charity_campaign.progress",
+   "summary": "A charity campaign moved toward its goal, or the broadcaster changed the goal.",
+   "token": "",
+   "href": "/reference/event-types/#channelcharity_campaignprogress"
+  },
+  {
+   "kind": "event",
+   "name": "channel.charity_campaign.start",
+   "summary": "The broadcaster started a charity campaign.",
+   "token": "",
+   "href": "/reference/event-types/#channelcharity_campaignstart"
+  },
+  {
+   "kind": "event",
+   "name": "channel.charity_campaign.stop",
+   "summary": "The broadcaster stopped a charity campaign.",
+   "token": "",
+   "href": "/reference/event-types/#channelcharity_campaignstop"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat_settings.update",
+   "summary": "The chat settings of the channel changed (emote, follower, slow, subscriber or unique chat mode).",
+   "token": "",
+   "href": "/reference/event-types/#channelchat_settingsupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.clear",
+   "summary": "A moderator or a bot cleared every message of the chat room.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatclear"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.clear_user_messages",
+   "summary": "A moderator or a bot cleared every message of one user, after a ban or a timeout.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatclear_user_messages"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.message",
+   "summary": "A user sent a message in the chat room.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatmessage"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.message_delete",
+   "summary": "A moderator removed one message from the chat room.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatmessage_delete"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.notification",
+   "summary": "Something shown as a notice in chat happened, such as a subscription, a gift, a raid or an announcement.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatnotification"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.user_message_hold",
+   "summary": "A message of the user in `user_id` was held by AutoMod.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatuser_message_hold"
+  },
+  {
+   "kind": "event",
+   "name": "channel.chat.user_message_update",
+   "summary": "The AutoMod status of a held message of the user in `user_id` changed.",
+   "token": "",
+   "href": "/reference/event-types/#channelchatuser_message_update"
+  },
+  {
+   "kind": "event",
+   "name": "channel.cheer",
+   "summary": "A user cheered Bits in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelcheer"
+  },
+  {
+   "kind": "event",
+   "name": "channel.custom_power_up_redemption.add",
+   "summary": "A viewer redeemed a custom Power-up.",
+   "token": "",
+   "href": "/reference/event-types/#channelcustom_power_up_redemptionadd"
+  },
+  {
+   "kind": "event",
+   "name": "channel.follow",
+   "summary": "Someone followed the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelfollow"
+  },
+  {
+   "kind": "event",
+   "name": "channel.goal.begin",
+   "summary": "The broadcaster started a creator goal.",
+   "token": "",
+   "href": "/reference/event-types/#channelgoalbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.goal.end",
+   "summary": "The broadcaster ended a creator goal.",
+   "token": "",
+   "href": "/reference/event-types/#channelgoalend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.goal.progress",
+   "summary": "A creator goal moved forward or backward.",
+   "token": "",
+   "href": "/reference/event-types/#channelgoalprogress"
+  },
+  {
+   "kind": "event",
+   "name": "channel.guest_star_guest.update",
+   "summary": "A guest or a slot changed in a running Guest Star session.",
+   "token": "",
+   "href": "/reference/event-types/#channelguest_star_guestupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.guest_star_session.begin",
+   "summary": "The host started a Guest Star session.",
+   "token": "",
+   "href": "/reference/event-types/#channelguest_star_sessionbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.guest_star_session.end",
+   "summary": "A Guest Star session ended, closed by the host or by Twitch.",
+   "token": "",
+   "href": "/reference/event-types/#channelguest_star_sessionend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.guest_star_settings.update",
+   "summary": "The host changed the Guest Star preferences of the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelguest_star_settingsupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.hype_train.begin",
+   "summary": "A Hype Train started on the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelhype_trainbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.hype_train.end",
+   "summary": "A Hype Train ended on the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelhype_trainend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.hype_train.progress",
+   "summary": "A contribution moved a running Hype Train forward.",
+   "token": "",
+   "href": "/reference/event-types/#channelhype_trainprogress"
+  },
+  {
+   "kind": "event",
+   "name": "channel.moderate",
+   "summary": "A moderator took a moderation action in the channel, warnings included.",
+   "token": "",
+   "href": "/reference/event-types/#channelmoderate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.moderate@1",
+   "summary": "A moderator took a moderation action in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelmoderate1"
+  },
+  {
+   "kind": "event",
+   "name": "channel.moderator.add",
+   "summary": "A user was made moderator of the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelmoderatoradd"
+  },
+  {
+   "kind": "event",
+   "name": "channel.moderator.remove",
+   "summary": "A user lost moderator status in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelmoderatorremove"
+  },
+  {
+   "kind": "event",
+   "name": "channel.poll.begin",
+   "summary": "A poll started on the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelpollbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.poll.end",
+   "summary": "A poll ended on the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelpollend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.poll.progress",
+   "summary": "Viewers voted in a running poll.",
+   "token": "",
+   "href": "/reference/event-types/#channelpollprogress"
+  },
+  {
+   "kind": "event",
+   "name": "channel.prediction.begin",
+   "summary": "A Prediction started on the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelpredictionbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.prediction.end",
+   "summary": "A Prediction ended, resolved or canceled.",
+   "token": "",
+   "href": "/reference/event-types/#channelpredictionend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.prediction.lock",
+   "summary": "Betting closed on a Prediction.",
+   "token": "",
+   "href": "/reference/event-types/#channelpredictionlock"
+  },
+  {
+   "kind": "event",
+   "name": "channel.prediction.progress",
+   "summary": "Viewers bet on a running Prediction.",
+   "token": "",
+   "href": "/reference/event-types/#channelpredictionprogress"
+  },
+  {
+   "kind": "event",
+   "name": "channel.raid",
+   "summary": "A broadcaster raided another channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelraid"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shared_chat.begin",
+   "summary": "The channel became active in a shared chat session.",
+   "token": "",
+   "href": "/reference/event-types/#channelshared_chatbegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shared_chat.end",
+   "summary": "The channel left a shared chat session, or the session ended.",
+   "token": "",
+   "href": "/reference/event-types/#channelshared_chatend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shared_chat.update",
+   "summary": "The shared chat session the channel is in changed, for example its participants.",
+   "token": "",
+   "href": "/reference/event-types/#channelshared_chatupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shield_mode.begin",
+   "summary": "Shield Mode was turned on in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelshield_modebegin"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shield_mode.end",
+   "summary": "Shield Mode was turned off in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelshield_modeend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shoutout.create",
+   "summary": "The broadcaster sent a Shoutout to another channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelshoutoutcreate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.shoutout.receive",
+   "summary": "The broadcaster received a Shoutout from another channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelshoutoutreceive"
+  },
+  {
+   "kind": "event",
+   "name": "channel.subscribe",
+   "summary": "A user subscribed to the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelsubscribe"
+  },
+  {
+   "kind": "event",
+   "name": "channel.subscription.end",
+   "summary": "A subscription to the channel ended.",
+   "token": "",
+   "href": "/reference/event-types/#channelsubscriptionend"
+  },
+  {
+   "kind": "event",
+   "name": "channel.subscription.gift",
+   "summary": "A viewer gifted one or more subscriptions in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelsubscriptiongift"
+  },
+  {
+   "kind": "event",
+   "name": "channel.subscription.message",
+   "summary": "A subscriber shared a resubscription message in chat.",
+   "token": "",
+   "href": "/reference/event-types/#channelsubscriptionmessage"
+  },
+  {
+   "kind": "event",
+   "name": "channel.suspicious_user.message",
+   "summary": "A user flagged as suspicious sent a chat message.",
+   "token": "",
+   "href": "/reference/event-types/#channelsuspicious_usermessage"
+  },
+  {
+   "kind": "event",
+   "name": "channel.suspicious_user.update",
+   "summary": "A moderator changed the treatment applied to a suspicious user.",
+   "token": "",
+   "href": "/reference/event-types/#channelsuspicious_userupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.unban",
+   "summary": "A viewer was unbanned in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelunban"
+  },
+  {
+   "kind": "event",
+   "name": "channel.unban_request.create",
+   "summary": "A banned user created an unban request.",
+   "token": "",
+   "href": "/reference/event-types/#channelunban_requestcreate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.unban_request.resolve",
+   "summary": "An unban request was approved, denied or canceled.",
+   "token": "",
+   "href": "/reference/event-types/#channelunban_requestresolve"
+  },
+  {
+   "kind": "event",
+   "name": "channel.update",
+   "summary": "The broadcaster changed the title, category, language or content classification labels of the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelupdate"
+  },
+  {
+   "kind": "event",
+   "name": "channel.vip.add",
+   "summary": "A user was made VIP of the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelvipadd"
+  },
+  {
+   "kind": "event",
+   "name": "channel.vip.remove",
+   "summary": "A user lost VIP status in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelvipremove"
+  },
+  {
+   "kind": "event",
+   "name": "channel.warning.acknowledge",
+   "summary": "A user acknowledged a warning they received in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelwarningacknowledge"
+  },
+  {
+   "kind": "event",
+   "name": "channel.warning.send",
+   "summary": "A warning was sent to a user in the channel.",
+   "token": "",
+   "href": "/reference/event-types/#channelwarningsend"
+  },
+  {
+   "kind": "event",
+   "name": "conduit.shard.disabled",
+   "summary": "EventSub disabled a conduit shard because the state of its transport changed.",
+   "token": "",
+   "href": "/reference/event-types/#conduitsharddisabled"
+  },
+  {
+   "kind": "event",
+   "name": "drop.entitlement.grant",
+   "summary": "Viewers were granted Drop entitlements.",
+   "token": "",
+   "href": "/reference/event-types/#dropentitlementgrant"
+  },
+  {
+   "kind": "event",
+   "name": "extension.bits_transaction.create",
+   "summary": "A Bits transaction was made in an extension.",
+   "token": "",
+   "href": "/reference/event-types/#extensionbits_transactioncreate"
+  },
+  {
+   "kind": "event",
+   "name": "stream.offline",
+   "summary": "The broadcaster stopped streaming.",
+   "token": "",
+   "href": "/reference/event-types/#streamoffline"
+  },
+  {
+   "kind": "event",
+   "name": "stream.online",
+   "summary": "The broadcaster started a stream.",
+   "token": "",
+   "href": "/reference/event-types/#streamonline"
+  },
+  {
+   "kind": "event",
+   "name": "user.authorization.grant",
+   "summary": "A user authorized the application.",
+   "token": "",
+   "href": "/reference/event-types/#userauthorizationgrant"
+  },
+  {
+   "kind": "event",
+   "name": "user.authorization.revoke",
+   "summary": "The application lost a user's authorization.",
+   "token": "",
+   "href": "/reference/event-types/#userauthorizationrevoke"
+  },
+  {
+   "kind": "event",
+   "name": "user.update",
+   "summary": "A user changed their account (name, description, email...).",
+   "token": "",
+   "href": "/reference/event-types/#userupdate"
+  },
+  {
+   "kind": "event",
+   "name": "user.whisper.message",
+   "summary": "The user received a whisper.",
+   "token": "",
+   "href": "/reference/event-types/#userwhispermessage"
+  }
+ ]
+}
