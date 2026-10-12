@@ -50,7 +50,7 @@ No token to fetch, no header to set, no cursor to carry around, no `429` to catc
 | **Pagination that disappears** | `await` for one page, `for await` for every item, `.all()`, `.take(n)`, `.total()`. |
 | **Rate limits respected** | The client follows Twitch's rate limit headers and waits instead of failing. Lists of more than 100 IDs are split and fetched in parallel. |
 | **EventSub, three ways** | WebSocket, webhooks and conduits behind the same typed `on()`. Reconnects, resubscribes, signature checks and duplicate filtering are built in. |
-| **Small and portable** | No dependency. About 22 kB gzipped. ESM and CommonJS. Only web standard APIs in the main entry. |
+| **Small and portable** | No dependency. About 23 kB gzipped. ESM and CommonJS. Only web standard APIs in the main entry. |
 
 ## Contents
 
