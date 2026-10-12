@@ -3,6 +3,14 @@
 All notable changes to `@ix-xs/twitch.api` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org).
 
+## 2.0.3
+
+### Documentation
+
+- The README, which is also the npm page, now links to the documentation
+  site (in English and in French), to the reference and to the repository.
+  No change to the code.
+
 ## 2.0.2
 
 ### Fixed

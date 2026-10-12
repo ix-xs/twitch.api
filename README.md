@@ -11,8 +11,15 @@ _Every Helix endpoint. Every EventSub event. Fully typed. Zero dependencies._
 [![CI](https://img.shields.io/github/actions/workflow/status/ix-xs/twitch.api/ci.yml?branch=main&label=CI&logo=github)](https://github.com/ix-xs/twitch.api/actions)
 [![node](https://img.shields.io/badge/node-%3E%3D22-brightgreen?logo=node.js&logoColor=white)](https://nodejs.org)
 [![types](https://img.shields.io/badge/types-included-3178c6?logo=typescript&logoColor=white)](#)
-[![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](./package.json)
-[![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+[![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/ix-xs/twitch.api/blob/main/package.json)
+[![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ix-xs/twitch.api/blob/main/LICENSE)
+
+**[Documentation](https://ix-xs.github.io/twitch.api/)** ·
+[Quick start](https://ix-xs.github.io/twitch.api/quick-start/) ·
+[API reference](https://ix-xs.github.io/twitch.api/reference/overview/) ·
+[Recipes](https://ix-xs.github.io/twitch.api/recipes/chat-bot/) ·
+[Troubleshooting](https://ix-xs.github.io/twitch.api/help/troubleshooting/) ·
+[GitHub](https://github.com/ix-xs/twitch.api)
 
 </div>
 
@@ -37,6 +44,8 @@ for await (const stream of twitch.streams.get({ language: "fr" })) {
 ```
 
 No token to fetch, no header to set, no cursor to carry around, no `429` to catch. You call a method, you get typed data.
+
+This page is the short tour. The [documentation site](https://ix-xs.github.io/twitch.api/) has the guides, complete programs to copy and the reference of every method and event type, in English and [in French](https://ix-xs.github.io/twitch.api/fr/).
 
 ## What you get
 
@@ -471,11 +480,11 @@ const twitch = new Twitch({ clientId, clientSecret, baseUrl: "http://localhost:8
 | `twitch.whispers` | Whispers |
 | `twitch.auth` | Tokens and OAuth flows |
 
-Every method has an example and a link to the official reference in its documentation: hover it in your editor.
+Every method has an example and a link to the official reference in its documentation: hover it in your editor. The [reference](https://ix-xs.github.io/twitch.api/reference/overview/) lists them all, with their parameters, what they return and the token they need, and the [event types](https://ix-xs.github.io/twitch.api/reference/event-types/) page does the same for EventSub.
 
 ## Coming from version 1
 
-Version 2 is a rewrite. The main differences:
+Version 2 is a rewrite. The [migration page](https://ix-xs.github.io/twitch.api/help/migrating-from-v1/) has the details and a before and after example. The main differences:
 
 - The client is a named export and takes `clientId` / `clientSecret`: `new Twitch({ clientId, clientSecret })`.
 - No `initialize()`. Tokens are fetched when needed, and nothing is written to `node_modules` anymore.
@@ -499,6 +508,13 @@ Version 2 is a rewrite. The main differences:
 | `client.getGames(names)` | `twitch.games.get({ name })` |
 | `client.getVideos(login)` | `twitch.videos.get({ user_id })` |
 
+## Links
+
+- [Documentation](https://ix-xs.github.io/twitch.api/), also [in French](https://ix-xs.github.io/twitch.api/fr/)
+- [Source code and issues](https://github.com/ix-xs/twitch.api) on GitHub
+- [Changelog](https://github.com/ix-xs/twitch.api/blob/main/CHANGELOG.md)
+- [Package](https://www.npmjs.com/package/@ix-xs/twitch.api) on npm
+
 ## License
 
-[MIT](./LICENSE)
+[MIT](https://github.com/ix-xs/twitch.api/blob/main/LICENSE)
