@@ -142,7 +142,7 @@ if (bucket) {
 }
 ```
 
-The result is `{ limit, remaining, resetAt }`, with `resetAt` in epoch milliseconds. It is `undefined` until Twitch has answered a request made with that token, and again once the window it describes is over, so `resetAt` is always in the future. Buckets of tokens passed with `{ token }` cannot be read this way.
+The result is `{ limit, remaining, resetAt }`, with `resetAt` in epoch milliseconds. It is `undefined` until Twitch has answered a request made with that token. `resetAt` is when the bucket is full again: Twitch refills it as time passes, so with little traffic that moment is always close, and once it has passed the bucket is reported full. Buckets of tokens passed with `{ token }` cannot be read this way.
 
 To follow the waits as they happen, listen to the `rateLimit` event, described in [Observability](/basics/observability/).
 

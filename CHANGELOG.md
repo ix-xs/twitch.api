@@ -3,6 +3,15 @@
 All notable changes to `@ix-xs/twitch.api` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org).
 
+## Unreleased
+
+### Fixed
+
+- `twitch.rateLimitOf()` returned `undefined` on a client with little traffic.
+  Twitch reports a reset time that is already reached when the bucket is
+  nearly full, and the client took that for a finished window. It now reports
+  the bucket as full once its reset time has passed.
+
 ## 2.0.1
 
 ### Changed

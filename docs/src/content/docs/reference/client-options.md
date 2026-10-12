@@ -122,7 +122,7 @@ const body = await twitch.request<{ data: { id: string }[] }>({
 
 ### Rate limit state
 
-`rateLimitOf()` reads the bucket of the app token, `rateLimitOf(userId)` the bucket of a user. It returns a copy with three numbers: `limit` (points per window), `remaining` (points left) and `resetAt` (epoch milliseconds at which the bucket refills). It returns `undefined` until Twitch has reported that bucket, and again once its window is over: a finished window says nothing about the next one.
+`rateLimitOf()` reads the bucket of the app token, `rateLimitOf(userId)` the bucket of a user. It returns a copy with three numbers: `limit` (points per window), `remaining` (points left) and `resetAt` (epoch milliseconds at which the bucket is full again). It returns `undefined` until Twitch has reported that bucket. Twitch refills a bucket as time passes, so with little traffic `resetAt` is always close: once it has passed, the bucket is reported full.
 
 ```ts
 const state = twitch.rateLimitOf();

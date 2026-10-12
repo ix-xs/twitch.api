@@ -123,7 +123,7 @@ describe("request pipeline", () => {
     await vi.advanceTimersByTimeAsync(600);
     await pending;
     expect(t.calls).toHaveLength(2);
-    expect(t.twitch.rateLimitOf()).toBeUndefined();
+    expect(t.twitch.rateLimitOf()).toMatchObject({ limit: 800, remaining: 800 });
   });
 
   it("throws instead of waiting with rateLimit: throw", async () => {

@@ -154,12 +154,20 @@ describe("OAuth requests", () => {
 });
 
 describe("rate limit state", () => {
-  it("forgets a window that is over", async () => {
+  it("reports a full bucket once its reset time has passed", async () => {
     const t = createTestClient();
     const past = String(Math.floor(Date.now() / 1000) - 5);
     t.reply({ data: [] }, { headers: { "Ratelimit-Limit": "800", "Ratelimit-Remaining": "700", "Ratelimit-Reset": past } });
     await t.twitch.users.get({ id: "1" });
-    expect(t.twitch.rateLimitOf()).toBeUndefined();
+    expect(t.twitch.rateLimitOf()).toMatchObject({ limit: 800, remaining: 800 });
+  });
+
+  it("reports what Twitch said while the reset time is ahead", async () => {
+    const t = createTestClient();
+    const soon = String(Math.floor(Date.now() / 1000) + 30);
+    t.reply({ data: [] }, { headers: { "Ratelimit-Limit": "800", "Ratelimit-Remaining": "12", "Ratelimit-Reset": soon } });
+    await t.twitch.users.get({ id: "1" });
+    expect(t.twitch.rateLimitOf()).toMatchObject({ limit: 800, remaining: 12 });
   });
 });
 

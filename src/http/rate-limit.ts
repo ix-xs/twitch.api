@@ -35,8 +35,10 @@ export class RateLimiter {
     if (!state) return 0;
     const now = Date.now();
     if (now >= state.resetAt) {
-      // The window is over: forget the bucket until Twitch reports it again.
-      this.#buckets.delete(bucket);
+      // The reset time has passed: the bucket is full again. One marked empty
+      // after a 429, whose size is unknown, is forgotten until Twitch reports it.
+      if (state.limit === 0) this.#buckets.delete(bucket);
+      else state.remaining = state.limit;
       return 0;
     }
     if (state.remaining > 0) {

@@ -142,7 +142,7 @@ if (bucket) {
 }
 ```
 
-Le résultat est `{ limit, remaining, resetAt }`, avec `resetAt` en millisecondes depuis l'époque Unix. Il vaut `undefined` tant que Twitch n'a pas répondu à une requête faite avec ce jeton, et de nouveau une fois terminée la fenêtre qu'il décrit : `resetAt` est donc toujours dans le futur. Les compartiments des jetons passés avec `{ token }` ne peuvent pas être lus de cette façon.
+Le résultat est `{ limit, remaining, resetAt }`, avec `resetAt` en millisecondes depuis l'époque Unix. Il vaut `undefined` tant que Twitch n'a pas répondu à une requête faite avec ce jeton. `resetAt` est le moment où le compartiment est de nouveau plein : Twitch le remplit au fil du temps, donc avec peu de trafic ce moment est toujours proche, et une fois passé le compartiment est indiqué comme plein. Les compartiments des jetons passés avec `{ token }` ne peuvent pas être lus de cette façon.
 
 Pour suivre les attentes au moment où elles se produisent, écoutez l'événement `rateLimit`, décrit dans [Observabilité](/basics/observability/).
 

@@ -369,11 +369,16 @@ export class Twitch {
   /**
    * What is known about a rate limit bucket: the app token's by default, a
    * user's when you pass their ID. `undefined` until Twitch has reported it.
+   *
+   * `resetAt` is when the bucket is full again. Twitch refills it as time
+   * passes, so with little traffic that moment is always close: once it has
+   * passed, the bucket is reported full.
    */
   rateLimitOf(userId?: string): { limit: number; remaining: number; resetAt: number } | undefined {
     const state = this.#shared.limiter.get(userId ? `user:${userId}` : "app");
-    // A window that is over says nothing about the next one.
-    return state && state.resetAt > Date.now() ? { ...state } : undefined;
+    if (!state || state.limit === 0) return undefined;
+    // Past its reset time the bucket has refilled, whatever the last response said.
+    return state.resetAt > Date.now() ? { ...state } : { ...state, remaining: state.limit };
   }
 
   /**

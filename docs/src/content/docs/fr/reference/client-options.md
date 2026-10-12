@@ -122,7 +122,7 @@ const body = await twitch.request<{ data: { id: string }[] }>({
 
 ### État des limites de débit
 
-`rateLimitOf()` lit le compartiment du jeton d'application, `rateLimitOf(userId)` celui d'un utilisateur. Elle renvoie une copie avec trois nombres : `limit` (points par fenêtre), `remaining` (points restants) et `resetAt` (le moment, en millisecondes depuis l'époque Unix, où le compartiment se remplit). Elle renvoie `undefined` tant que Twitch n'a pas communiqué ce compartiment, et de nouveau une fois sa fenêtre terminée : une fenêtre terminée ne dit rien de la suivante.
+`rateLimitOf()` lit le compartiment du jeton d'application, `rateLimitOf(userId)` celui d'un utilisateur. Elle renvoie une copie avec trois nombres : `limit` (points par fenêtre), `remaining` (points restants) et `resetAt` (le moment, en millisecondes depuis l'époque Unix, où le compartiment est de nouveau plein). Elle renvoie `undefined` tant que Twitch n'a pas communiqué ce compartiment. Twitch remplit un compartiment au fil du temps : avec peu de trafic, `resetAt` est donc toujours proche, et une fois ce moment passé le compartiment est indiqué comme plein.
 
 ```ts
 const state = twitch.rateLimitOf();
