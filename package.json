@@ -1,7 +1,7 @@
 {
   "name": "@ix-xs/twitch.api",
   "version": "2.0.0",
-  "description": "The complete Twitch API client for JavaScript and TypeScript. Every Helix endpoint and every EventSub event fully typed, automatic tokens, rate limits, pagination and reconnects, zero dependencies.",
+  "description": "The whole Twitch API, typed. A zero-dependency client for JavaScript and TypeScript: all 149 Helix endpoints and 83 EventSub events, with tokens, rate limits, pagination and reconnects handled for you.",
   "keywords": [
     "twitch",
     "twitch-api",
