@@ -3,7 +3,7 @@
 All notable changes to `@ix-xs/twitch.api` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org).
 
-## Unreleased
+## 2.0.2
 
 ### Fixed
 
