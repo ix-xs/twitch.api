@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an improvement, or report an endpoint or event that is missing or out of date.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the use case, not just the solution. For a missing endpoint or event, link its page in the Twitch documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: How might it look?
+      render: ts
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

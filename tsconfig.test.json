@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@ix-xs/twitch.api": [
+        "./src/index.ts"
+      ],
+      "@ix-xs/twitch.api/node": [
+        "./src/node.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "examples/**/*.ts",
+    "docs/src/console/samples/**/*.ts"
+  ]
+}

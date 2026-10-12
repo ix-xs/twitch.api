@@ -1,0 +1,11 @@
+node_modules
+dist
+*.tgz
+.env
+.env.*
+!.env.example
+tokens.json
+.twitch-tokens.json
+coverage
+.DS_Store
+.claude/

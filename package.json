@@ -1,0 +1,101 @@
+{
+  "name": "@ix-xs/twitch.api",
+  "version": "2.0.0",
+  "description": "The complete Twitch API client for JavaScript and TypeScript. Every Helix endpoint and every EventSub event fully typed, automatic tokens, rate limits, pagination and reconnects, zero dependencies.",
+  "keywords": [
+    "twitch",
+    "twitch-api",
+    "helix",
+    "eventsub",
+    "twitch-bot",
+    "chat-bot",
+    "oauth",
+    "websocket",
+    "webhook",
+    "typescript",
+    "esm",
+    "zero-dependency",
+    "api-client"
+  ],
+  "author": "ix-xs.dev <contact@ix-xs.dev>",
+  "license": "MIT",
+  "homepage": "https://ix-xs.github.io/twitch.api/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ix-xs/twitch.api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ix-xs/twitch.api/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./node": {
+      "import": {
+        "types": "./dist/node.d.ts",
+        "default": "./dist/node.js"
+      },
+      "require": {
+        "types": "./dist/node.d.cts",
+        "default": "./dist/node.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "node": [
+        "./dist/node.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:types": "tsc -p tsconfig.test.json",
+    "attw": "attw --pack .",
+    "check": "npm run typecheck && npm run test:types && npm run check:jsdoc && npm run build && npm test && npm run docs:check",
+    "docs": "npm --prefix docs install && npm --prefix docs run dev",
+    "docs:build": "npm --prefix docs install && npm --prefix docs run build",
+    "docs:reference": "node docs/scripts/reference.mjs",
+    "docs:check": "node docs/scripts/reference.mjs --check && node docs/scripts/check-snippets.mjs",
+    "prepublishOnly": "npm run check",
+    "check:jsdoc": "node scripts/check-jsdoc.mjs"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.0",
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
