@@ -5,7 +5,7 @@ An [Astro Starlight](https://starlight.astro.build) site for `@ix-xs/twitch.api`
 | Section | Source | Written by |
 | --- | --- | --- |
 | Home page | `src/content/docs/index.mdx`, `src/components/` | hand |
-| Start, Basics, Authentication, Events, Recipes, Help | `src/content/docs/{basics,auth,events,recipes,help}/` and the two pages at the root | hand |
+| Start, Basics, Authentication, Events, Recipes, Help | `src/content/docs/{basics,auth,events,recipes,help}/` and the three pages at the root | hand |
 | Errors, Client options | `src/content/docs/reference/errors.md`, `reference/client-options.md` | hand |
 | API groups, Event types, Scopes, Reference overview | `src/content/docs/reference/` | `scripts/reference.mjs`, from the source code |
 

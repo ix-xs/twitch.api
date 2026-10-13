@@ -109,7 +109,7 @@ export default defineConfig({
           label: "Start",
           translations: { fr: "Démarrer" },
           items: [
-            { label: "Introduction", translations: { fr: "Introduction" }, slug: "index" },
+            { slug: "introduction" },
             { slug: "quick-start" },
             { slug: "credentials" },
           ],
