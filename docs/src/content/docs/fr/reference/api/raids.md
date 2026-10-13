@@ -1,15 +1,11 @@
 ---
 title: twitch.raids
-description: "Raids: start one, cancel a pending one."
+description: "Raids : en lancer un, annuler celui en attente."
 sidebar:
   label: raids
 ---
 
 Toutes les méthodes de `twitch.raids`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## start
 
@@ -17,21 +13,18 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.raids.start(params, options?): Promise<PendingRaid>
 ```
 
-Prepares a raid on another channel. The viewers only leave once the
-broadcaster confirms in the Twitch interface or after a 90 second
-countdown, so listen to the channel raid event to know that it happened.
-Limited to 10 calls per 10 minutes.
+Prépare un raid vers une autre chaîne. Les spectateurs ne partent que lorsque le diffuseur confirme dans l'interface de Twitch ou après un compte à rebours de 90 secondes : écoutez donc l'événement de raid de la chaîne pour savoir qu'il a eu lieu. Limité à 10 appels par tranche de 10 minutes.
 
-**Jeton:** user, scope `channel:manage:raids`.
+**Jeton :** utilisateur, scope `channel:manage:raids`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `from_broadcaster_id` | `string` | Broadcaster who sends their viewers. Defaults to the user making the call. |
-| `to_broadcaster_id` <small>requis</small> | `string` | ID of the broadcaster to raid. |
+| `from_broadcaster_id` | `string` | Diffuseur qui envoie ses spectateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `to_broadcaster_id` <small>requis</small> | `string` | Identifiant du diffuseur visé par le raid. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -42,8 +35,8 @@ Limited to 10 calls per 10 minutes.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` | When the raid was requested, as an RFC 3339 timestamp. |
-| `is_mature` | `boolean` | Deprecated. Always `false`. |
+| `created_at` | `string` | Date de la demande de raid, sous forme d'horodatage RFC 3339. |
+| `is_mature` | `boolean` | Obsolète. Toujours `false`. |
 
 </details>
 
@@ -61,17 +54,17 @@ const raid = await twitch.raids.start({ to_broadcaster_id: "141981764" });
 twitch.raids.cancel(params?, options?): Promise<void>
 ```
 
-Cancels a raid that has not left yet. Limited to 10 calls per 10 minutes.
+Annule un raid qui n'est pas encore parti. Limité à 10 appels par tranche de 10 minutes.
 
-**Jeton:** user, scope `channel:manage:raids`.
+**Jeton :** utilisateur, scope `channel:manage:raids`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who started the raid. Defaults to the user making the call. |
+| `broadcaster_id` | `string` | Diffuseur qui a lancé le raid. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 

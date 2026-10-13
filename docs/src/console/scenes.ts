@@ -17,7 +17,7 @@ export type Line = { /** Milliseconds after the previous line. */ after: number 
   | { kind: "note"; text: Text }
   | { kind: "log"; text: string }
   | { kind: "event"; name: string; detail: string }
-  | { kind: "chat"; from: string; hue: number; text: string; bot?: boolean }
+  | { kind: "chat"; from: string; hue: number; text: string | Text; bot?: boolean }
 );
 
 export interface Scene {
@@ -33,6 +33,19 @@ export interface Scene {
 function shown(source: string): string {
   const marker = source.indexOf("// ---");
   return source.slice(marker < 0 ? 0 : source.indexOf("\n", marker) + 1).trim();
+}
+
+/** The comments of the samples, in French. A comment missing here stays as written. */
+const COMMENTS_FR: Record<string, string> = {
+  "250 streams: three requests, one array.": "250 streams : trois requêtes, un seul tableau.",
+  "Or walk every page without holding them all in memory.": "Ou parcourir toutes les pages sans les garder toutes en mémoire.",
+  "Signatures are verified before your handler runs.": "Les signatures sont vérifiées avant l'appel de votre gestionnaire.",
+};
+
+/** The code of a scene with its comments in the language of the page. */
+export function codeOf(scene: Scene, language: "en" | "fr"): string {
+  if (language === "en") return scene.code;
+  return scene.code.replace(/^(\s*\/\/ )(.+)$/gm, (whole, start: string, comment: string) => (COMMENTS_FR[comment] ? start + COMMENTS_FR[comment] : whole));
 }
 
 export const SCENES: Scene[] = [
@@ -71,8 +84,8 @@ export const SCENES: Scene[] = [
     lines: [
       { after: 250, kind: "note", text: { en: "WebSocket open, session welcomed.", fr: "WebSocket ouvert, session accueillie." } },
       { after: 300, kind: "call", method: "POST", path: "/eventsub/subscriptions", status: 202 },
-      { after: 500, kind: "chat", from: "marguerite", hue: 150, text: "hello everyone" },
-      { after: 600, kind: "chat", from: "kowalczyk_dev", hue: 30, text: "is the bot awake?" },
+      { after: 500, kind: "chat", from: "marguerite", hue: 150, text: { en: "hello everyone", fr: "bonjour tout le monde" } },
+      { after: 600, kind: "chat", from: "kowalczyk_dev", hue: 30, text: { en: "is the bot awake?", fr: "le bot est réveillé ?" } },
       { after: 500, kind: "chat", from: "kowalczyk_dev", hue: 30, text: "!ping" },
       { after: 250, kind: "call", method: "POST", path: "/chat/messages", status: 200 },
       { after: 200, kind: "chat", from: "your_bot", hue: 265, text: "pong", bot: true },

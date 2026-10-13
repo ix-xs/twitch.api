@@ -1,15 +1,11 @@
 ---
 title: twitch.games
-description: "Games and categories: look them up, list the most watched."
+description: "Jeux et catégories : les retrouver, lister les plus regardés."
 sidebar:
   label: games
 ---
 
 Toutes les méthodes de `twitch.games`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## top
 
@@ -17,19 +13,19 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.games.top(params?, options?): Paginator<Game>
 ```
 
-Lists the categories with the most viewers right now, most watched first.
+Liste les catégories qui ont le plus de spectateurs en ce moment, en commençant par les plus regardées.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
-| `before` | `string` | Cursor of the previous page. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
+| `before` | `string` | Curseur de la page précédente. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -40,10 +36,10 @@ Lists the categories with the most viewers right now, most watched first.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the category. |
-| `name` | `string` | Name of the category. |
-| `box_art_url` | `string` | URL of the box art. Replace `&#123;width}` and `&#123;height}` with the size you want, in pixels. |
-| `igdb_id` | `string` | ID of the game on IGDB. An empty string when Twitch does not know it. |
+| `id` | `string` | Identifiant de la catégorie. |
+| `name` | `string` | Nom de la catégorie. |
+| `box_art_url` | `string` | URL de la jaquette. Remplacez `&#123;width}` et `&#123;height}` par la taille voulue, en pixels. |
+| `igdb_id` | `string` | Identifiant du jeu sur IGDB. Une chaîne vide quand Twitch ne le connaît pas. |
 
 </details>
 
@@ -61,20 +57,19 @@ const top = await twitch.games.top().take(10);
 twitch.games.get(params, options?): Promise<Game[]>
 ```
 
-Gets categories by ID, by exact name, by IGDB ID, or any mix of them.
-Categories that do not exist are left out of the result.
+Renvoie des catégories d'après leur identifiant, leur nom exact, leur identifiant IGDB, ou n'importe quelle combinaison des trois. Les catégories qui n'existent pas sont absentes du résultat.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string \| readonly string[]` | IDs of the categories to get. Any number: long lists are split for you. |
-| `name` | `string \| readonly string[]` | Exact names of the categories to get. Any number: long lists are split for you. |
-| `igdb_id` | `string \| readonly string[]` | IGDB IDs of the games to get. Any number: long lists are split for you. |
+| `id` | `string \| readonly string[]` | Identifiants des catégories à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
+| `name` | `string \| readonly string[]` | Noms exacts des catégories à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
+| `igdb_id` | `string \| readonly string[]` | Identifiants IGDB des jeux à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -85,10 +80,10 @@ Categories that do not exist are left out of the result.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the category. |
-| `name` | `string` | Name of the category. |
-| `box_art_url` | `string` | URL of the box art. Replace `&#123;width}` and `&#123;height}` with the size you want, in pixels. |
-| `igdb_id` | `string` | ID of the game on IGDB. An empty string when Twitch does not know it. |
+| `id` | `string` | Identifiant de la catégorie. |
+| `name` | `string` | Nom de la catégorie. |
+| `box_art_url` | `string` | URL de la jaquette. Remplacez `&#123;width}` et `&#123;height}` par la taille voulue, en pixels. |
+| `igdb_id` | `string` | Identifiant du jeu sur IGDB. Une chaîne vide quand Twitch ne le connaît pas. |
 
 </details>
 

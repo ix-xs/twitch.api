@@ -1,15 +1,11 @@
 ---
 title: twitch.contentLabels
-description: "Content classification labels and their localized names."
+description: "Étiquettes de classification du contenu et leurs noms traduits."
 sidebar:
   label: contentLabels
 ---
 
 Toutes les méthodes de `twitch.contentLabels`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## list
 
@@ -17,18 +13,17 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.contentLabels.list(params?, options?): Promise<ContentLabel[]>
 ```
 
-Lists every content classification label, with its name and description
-in the language you ask for.
+Liste toutes les étiquettes de classification du contenu, avec leur nom et leur description dans la langue demandée.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `locale` | `ContentLabelLocale` | Language of the names and descriptions. Twitch defaults to `"en-US"`. |
+| `locale` | `ContentLabelLocale` | Langue des noms et des descriptions. Twitch prend `"en-US"` par défaut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -39,9 +34,9 @@ in the language you ask for.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the label, such as `"Gambling"`. |
-| `description` | `string` | What the label covers, in the requested language. |
-| `name` | `string` | Name of the label, in the requested language. |
+| `id` | `string` | Identifiant de l'étiquette, par exemple `"Gambling"`. |
+| `description` | `string` | Ce que couvre l'étiquette, dans la langue demandée. |
+| `name` | `string` | Nom de l'étiquette, dans la langue demandée. |
 
 </details>
 

@@ -1,0 +1,13 @@
+{
+ "Broadcaster whose tags to list.": "Diffuseur dont on liste les tags.",
+ "Description of the tag in each language. Keys are locales such as `\"en-us\"`.": "Description du tag dans chaque langue. Les clés sont des codes de langue tels que `\"en-us\"`.",
+ "ID of the tag.": "Identifiant du tag.",
+ "Lists the Twitch defined tags applied to a channel.": "Liste les tags définis par Twitch appliqués à une chaîne.",
+ "Lists the stream tags defined by Twitch.": "Liste les tags de stream définis par Twitch.",
+ "Name of the tag in each language. Keys are locales such as `\"en-us\"`.": "Nom du tag dans chaque langue. Les clés sont des codes de langue tels que `\"en-us\"`.",
+ "Only these tags. Up to 100 IDs.": "Uniquement ces tags. Jusqu'à 100 identifiants.",
+ "Stream tags (deprecated by Twitch, kept for completeness).": "Tags de stream (abandonnés par Twitch, conservés par souci d'exhaustivité).",
+ "Twitch replaced these tags with free text ones in 2023 and this endpoint no longer returns any.": "Twitch a remplacé ces tags par des tags en texte libre en 2023 et cet endpoint n'en renvoie plus aucun.",
+ "Twitch replaced these tags with free text ones in 2023. Read the `tags` field of the channel information instead.": "Twitch a remplacé ces tags par des tags en texte libre en 2023. Lisez plutôt le champ `tags` des informations de la chaîne.",
+ "Whether Twitch applies the tag by itself. Broadcasters cannot add such a tag.": "Indique si Twitch applique le tag de lui-même. Les diffuseurs ne peuvent pas ajouter un tel tag."
+}

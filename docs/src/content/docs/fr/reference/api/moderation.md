@@ -1,15 +1,11 @@
 ---
 title: twitch.moderation
-description: "Moderation: bans, timeouts, warnings, AutoMod, blocked terms, moderators, VIPs and Shield Mode."
+description: "Modération : bannissements, timeouts, avertissements, AutoMod, termes bloqués, modérateurs, VIP et Shield Mode."
 sidebar:
   label: moderation
 ---
 
 Toutes les méthodes de `twitch.moderation`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## checkAutoMod
 
@@ -17,20 +13,18 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.moderation.checkAutoMod(params, options?): Promise<AutoModCheckResult[]>
 ```
 
-Tells whether AutoMod would let messages through in a channel, without
-sending them. Twitch limits these checks per channel, from 5 a minute for
-a regular account to 30 for a partner.
+Indique si AutoMod laisserait passer des messages sur une chaîne, sans les envoyer. Twitch limite ces vérifications par chaîne, de 5 par minute pour un compte ordinaire à 30 pour un partenaire.
 
-**Jeton:** app or user, scope `moderation:read`.
+**Jeton :** application ou utilisateur, scope `moderation:read`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose AutoMod settings and blocked terms apply. Defaults to the user making the call. |
-| `data` <small>requis</small> | `readonly AutoModCheckMessage[]` | Messages to check, 1 to 100. |
+| `broadcaster_id` | `string` | Diffuseur dont les réglages AutoMod et les termes bloqués s'appliquent. Par défaut, l'utilisateur qui fait l'appel. |
+| `data` <small>requis</small> | `readonly AutoModCheckMessage[]` | Messages à vérifier, de 1 à 100. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -41,8 +35,8 @@ a regular account to 30 for a partner.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `msg_id` | `string` | The ID you gave to the message. |
-| `is_permitted` | `boolean` | `true` when the message would go straight to chat, `false` when it would be held or blocked. |
+| `msg_id` | `string` | L'identifiant que vous avez donné au message. |
+| `is_permitted` | `boolean` | `true` quand le message irait directement dans le chat, `false` quand il serait retenu ou bloqué. |
 
 </details>
 
@@ -63,19 +57,19 @@ if (!result?.is_permitted) console.log("AutoMod would hold this message");
 twitch.moderation.manageAutoModMessage(params, options?): Promise<void>
 ```
 
-Approves or denies a message that AutoMod is holding for review.
+Approuve ou refuse un message qu'AutoMod retient pour examen.
 
-**Jeton:** app or user, scope `moderator:manage:automod`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:automod`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | Moderator who takes the decision. Defaults to the user making the call. |
-| `msg_id` <small>requis</small> | `string` | ID of the held message. |
-| `action` <small>requis</small> | `"ALLOW" \| "DENY"` | `"ALLOW"` releases the message to chat, `"DENY"` discards it. |
+| `user_id` | `string` | Modérateur qui prend la décision. Par défaut, l'utilisateur qui fait l'appel. |
+| `msg_id` <small>requis</small> | `string` | Identifiant du message retenu. |
+| `action` <small>requis</small> | `"ALLOW" \| "DENY"` | `"ALLOW"` publie le message dans le chat, `"DENY"` l'écarte. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -95,18 +89,18 @@ await twitch.moderation.manageAutoModMessage({ msg_id: "836013710", action: "ALL
 twitch.moderation.autoModSettings(params, options?): Promise<AutoModSettings>
 ```
 
-Gets the AutoMod levels of a channel.
+Renvoie les niveaux AutoMod d'une chaîne.
 
-**Jeton:** app or user, scope `moderator:read:automod_settings` or `moderator:manage:automod_settings`.
+**Jeton :** application ou utilisateur, scope `moderator:read:automod_settings` ou `moderator:manage:automod_settings`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose settings to read. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on lit les réglages. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -117,17 +111,17 @@ Gets the AutoMod levels of a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `moderator_id` | `string` | ID of the moderator who made the call. |
-| `overall_level` | `number \| null` | Overall level, 0 to 4. `null` when the categories were set one by one. |
-| `disability` | `number` | Level for discrimination against disability. |
-| `aggression` | `number` | Level for aggressive hostility. |
-| `sexuality_sex_or_gender` | `number` | Level for discrimination based on sexuality, sex or gender. |
-| `misogyny` | `number` | Level for discrimination against women. |
-| `bullying` | `number` | Level for name calling and insults. |
-| `swearing` | `number` | Level for profanity. |
-| `race_ethnicity_or_religion` | `number` | Level for racial, ethnic or religious discrimination. |
-| `sex_based_terms` | `number` | Level for sexual content. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a fait l'appel. |
+| `overall_level` | `number \| null` | Niveau global, de 0 à 4. `null` quand les catégories ont été réglées une à une. |
+| `disability` | `number` | Niveau pour la discrimination liée au handicap. |
+| `aggression` | `number` | Niveau pour l'hostilité agressive. |
+| `sexuality_sex_or_gender` | `number` | Niveau pour la discrimination fondée sur la sexualité, le sexe ou le genre. |
+| `misogyny` | `number` | Niveau pour la discrimination envers les femmes. |
+| `bullying` | `number` | Niveau pour les injures et les insultes. |
+| `swearing` | `number` | Niveau pour les grossièretés. |
+| `race_ethnicity_or_religion` | `number` | Niveau pour la discrimination raciale, ethnique ou religieuse. |
+| `sex_based_terms` | `number` | Niveau pour le contenu sexuel. |
 
 </details>
 
@@ -146,29 +140,27 @@ console.log(settings.overall_level);
 twitch.moderation.updateAutoModSettings(params, options?): Promise<AutoModSettings>
 ```
 
-Replaces the AutoMod levels of a channel. This overwrites everything: a
-category you leave out goes back to 0, so send all the levels you want to
-keep.
+Remplace les niveaux AutoMod d'une chaîne. Tout est écrasé : une catégorie que vous omettez revient à 0, envoyez donc tous les niveaux que vous voulez conserver.
 
-**Jeton:** app or user, scope `moderator:manage:automod_settings`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:automod_settings`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose settings to change. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `overall_level` | `number` | Overall level, 0 to 4. Twitch derives every category level from it. |
-| `disability` | `number` | Level for discrimination against disability. |
-| `aggression` | `number` | Level for aggressive hostility. |
-| `sexuality_sex_or_gender` | `number` | Level for discrimination based on sexuality, sex or gender. |
-| `misogyny` | `number` | Level for discrimination against women. |
-| `bullying` | `number` | Level for name calling and insults. |
-| `swearing` | `number` | Level for profanity. |
-| `race_ethnicity_or_religion` | `number` | Level for racial, ethnic or religious discrimination. |
-| `sex_based_terms` | `number` | Level for sexual content. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on modifie les réglages. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `overall_level` | `number` | Niveau global, de 0 à 4. Twitch en déduit le niveau de chaque catégorie. |
+| `disability` | `number` | Niveau pour la discrimination liée au handicap. |
+| `aggression` | `number` | Niveau pour l'hostilité agressive. |
+| `sexuality_sex_or_gender` | `number` | Niveau pour la discrimination fondée sur la sexualité, le sexe ou le genre. |
+| `misogyny` | `number` | Niveau pour la discrimination envers les femmes. |
+| `bullying` | `number` | Niveau pour les injures et les insultes. |
+| `swearing` | `number` | Niveau pour les grossièretés. |
+| `race_ethnicity_or_religion` | `number` | Niveau pour la discrimination raciale, ethnique ou religieuse. |
+| `sex_based_terms` | `number` | Niveau pour le contenu sexuel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -179,17 +171,17 @@ keep.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `moderator_id` | `string` | ID of the moderator who made the call. |
-| `overall_level` | `number \| null` | Overall level, 0 to 4. `null` when the categories were set one by one. |
-| `disability` | `number` | Level for discrimination against disability. |
-| `aggression` | `number` | Level for aggressive hostility. |
-| `sexuality_sex_or_gender` | `number` | Level for discrimination based on sexuality, sex or gender. |
-| `misogyny` | `number` | Level for discrimination against women. |
-| `bullying` | `number` | Level for name calling and insults. |
-| `swearing` | `number` | Level for profanity. |
-| `race_ethnicity_or_religion` | `number` | Level for racial, ethnic or religious discrimination. |
-| `sex_based_terms` | `number` | Level for sexual content. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a fait l'appel. |
+| `overall_level` | `number \| null` | Niveau global, de 0 à 4. `null` quand les catégories ont été réglées une à une. |
+| `disability` | `number` | Niveau pour la discrimination liée au handicap. |
+| `aggression` | `number` | Niveau pour l'hostilité agressive. |
+| `sexuality_sex_or_gender` | `number` | Niveau pour la discrimination fondée sur la sexualité, le sexe ou le genre. |
+| `misogyny` | `number` | Niveau pour la discrimination envers les femmes. |
+| `bullying` | `number` | Niveau pour les injures et les insultes. |
+| `swearing` | `number` | Niveau pour les grossièretés. |
+| `race_ethnicity_or_religion` | `number` | Niveau pour la discrimination raciale, ethnique ou religieuse. |
+| `sex_based_terms` | `number` | Niveau pour le contenu sexuel. |
 
 </details>
 
@@ -208,21 +200,21 @@ await twitch.moderation.updateAutoModSettings({ broadcaster_id: "141981764", swe
 twitch.moderation.bans(params?, options?): Paginator<BannedUser>
 ```
 
-Lists the users who are banned or timed out in a channel.
+Liste les utilisateurs bannis ou sous timeout sur une chaîne.
 
-**Jeton:** app or user, scope `moderation:read` or `moderator:manage:banned_users`.
+**Jeton :** application ou utilisateur, scope `moderation:read` ou `moderator:manage:banned_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose bans to list. Defaults to the user making the call. |
-| `user_id` | `string \| readonly string[]` | Only these users, when they are banned or timed out. Up to 100 IDs. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
-| `before` | `string` | Cursor of the previous page. |
+| `broadcaster_id` | `string` | Diffuseur dont on liste les bannissements. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` | `string \| readonly string[]` | Uniquement ces utilisateurs, s'ils sont bannis ou sous timeout. Jusqu'à 100 identifiants. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
+| `before` | `string` | Curseur de la page précédente. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -233,15 +225,15 @@ Lists the users who are banned or timed out in a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the banned user. |
-| `user_login` | `string` | Login name of the banned user. |
-| `user_name` | `string` | Display name of the banned user. |
-| `expires_at` | `string` | When the timeout ends, as an RFC 3339 timestamp. An empty string for a permanent ban. |
-| `created_at` | `string` | When the ban or timeout was set, as an RFC 3339 timestamp. |
-| `reason` | `string` | Reason given by the moderator. An empty string when there is none. |
-| `moderator_id` | `string` | ID of the moderator who set the ban or timeout. |
-| `moderator_login` | `string` | Login name of that moderator. |
-| `moderator_name` | `string` | Display name of that moderator. |
+| `user_id` | `string` | Identifiant de l'utilisateur banni. |
+| `user_login` | `string` | Nom de connexion de l'utilisateur banni. |
+| `user_name` | `string` | Nom d'affichage de l'utilisateur banni. |
+| `expires_at` | `string` | Moment où le timeout prend fin, sous forme d'horodatage RFC 3339. Une chaîne vide pour un bannissement permanent. |
+| `created_at` | `string` | Moment où le bannissement ou le timeout a été appliqué, sous forme d'horodatage RFC 3339. |
+| `reason` | `string` | Raison donnée par le modérateur. Une chaîne vide quand il n'y en a pas. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a appliqué le bannissement ou le timeout. |
+| `moderator_login` | `string` | Nom de connexion de ce modérateur. |
+| `moderator_name` | `string` | Nom d'affichage de ce modérateur. |
 
 </details>
 
@@ -261,25 +253,21 @@ for await (const banned of twitch.moderation.bans()) {
 twitch.moderation.ban(params, options?): Promise<UserBan>
 ```
 
-Bans a user from a channel's chat. A timeout is a ban with a `duration`:
-give the number of seconds and the user is let back in afterwards. Calling
-it again on a timed out user changes the duration or turns the timeout
-into a ban, but a banned user has to be unbanned before a timeout can be
-set.
+Bannit un utilisateur du chat d'une chaîne. Un timeout est un bannissement avec une `duration` : donnez le nombre de secondes et l'utilisateur est réadmis ensuite. Un nouvel appel sur un utilisateur sous timeout change la durée ou transforme le timeout en bannissement, mais un utilisateur banni doit être débanni avant de pouvoir recevoir un timeout.
 
-**Jeton:** app or user, scope `moderator:manage:banned_users`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:banned_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat the user is removed from. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the user to ban or time out. |
-| `duration` | `number` | Length of the timeout in seconds, 1 to 1209600 (two weeks). Leave it out for a permanent ban. |
-| `reason` | `string` | Reason shown to the user and the other moderators, 500 characters at most. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur du chat dont l'utilisateur est exclu. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à bannir ou à mettre sous timeout. |
+| `duration` | `number` | Durée du timeout en secondes, de 1 à 1209600 (deux semaines). Omettez-la pour un bannissement permanent. |
+| `reason` | `string` | Raison montrée à l'utilisateur et aux autres modérateurs, 500 caractères au plus. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -290,11 +278,11 @@ set.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster whose chat the user was removed from. |
-| `moderator_id` | `string` | ID of the moderator who set it. |
-| `user_id` | `string` | ID of the banned user. |
-| `created_at` | `string` | When it was set, as an RFC 3339 timestamp. |
-| `end_time` | `string \| null` | When the timeout ends, as an RFC 3339 timestamp. `null` for a permanent ban. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur du chat dont l'utilisateur a été exclu. |
+| `moderator_id` | `string` | Identifiant du modérateur qui l'a appliqué. |
+| `user_id` | `string` | Identifiant de l'utilisateur banni. |
+| `created_at` | `string` | Moment où il a été appliqué, sous forme d'horodatage RFC 3339. |
+| `end_time` | `string \| null` | Moment où le timeout prend fin, sous forme d'horodatage RFC 3339. `null` pour un bannissement permanent. |
 
 </details>
 
@@ -314,19 +302,19 @@ console.log(timeout.end_time);
 twitch.moderation.unban(params, options?): Promise<void>
 ```
 
-Lifts the ban or the timeout of a user.
+Lève le bannissement ou le timeout d'un utilisateur.
 
-**Jeton:** app or user, scope `moderator:manage:banned_users`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:banned_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat the user is banned from. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the user to unban. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur du chat dont l'utilisateur est banni. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à débannir. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -346,22 +334,22 @@ await twitch.moderation.unban({ broadcaster_id: "141981764", user_id: "9876" });
 twitch.moderation.unbanRequests(params, options?): Paginator<UnbanRequest>
 ```
 
-Lists the unban requests of a channel that are in a given state.
+Liste les demandes de débannissement d'une chaîne qui sont dans un état donné.
 
-**Jeton:** user, scope `moderator:read:unban_requests` or `moderator:manage:unban_requests`.
+**Jeton :** utilisateur, scope `moderator:read:unban_requests` ou `moderator:manage:unban_requests`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose channel received the requests. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `status` <small>requis</small> | `UnbanRequestStatus` | Only requests in this state. |
-| `user_id` | `string` | Only requests written by this user. |
-| `first` | `number` | Items per page. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont la chaîne a reçu les demandes. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `status` <small>requis</small> | `UnbanRequestStatus` | Uniquement les demandes dans cet état. |
+| `user_id` | `string` | Uniquement les demandes rédigées par cet utilisateur. |
+| `first` | `number` | Éléments par page. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -372,21 +360,21 @@ Lists the unban requests of a channel that are in a given state.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the request. |
-| `broadcaster_id` | `string` | ID of the broadcaster who received the request. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `moderator_id` | `string` | ID of the moderator who approved or denied the request. |
-| `moderator_login` | `string` | Login name of that moderator. |
-| `moderator_name` | `string` | Display name of that moderator. |
-| `user_id` | `string` | ID of the banned user who wrote the request. |
-| `user_login` | `string` | Login name of that user. |
-| `user_name` | `string` | Display name of that user. |
-| `text` | `string` | Message written by the user. |
-| `status` | `UnbanRequestStatus` | Where the request stands. |
-| `created_at` | `string` | When the request was sent, as an RFC 3339 timestamp. |
-| `resolved_at` | `string \| null` | When the request was approved or denied, as an RFC 3339 timestamp. `null` while it is open. |
-| `resolution_text` | `string \| null` | Answer written by the moderator. `null` while the request is open. |
+| `id` | `string` | Identifiant de la demande. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui a reçu la demande. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a approuvé ou refusé la demande. |
+| `moderator_login` | `string` | Nom de connexion de ce modérateur. |
+| `moderator_name` | `string` | Nom d'affichage de ce modérateur. |
+| `user_id` | `string` | Identifiant de l'utilisateur banni qui a rédigé la demande. |
+| `user_login` | `string` | Nom de connexion de cet utilisateur. |
+| `user_name` | `string` | Nom d'affichage de cet utilisateur. |
+| `text` | `string` | Message rédigé par l'utilisateur. |
+| `status` | `UnbanRequestStatus` | État d'avancement de la demande. |
+| `created_at` | `string` | Moment où la demande a été envoyée, sous forme d'horodatage RFC 3339. |
+| `resolved_at` | `string \| null` | Moment où la demande a été approuvée ou refusée, sous forme d'horodatage RFC 3339. `null` tant qu'elle est ouverte. |
+| `resolution_text` | `string \| null` | Réponse rédigée par le modérateur. `null` tant que la demande est ouverte. |
 
 </details>
 
@@ -404,21 +392,21 @@ const pending = await twitch.moderation.unbanRequests({ broadcaster_id: "1419817
 twitch.moderation.resolveUnbanRequest(params, options?): Promise<UnbanRequest>
 ```
 
-Approves or denies an unban request. Approving it unbans the user.
+Approuve ou refuse une demande de débannissement. L'approuver débannit l'utilisateur.
 
-**Jeton:** user, scope `moderator:manage:unban_requests`.
+**Jeton :** utilisateur, scope `moderator:manage:unban_requests`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose channel received the request. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `unban_request_id` <small>requis</small> | `string` | ID of the request to resolve. |
-| `status` <small>requis</small> | `"approved" \| "denied"` | The decision. |
-| `resolution_text` | `string` | Answer shown to the user, 500 characters at most. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont la chaîne a reçu la demande. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `unban_request_id` <small>requis</small> | `string` | Identifiant de la demande à traiter. |
+| `status` <small>requis</small> | `"approved" \| "denied"` | La décision. |
+| `resolution_text` | `string` | Réponse montrée à l'utilisateur, 500 caractères au plus. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -429,21 +417,21 @@ Approves or denies an unban request. Approving it unbans the user.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the request. |
-| `broadcaster_id` | `string` | ID of the broadcaster who received the request. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `moderator_id` | `string` | ID of the moderator who approved or denied the request. |
-| `moderator_login` | `string` | Login name of that moderator. |
-| `moderator_name` | `string` | Display name of that moderator. |
-| `user_id` | `string` | ID of the banned user who wrote the request. |
-| `user_login` | `string` | Login name of that user. |
-| `user_name` | `string` | Display name of that user. |
-| `text` | `string` | Message written by the user. |
-| `status` | `UnbanRequestStatus` | Where the request stands. |
-| `created_at` | `string` | When the request was sent, as an RFC 3339 timestamp. |
-| `resolved_at` | `string \| null` | When the request was approved or denied, as an RFC 3339 timestamp. `null` while it is open. |
-| `resolution_text` | `string \| null` | Answer written by the moderator. `null` while the request is open. |
+| `id` | `string` | Identifiant de la demande. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui a reçu la demande. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a approuvé ou refusé la demande. |
+| `moderator_login` | `string` | Nom de connexion de ce modérateur. |
+| `moderator_name` | `string` | Nom d'affichage de ce modérateur. |
+| `user_id` | `string` | Identifiant de l'utilisateur banni qui a rédigé la demande. |
+| `user_login` | `string` | Nom de connexion de cet utilisateur. |
+| `user_name` | `string` | Nom d'affichage de cet utilisateur. |
+| `text` | `string` | Message rédigé par l'utilisateur. |
+| `status` | `UnbanRequestStatus` | État d'avancement de la demande. |
+| `created_at` | `string` | Moment où la demande a été envoyée, sous forme d'horodatage RFC 3339. |
+| `resolved_at` | `string \| null` | Moment où la demande a été approuvée ou refusée, sous forme d'horodatage RFC 3339. `null` tant qu'elle est ouverte. |
+| `resolution_text` | `string \| null` | Réponse rédigée par le modérateur. `null` tant que la demande est ouverte. |
 
 </details>
 
@@ -466,21 +454,20 @@ const request = await twitch.moderation.resolveUnbanRequest({
 twitch.moderation.blockedTerms(params, options?): Paginator<BlockedTerm>
 ```
 
-Lists the blocked terms of a channel, newest first. Private terms are not
-included.
+Liste les termes bloqués d'une chaîne, du plus récent au plus ancien. Les termes privés ne sont pas compris.
 
-**Jeton:** app or user, scope `moderator:read:blocked_terms` or `moderator:manage:blocked_terms`.
+**Jeton :** application ou utilisateur, scope `moderator:read:blocked_terms` ou `moderator:manage:blocked_terms`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the list. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient la liste. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -491,13 +478,13 @@ included.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the list. |
-| `moderator_id` | `string` | ID of the moderator who blocked the term. |
-| `id` | `string` | ID of the blocked term. |
-| `text` | `string` | The blocked word or phrase. |
-| `created_at` | `string` | When the term was blocked, as an RFC 3339 timestamp. |
-| `updated_at` | `string` | When the term last changed, as an RFC 3339 timestamp. Moves each time AutoMod denies it again. |
-| `expires_at` | `string \| null` | When the block ends, as an RFC 3339 timestamp. `null` for a term added by hand or blocked for good by AutoMod. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la liste. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a bloqué le terme. |
+| `id` | `string` | Identifiant du terme bloqué. |
+| `text` | `string` | Le mot ou l'expression bloqués. |
+| `created_at` | `string` | Moment où le terme a été bloqué, sous forme d'horodatage RFC 3339. |
+| `updated_at` | `string` | Moment de la dernière modification du terme, sous forme d'horodatage RFC 3339. Change chaque fois qu'AutoMod le refuse de nouveau. |
+| `expires_at` | `string \| null` | Moment où le blocage prend fin, sous forme d'horodatage RFC 3339. `null` pour un terme ajouté à la main ou bloqué définitivement par AutoMod. |
 
 </details>
 
@@ -515,20 +502,19 @@ const terms = await twitch.moderation.blockedTerms({ broadcaster_id: "141981764"
 twitch.moderation.addBlockedTerm(params, options?): Promise<BlockedTerm>
 ```
 
-Blocks a word or phrase in a channel's chat. When the term is already
-blocked, the existing entry is returned.
+Bloque un mot ou une expression dans le chat d'une chaîne. Quand le terme est déjà bloqué, l'entrée existante est renvoyée.
 
-**Jeton:** app or user, scope `moderator:manage:blocked_terms`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:blocked_terms`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the list. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `text` <small>requis</small> | `string` | Word or phrase to block, 2 to 500 characters. A `*` at the start or the end of a word works as a wildcard, as in `"foo*"`. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient la liste. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `text` <small>requis</small> | `string` | Mot ou expression à bloquer, de 2 à 500 caractères. Un `*` au début ou à la fin d'un mot sert de joker, comme dans `"foo*"`. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -539,13 +525,13 @@ blocked, the existing entry is returned.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the list. |
-| `moderator_id` | `string` | ID of the moderator who blocked the term. |
-| `id` | `string` | ID of the blocked term. |
-| `text` | `string` | The blocked word or phrase. |
-| `created_at` | `string` | When the term was blocked, as an RFC 3339 timestamp. |
-| `updated_at` | `string` | When the term last changed, as an RFC 3339 timestamp. Moves each time AutoMod denies it again. |
-| `expires_at` | `string \| null` | When the block ends, as an RFC 3339 timestamp. `null` for a term added by hand or blocked for good by AutoMod. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la liste. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a bloqué le terme. |
+| `id` | `string` | Identifiant du terme bloqué. |
+| `text` | `string` | Le mot ou l'expression bloqués. |
+| `created_at` | `string` | Moment où le terme a été bloqué, sous forme d'horodatage RFC 3339. |
+| `updated_at` | `string` | Moment de la dernière modification du terme, sous forme d'horodatage RFC 3339. Change chaque fois qu'AutoMod le refuse de nouveau. |
+| `expires_at` | `string \| null` | Moment où le blocage prend fin, sous forme d'horodatage RFC 3339. `null` pour un terme ajouté à la main ou bloqué définitivement par AutoMod. |
 
 </details>
 
@@ -563,20 +549,19 @@ const term = await twitch.moderation.addBlockedTerm({ broadcaster_id: "141981764
 twitch.moderation.removeBlockedTerm(params, options?): Promise<void>
 ```
 
-Removes a term from a channel's blocked terms. An ID that does not exist
-is not an error.
+Retire un terme des termes bloqués d'une chaîne. Un identifiant qui n'existe pas n'est pas une erreur.
 
-**Jeton:** app or user, scope `moderator:manage:blocked_terms`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:blocked_terms`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the list. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `id` <small>requis</small> | `string` | ID of the blocked term to remove. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient la liste. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `id` <small>requis</small> | `string` | Identifiant du terme bloqué à retirer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -596,20 +581,19 @@ await twitch.moderation.removeBlockedTerm({ broadcaster_id: "141981764", id: ter
 twitch.moderation.deleteMessages(params, options?): Promise<void>
 ```
 
-Removes one message from a channel's chat, or every message when no
-`message_id` is given.
+Supprime un message du chat d'une chaîne, ou tous les messages quand aucun `message_id` n'est donné.
 
-**Jeton:** app or user, scope `moderator:manage:chat_messages`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:chat_messages`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the chat room. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `message_id` | `string` | ID of the message to remove. It must be less than 6 hours old and written by neither the broadcaster nor a moderator. Leave it out to clear the chat. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient le chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `message_id` | `string` | Identifiant du message à supprimer. Il doit avoir moins de 6 heures et n'avoir été écrit ni par le diffuseur ni par un modérateur. Omettez-le pour vider le chat. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -630,19 +614,19 @@ await twitch.moderation.deleteMessages({ broadcaster_id: "141981764" });
 twitch.moderation.moderatedChannels(params?, options?): Paginator<ModeratedChannel>
 ```
 
-Lists the channels in which a user is a moderator.
+Liste les chaînes dont un utilisateur est modérateur.
 
-**Jeton:** app or user, scope `user:read:moderated_channels`.
+**Jeton :** application ou utilisateur, scope `user:read:moderated_channels`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | User whose moderated channels to list. Defaults to the user making the call. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `user_id` | `string` | Utilisateur dont on liste les chaînes modérées. Par défaut, l'utilisateur qui fait l'appel. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -653,9 +637,9 @@ Lists the channels in which a user is a moderator.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the channel's broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur de la chaîne. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
 
 </details>
 
@@ -675,20 +659,20 @@ for await (const channel of twitch.moderation.moderatedChannels()) {
 twitch.moderation.moderators(params?, options?): Paginator<ChannelModerator>
 ```
 
-Lists the moderators of a channel.
+Liste les modérateurs d'une chaîne.
 
-**Jeton:** user, scope `moderation:read` or `channel:manage:moderators`.
+**Jeton :** utilisateur, scope `moderation:read` ou `channel:manage:moderators`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose moderators to list. Defaults to the user making the call. |
-| `user_id` | `string \| readonly string[]` | Only these users, when they are moderators. Up to 100 IDs. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` | `string` | Diffuseur dont on liste les modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` | `string \| readonly string[]` | Uniquement ces utilisateurs, s'ils sont modérateurs. Jusqu'à 100 identifiants. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -699,9 +683,9 @@ Lists the moderators of a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the moderator. |
-| `user_login` | `string` | Login name of the moderator. |
-| `user_name` | `string` | Display name of the moderator. |
+| `user_id` | `string` | Identifiant du modérateur. |
+| `user_login` | `string` | Nom de connexion du modérateur. |
+| `user_name` | `string` | Nom d'affichage du modérateur. |
 
 </details>
 
@@ -719,19 +703,18 @@ const mods = await twitch.moderation.moderators().all();
 twitch.moderation.addModerator(params, options?): Promise<void>
 ```
 
-Makes a user a moderator of the channel. A VIP has to lose that status
-first. Twitch allows 10 additions per 10 seconds.
+Nomme un utilisateur modérateur de la chaîne. Un VIP doit d'abord perdre ce statut. Twitch autorise 10 ajouts par tranche de 10 secondes.
 
-**Jeton:** user, scope `channel:manage:moderators`.
+**Jeton :** utilisateur, scope `channel:manage:moderators`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the chat room. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the user to make a moderator. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient le chat. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à nommer modérateur. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -751,19 +734,18 @@ await twitch.moderation.addModerator({ user_id: "9876" });
 twitch.moderation.removeModerator(params, options?): Promise<void>
 ```
 
-Takes the moderator role away from a user. Twitch allows 10 removals per
-10 seconds.
+Retire le rôle de modérateur à un utilisateur. Twitch autorise 10 retraits par tranche de 10 secondes.
 
-**Jeton:** user, scope `channel:manage:moderators`.
+**Jeton :** utilisateur, scope `channel:manage:moderators`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the chat room. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the moderator to remove. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient le chat. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant du modérateur à retirer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -783,20 +765,20 @@ await twitch.moderation.removeModerator({ user_id: "9876" });
 twitch.moderation.vips(params?, options?): Paginator<ChannelVip>
 ```
 
-Lists the VIPs of a channel.
+Liste les VIP d'une chaîne.
 
-**Jeton:** user, scope `channel:read:vips` or `channel:manage:vips`.
+**Jeton :** utilisateur, scope `channel:read:vips` ou `channel:manage:vips`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose VIPs to list. Defaults to the user making the call. |
-| `user_id` | `string \| readonly string[]` | Only these users, when they are VIPs. Up to 100 IDs. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` | `string` | Diffuseur dont on liste les VIP. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` | `string \| readonly string[]` | Uniquement ces utilisateurs, s'ils sont VIP. Jusqu'à 100 identifiants. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -807,9 +789,9 @@ Lists the VIPs of a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the VIP. |
-| `user_name` | `string` | Display name of the VIP. |
-| `user_login` | `string` | Login name of the VIP. |
+| `user_id` | `string` | Identifiant du VIP. |
+| `user_name` | `string` | Nom d'affichage du VIP. |
+| `user_login` | `string` | Nom de connexion du VIP. |
 
 </details>
 
@@ -827,20 +809,18 @@ const vips = await twitch.moderation.vips().all();
 twitch.moderation.addVip(params, options?): Promise<void>
 ```
 
-Makes a user a VIP of the channel. A moderator has to lose that role
-first, and the channel needs a free VIP slot. Twitch allows 10 additions
-per 10 seconds.
+Nomme un utilisateur VIP de la chaîne. Un modérateur doit d'abord perdre ce rôle, et la chaîne doit avoir une place de VIP libre. Twitch autorise 10 ajouts par tranche de 10 secondes.
 
-**Jeton:** user, scope `channel:manage:vips`.
+**Jeton :** utilisateur, scope `channel:manage:vips`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who grants the status. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the user to make a VIP. |
+| `broadcaster_id` | `string` | Diffuseur qui accorde le statut. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à nommer VIP. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -860,20 +840,18 @@ await twitch.moderation.addVip({ user_id: "9876" });
 twitch.moderation.removeVip(params, options?): Promise<void>
 ```
 
-Takes the VIP status away from a user. A VIP can also give up their own
-status: pass the channel in `broadcaster_id` and make the call as that
-VIP. Twitch allows 10 removals per 10 seconds.
+Retire le statut VIP à un utilisateur. Un VIP peut aussi renoncer lui-même à son statut : passez la chaîne dans `broadcaster_id` et faites l'appel en tant que ce VIP. Twitch autorise 10 retraits par tranche de 10 secondes.
 
-**Jeton:** user, scope `channel:manage:vips`.
+**Jeton :** utilisateur, scope `channel:manage:vips`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster of the channel where the user is a VIP. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the VIP to remove. |
+| `broadcaster_id` | `string` | Diffuseur de la chaîne où l'utilisateur est VIP. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant du VIP à retirer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -894,20 +872,19 @@ await twitch.moderation.removeVip({ broadcaster_id: "141981764", user_id: "9876"
 twitch.moderation.updateShieldMode(params, options?): Promise<ShieldModeStatus>
 ```
 
-Turns Shield Mode on or off in a channel. While it is on, the stricter
-chat rules the broadcaster prepared for it apply.
+Active ou désactive le Shield Mode sur une chaîne. Tant qu'il est activé, les règles de chat plus strictes que le diffuseur a préparées pour lui s'appliquent.
 
-**Jeton:** app or user, scope `moderator:manage:shield_mode`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:shield_mode`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose Shield Mode to switch. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `is_active` <small>requis</small> | `boolean` | `true` turns Shield Mode on, `false` turns it off. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on bascule le Shield Mode. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `is_active` <small>requis</small> | `boolean` | `true` active le Shield Mode, `false` le désactive. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -918,11 +895,11 @@ chat rules the broadcaster prepared for it apply.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `is_active` | `boolean` | Whether Shield Mode is on. |
-| `moderator_id` | `string` | ID of the moderator who last turned it on. An empty string when it was never on. |
-| `moderator_login` | `string` | Login name of that moderator. An empty string when it was never on. |
-| `moderator_name` | `string` | Display name of that moderator. An empty string when it was never on. |
-| `last_activated_at` | `string` | When it was last turned on, as an RFC 3339 timestamp. An empty string when it was never on. |
+| `is_active` | `boolean` | Indique si le Shield Mode est activé. |
+| `moderator_id` | `string` | Identifiant du modérateur qui l'a activé en dernier. Une chaîne vide quand il n'a jamais été activé. |
+| `moderator_login` | `string` | Nom de connexion de ce modérateur. Une chaîne vide quand il n'a jamais été activé. |
+| `moderator_name` | `string` | Nom d'affichage de ce modérateur. Une chaîne vide quand il n'a jamais été activé. |
+| `last_activated_at` | `string` | Moment de sa dernière activation, sous forme d'horodatage RFC 3339. Une chaîne vide quand il n'a jamais été activé. |
 
 </details>
 
@@ -940,18 +917,18 @@ const status = await twitch.moderation.updateShieldMode({ broadcaster_id: "14198
 twitch.moderation.shieldMode(params, options?): Promise<ShieldModeStatus>
 ```
 
-Tells whether Shield Mode is on in a channel and who turned it on last.
+Indique si le Shield Mode est activé sur une chaîne et qui l'a activé en dernier.
 
-**Jeton:** app or user, scope `moderator:read:shield_mode` or `moderator:manage:shield_mode`.
+**Jeton :** application ou utilisateur, scope `moderator:read:shield_mode` ou `moderator:manage:shield_mode`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose Shield Mode to read. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on lit le Shield Mode. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -962,11 +939,11 @@ Tells whether Shield Mode is on in a channel and who turned it on last.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `is_active` | `boolean` | Whether Shield Mode is on. |
-| `moderator_id` | `string` | ID of the moderator who last turned it on. An empty string when it was never on. |
-| `moderator_login` | `string` | Login name of that moderator. An empty string when it was never on. |
-| `moderator_name` | `string` | Display name of that moderator. An empty string when it was never on. |
-| `last_activated_at` | `string` | When it was last turned on, as an RFC 3339 timestamp. An empty string when it was never on. |
+| `is_active` | `boolean` | Indique si le Shield Mode est activé. |
+| `moderator_id` | `string` | Identifiant du modérateur qui l'a activé en dernier. Une chaîne vide quand il n'a jamais été activé. |
+| `moderator_login` | `string` | Nom de connexion de ce modérateur. Une chaîne vide quand il n'a jamais été activé. |
+| `moderator_name` | `string` | Nom d'affichage de ce modérateur. Une chaîne vide quand il n'a jamais été activé. |
+| `last_activated_at` | `string` | Moment de sa dernière activation, sous forme d'horodatage RFC 3339. Une chaîne vide quand il n'a jamais été activé. |
 
 </details>
 
@@ -984,21 +961,20 @@ const { is_active } = await twitch.moderation.shieldMode({ broadcaster_id: "1419
 twitch.moderation.warn(params, options?): Promise<UserWarning>
 ```
 
-Sends a warning to a chat user, who cannot chat again until they
-acknowledge it. A new warning replaces a pending one.
+Envoie un avertissement à un utilisateur du chat, qui ne peut plus y écrire tant qu'il n'en a pas pris acte. Un nouvel avertissement remplace celui qui est en attente.
 
-**Jeton:** app or user, scope `moderator:manage:warnings`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:warnings`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster of the channel the warning applies to. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the user to warn. |
-| `reason` <small>requis</small> | `string` | Why the user is warned, 500 characters at most. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur de la chaîne à laquelle l'avertissement s'applique. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à avertir. |
+| `reason` <small>requis</small> | `string` | Motif de l'avertissement, 500 caractères au plus. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -1009,10 +985,10 @@ acknowledge it. A new warning replaces a pending one.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster of the channel the warning applies to. |
-| `user_id` | `string` | ID of the warned user. |
-| `moderator_id` | `string` | ID of the moderator who sent the warning. |
-| `reason` | `string` | Reason given with the warning. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur de la chaîne à laquelle l'avertissement s'applique. |
+| `user_id` | `string` | Identifiant de l'utilisateur averti. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a envoyé l'avertissement. |
+| `reason` | `string` | Raison donnée avec l'avertissement. |
 
 </details>
 
@@ -1030,21 +1006,20 @@ await twitch.moderation.warn({ broadcaster_id: "141981764", user_id: "9876", rea
 twitch.moderation.addSuspiciousStatus(params, options?): Promise<SuspiciousUser>
 ```
 
-Flags a chatter as suspicious in a channel, either to keep an eye on them
-or to restrict their messages.
+Signale comme suspect un spectateur présent dans le chat d'une chaîne, soit pour le surveiller, soit pour restreindre ses messages.
 
-**Jeton:** app or user, scope `moderator:manage:suspicious_users`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:suspicious_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster of the channel the status applies to. |
-| `moderator_id` | `string` | Moderator who sets the status. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the chatter to flag. |
-| `status` <small>requis</small> | `"ACTIVE_MONITORING" \| "RESTRICTED"` | `"ACTIVE_MONITORING"` watches the user, `"RESTRICTED"` also hides their messages from chat. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur de la chaîne à laquelle le statut s'applique. |
+| `moderator_id` | `string` | Modérateur qui attribue le statut. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant du spectateur à signaler. |
+| `status` <small>requis</small> | `"ACTIVE_MONITORING" \| "RESTRICTED"` | `"ACTIVE_MONITORING"` surveille l'utilisateur, `"RESTRICTED"` masque en plus ses messages dans le chat. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -1055,12 +1030,12 @@ or to restrict their messages.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the chatter. |
-| `broadcaster_id` | `string` | ID of the broadcaster of the channel. |
-| `moderator_id` | `string` | ID of the moderator who last changed the status. |
-| `updated_at` | `string` | When the status last changed, as an RFC 3339 timestamp. |
-| `status` | `SuspiciousUserStatus` | Current treatment. `"NO_TREATMENT"` once the status has been removed. |
-| `types` | `SuspiciousUserType[]` | Reasons the user is considered suspicious. |
+| `user_id` | `string` | Identifiant du spectateur présent dans le chat. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur de la chaîne. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a modifié le statut en dernier. |
+| `updated_at` | `string` | Moment de la dernière modification du statut, sous forme d'horodatage RFC 3339. |
+| `status` | `SuspiciousUserStatus` | Traitement en cours. `"NO_TREATMENT"` une fois le statut retiré. |
+| `types` | `SuspiciousUserType[]` | Raisons pour lesquelles l'utilisateur est jugé suspect. |
 
 </details>
 
@@ -1082,19 +1057,19 @@ const flagged = await twitch.moderation.addSuspiciousStatus({
 twitch.moderation.removeSuspiciousStatus(params, options?): Promise<SuspiciousUser>
 ```
 
-Clears the suspicious status of a chatter in a channel.
+Retire le statut suspect d'un spectateur présent dans le chat d'une chaîne.
 
-**Jeton:** app or user, scope `moderator:manage:suspicious_users`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:suspicious_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster of the channel the status applies to. |
-| `moderator_id` | `string` | Moderator who removes the status. Defaults to the user making the call. |
-| `user_id` <small>requis</small> | `string` | ID of the chatter to clear. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur de la chaîne à laquelle le statut s'applique. |
+| `moderator_id` | `string` | Modérateur qui retire le statut. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` <small>requis</small> | `string` | Identifiant du spectateur dont on retire le statut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -1105,12 +1080,12 @@ Clears the suspicious status of a chatter in a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the chatter. |
-| `broadcaster_id` | `string` | ID of the broadcaster of the channel. |
-| `moderator_id` | `string` | ID of the moderator who last changed the status. |
-| `updated_at` | `string` | When the status last changed, as an RFC 3339 timestamp. |
-| `status` | `SuspiciousUserStatus` | Current treatment. `"NO_TREATMENT"` once the status has been removed. |
-| `types` | `SuspiciousUserType[]` | Reasons the user is considered suspicious. |
+| `user_id` | `string` | Identifiant du spectateur présent dans le chat. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur de la chaîne. |
+| `moderator_id` | `string` | Identifiant du modérateur qui a modifié le statut en dernier. |
+| `updated_at` | `string` | Moment de la dernière modification du statut, sous forme d'horodatage RFC 3339. |
+| `status` | `SuspiciousUserStatus` | Traitement en cours. `"NO_TREATMENT"` une fois le statut retiré. |
+| `types` | `SuspiciousUserType[]` | Raisons pour lesquelles l'utilisateur est jugé suspect. |
 
 </details>
 

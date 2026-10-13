@@ -1,15 +1,11 @@
 ---
 title: twitch.chat
-description: "Chat: send messages and announcements, chatters, emotes, badges, settings, colors, pins and shoutouts."
+description: "Chat : messages, annonces, spectateurs présents, emotes, badges, réglages, couleurs, épingles et shoutouts."
 sidebar:
   label: chat
 ---
 
 Toutes les méthodes de `twitch.chat`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## chatters
 
@@ -17,21 +13,20 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.chat.chatters(params, options?): Paginator<Chatter>
 ```
 
-Lists the users connected to a channel's chat. Twitch refreshes the list
-with a delay, so recent joins and departures can be missing.
+Liste les utilisateurs connectés au chat d'une chaîne. Twitch actualise la liste avec un temps de retard : les arrivées et les départs récents peuvent donc manquer.
 
-**Jeton:** app or user, scope `moderator:read:chatters`.
+**Jeton :** application ou utilisateur, scope `moderator:read:chatters`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat to read. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `first` | `number` | Items per page, 1 to 1000. Twitch defaults to 100. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on lit le chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `first` | `number` | Éléments par page, de 1 à 1000. Twitch en renvoie 100 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -42,9 +37,9 @@ with a delay, so recent joins and departures can be missing.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the user. |
-| `user_login` | `string` | Login name of the user. |
-| `user_name` | `string` | Display name of the user. |
+| `user_id` | `string` | Identifiant de l'utilisateur. |
+| `user_login` | `string` | Nom de connexion de l'utilisateur. |
+| `user_name` | `string` | Nom d'affichage de l'utilisateur. |
 
 </details>
 
@@ -65,17 +60,17 @@ for await (const chatter of twitch.chat.chatters({ broadcaster_id: "141981764" }
 twitch.chat.channelEmotes(params, options?): Promise<ChatEmoteList<ChatChannelEmote>>
 ```
 
-Gets the custom emotes of a channel: subscriber, follower and Bits tier emotes.
+Renvoie les emotes personnalisées d'une chaîne : emotes d'abonné, de follower et de palier de Bits.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose custom emotes to get. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on récupère les emotes personnalisées. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -86,8 +81,8 @@ Gets the custom emotes of a channel: subscriber, follower and Bits tier emotes.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `data` | `ChatChannelEmote[]` | The emotes. |
-| `template` | `string` | Image URL with the placeholders `&#123;&#123;id}}`, `&#123;&#123;format}}`, `&#123;&#123;theme_mode}}` and `&#123;&#123;scale}}`. Fill them with the values of an emote to get its CDN URL. |
+| `data` | `ChatChannelEmote[]` | Les emotes. |
+| `template` | `string` | URL d'image à compléter, avec les variables `&#123;&#123;id}}`, `&#123;&#123;format}}`, `&#123;&#123;theme_mode}}` et `&#123;&#123;scale}}`. Remplacez-les par les valeurs d'une emote pour obtenir son URL sur le CDN. |
 
 </details>
 
@@ -105,15 +100,15 @@ const { data, template } = await twitch.chat.channelEmotes({ broadcaster_id: "14
 twitch.chat.globalEmotes(options?): Promise<ChatEmoteList<ChatEmote>>
 ```
 
-Gets the emotes made by Twitch that work in every chat.
+Renvoie les emotes créées par Twitch, utilisables dans tous les chats.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -124,8 +119,8 @@ Cette méthode ne prend aucun paramètre propre.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `data` | `ChatEmote[]` | The emotes. |
-| `template` | `string` | Image URL with the placeholders `&#123;&#123;id}}`, `&#123;&#123;format}}`, `&#123;&#123;theme_mode}}` and `&#123;&#123;scale}}`. Fill them with the values of an emote to get its CDN URL. |
+| `data` | `ChatEmote[]` | Les emotes. |
+| `template` | `string` | URL d'image à compléter, avec les variables `&#123;&#123;id}}`, `&#123;&#123;format}}`, `&#123;&#123;theme_mode}}` et `&#123;&#123;scale}}`. Remplacez-les par les valeurs d'une emote pour obtenir son URL sur le CDN. |
 
 </details>
 
@@ -143,18 +138,17 @@ const { data, template } = await twitch.chat.globalEmotes();
 twitch.chat.emoteSets(params, options?): Promise<ChatEmoteList<ChatSetEmote>>
 ```
 
-Gets the emotes of one or more emote sets. Sets that do not exist are
-left out of the result.
+Renvoie les emotes d'un ou de plusieurs ensembles d'emotes. Les ensembles qui n'existent pas sont absents du résultat.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `emote_set_id` <small>requis</small> | `string \| readonly string[]` | IDs of the emote sets to get. Any number: long lists are split for you. |
+| `emote_set_id` <small>requis</small> | `string \| readonly string[]` | Identifiants des ensembles d'emotes à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -165,8 +159,8 @@ left out of the result.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `data` | `ChatSetEmote[]` | The emotes. |
-| `template` | `string` | Image URL with the placeholders `&#123;&#123;id}}`, `&#123;&#123;format}}`, `&#123;&#123;theme_mode}}` and `&#123;&#123;scale}}`. Fill them with the values of an emote to get its CDN URL. |
+| `data` | `ChatSetEmote[]` | Les emotes. |
+| `template` | `string` | URL d'image à compléter, avec les variables `&#123;&#123;id}}`, `&#123;&#123;format}}`, `&#123;&#123;theme_mode}}` et `&#123;&#123;scale}}`. Remplacez-les par les valeurs d'une emote pour obtenir son URL sur le CDN. |
 
 </details>
 
@@ -184,18 +178,17 @@ const { data, template } = await twitch.chat.emoteSets({ emote_set_id: ["3015904
 twitch.chat.channelBadges(params, options?): Promise<ChatBadgeSet[]>
 ```
 
-Gets the custom chat badges of a channel, such as its subscriber and Bits
-badges. The list is empty when the channel has none.
+Renvoie les badges de chat personnalisés d'une chaîne, comme ses badges d'abonné et de Bits. La liste est vide quand la chaîne n'en a aucun.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose custom badges to get. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on récupère les badges personnalisés. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -206,8 +199,8 @@ badges. The list is empty when the channel has none.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `set_id` | `string` | ID of the set. |
-| `versions` | `ChatBadgeVersion[]` | Badges of the set, sorted by ID. |
+| `set_id` | `string` | Identifiant de l'ensemble. |
+| `versions` | `ChatBadgeVersion[]` | Badges de l'ensemble, triés par identifiant. |
 
 </details>
 
@@ -225,15 +218,15 @@ const sets = await twitch.chat.channelBadges({ broadcaster_id: "141981764" });
 twitch.chat.globalBadges(options?): Promise<ChatBadgeSet[]>
 ```
 
-Gets the chat badges made by Twitch that can show up in every chat.
+Renvoie les badges de chat créés par Twitch, qui peuvent apparaître dans tous les chats.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -244,8 +237,8 @@ Cette méthode ne prend aucun paramètre propre.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `set_id` | `string` | ID of the set. |
-| `versions` | `ChatBadgeVersion[]` | Badges of the set, sorted by ID. |
+| `set_id` | `string` | Identifiant de l'ensemble. |
+| `versions` | `ChatBadgeVersion[]` | Badges de l'ensemble, triés par identifiant. |
 
 </details>
 
@@ -263,20 +256,18 @@ const sets = await twitch.chat.globalBadges();
 twitch.chat.settings(params, options?): Promise<ChatSettings>
 ```
 
-Gets the chat settings of a channel. The chat delay settings are only
-included when `moderator_id` is given and the call is made as that user
-with the `moderator:read:chat_settings` scope.
+Renvoie les réglages du chat d'une chaîne. Les réglages du délai du chat ne sont inclus que si `moderator_id` est fourni et que l'appel est fait au nom de cet utilisateur avec le scope `moderator:read:chat_settings`.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat settings to get. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Only needed to read the chat delay settings, and the call must then be made with that user's token. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on récupère les réglages du chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Nécessaire uniquement pour lire les réglages du délai du chat, et l'appel doit alors être fait avec le jeton de cet utilisateur. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -287,17 +278,17 @@ with the `moderator:read:chat_settings` scope.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `emote_mode` | `boolean` | Whether messages may only contain emotes. |
-| `follower_mode` | `boolean` | Whether only followers may chat. |
-| `follower_mode_duration` | `number \| null` | Minutes a user must have followed the channel before chatting. `null` when `follower_mode` is off. |
-| `moderator_id` | `string` | ID of the moderator the call was made for. Only present with a user token that has the `moderator:read:chat_settings` scope. |
-| `non_moderator_chat_delay` | `boolean` | Whether messages are held back for a moment so moderators can remove them first. Only present when the call names a moderator and uses their token with the `moderator:read:chat_settings` scope. |
-| `non_moderator_chat_delay_duration` | `number` | Length of that delay, in seconds. `null` when the delay is off. Present under the same conditions. |
-| `slow_mode` | `boolean` | Whether users must wait between two messages. |
-| `slow_mode_wait_time` | `number \| null` | Seconds a user must wait between two messages. `null` when `slow_mode` is off. |
-| `subscriber_mode` | `boolean` | Whether only subscribers may chat. |
-| `unique_chat_mode` | `boolean` | Whether a user may not post the same message twice. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `emote_mode` | `boolean` | Indique si les messages ne peuvent contenir que des emotes. |
+| `follower_mode` | `boolean` | Indique si seuls les followers peuvent écrire dans le chat. |
+| `follower_mode_duration` | `number \| null` | Nombre de minutes pendant lesquelles un utilisateur doit avoir suivi la chaîne avant de pouvoir écrire dans le chat. `null` quand `follower_mode` est désactivé. |
+| `moderator_id` | `string` | Identifiant du modérateur pour lequel l'appel a été fait. Présent uniquement avec un jeton utilisateur qui a le scope `moderator:read:chat_settings`. |
+| `non_moderator_chat_delay` | `boolean` | Indique si les messages sont retenus un instant pour que les modérateurs puissent les retirer avant leur affichage. Présent uniquement quand l'appel désigne un modérateur et utilise son jeton avec le scope `moderator:read:chat_settings`. |
+| `non_moderator_chat_delay_duration` | `number` | Durée de ce délai, en secondes. `null` quand le délai est désactivé. Présent dans les mêmes conditions. |
+| `slow_mode` | `boolean` | Indique si les utilisateurs doivent attendre entre deux messages. |
+| `slow_mode_wait_time` | `number \| null` | Nombre de secondes qu'un utilisateur doit attendre entre deux messages. `null` quand `slow_mode` est désactivé. |
+| `subscriber_mode` | `boolean` | Indique si seuls les abonnés peuvent écrire dans le chat. |
+| `unique_chat_mode` | `boolean` | Indique s'il est interdit à un utilisateur d'envoyer deux fois le même message. |
 
 </details>
 
@@ -316,18 +307,17 @@ if (settings.slow_mode) console.log(settings.slow_mode_wait_time);
 twitch.chat.sharedSession(params, options?): Promise<SharedChatSession | null>
 ```
 
-Gets the shared chat session a channel is part of, or `null` when it is
-not in one.
+Renvoie la session de chat partagé à laquelle une chaîne participe, ou `null` quand elle ne participe à aucune.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose shared chat session to get. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on récupère la session de chat partagé. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -338,11 +328,11 @@ not in one.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `session_id` | `string` | ID of the session. |
-| `host_broadcaster_id` | `string` | ID of the broadcaster who hosts the session. |
-| `participants` | `SharedChatParticipant[]` | Channels taking part in the session, host included. |
-| `created_at` | `string` | When the session started, as an RFC 3339 timestamp. |
-| `updated_at` | `string` | When the session last changed, as an RFC 3339 timestamp. |
+| `session_id` | `string` | Identifiant de la session. |
+| `host_broadcaster_id` | `string` | Identifiant du diffuseur qui héberge la session. |
+| `participants` | `SharedChatParticipant[]` | Chaînes qui participent à la session, hôte compris. |
+| `created_at` | `string` | Moment où la session a commencé, sous forme d'horodatage RFC 3339. |
+| `updated_at` | `string` | Moment de la dernière modification de la session, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -360,20 +350,19 @@ const session = await twitch.chat.sharedSession({ broadcaster_id: "141981764" })
 twitch.chat.userEmotes(params?, options?): Paginator<ChatUserEmote, ChatUserEmotePage>
 ```
 
-Lists every emote a user can post, across all channels. The URL template
-comes with each page, as `page.raw.template`.
+Liste toutes les emotes qu'un utilisateur peut envoyer, toutes chaînes confondues. Le modèle d'URL accompagne chaque page, dans `page.raw.template`.
 
-**Jeton:** user, scope `user:read:emotes`.
+**Jeton :** utilisateur, scope `user:read:emotes`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | User whose emotes to list. Defaults to the user making the call. |
-| `broadcaster_id` | `string` | Makes sure the follower emotes of this broadcaster are part of the result. |
-| `after` | `string` | Cursor of the next page. |
+| `user_id` | `string` | Utilisateur dont on liste les emotes. Par défaut, l'utilisateur qui fait l'appel. |
+| `broadcaster_id` | `string` | Garantit que les emotes de follower de ce diffuseur figurent dans le résultat. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -384,14 +373,14 @@ comes with each page, as `page.raw.template`.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the emote. |
-| `name` | `string` | Name of the emote, which is what the user types in chat to post it. Case sensitive. |
-| `emote_type` | `ChatUserEmoteType` | How the user obtained the emote. |
-| `emote_set_id` | `string` | ID of the emote set the emote belongs to. An empty string when it belongs to none. |
-| `owner_id` | `string` | ID of the broadcaster who owns the emote. An empty string when it has no owner. |
-| `format` | `ChatEmoteFormat[]` | Formats the emote exists in. |
-| `scale` | `ChatEmoteScale[]` | Sizes the emote exists in. |
-| `theme_mode` | `ChatEmoteThemeMode[]` | Backgrounds the emote exists for. |
+| `id` | `string` | Identifiant de l'emote. |
+| `name` | `string` | Nom de l'emote, c'est-à-dire ce que l'utilisateur saisit dans le chat pour l'envoyer. Sensible à la casse. |
+| `emote_type` | `ChatUserEmoteType` | Façon dont l'utilisateur a obtenu l'emote. |
+| `emote_set_id` | `string` | Identifiant de l'ensemble d'emotes auquel l'emote appartient. Une chaîne vide quand elle n'appartient à aucun. |
+| `owner_id` | `string` | Identifiant du diffuseur à qui appartient l'emote. Une chaîne vide quand elle n'a pas de propriétaire. |
+| `format` | `ChatEmoteFormat[]` | Formats dans lesquels l'emote existe. |
+| `scale` | `ChatEmoteScale[]` | Tailles dans lesquelles l'emote existe. |
+| `theme_mode` | `ChatEmoteThemeMode[]` | Fonds pour lesquels l'emote existe. |
 
 </details>
 
@@ -410,29 +399,27 @@ console.log(page.data.length, page.raw.template);
 twitch.chat.updateSettings(params, options?): Promise<ChatSettings>
 ```
 
-Changes the chat settings of a channel and returns the new ones. To set a
-duration, send its mode as `true` in the same call, even when the mode is
-already on.
+Modifie les réglages du chat d'une chaîne et renvoie les nouveaux. Pour régler une durée, envoyez son mode à `true` dans le même appel, même si ce mode est déjà actif.
 
-**Jeton:** app or user, scope `moderator:manage:chat_settings`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:chat_settings`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat settings to change. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `emote_mode` | `boolean` | Whether messages may only contain emotes. |
-| `follower_mode` | `boolean` | Whether only followers may chat. |
-| `follower_mode_duration` | `number` | Minutes a user must have followed the channel before chatting, 0 to 129600. Send it with `follower_mode: true`. |
-| `non_moderator_chat_delay` | `boolean` | Whether messages are held back for a moment so moderators can remove them first. |
-| `non_moderator_chat_delay_duration` | `2 \| 4 \| 6` | Length of that delay, in seconds. Send it with `non_moderator_chat_delay: true`. |
-| `slow_mode` | `boolean` | Whether users must wait between two messages. |
-| `slow_mode_wait_time` | `number` | Seconds a user must wait between two messages, 3 to 120. Send it with `slow_mode: true`. |
-| `subscriber_mode` | `boolean` | Whether only subscribers may chat. |
-| `unique_chat_mode` | `boolean` | Whether a user may not post the same message twice. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on modifie les réglages du chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `emote_mode` | `boolean` | Indique si les messages ne peuvent contenir que des emotes. |
+| `follower_mode` | `boolean` | Indique si seuls les followers peuvent écrire dans le chat. |
+| `follower_mode_duration` | `number` | Nombre de minutes pendant lesquelles un utilisateur doit avoir suivi la chaîne avant de pouvoir écrire dans le chat, de 0 à 129600. À envoyer avec `follower_mode: true`. |
+| `non_moderator_chat_delay` | `boolean` | Indique si les messages sont retenus un instant pour que les modérateurs puissent les retirer avant leur affichage. |
+| `non_moderator_chat_delay_duration` | `2 \| 4 \| 6` | Durée de ce délai, en secondes. À envoyer avec `non_moderator_chat_delay: true`. |
+| `slow_mode` | `boolean` | Indique si les utilisateurs doivent attendre entre deux messages. |
+| `slow_mode_wait_time` | `number` | Nombre de secondes qu'un utilisateur doit attendre entre deux messages, de 3 à 120. À envoyer avec `slow_mode: true`. |
+| `subscriber_mode` | `boolean` | Indique si seuls les abonnés peuvent écrire dans le chat. |
+| `unique_chat_mode` | `boolean` | Indique s'il est interdit à un utilisateur d'envoyer deux fois le même message. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -443,17 +430,17 @@ already on.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `emote_mode` | `boolean` | Whether messages may only contain emotes. |
-| `follower_mode` | `boolean` | Whether only followers may chat. |
-| `follower_mode_duration` | `number \| null` | Minutes a user must have followed the channel before chatting. `null` when `follower_mode` is off. |
-| `moderator_id` | `string` | ID of the moderator the call was made for. Only present with a user token that has the `moderator:read:chat_settings` scope. |
-| `non_moderator_chat_delay` | `boolean` | Whether messages are held back for a moment so moderators can remove them first. Only present when the call names a moderator and uses their token with the `moderator:read:chat_settings` scope. |
-| `non_moderator_chat_delay_duration` | `number` | Length of that delay, in seconds. `null` when the delay is off. Present under the same conditions. |
-| `slow_mode` | `boolean` | Whether users must wait between two messages. |
-| `slow_mode_wait_time` | `number \| null` | Seconds a user must wait between two messages. `null` when `slow_mode` is off. |
-| `subscriber_mode` | `boolean` | Whether only subscribers may chat. |
-| `unique_chat_mode` | `boolean` | Whether a user may not post the same message twice. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `emote_mode` | `boolean` | Indique si les messages ne peuvent contenir que des emotes. |
+| `follower_mode` | `boolean` | Indique si seuls les followers peuvent écrire dans le chat. |
+| `follower_mode_duration` | `number \| null` | Nombre de minutes pendant lesquelles un utilisateur doit avoir suivi la chaîne avant de pouvoir écrire dans le chat. `null` quand `follower_mode` est désactivé. |
+| `moderator_id` | `string` | Identifiant du modérateur pour lequel l'appel a été fait. Présent uniquement avec un jeton utilisateur qui a le scope `moderator:read:chat_settings`. |
+| `non_moderator_chat_delay` | `boolean` | Indique si les messages sont retenus un instant pour que les modérateurs puissent les retirer avant leur affichage. Présent uniquement quand l'appel désigne un modérateur et utilise son jeton avec le scope `moderator:read:chat_settings`. |
+| `non_moderator_chat_delay_duration` | `number` | Durée de ce délai, en secondes. `null` quand le délai est désactivé. Présent dans les mêmes conditions. |
+| `slow_mode` | `boolean` | Indique si les utilisateurs doivent attendre entre deux messages. |
+| `slow_mode_wait_time` | `number \| null` | Nombre de secondes qu'un utilisateur doit attendre entre deux messages. `null` quand `slow_mode` est désactivé. |
+| `subscriber_mode` | `boolean` | Indique si seuls les abonnés peuvent écrire dans le chat. |
+| `unique_chat_mode` | `boolean` | Indique s'il est interdit à un utilisateur d'envoyer deux fois le même message. |
 
 </details>
 
@@ -471,22 +458,21 @@ await twitch.chat.updateSettings({ broadcaster_id: "141981764", slow_mode: true,
 twitch.chat.announce(params, options?): Promise<void>
 ```
 
-Posts a highlighted announcement in a channel's chat. Limited to one
-announcement every 2 seconds.
+Publie une annonce mise en avant dans le chat d'une chaîne. Limité à une annonce toutes les 2 secondes.
 
-**Jeton:** app or user, scope `moderator:manage:announcements`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:announcements`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat receives the announcement. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `message` <small>requis</small> | `string` | Text of the announcement. Anything past 500 characters is cut. |
-| `color` | `ChatAnnouncementColor` | Highlight color. Twitch defaults to `"primary"`. |
-| `for_source_only` | `boolean` | During a shared chat session, whether only this channel gets the announcement. App tokens only, where it defaults to `true`. Twitch rejects it with a user token. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont le chat reçoit l'annonce. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `message` <small>requis</small> | `string` | Texte de l'annonce. Tout ce qui dépasse 500 caractères est coupé. |
+| `color` | `ChatAnnouncementColor` | Couleur de mise en avant. Twitch prend `"primary"` par défaut. |
+| `for_source_only` | `boolean` | Pendant une session de chat partagé, indique si seule cette chaîne reçoit l'annonce. Réservé aux jetons d'application, où la valeur par défaut est `true`. Twitch le refuse avec un jeton utilisateur. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -506,21 +492,19 @@ await twitch.chat.announce({ broadcaster_id: "141981764", message: "Giveaway in 
 twitch.chat.shoutout(params, options?): Promise<void>
 ```
 
-Gives a shoutout to another broadcaster, which shows their channel with a
-follow button in chat. The sending channel must be live. Limited to one
-shoutout every 2 minutes, and one per hour to the same broadcaster.
+Fait un shoutout à un autre diffuseur, ce qui affiche sa chaîne dans le chat avec un bouton pour la suivre. La chaîne qui fait le shoutout doit être en direct. Limité à un shoutout toutes les 2 minutes, et à un par heure pour un même diffuseur.
 
-**Jeton:** app or user, scope `moderator:manage:shoutouts`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:shoutouts`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `from_broadcaster_id` <small>requis</small> | `string` | Broadcaster who gives the shoutout. |
-| `to_broadcaster_id` <small>requis</small> | `string` | Broadcaster who receives the shoutout. |
-| `moderator_id` | `string` | The broadcaster giving the shoutout or one of their moderators. Defaults to the user making the call. |
+| `from_broadcaster_id` <small>requis</small> | `string` | Diffuseur qui fait le shoutout. |
+| `to_broadcaster_id` <small>requis</small> | `string` | Diffuseur qui reçoit le shoutout. |
+| `moderator_id` | `string` | Le diffuseur qui fait le shoutout ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -540,23 +524,22 @@ await twitch.chat.shoutout({ from_broadcaster_id: "141981764", to_broadcaster_id
 twitch.chat.send(params, options?): Promise<SentChatMessage>
 ```
 
-Sends a message to a channel's chat. Check `is_sent` on the result: a
-message Twitch refuses comes back with a `drop_reason` instead of an error.
+Envoie un message dans le chat d'une chaîne. Vérifiez `is_sent` dans le résultat : un message que Twitch refuse revient avec un `drop_reason` au lieu d'une erreur.
 
-**Jeton:** app or user, scope `user:write:chat`.
+**Jeton :** application ou utilisateur, scope `user:write:chat`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose chat receives the message. |
-| `sender_id` | `string` | User who sends the message. Defaults to the user making the call. |
-| `message` <small>requis</small> | `string` | Text of the message, 500 characters at most. Emote names are turned into emotes. |
-| `reply_parent_message_id` | `string` | ID of the message this one replies to. |
-| `for_source_only` | `boolean` | During a shared chat session, whether only this channel gets the message. App tokens only. Twitch rejects it with a user token. |
-| `pin` | `boolean` | Pins the message for 20 minutes as it is sent. The sender must be the broadcaster or a moderator and also needs the `moderator:manage:chat_messages` scope. Cannot be used together with `reply_parent_message_id` or `for_source_only`. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont le chat reçoit le message. |
+| `sender_id` | `string` | Utilisateur qui envoie le message. Par défaut, l'utilisateur qui fait l'appel. |
+| `message` <small>requis</small> | `string` | Texte du message, 500 caractères au plus. Les noms d'emotes sont convertis en emotes. |
+| `reply_parent_message_id` | `string` | Identifiant du message auquel celui-ci répond. |
+| `for_source_only` | `boolean` | Pendant une session de chat partagé, indique si seule cette chaîne reçoit le message. Réservé aux jetons d'application. Twitch le refuse avec un jeton utilisateur. |
+| `pin` | `boolean` | Épingle le message pendant 20 minutes dès son envoi. L'expéditeur doit être le diffuseur ou un modérateur, et il lui faut aussi le scope `moderator:manage:chat_messages`. Incompatible avec `reply_parent_message_id` et `for_source_only`. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -567,9 +550,9 @@ message Twitch refuses comes back with a `drop_reason` instead of an error.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `message_id` | `string` | ID of the message. |
-| `is_sent` | `boolean` | Whether the message passed every check and reached the chat. |
-| `drop_reason` | `ChatMessageDropReason` | Why the message was not delivered. Absent or `null` when it was. |
+| `message_id` | `string` | Identifiant du message. |
+| `is_sent` | `boolean` | Indique si le message a passé tous les contrôles et atteint le chat. |
+| `drop_reason` | `ChatMessageDropReason` | Raison pour laquelle le message n'a pas été remis. Absent ou `null` quand il l'a été. |
 
 </details>
 
@@ -588,19 +571,18 @@ if (!sent.is_sent) console.log(sent.drop_reason?.message);
 twitch.chat.pinnedMessage(params, options?): Promise<PinnedChatMessage | null>
 ```
 
-Gets the message pinned in a channel's chat, or `null` when nothing is
-pinned.
+Renvoie le message épinglé dans le chat d'une chaîne, ou `null` quand rien n'est épinglé.
 
-**Jeton:** app or user, scope `moderator:manage:chat_messages` or `moderator:read:chat_messages`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:chat_messages` ou `moderator:read:chat_messages`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the chat. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient le chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -611,18 +593,18 @@ pinned.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `message_id` | `string` | ID of the pinned message. |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the chat. |
-| `sender_user_id` | `string` | ID of the user who wrote the message. |
-| `sender_user_login` | `string` | Login name of the user who wrote the message. |
-| `sender_user_name` | `string` | Display name of the user who wrote the message. |
-| `pinned_by_user_id` | `string` | ID of the user who pinned the message. |
-| `pinned_by_user_login` | `string` | Login name of the user who pinned the message. |
-| `pinned_by_user_name` | `string` | Display name of the user who pinned the message. |
-| `message` | `{ text: string; fragments: PinnedChatMessageFragment[]; }` | Content of the message. |
-| `starts_at` | `string` | When the message was pinned, as an RFC 3339 timestamp. |
-| `ends_at` | `string \| null` | When the pin expires, as an RFC 3339 timestamp. `null` when it lasts until the stream ends. |
-| `updated_at` | `string` | When the pin was last changed, as an RFC 3339 timestamp. |
+| `message_id` | `string` | Identifiant du message épinglé. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient le chat. |
+| `sender_user_id` | `string` | Identifiant de l'utilisateur qui a écrit le message. |
+| `sender_user_login` | `string` | Nom de connexion de l'utilisateur qui a écrit le message. |
+| `sender_user_name` | `string` | Nom d'affichage de l'utilisateur qui a écrit le message. |
+| `pinned_by_user_id` | `string` | Identifiant de l'utilisateur qui a épinglé le message. |
+| `pinned_by_user_login` | `string` | Nom de connexion de l'utilisateur qui a épinglé le message. |
+| `pinned_by_user_name` | `string` | Nom d'affichage de l'utilisateur qui a épinglé le message. |
+| `message` | `{ text: string; fragments: PinnedChatMessageFragment[]; }` | Contenu du message. |
+| `starts_at` | `string` | Moment où le message a été épinglé, sous forme d'horodatage RFC 3339. |
+| `ends_at` | `string \| null` | Moment où l'épingle expire, sous forme d'horodatage RFC 3339. `null` quand elle dure jusqu'à la fin du stream. |
+| `updated_at` | `string` | Moment de la dernière modification de l'épingle, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -641,21 +623,20 @@ if (pinned) console.log(pinned.message.text);
 twitch.chat.pin(params, options?): Promise<void>
 ```
 
-Pins a message at the top of a channel's chat. A chat holds one pinned
-message, so this replaces the current one.
+Épingle un message en haut du chat d'une chaîne. Un chat n'a qu'un seul message épinglé : le nouveau remplace donc celui qui était en place.
 
-**Jeton:** app or user, scope `moderator:manage:chat_messages`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:chat_messages`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the chat. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `message_id` <small>requis</small> | `string` | ID of the message to pin. |
-| `duration_seconds` | `number` | Seconds the message stays pinned, 30 to 1800. Without it the pin lasts until the stream ends. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient le chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `message_id` <small>requis</small> | `string` | Identifiant du message à épingler. |
+| `duration_seconds` | `number` | Nombre de secondes pendant lesquelles le message reste épinglé, de 30 à 1800. Sans cette valeur, l'épingle dure jusqu'à la fin du stream. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -675,21 +656,20 @@ await twitch.chat.pin({ broadcaster_id: "141981764", message_id: sent.message_id
 twitch.chat.updatePin(params, options?): Promise<void>
 ```
 
-Changes how long a pinned message stays pinned. The new duration counts
-from the moment of the call.
+Modifie la durée pendant laquelle un message épinglé le reste. La nouvelle durée court à partir du moment de l'appel.
 
-**Jeton:** app or user, scope `moderator:manage:chat_messages`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:chat_messages`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the chat. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `message_id` <small>requis</small> | `string` | ID of the pinned message. |
-| `duration_seconds` | `number` | Seconds the message stays pinned counting from now, 30 to 1800. Without it the pin lasts until the stream ends. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient le chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `message_id` <small>requis</small> | `string` | Identifiant du message épinglé. |
+| `duration_seconds` | `number` | Nombre de secondes pendant lesquelles le message reste épinglé à compter de maintenant, de 30 à 1800. Sans cette valeur, l'épingle dure jusqu'à la fin du stream. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -709,19 +689,19 @@ await twitch.chat.updatePin({ broadcaster_id: "141981764", message_id: pinned.me
 twitch.chat.unpin(params, options?): Promise<void>
 ```
 
-Removes a pinned message from the top of a channel's chat.
+Retire un message épinglé du haut du chat d'une chaîne.
 
-**Jeton:** app or user, scope `moderator:manage:chat_messages`.
+**Jeton :** application ou utilisateur, scope `moderator:manage:chat_messages`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who owns the chat. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `message_id` <small>requis</small> | `string` | ID of the message to unpin. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur à qui appartient le chat. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `message_id` <small>requis</small> | `string` | Identifiant du message à désépingler. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -741,18 +721,17 @@ await twitch.chat.unpin({ broadcaster_id: "141981764", message_id: pinned.messag
 twitch.chat.colors(params, options?): Promise<UserChatColor[]>
 ```
 
-Gets the color users have for their name in chat. Users that do not exist
-are left out of the result.
+Renvoie la couleur du nom des utilisateurs dans le chat. Les utilisateurs qui n'existent pas sont absents du résultat.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` <small>requis</small> | `string \| readonly string[]` | IDs of the users to look up. Any number: long lists are split for you. |
+| `user_id` <small>requis</small> | `string \| readonly string[]` | Identifiants des utilisateurs à rechercher. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -763,10 +742,10 @@ are left out of the result.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the user. |
-| `user_login` | `string` | Login name of the user. |
-| `user_name` | `string` | Display name of the user. |
-| `color` | `string` | Hex code of the color, such as `"#9146FF"`. An empty string when the user never picked one. |
+| `user_id` | `string` | Identifiant de l'utilisateur. |
+| `user_login` | `string` | Nom de connexion de l'utilisateur. |
+| `user_name` | `string` | Nom d'affichage de l'utilisateur. |
+| `color` | `string` | Code hexadécimal de la couleur, par exemple `"#9146FF"`. Une chaîne vide quand l'utilisateur n'en a jamais choisi. |
 
 </details>
 
@@ -785,19 +764,18 @@ console.log(entry?.color);
 twitch.chat.setColor(params, options?): Promise<void>
 ```
 
-Changes the color of a user's name in chat. Hex codes are reserved to
-Turbo and Prime users, everyone else picks a named color.
+Modifie la couleur du nom d'un utilisateur dans le chat. Les codes hexadécimaux sont réservés aux utilisateurs Turbo et Prime, les autres choisissent une couleur nommée.
 
-**Jeton:** user, scope `user:manage:chat_color`.
+**Jeton :** utilisateur, scope `user:manage:chat_color`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | User whose color to change. Defaults to the user making the call. |
-| `color` <small>requis</small> | `ChatColorName \| (string & {})` | A named color, or a hex code such as `"#9146FF"` for Turbo and Prime users. |
+| `user_id` | `string` | Utilisateur dont on modifie la couleur. Par défaut, l'utilisateur qui fait l'appel. |
+| `color` <small>requis</small> | `ChatColorName \| (string & {})` | Une couleur nommée, ou un code hexadécimal tel que `"#9146FF"` pour les utilisateurs Turbo et Prime. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 

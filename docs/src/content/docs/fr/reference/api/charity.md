@@ -1,15 +1,11 @@
 ---
 title: twitch.charity
-description: "Charity: the active campaign and its donations."
+description: "Collectes caritatives : la campagne en cours et ses dons."
 sidebar:
   label: charity
 ---
 
 Toutes les méthodes de `twitch.charity`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## campaign
 
@@ -17,18 +13,17 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.charity.campaign(params?, options?): Promise<CharityCampaign | null>
 ```
 
-Gets the charity campaign a broadcaster is running, or `null` when there
-is none. A campaign can no longer be read once it has ended.
+Renvoie la collecte caritative que mène un diffuseur, ou `null` quand il n'y en a pas. Une collecte ne peut plus être lue une fois terminée.
 
-**Jeton:** user, scope `channel:read:charity`.
+**Jeton :** utilisateur, scope `channel:read:charity`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster running the campaign. Defaults to the user making the call. |
+| `broadcaster_id` | `string` | Diffuseur qui mène la collecte. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -39,16 +34,16 @@ is none. A campaign can no longer be read once it has ended.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the campaign. |
-| `broadcaster_id` | `string` | ID of the broadcaster running the campaign. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `charity_name` | `string` | Name of the charity. |
-| `charity_description` | `string` | What the charity does. |
-| `charity_logo` | `string` | URL of the logo of the charity, a 100 by 100 pixels PNG. |
-| `charity_website` | `string` | URL of the website of the charity. |
-| `current_amount` | `CharityAmount` | Money raised so far. |
-| `target_amount` | `CharityAmount \| null` | Money the broadcaster aims to raise, or `null` when no goal is set. |
+| `id` | `string` | Identifiant de la collecte. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui mène la collecte. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `charity_name` | `string` | Nom de l'association caritative. |
+| `charity_description` | `string` | Ce que fait l'association caritative. |
+| `charity_logo` | `string` | URL du logo de l'association caritative, un PNG de 100 pixels sur 100. |
+| `charity_website` | `string` | URL du site web de l'association caritative. |
+| `current_amount` | `CharityAmount` | Somme récoltée jusqu'ici. |
+| `target_amount` | `CharityAmount \| null` | Somme que le diffuseur vise à récolter, ou `null` quand aucun objectif n'est fixé. |
 
 </details>
 
@@ -67,20 +62,19 @@ if (campaign) console.log(campaign.charity_name, campaign.current_amount.value);
 twitch.charity.donations(params?, options?): Paginator<CharityDonation>
 ```
 
-Lists the donations made to the campaign a broadcaster is running. The
-list is empty when no campaign is active.
+Liste les dons faits à la collecte que mène un diffuseur. La liste est vide quand aucune collecte n'est en cours.
 
-**Jeton:** user, scope `channel:read:charity`.
+**Jeton :** utilisateur, scope `channel:read:charity`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster running the campaign. Defaults to the user making the call. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` | `string` | Diffuseur qui mène la collecte. Par défaut, l'utilisateur qui fait l'appel. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -91,12 +85,12 @@ list is empty when no campaign is active.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the donation, unique across campaigns. |
-| `campaign_id` | `string` | ID of the campaign the money went to. |
-| `user_id` | `string` | ID of the donor. |
-| `user_login` | `string` | Login name of the donor. |
-| `user_name` | `string` | Display name of the donor. |
-| `amount` | `CharityAmount` | Money given. |
+| `id` | `string` | Identifiant du don, unique d'une collecte à l'autre. |
+| `campaign_id` | `string` | Identifiant de la collecte à laquelle l'argent a été versé. |
+| `user_id` | `string` | Identifiant du donateur. |
+| `user_login` | `string` | Nom de connexion du donateur. |
+| `user_name` | `string` | Nom d'affichage du donateur. |
+| `amount` | `CharityAmount` | Somme donnée. |
 
 </details>
 

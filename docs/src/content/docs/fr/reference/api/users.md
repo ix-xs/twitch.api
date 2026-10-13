@@ -1,15 +1,11 @@
 ---
 title: twitch.users
-description: "Users: profiles, block list and installed extensions."
+description: "Utilisateurs : profils, liste de blocage et extensions installées."
 sidebar:
   label: users
 ---
 
 Toutes les méthodes de `twitch.users`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,19 +13,18 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.users.get(params, options?): Promise<User[]>
 ```
 
-Gets users by ID, by login name, or both. Users that do not exist are
-left out of the result.
+Renvoie des utilisateurs d'après leur identifiant, leur nom de connexion, ou les deux. Les utilisateurs qui n'existent pas sont absents du résultat.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string \| readonly string[]` | IDs of the users to get. Any number: long lists are split for you. |
-| `login` | `string \| readonly string[]` | Login names of the users to get. Any number: long lists are split for you. |
+| `id` | `string \| readonly string[]` | Identifiants des utilisateurs à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
+| `login` | `string \| readonly string[]` | Noms de connexion des utilisateurs à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -40,17 +35,17 @@ left out of the result.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the user. |
-| `login` | `string` | Login name: lowercase, the one that appears in URLs. |
-| `display_name` | `string` | Display name, with the capitalisation the user chose. |
-| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Staff role on Twitch. An empty string for a regular user. |
-| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Monetisation status. An empty string for a regular broadcaster. |
-| `description` | `string` | Channel description written by the user. |
-| `profile_image_url` | `string` | URL of the profile picture. |
-| `offline_image_url` | `string` | URL of the image shown when the channel is offline. |
-| `view_count` | `number` | Deprecated. Twitch no longer fills this field. |
-| `email` | `string` | Verified email address. Only present when the call is made with a token of this user that has the `user:read:email` scope. |
-| `created_at` | `string` | When the account was created, as an RFC 3339 timestamp. |
+| `id` | `string` | Identifiant de l'utilisateur. |
+| `login` | `string` | Nom de connexion : en minuscules, celui qui apparaît dans les URL. |
+| `display_name` | `string` | Nom d'affichage, avec les majuscules choisies par l'utilisateur. |
+| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Rôle au sein du personnel de Twitch. Une chaîne vide pour un utilisateur ordinaire. |
+| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Statut de monétisation. Une chaîne vide pour un diffuseur ordinaire. |
+| `description` | `string` | Description de la chaîne rédigée par l'utilisateur. |
+| `profile_image_url` | `string` | URL de la photo de profil. |
+| `offline_image_url` | `string` | URL de l'image affichée quand la chaîne est hors ligne. |
+| `view_count` | `number` | Obsolète. Twitch ne renseigne plus ce champ. |
+| `email` | `string` | Adresse e-mail vérifiée. Présente uniquement quand l'appel est fait avec un jeton de cet utilisateur doté du scope `user:read:email`. |
+| `created_at` | `string` | Date de création du compte, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -68,16 +63,15 @@ const users = await twitch.users.get({ login: ["twitchdev", "twitch"] });
 twitch.users.getById(id, options?): Promise<User | null>
 ```
 
-Gets one user by ID, or `null` when there is no such user. Calls made in
-the same tick are merged into a single request.
+Renvoie un utilisateur d'après son identifiant, ou `null` quand il n'existe pas. Les appels faits dans le même tick sont fusionnés en une seule requête.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
-`id`: `string`
+`id` : `string`
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -88,17 +82,17 @@ the same tick are merged into a single request.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the user. |
-| `login` | `string` | Login name: lowercase, the one that appears in URLs. |
-| `display_name` | `string` | Display name, with the capitalisation the user chose. |
-| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Staff role on Twitch. An empty string for a regular user. |
-| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Monetisation status. An empty string for a regular broadcaster. |
-| `description` | `string` | Channel description written by the user. |
-| `profile_image_url` | `string` | URL of the profile picture. |
-| `offline_image_url` | `string` | URL of the image shown when the channel is offline. |
-| `view_count` | `number` | Deprecated. Twitch no longer fills this field. |
-| `email` | `string` | Verified email address. Only present when the call is made with a token of this user that has the `user:read:email` scope. |
-| `created_at` | `string` | When the account was created, as an RFC 3339 timestamp. |
+| `id` | `string` | Identifiant de l'utilisateur. |
+| `login` | `string` | Nom de connexion : en minuscules, celui qui apparaît dans les URL. |
+| `display_name` | `string` | Nom d'affichage, avec les majuscules choisies par l'utilisateur. |
+| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Rôle au sein du personnel de Twitch. Une chaîne vide pour un utilisateur ordinaire. |
+| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Statut de monétisation. Une chaîne vide pour un diffuseur ordinaire. |
+| `description` | `string` | Description de la chaîne rédigée par l'utilisateur. |
+| `profile_image_url` | `string` | URL de la photo de profil. |
+| `offline_image_url` | `string` | URL de l'image affichée quand la chaîne est hors ligne. |
+| `view_count` | `number` | Obsolète. Twitch ne renseigne plus ce champ. |
+| `email` | `string` | Adresse e-mail vérifiée. Présente uniquement quand l'appel est fait avec un jeton de cet utilisateur doté du scope `user:read:email`. |
+| `created_at` | `string` | Date de création du compte, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -116,16 +110,15 @@ const user = await twitch.users.getById("141981764");
 twitch.users.getByLogin(login, options?): Promise<User | null>
 ```
 
-Gets one user by login name, or `null` when there is no such user. Calls
-made in the same tick are merged into a single request.
+Renvoie un utilisateur d'après son nom de connexion, ou `null` quand il n'existe pas. Les appels faits dans le même tick sont fusionnés en une seule requête.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
-`login`: `string`
+`login` : `string`
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -136,17 +129,17 @@ made in the same tick are merged into a single request.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the user. |
-| `login` | `string` | Login name: lowercase, the one that appears in URLs. |
-| `display_name` | `string` | Display name, with the capitalisation the user chose. |
-| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Staff role on Twitch. An empty string for a regular user. |
-| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Monetisation status. An empty string for a regular broadcaster. |
-| `description` | `string` | Channel description written by the user. |
-| `profile_image_url` | `string` | URL of the profile picture. |
-| `offline_image_url` | `string` | URL of the image shown when the channel is offline. |
-| `view_count` | `number` | Deprecated. Twitch no longer fills this field. |
-| `email` | `string` | Verified email address. Only present when the call is made with a token of this user that has the `user:read:email` scope. |
-| `created_at` | `string` | When the account was created, as an RFC 3339 timestamp. |
+| `id` | `string` | Identifiant de l'utilisateur. |
+| `login` | `string` | Nom de connexion : en minuscules, celui qui apparaît dans les URL. |
+| `display_name` | `string` | Nom d'affichage, avec les majuscules choisies par l'utilisateur. |
+| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Rôle au sein du personnel de Twitch. Une chaîne vide pour un utilisateur ordinaire. |
+| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Statut de monétisation. Une chaîne vide pour un diffuseur ordinaire. |
+| `description` | `string` | Description de la chaîne rédigée par l'utilisateur. |
+| `profile_image_url` | `string` | URL de la photo de profil. |
+| `offline_image_url` | `string` | URL de l'image affichée quand la chaîne est hors ligne. |
+| `view_count` | `number` | Obsolète. Twitch ne renseigne plus ce champ. |
+| `email` | `string` | Adresse e-mail vérifiée. Présente uniquement quand l'appel est fait avec un jeton de cet utilisateur doté du scope `user:read:email`. |
+| `created_at` | `string` | Date de création du compte, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -164,16 +157,15 @@ const user = await twitch.users.getByLogin("twitchdev");
 twitch.users.me(options?): Promise<User>
 ```
 
-Gets the user who owns the token the call is made with. Includes `email`
-when the token has the `user:read:email` scope.
+Renvoie l'utilisateur à qui appartient le jeton utilisé pour l'appel. Inclut `email` quand le jeton a le scope `user:read:email`.
 
-**Jeton:** user.
+**Jeton :** utilisateur.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -184,17 +176,17 @@ Cette méthode ne prend aucun paramètre propre.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the user. |
-| `login` | `string` | Login name: lowercase, the one that appears in URLs. |
-| `display_name` | `string` | Display name, with the capitalisation the user chose. |
-| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Staff role on Twitch. An empty string for a regular user. |
-| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Monetisation status. An empty string for a regular broadcaster. |
-| `description` | `string` | Channel description written by the user. |
-| `profile_image_url` | `string` | URL of the profile picture. |
-| `offline_image_url` | `string` | URL of the image shown when the channel is offline. |
-| `view_count` | `number` | Deprecated. Twitch no longer fills this field. |
-| `email` | `string` | Verified email address. Only present when the call is made with a token of this user that has the `user:read:email` scope. |
-| `created_at` | `string` | When the account was created, as an RFC 3339 timestamp. |
+| `id` | `string` | Identifiant de l'utilisateur. |
+| `login` | `string` | Nom de connexion : en minuscules, celui qui apparaît dans les URL. |
+| `display_name` | `string` | Nom d'affichage, avec les majuscules choisies par l'utilisateur. |
+| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Rôle au sein du personnel de Twitch. Une chaîne vide pour un utilisateur ordinaire. |
+| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Statut de monétisation. Une chaîne vide pour un diffuseur ordinaire. |
+| `description` | `string` | Description de la chaîne rédigée par l'utilisateur. |
+| `profile_image_url` | `string` | URL de la photo de profil. |
+| `offline_image_url` | `string` | URL de l'image affichée quand la chaîne est hors ligne. |
+| `view_count` | `number` | Obsolète. Twitch ne renseigne plus ce champ. |
+| `email` | `string` | Adresse e-mail vérifiée. Présente uniquement quand l'appel est fait avec un jeton de cet utilisateur doté du scope `user:read:email`. |
+| `created_at` | `string` | Date de création du compte, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -212,17 +204,17 @@ const me = await twitch.users.me();
 twitch.users.update(params, options?): Promise<User>
 ```
 
-Updates the description of the user making the call.
+Met à jour la description de l'utilisateur qui fait l'appel.
 
-**Jeton:** user, scope `user:edit`.
+**Jeton :** utilisateur, scope `user:edit`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `description` | `string` | New channel description, 300 characters at most. An empty string removes it. |
+| `description` | `string` | Nouvelle description de la chaîne, 300 caractères au plus. Une chaîne vide la supprime. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -233,17 +225,17 @@ Updates the description of the user making the call.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the user. |
-| `login` | `string` | Login name: lowercase, the one that appears in URLs. |
-| `display_name` | `string` | Display name, with the capitalisation the user chose. |
-| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Staff role on Twitch. An empty string for a regular user. |
-| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Monetisation status. An empty string for a regular broadcaster. |
-| `description` | `string` | Channel description written by the user. |
-| `profile_image_url` | `string` | URL of the profile picture. |
-| `offline_image_url` | `string` | URL of the image shown when the channel is offline. |
-| `view_count` | `number` | Deprecated. Twitch no longer fills this field. |
-| `email` | `string` | Verified email address. Only present when the call is made with a token of this user that has the `user:read:email` scope. |
-| `created_at` | `string` | When the account was created, as an RFC 3339 timestamp. |
+| `id` | `string` | Identifiant de l'utilisateur. |
+| `login` | `string` | Nom de connexion : en minuscules, celui qui apparaît dans les URL. |
+| `display_name` | `string` | Nom d'affichage, avec les majuscules choisies par l'utilisateur. |
+| `type` | `"" \| "admin" \| "global_mod" \| "staff"` | Rôle au sein du personnel de Twitch. Une chaîne vide pour un utilisateur ordinaire. |
+| `broadcaster_type` | `"" \| "affiliate" \| "partner"` | Statut de monétisation. Une chaîne vide pour un diffuseur ordinaire. |
+| `description` | `string` | Description de la chaîne rédigée par l'utilisateur. |
+| `profile_image_url` | `string` | URL de la photo de profil. |
+| `offline_image_url` | `string` | URL de l'image affichée quand la chaîne est hors ligne. |
+| `view_count` | `number` | Obsolète. Twitch ne renseigne plus ce champ. |
+| `email` | `string` | Adresse e-mail vérifiée. Présente uniquement quand l'appel est fait avec un jeton de cet utilisateur doté du scope `user:read:email`. |
+| `created_at` | `string` | Date de création du compte, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -261,17 +253,17 @@ await twitch.users.update({ description: "Live every evening." });
 twitch.users.authorization(params, options?): Promise<UserAuthorization[]>
 ```
 
-Tells which scopes the given users granted to your application.
+Indique quels scopes les utilisateurs donnés ont accordés à votre application.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` <small>requis</small> | `string \| readonly string[]` | IDs of the users to check. Any number: long lists are split for you. |
+| `user_id` <small>requis</small> | `string \| readonly string[]` | Identifiants des utilisateurs à vérifier. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -282,11 +274,11 @@ Tells which scopes the given users granted to your application.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the user. |
-| `user_name` | `string` | Display name of the user. |
-| `user_login` | `string` | Login name of the user. |
-| `scopes` | `string[]` | Every scope the user granted to your client ID. |
-| `has_authorized` | `boolean` | Whether the user authorized your application at all. |
+| `user_id` | `string` | Identifiant de l'utilisateur. |
+| `user_name` | `string` | Nom d'affichage de l'utilisateur. |
+| `user_login` | `string` | Nom de connexion de l'utilisateur. |
+| `scopes` | `string[]` | Tous les scopes que l'utilisateur a accordés à votre identifiant client. |
+| `has_authorized` | `boolean` | Indique si l'utilisateur a autorisé votre application, même sans aucun scope. |
 
 </details>
 
@@ -304,19 +296,19 @@ const [auth] = await twitch.users.authorization({ user_id: "141981764" });
 twitch.users.blocks(params?, options?): Paginator<BlockedUser>
 ```
 
-Lists the users a broadcaster has blocked, most recent first.
+Liste les utilisateurs bloqués par un diffuseur, du plus récent au plus ancien.
 
-**Jeton:** user, scope `user:read:blocked_users`.
+**Jeton :** utilisateur, scope `user:read:blocked_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose block list to read. Defaults to the user making the call. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the page to fetch. |
+| `broadcaster_id` | `string` | Diffuseur dont on lit la liste de blocage. Par défaut, l'utilisateur qui fait l'appel. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page à récupérer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -327,9 +319,9 @@ Lists the users a broadcaster has blocked, most recent first.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the blocked user. |
-| `user_login` | `string` | Login name of the blocked user. |
-| `display_name` | `string` | Display name of the blocked user. |
+| `user_id` | `string` | Identifiant de l'utilisateur bloqué. |
+| `user_login` | `string` | Nom de connexion de l'utilisateur bloqué. |
+| `display_name` | `string` | Nom d'affichage de l'utilisateur bloqué. |
 
 </details>
 
@@ -347,19 +339,19 @@ for await (const blocked of twitch.users.blocks()) console.log(blocked.user_logi
 twitch.users.block(params, options?): Promise<void>
 ```
 
-Blocks a user on behalf of the user making the call.
+Bloque un utilisateur au nom de l'utilisateur qui fait l'appel.
 
-**Jeton:** user, scope `user:manage:blocked_users`.
+**Jeton :** utilisateur, scope `user:manage:blocked_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `target_user_id` <small>requis</small> | `string` | ID of the user to block. |
-| `source_context` | `"chat" \| "whisper"` | Where the behaviour that motivates the block took place. |
-| `reason` | `"harassment" \| "spam" \| "other"` | Why the user is being blocked. |
+| `target_user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à bloquer. |
+| `source_context` | `"chat" \| "whisper"` | Endroit où s'est produit le comportement qui motive le blocage. |
+| `reason` | `"harassment" \| "spam" \| "other"` | Raison du blocage de l'utilisateur. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -379,17 +371,17 @@ await twitch.users.block({ target_user_id: "198704263", reason: "spam" });
 twitch.users.unblock(params, options?): Promise<void>
 ```
 
-Removes a block set by the user making the call.
+Lève un blocage posé par l'utilisateur qui fait l'appel.
 
-**Jeton:** user, scope `user:manage:blocked_users`.
+**Jeton :** utilisateur, scope `user:manage:blocked_users`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `target_user_id` <small>requis</small> | `string` | ID of the user to unblock. |
+| `target_user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à débloquer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -409,16 +401,15 @@ await twitch.users.unblock({ target_user_id: "198704263" });
 twitch.users.extensions(options?): Promise<UserExtension[]>
 ```
 
-Lists the extensions installed by the user making the call. Inactive ones
-are only included with the `user:edit:broadcast` scope.
+Liste les extensions installées par l'utilisateur qui fait l'appel. Les extensions inactives ne sont incluses qu'avec le scope `user:edit:broadcast`.
 
-**Jeton:** user, scope `user:read:broadcast` or `user:edit:broadcast`.
+**Jeton :** utilisateur, scope `user:read:broadcast` ou `user:edit:broadcast`.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -429,11 +420,11 @@ Cette méthode ne prend aucun paramètre propre.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the extension. |
-| `version` | `string` | Installed version. |
-| `name` | `string` | Name of the extension. |
-| `can_activate` | `boolean` | Whether the extension is configured and ready to be activated. |
-| `type` | `ExtensionType[]` | Slots this extension can be activated in. |
+| `id` | `string` | Identifiant de l'extension. |
+| `version` | `string` | Version installée. |
+| `name` | `string` | Nom de l'extension. |
+| `can_activate` | `boolean` | Indique si l'extension est configurée et prête à être activée. |
+| `type` | `ExtensionType[]` | Emplacements dans lesquels cette extension peut être activée. |
 
 </details>
 
@@ -451,17 +442,17 @@ const extensions = await twitch.users.extensions();
 twitch.users.activeExtensions(params?, options?): Promise<ActiveExtensions>
 ```
 
-Gets the extensions a broadcaster has active in each slot.
+Renvoie les extensions actives d'un diffuseur, emplacement par emplacement.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | Broadcaster to read. Optional with a user token, required with an app token. |
+| `user_id` | `string` | Diffuseur à lire. Facultatif avec un jeton utilisateur, obligatoire avec un jeton d'application. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -472,9 +463,9 @@ Gets the extensions a broadcaster has active in each slot.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `panel` | `Record<string, ExtensionSlot>` | Panel extensions, shown under the video. |
-| `overlay` | `Record<string, ExtensionSlot>` | Overlay extensions, shown on top of the whole video. |
-| `component` | `Record<string, ComponentExtensionSlot>` | Component extensions, shown on top of a part of the video. |
+| `panel` | `Record<string, ExtensionSlot>` | Extensions de type panneau, affichées sous la vidéo. |
+| `overlay` | `Record<string, ExtensionSlot>` | Extensions de type overlay, affichées par-dessus toute la vidéo. |
+| `component` | `Record<string, ComponentExtensionSlot>` | Extensions de type composant, affichées par-dessus une partie de la vidéo. |
 
 </details>
 
@@ -493,17 +484,17 @@ console.log(active.panel["1"]);
 twitch.users.updateExtensions(params, options?): Promise<ActiveExtensions>
 ```
 
-Activates, deactivates or moves the extensions of the user making the call.
+Active, désactive ou déplace les extensions de l'utilisateur qui fait l'appel.
 
-**Jeton:** user, scope `user:edit:broadcast`.
+**Jeton :** utilisateur, scope `user:edit:broadcast`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `data` <small>requis</small> | `{ panel?: Record<string, ExtensionSlot> \| undefined; overlay?: Record<string, ExtensionSlot> \| undefined; component?: Record<string, ComponentExtensionSlot> \| undefined; }` | Slots to change, by kind then by slot number. Slots you leave out are untouched. |
+| `data` <small>requis</small> | `{ panel?: Record<string, ExtensionSlot> \| undefined; overlay?: Record<string, ExtensionSlot> \| undefined; component?: Record<string, ComponentExtensionSlot> \| undefined; }` | Emplacements à modifier, par type puis par numéro d'emplacement. Ceux que vous omettez restent tels quels. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -514,9 +505,9 @@ Activates, deactivates or moves the extensions of the user making the call.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `panel` | `Record<string, ExtensionSlot>` | Panel extensions, shown under the video. |
-| `overlay` | `Record<string, ExtensionSlot>` | Overlay extensions, shown on top of the whole video. |
-| `component` | `Record<string, ComponentExtensionSlot>` | Component extensions, shown on top of a part of the video. |
+| `panel` | `Record<string, ExtensionSlot>` | Extensions de type panneau, affichées sous la vidéo. |
+| `overlay` | `Record<string, ExtensionSlot>` | Extensions de type overlay, affichées par-dessus toute la vidéo. |
+| `component` | `Record<string, ComponentExtensionSlot>` | Extensions de type composant, affichées par-dessus une partie de la vidéo. |
 
 </details>
 

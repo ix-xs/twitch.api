@@ -1,15 +1,11 @@
 ---
 title: twitch.teams
-description: "Teams: look one up, list the teams of a channel."
+description: "Équipes : en retrouver une, lister celles d'une chaîne."
 sidebar:
   label: teams
 ---
 
 Toutes les méthodes de `twitch.teams`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## ofChannel
 
@@ -17,18 +13,17 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.teams.ofChannel(params, options?): Promise<ChannelTeam[]>
 ```
 
-Lists the teams a broadcaster is a member of. The list is empty when
-there are none.
+Liste les équipes dont un diffuseur est membre. La liste est vide quand il n'y en a aucune.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose teams to list. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on liste les équipes. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -39,18 +34,18 @@ there are none.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `background_image_url` | `string \| null` | URL of the background image, or `null` when the team has none. |
-| `banner` | `string \| null` | URL of the banner, or `null` when the team has none. |
-| `created_at` | `string` | When the team was created, as an RFC 3339 timestamp. |
-| `updated_at` | `string` | When the team was last changed, as an RFC 3339 timestamp. |
-| `info` | `string` | Description of the team. May hold HTML, Markdown and line breaks. |
-| `thumbnail_url` | `string` | URL of the team logo. |
-| `team_name` | `string` | Name of the team: the one that appears in URLs. |
-| `team_display_name` | `string` | Display name of the team. |
-| `id` | `string` | ID of the team. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `background_image_url` | `string \| null` | URL de l'image d'arrière-plan, ou `null` quand l'équipe n'en a pas. |
+| `banner` | `string \| null` | URL de la bannière, ou `null` quand l'équipe n'en a pas. |
+| `created_at` | `string` | Date de création de l'équipe, sous forme d'horodatage RFC 3339. |
+| `updated_at` | `string` | Date de dernière modification de l'équipe, sous forme d'horodatage RFC 3339. |
+| `info` | `string` | Description de l'équipe. Peut contenir du HTML, du Markdown et des sauts de ligne. |
+| `thumbnail_url` | `string` | URL du logo de l'équipe. |
+| `team_name` | `string` | Nom de l'équipe : celui qui apparaît dans les URL. |
+| `team_display_name` | `string` | Nom d'affichage de l'équipe. |
+| `id` | `string` | Identifiant de l'équipe. |
 
 </details>
 
@@ -68,19 +63,18 @@ const teams = await twitch.teams.ofChannel({ broadcaster_id: "141981764" });
 twitch.teams.get(params, options?): Promise<Team | null>
 ```
 
-Gets a team and its members, by name or by ID. Resolves with `null` when
-Twitch returns no team.
+Renvoie une équipe et ses membres, d'après son nom ou son identifiant. Se résout avec `null` quand Twitch ne renvoie aucune équipe.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `name` | `string` | Name of the team. |
-| `id` | `string` | ID of the team. |
+| `name` | `string` | Nom de l'équipe. |
+| `id` | `string` | Identifiant de l'équipe. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -91,16 +85,16 @@ Twitch returns no team.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `users` | `TeamMember[]` | Members of the team. |
-| `background_image_url` | `string \| null` | URL of the background image, or `null` when the team has none. |
-| `banner` | `string \| null` | URL of the banner, or `null` when the team has none. |
-| `created_at` | `string` | When the team was created, as an RFC 3339 timestamp. |
-| `updated_at` | `string` | When the team was last changed, as an RFC 3339 timestamp. |
-| `info` | `string` | Description of the team. May hold HTML, Markdown and line breaks. |
-| `thumbnail_url` | `string` | URL of the team logo. |
-| `team_name` | `string` | Name of the team: the one that appears in URLs. |
-| `team_display_name` | `string` | Display name of the team. |
-| `id` | `string` | ID of the team. |
+| `users` | `TeamMember[]` | Membres de l'équipe. |
+| `background_image_url` | `string \| null` | URL de l'image d'arrière-plan, ou `null` quand l'équipe n'en a pas. |
+| `banner` | `string \| null` | URL de la bannière, ou `null` quand l'équipe n'en a pas. |
+| `created_at` | `string` | Date de création de l'équipe, sous forme d'horodatage RFC 3339. |
+| `updated_at` | `string` | Date de dernière modification de l'équipe, sous forme d'horodatage RFC 3339. |
+| `info` | `string` | Description de l'équipe. Peut contenir du HTML, du Markdown et des sauts de ligne. |
+| `thumbnail_url` | `string` | URL du logo de l'équipe. |
+| `team_name` | `string` | Nom de l'équipe : celui qui apparaît dans les URL. |
+| `team_display_name` | `string` | Nom d'affichage de l'équipe. |
+| `id` | `string` | Identifiant de l'équipe. |
 
 </details>
 

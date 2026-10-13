@@ -1,0 +1,17 @@
+---
+// A static host serves one 404 page for every missing address, and that page
+// is the English one. When the missing address belongs to a translated part of
+// the site, this sends the reader to the 404 page of that language.
+import { LANGUAGES, href } from "../i18n";
+
+const translated = LANGUAGES.filter((language) => language.locale !== undefined).map((language) => ({
+  prefix: href("/", language.locale),
+  page: href("/404/", language.locale),
+}));
+---
+
+<script is:inline define:vars={{ translated }}>
+  for (const { prefix, page } of translated) {
+    if (location.pathname.startsWith(prefix) && !location.pathname.startsWith(page)) location.replace(page);
+  }
+</script>

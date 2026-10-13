@@ -1,0 +1,20 @@
+{
+ "Changes the number of shards of a conduit.": "Change le nombre de shards d'un conduit.",
+ "Conduits: the EventSub transport that spreads events over several shards.": "Conduits : le transport EventSub qui répartit les événements sur plusieurs shards.",
+ "Creates a conduit with the given number of shards.": "Crée un conduit avec le nombre de shards donné.",
+ "Current state of the shard.": "État actuel du shard.",
+ "Deletes a conduit. Its subscriptions stop shortly after.": "Supprime un conduit. Ses abonnements s'arrêtent peu après.",
+ "ID of the conduit.": "Identifiant du conduit.",
+ "ID of the shard: its index, starting at `\"0\"`.": "Identifiant du shard : son indice, à partir de `\"0\"`.",
+ "Lists the conduits of your application.": "Liste les conduits de votre application.",
+ "Lists the shards of a conduit and where each one delivers events.": "Liste les shards d'un conduit et l'endroit où chacun livre les événements.",
+ "New number of shards. Lowering it removes the shards with the highest IDs.": "Nouveau nombre de shards. Le réduire supprime les shards aux identifiants les plus élevés.",
+ "Number of shards the conduit has.": "Nombre de shards du conduit.",
+ "Number of shards to create.": "Nombre de shards à créer.",
+ "Only shards in this state.": "Uniquement les shards dans cet état.",
+ "Points shards at a webhook callback or a WebSocket session. Shards that could not be updated are reported in `errors` instead of throwing.": "Dirige des shards vers un callback de webhook ou une session WebSocket. Les shards qui n'ont pas pu être mis à jour sont signalés dans `errors` au lieu de lever une erreur.",
+ "Shards that could not be updated.": "Shards qui n'ont pas pu être mis à jour.",
+ "Shards that were updated.": "Shards mis à jour.",
+ "Shards to update. Any number: long lists are split for you.": "Shards à mettre à jour. En nombre quelconque : les longues listes sont découpées pour vous.",
+ "Where the shard delivers events.": "Endroit où le shard livre les événements."
+}

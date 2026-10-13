@@ -166,7 +166,7 @@ if (second?.cursor) {
 Certains endpoints envoient des champs à côté de la liste. Ils se trouvent dans `page.raw`, qui est typé pour ces endpoints.
 
 ```ts
-// Abonnés : le total et les points d'abonnement de la chaîne.
+// Abonnés : le total et les points d'abonnés de la chaîne.
 const subs = await twitch.subscriptions.get({ first: 1 });
 console.log(subs.total, subs.raw.points);
 

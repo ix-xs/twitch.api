@@ -1,15 +1,11 @@
 ---
 title: twitch.search
-description: "Search for categories and channels."
+description: "Recherche de catégories et de chaînes."
 sidebar:
   label: search
 ---
 
 Toutes les méthodes de `twitch.search`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## categories
 
@@ -17,20 +13,19 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.search.categories(params, options?): Paginator<CategorySearchResult>
 ```
 
-Finds the categories whose name contains every word of the query, in any
-order and whatever the case.
+Trouve les catégories dont le nom contient tous les mots de la recherche, dans n'importe quel ordre et sans tenir compte de la casse.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `query` <small>requis</small> | `string` | Text to look for. Pass it as is, it is URL encoded for you. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `query` <small>requis</small> | `string` | Texte à rechercher. Passez-le tel quel, il est encodé pour l'URL à votre place. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -41,9 +36,9 @@ order and whatever the case.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the category. |
-| `name` | `string` | Name of the category. |
-| `box_art_url` | `string` | URL of the box art. |
+| `id` | `string` | Identifiant de la catégorie. |
+| `name` | `string` | Nom de la catégorie. |
+| `box_art_url` | `string` | URL de la jaquette. |
 
 </details>
 
@@ -61,22 +56,20 @@ const categories = await twitch.search.categories({ query: "fort" }).take(5);
 twitch.search.channels(params, options?): Paginator<ChannelSearchResult>
 ```
 
-Finds channels that streamed in the last six months. The query is matched
-against the start of the login name, or with `live_only` against the start
-of the broadcaster's name and of the category name.
+Trouve les chaînes qui ont streamé au cours des six derniers mois. La recherche porte sur le début du nom de connexion ou, avec `live_only`, sur le début du nom du diffuseur et du nom de la catégorie.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `query` <small>requis</small> | `string` | Text to look for. Pass it as is, it is URL encoded for you. |
-| `live_only` | `boolean` | `true` to keep only channels that are live. Twitch defaults to `false`. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `query` <small>requis</small> | `string` | Texte à rechercher. Passez-le tel quel, il est encodé pour l'URL à votre place. |
+| `live_only` | `boolean` | `true` pour ne garder que les chaînes en direct. Twitch prend `false` par défaut. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -87,18 +80,18 @@ of the broadcaster's name and of the category name.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_language` | `string` | Language of the broadcaster: an ISO 639-1 code, or `"other"`. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `display_name` | `string` | Display name of the broadcaster. |
-| `game_id` | `string` | ID of the category being streamed, or of the last one that was. |
-| `game_name` | `string` | Name of the category being streamed, or of the last one that was. |
-| `id` | `string` | ID of the broadcaster. |
-| `is_live` | `boolean` | Whether the channel is live right now. |
-| `tag_ids` | `string[]` | Deprecated. Always empty. Use `tags`. |
-| `tags` | `string[]` | Tags applied to the channel. |
-| `thumbnail_url` | `string` | URL of the broadcaster's profile picture. |
-| `title` | `string` | Title of the stream. An empty string when none is set. |
-| `started_at` | `string` | When the stream started, as an RFC 3339 timestamp. An empty string when the channel is offline. |
+| `broadcaster_language` | `string` | Langue du diffuseur : un code ISO 639-1, ou `"other"`. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `display_name` | `string` | Nom d'affichage du diffuseur. |
+| `game_id` | `string` | Identifiant de la catégorie en cours de diffusion, ou de la dernière diffusée. |
+| `game_name` | `string` | Nom de la catégorie en cours de diffusion, ou de la dernière diffusée. |
+| `id` | `string` | Identifiant du diffuseur. |
+| `is_live` | `boolean` | Indique si la chaîne est en direct en ce moment. |
+| `tag_ids` | `string[]` | Obsolète. Toujours vide. Utilisez `tags`. |
+| `tags` | `string[]` | Tags appliqués à la chaîne. |
+| `thumbnail_url` | `string` | URL de la photo de profil du diffuseur. |
+| `title` | `string` | Titre du stream. Une chaîne vide quand aucun n'est défini. |
+| `started_at` | `string` | Début du stream, sous forme d'horodatage RFC 3339. Une chaîne vide quand la chaîne est hors ligne. |
 
 </details>
 

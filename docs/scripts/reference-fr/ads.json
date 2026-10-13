@@ -1,0 +1,23 @@
+{
+ "Ads: run commercials, read the ad schedule, snooze the next ad.": "Publicités : lancer une coupure, lire le planning, repousser la prochaine.",
+ "Broadcaster who runs the commercial. Defaults to the user making the call.": "Diffuseur qui lance la coupure publicitaire. Par défaut, l'utilisateur qui fait l'appel.",
+ "Broadcaster whose ad to push back. Defaults to the user making the call.": "Diffuseur dont on repousse la publicité. Par défaut, l'utilisateur qui fait l'appel.",
+ "Broadcaster whose schedule to read. Defaults to the user making the call.": "Diffuseur dont on lit le planning. Par défaut, l'utilisateur qui fait l'appel.",
+ "Gets the ad schedule of a channel: next and last ad, snoozes left and remaining time without pre-rolls. With an app token, the broadcaster must have granted the scope to your application.": "Renvoie le planning publicitaire d'une chaîne : prochaine et dernière publicité, reports restants et temps restant sans pre-roll. Avec un jeton d'application, le diffuseur doit avoir accordé le scope à votre application.",
+ "Length of the commercial that was requested, in seconds. Capped at 180.": "Durée de la coupure publicitaire demandée, en secondes. Plafonnée à 180.",
+ "Length of the next ad break, in seconds.": "Durée de la prochaine coupure publicitaire, en secondes.",
+ "New time of the next ad. See {@link AdTimestamp}.": "Nouvelle heure de la prochaine publicité. Voir {@link AdTimestamp}.",
+ "Number of snoozes the broadcaster has left.": "Nombre de reports qu'il reste au diffuseur.",
+ "Pushes the next automatic mid-roll ad back by five minutes, at the cost of one snooze. With an app token, the broadcaster must have granted the scope to your application.": "Repousse de cinq minutes la prochaine publicité mid-roll automatique, au prix d'un report. Avec un jeton d'application, le diffuseur doit avoir accordé le scope à votre application.",
+ "Seconds left without pre-roll ads. `0` when pre-rolls are being shown.": "Secondes restantes sans publicité pre-roll. `0` quand les pre-rolls sont diffusés.",
+ "Seconds to wait before another commercial can be started.": "Secondes à attendre avant de pouvoir lancer une autre coupure publicitaire.",
+ "Starts a commercial break on a channel. The broadcaster must be a partner or an affiliate and must be live. With an app token, the broadcaster must have granted the scope to your application.": "Lance une coupure publicitaire sur une chaîne. Le diffuseur doit être partenaire ou affilié, et en direct. Avec un jeton d'application, le diffuseur doit avoir accordé le scope à votre application.",
+ "Tells whether Twitch could serve an ad. Often an empty string.": "Indique si Twitch a pu diffuser une publicité. Souvent une chaîne vide.",
+ "Wanted length in seconds, 180 at most. The ad that is served can be a little shorter or longer.": "Durée voulue en secondes, 180 au plus. La publicité diffusée peut être un peu plus courte ou un peu plus longue.",
+ "When the broadcaster gets one more snooze. See {@link AdTimestamp}.": "Moment où le diffuseur regagne un report. Voir {@link AdTimestamp}.",
+ "When the last ad break ran. Empty or `0` when there was none or the channel is offline. See {@link AdTimestamp}.": "Moment de la dernière coupure publicitaire. Vide ou `0` quand il n'y en a pas eu ou que la chaîne est hors ligne. Voir {@link AdTimestamp}.",
+ "When the next ad is due. Empty or `0` when none is scheduled or the channel is offline. See {@link AdTimestamp}.": "Moment prévu pour la prochaine publicité. Vide ou `0` quand aucune n'est programmée ou que la chaîne est hors ligne. Voir {@link AdTimestamp}.",
+ "app or user, scope `channel:edit:commercial`.": "application ou utilisateur, scope `channel:edit:commercial`.",
+ "app or user, scope `channel:manage:ads`.": "application ou utilisateur, scope `channel:manage:ads`.",
+ "app or user, scope `channel:read:ads`.": "application ou utilisateur, scope `channel:read:ads`."
+}

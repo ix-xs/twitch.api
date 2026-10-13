@@ -1,15 +1,11 @@
 ---
 title: twitch.guestStar
-description: "Guest Star (beta): sessions, invites and slots."
+description: "Guest Star (bêta) : sessions, invitations et emplacements."
 sidebar:
   label: guestStar
 ---
 
 Toutes les méthodes de `twitch.guestStar`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## settings
 
@@ -17,20 +13,20 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.guestStar.settings(params, options?): Promise<GuestStarSettings>
 ```
 
-Gets the Guest Star settings of a channel.
+Renvoie les réglages Guest Star d'une chaîne.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose settings to read. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on lit les réglages. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -41,11 +37,11 @@ Beta: Twitch may change this endpoint.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `is_moderator_send_live_enabled` | `boolean` | Whether Guest Star moderators may decide if a guest in a slot is live. |
-| `slot_count` | `number` | Number of slots the host can fill in a call, 1 to 6. |
-| `is_browser_source_audio_enabled` | `boolean` | Whether browser sources of this channel play the audio of the session. |
-| `group_layout` | `GuestStarGroupLayout` | How guests are arranged in the browser source. |
-| `browser_source_token` | `string` | View only token used to build browser source URLs. |
+| `is_moderator_send_live_enabled` | `boolean` | Indique si les modérateurs Guest Star peuvent décider si l'invité d'un emplacement est à l'antenne. |
+| `slot_count` | `number` | Nombre d'emplacements que l'hôte peut remplir dans un appel, de 1 à 6. |
+| `is_browser_source_audio_enabled` | `boolean` | Indique si les sources navigateur de cette chaîne diffusent l'audio de la session. |
+| `group_layout` | `GuestStarGroupLayout` | Disposition des invités dans la source navigateur. |
+| `browser_source_token` | `string` | Jeton en lecture seule qui sert à construire les URL des sources navigateur. |
 
 </details>
 
@@ -64,25 +60,24 @@ console.log(settings.slot_count, settings.group_layout);
 twitch.guestStar.updateSettings(params?, options?): Promise<void>
 ```
 
-Changes the Guest Star settings of a channel. Only the fields you pass
-are touched.
+Modifie les réglages Guest Star d'une chaîne. Seuls les champs que vous passez sont modifiés.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose settings to change. Defaults to the user making the call. |
-| `is_moderator_send_live_enabled` | `boolean` | Lets Guest Star moderators decide if a guest in a slot is live. |
-| `slot_count` | `number` | Number of slots the host can fill in a call, 1 to 6. |
-| `is_browser_source_audio_enabled` | `boolean` | Makes browser sources of this channel play the audio of the session. |
-| `group_layout` | `GuestStarGroupLayout` | How guests are arranged in the browser source. |
-| `regenerate_browser_sources` | `boolean` | Issues a new browser source token. Every browser source already set up in the streaming software stops working at once. |
+| `broadcaster_id` | `string` | Diffuseur dont on modifie les réglages. Par défaut, l'utilisateur qui fait l'appel. |
+| `is_moderator_send_live_enabled` | `boolean` | Permet aux modérateurs Guest Star de décider si l'invité d'un emplacement est à l'antenne. |
+| `slot_count` | `number` | Nombre d'emplacements que l'hôte peut remplir dans un appel, de 1 à 6. |
+| `is_browser_source_audio_enabled` | `boolean` | Fait diffuser l'audio de la session par les sources navigateur de cette chaîne. |
+| `group_layout` | `GuestStarGroupLayout` | Disposition des invités dans la source navigateur. |
+| `regenerate_browser_sources` | `boolean` | Émet un nouveau jeton de source navigateur. Toutes les sources navigateur déjà configurées dans le logiciel de streaming cessent aussitôt de fonctionner. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -102,21 +97,20 @@ await twitch.guestStar.updateSettings({ slot_count: 4, group_layout: "TILED_LAYO
 twitch.guestStar.session(params, options?): Promise<GuestStarSession | null>
 ```
 
-Gets the Guest Star session a channel is running, or `null` when there is
-none. A guest can read it too, once invited or seated.
+Renvoie la session Guest Star en cours sur une chaîne, ou `null` quand il n'y en a aucune. Un invité peut la lire aussi, dès qu'il est invité ou installé à un emplacement.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -127,8 +121,8 @@ Beta: Twitch may change this endpoint.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the session. |
-| `guests` | `GuestStarGuest[]` | Everyone who holds a slot, the host included. |
+| `id` | `string` | Identifiant de la session. |
+| `guests` | `GuestStarGuest[]` | Toutes les personnes qui occupent un emplacement, hôte compris. |
 
 </details>
 
@@ -147,21 +141,19 @@ if (session) console.log(session.guests.map((guest) => guest.user_login));
 twitch.guestStar.createSession(params?, options?): Promise<GuestStarSession>
 ```
 
-Starts a Guest Star session with the broadcaster as its only member. The
-broadcaster has to be in the call interface, otherwise Twitch ends the
-call by itself.
+Lance une session Guest Star dont le diffuseur est le seul membre. Le diffuseur doit se trouver dans l'interface d'appel, sans quoi Twitch met fin à l'appel de lui-même.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who will host the session. Defaults to the user making the call. |
+| `broadcaster_id` | `string` | Diffuseur qui hébergera la session. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -172,8 +164,8 @@ Beta: Twitch may change this endpoint.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the session. |
-| `guests` | `GuestStarGuest[]` | Everyone who holds a slot, the host included. |
+| `id` | `string` | Identifiant de la session. |
+| `guests` | `GuestStarGuest[]` | Toutes les personnes qui occupent un emplacement, hôte compris. |
 
 </details>
 
@@ -191,22 +183,20 @@ const session = await twitch.guestStar.createSession();
 twitch.guestStar.endSession(params, options?): Promise<GuestStarSession | null>
 ```
 
-Ends a Guest Star session, like the host pressing "End Call". Resolves
-with the session as it was at that moment, or `null` when Twitch sends
-nothing back.
+Met fin à une session Guest Star, comme si l'hôte appuyait sur « End Call ». Renvoie la session telle qu'elle était à ce moment-là, ou `null` quand Twitch ne renvoie rien.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who hosts the session. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session to end. |
+| `broadcaster_id` | `string` | Diffuseur qui héberge la session. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session à terminer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -217,8 +207,8 @@ Beta: Twitch may change this endpoint.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the session. |
-| `guests` | `GuestStarGuest[]` | Everyone who holds a slot, the host included. |
+| `id` | `string` | Identifiant de la session. |
+| `guests` | `GuestStarGuest[]` | Toutes les personnes qui occupent un emplacement, hôte compris. |
 
 </details>
 
@@ -236,22 +226,21 @@ await twitch.guestStar.endSession({ session_id: session.id });
 twitch.guestStar.invites(params, options?): Promise<GuestStarInvite[]>
 ```
 
-Lists the pending invitations of a session, with how far each invited
-user is in the waiting room.
+Liste les invitations en attente d'une session, en indiquant où en est chaque utilisateur invité dans la salle d'attente.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session whose invitations to list. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session dont on liste les invitations. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -262,13 +251,13 @@ Beta: Twitch may change this endpoint.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the invited user. |
-| `invited_at` | `string` | When the invitation was sent, as an RFC 3339 timestamp. |
-| `status` | `"INVITED" \| "ACCEPTED" \| "READY"` | How far the user is in joining: `"INVITED"` when they have not reacted yet, `"ACCEPTED"` once they are in the waiting room, `"READY"` when they said they can join the call. |
-| `is_video_enabled` | `boolean` | Whether the user has their camera turned on. |
-| `is_audio_enabled` | `boolean` | Whether the user has their microphone turned on. |
-| `is_video_available` | `boolean` | Whether the user has a camera to share. |
-| `is_audio_available` | `boolean` | Whether the user has a microphone to share. |
+| `user_id` | `string` | Identifiant de l'utilisateur invité. |
+| `invited_at` | `string` | Moment où l'invitation a été envoyée, sous forme d'horodatage RFC 3339. |
+| `status` | `"INVITED" \| "ACCEPTED" \| "READY"` | Étape où en est l'utilisateur pour rejoindre la session :`"INVITED"` tant qu'il n'a pas réagi, `"ACCEPTED"` une fois dans la salle d'attente, `"READY"` quand il a indiqué pouvoir rejoindre l'appel. |
+| `is_video_enabled` | `boolean` | Indique si la caméra de l'utilisateur est allumée. |
+| `is_audio_enabled` | `boolean` | Indique si le micro de l'utilisateur est activé. |
+| `is_video_available` | `boolean` | Indique si l'utilisateur a une caméra à partager. |
+| `is_audio_available` | `boolean` | Indique si l'utilisateur a un micro à partager. |
 
 </details>
 
@@ -287,22 +276,22 @@ const ready = invites.filter((invite) => invite.status === "READY");
 twitch.guestStar.invite(params, options?): Promise<void>
 ```
 
-Invites a user to a session in progress.
+Invite un utilisateur à une session en cours.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session to invite the user to. |
-| `guest_id` <small>requis</small> | `string` | ID of the user to invite. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session à laquelle inviter l'utilisateur. |
+| `guest_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à inviter. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -322,22 +311,22 @@ await twitch.guestStar.invite({ broadcaster_id: "141981764", session_id: session
 twitch.guestStar.deleteInvite(params, options?): Promise<void>
 ```
 
-Takes back an invitation to a session.
+Retire une invitation à une session.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session the invitation was sent for. |
-| `guest_id` <small>requis</small> | `string` | ID of the user whose invitation to take back. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session pour laquelle l'invitation a été envoyée. |
+| `guest_id` <small>requis</small> | `string` | Identifiant de l'utilisateur dont on retire l'invitation. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -357,24 +346,23 @@ await twitch.guestStar.deleteInvite({ broadcaster_id: "141981764", session_id: s
 twitch.guestStar.assignSlot(params, options?): Promise<void>
 ```
 
-Seats an invited user in a slot of the session, once they are ready to
-join.
+Installe un utilisateur invité à un emplacement de la session, une fois qu'il est prêt à la rejoindre.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session. |
-| `guest_id` <small>requis</small> | `string` | ID of the user to seat. They must be invited and ready to join. |
-| `slot_id` <small>requis</small> | `string` | Slot to give them: a number from `"1"` up to the slot count of the channel. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session. |
+| `guest_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à installer. Il doit être invité et prêt à rejoindre la session. |
+| `slot_id` <small>requis</small> | `string` | Emplacement à lui attribuer : un nombre allant de `"1"` au nombre d'emplacements de la chaîne. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -399,24 +387,23 @@ await twitch.guestStar.assignSlot({
 twitch.guestStar.updateSlot(params, options?): Promise<void>
 ```
 
-Moves a guest to another slot. When the destination is taken, the two
-guests swap places.
+Déplace un invité vers un autre emplacement. Quand celui-ci est occupé, les deux invités échangent leurs places.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session. |
-| `source_slot_id` <small>requis</small> | `string` | Slot the guest is in now. |
-| `destination_slot_id` | `string` | Slot to move the guest to. When someone is already there, the two swap places. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session. |
+| `source_slot_id` <small>requis</small> | `string` | Emplacement actuel de l'invité. |
+| `destination_slot_id` | `string` | Emplacement vers lequel déplacer l'invité. Quand quelqu'un s'y trouve déjà, les deux échangent leurs places. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -441,25 +428,24 @@ await twitch.guestStar.updateSlot({
 twitch.guestStar.deleteSlot(params, options?): Promise<void>
 ```
 
-Removes a guest from their slot. They lose access to the session at once
-and can no longer send or receive its audio and video.
+Retire un invité de son emplacement. Il perd aussitôt l'accès à la session et ne peut plus en envoyer ni en recevoir l'audio et la vidéo.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session. |
-| `guest_id` <small>requis</small> | `string` | ID of the guest to remove. |
-| `slot_id` <small>requis</small> | `string` | Slot the guest is in. |
-| `should_reinvite_guest` | `boolean` | Sends the guest back to the invitation queue instead of out of the session. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session. |
+| `guest_id` <small>requis</small> | `string` | Identifiant de l'invité à retirer. |
+| `slot_id` <small>requis</small> | `string` | Emplacement de l'invité. |
+| `should_reinvite_guest` | `boolean` | Renvoie l'invité dans la file des invitations au lieu de le sortir de la session. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -484,28 +470,26 @@ await twitch.guestStar.deleteSlot({
 twitch.guestStar.updateSlotSettings(params, options?): Promise<void>
 ```
 
-Changes what a slot may share and how it comes out on stream: audio,
-video, live state and volume. Allowing audio or video again does not turn
-it on, the guest is told they can do so.
+Modifie ce qu'un emplacement peut partager et la façon dont il apparaît dans le stream : audio, vidéo, passage à l'antenne et volume. Autoriser de nouveau l'audio ou la vidéo ne les active pas : l'invité est prévenu qu'il peut le faire.
 
-Beta: Twitch may change this endpoint.
+Bêta : Twitch peut modifier cet endpoint.
 
-**Jeton:** user, scope `channel:manage:guest_star` or `moderator:manage:guest_star`.
+**Jeton :** utilisateur, scope `channel:manage:guest_star` ou `moderator:manage:guest_star`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who hosts the session. |
-| `moderator_id` | `string` | The broadcaster or one of their moderators. Defaults to the user making the call. |
-| `session_id` <small>requis</small> | `string` | ID of the session. |
-| `slot_id` <small>requis</small> | `string` | Slot to change. |
-| `is_audio_enabled` | `boolean` | Whether the slot may share audio. `false` mutes it for everyone. |
-| `is_video_enabled` | `boolean` | Whether the slot may share video. `false` hides it for everyone. |
-| `is_live` | `boolean` | Whether the slot is shown and heard on stream, through the browser source. |
-| `volume` | `number` | Volume of the slot on stream, 0 to 100. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui héberge la session. |
+| `moderator_id` | `string` | Le diffuseur ou l'un de ses modérateurs. Par défaut, l'utilisateur qui fait l'appel. |
+| `session_id` <small>requis</small> | `string` | Identifiant de la session. |
+| `slot_id` <small>requis</small> | `string` | Emplacement à modifier. |
+| `is_audio_enabled` | `boolean` | Indique si l'emplacement peut partager de l'audio. `false` le rend muet pour tout le monde. |
+| `is_video_enabled` | `boolean` | Indique si l'emplacement peut partager de la vidéo. `false` le masque pour tout le monde. |
+| `is_live` | `boolean` | Indique si l'emplacement est visible et audible dans le stream, par l'intermédiaire de la source navigateur. |
+| `volume` | `number` | Volume de l'emplacement dans le stream, de 0 à 100. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 

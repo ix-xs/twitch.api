@@ -1,15 +1,11 @@
 ---
 title: twitch.goals
-description: "Creator goals of a channel."
+description: "Objectifs de créateur d'une chaîne."
 sidebar:
   label: goals
 ---
 
 Toutes les méthodes de `twitch.goals`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,17 +13,17 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.goals.get(params?, options?): Promise<CreatorGoal[]>
 ```
 
-Lists the active goals of a broadcaster with their current progress.
+Liste les objectifs actifs d'un diffuseur avec leur progression actuelle.
 
-**Jeton:** user, scope `channel:read:goals`.
+**Jeton :** utilisateur, scope `channel:read:goals`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who created the goals. Defaults to the user making the call. |
+| `broadcaster_id` | `string` | Diffuseur qui a créé les objectifs. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -38,15 +34,15 @@ Lists the active goals of a broadcaster with their current progress.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the goal. |
-| `broadcaster_id` | `string` | ID of the broadcaster who created the goal. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `type` | `CreatorGoalType` | What the goal counts. |
-| `description` | `string` | Text of the goal. An empty string when the broadcaster wrote none. |
-| `current_amount` | `number` | Where the count stands now. For `follower` this is the whole follower count of the channel. |
-| `target_amount` | `number` | Value the broadcaster wants to reach. |
-| `created_at` | `string` | When the goal was created, as an RFC 3339 timestamp. |
+| `id` | `string` | Identifiant de l'objectif. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui a créé l'objectif. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `type` | `CreatorGoalType` | Ce que compte l'objectif. |
+| `description` | `string` | Texte de l'objectif. Une chaîne vide quand le diffuseur n'en a pas écrit. |
+| `current_amount` | `number` | Valeur actuelle du compteur. Pour `follower`, c'est le nombre total de followers de la chaîne. |
+| `target_amount` | `number` | Valeur que le diffuseur veut atteindre. |
+| `created_at` | `string` | Date de création de l'objectif, sous forme d'horodatage RFC 3339. |
 
 </details>
 

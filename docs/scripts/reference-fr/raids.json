@@ -1,0 +1,10 @@
+{
+ "Broadcaster who sends their viewers. Defaults to the user making the call.": "Diffuseur qui envoie ses spectateurs. Par défaut, l'utilisateur qui fait l'appel.",
+ "Broadcaster who started the raid. Defaults to the user making the call.": "Diffuseur qui a lancé le raid. Par défaut, l'utilisateur qui fait l'appel.",
+ "Cancels a raid that has not left yet. Limited to 10 calls per 10 minutes.": "Annule un raid qui n'est pas encore parti. Limité à 10 appels par tranche de 10 minutes.",
+ "ID of the broadcaster to raid.": "Identifiant du diffuseur visé par le raid.",
+ "Prepares a raid on another channel. The viewers only leave once the broadcaster confirms in the Twitch interface or after a 90 second countdown, so listen to the channel raid event to know that it happened. Limited to 10 calls per 10 minutes.": "Prépare un raid vers une autre chaîne. Les spectateurs ne partent que lorsque le diffuseur confirme dans l'interface de Twitch ou après un compte à rebours de 90 secondes : écoutez donc l'événement de raid de la chaîne pour savoir qu'il a eu lieu. Limité à 10 appels par tranche de 10 minutes.",
+ "Raids: start one, cancel a pending one.": "Raids : en lancer un, annuler celui en attente.",
+ "When the raid was requested, as an RFC 3339 timestamp.": "Date de la demande de raid, sous forme d'horodatage RFC 3339.",
+ "user, scope `channel:manage:raids`.": "utilisateur, scope `channel:manage:raids`."
+}

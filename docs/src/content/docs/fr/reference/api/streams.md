@@ -1,15 +1,11 @@
 ---
 title: twitch.streams
-description: "Streams: who is live, stream keys and markers."
+description: "Streams : qui est en direct, clés de stream et marqueurs."
 sidebar:
   label: streams
 ---
 
 Toutes les méthodes de `twitch.streams`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,26 +13,24 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.streams.get(params?, options?): Paginator<Stream>
 ```
 
-Lists live streams, most viewers first. Without filters this is every
-stream on Twitch. Viewer counts move while you page, so a stream can show
-up twice or be skipped.
+Liste les streams en direct, en commençant par ceux qui ont le plus de spectateurs. Sans filtre, ce sont tous les streams de Twitch. Les nombres de spectateurs bougent pendant que vous parcourez les pages : un stream peut donc apparaître deux fois ou être sauté.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string \| readonly string[]` | Only streams of these users. Up to 100 IDs. |
-| `user_login` | `string \| readonly string[]` | Only streams of these users. Up to 100 login names. |
-| `game_id` | `string \| readonly string[]` | Only streams in these categories. Up to 100 IDs. |
-| `type` | `"live" \| "all"` | Kind of stream. Twitch defaults to `"all"`. |
-| `language` | `string \| readonly string[]` | Only streams in these languages: ISO 639-1 codes, or `"other"`. Up to 100. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `before` | `string` | Cursor of the previous page. |
-| `after` | `string` | Cursor of the next page. |
+| `user_id` | `string \| readonly string[]` | Uniquement les streams de ces utilisateurs. Jusqu'à 100 identifiants. |
+| `user_login` | `string \| readonly string[]` | Uniquement les streams de ces utilisateurs. Jusqu'à 100 noms de connexion. |
+| `game_id` | `string \| readonly string[]` | Uniquement les streams de ces catégories. Jusqu'à 100 identifiants. |
+| `type` | `"live" \| "all"` | Type de stream. Twitch prend `"all"` par défaut. |
+| `language` | `string \| readonly string[]` | Uniquement les streams dans ces langues : des codes ISO 639-1, ou `"other"`. Jusqu'à 100. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `before` | `string` | Curseur de la page précédente. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -47,21 +41,21 @@ up twice or be skipped.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the stream. The VOD of the broadcast can be looked up with it later. |
-| `user_id` | `string` | ID of the broadcaster. |
-| `user_login` | `string` | Login name of the broadcaster. |
-| `user_name` | `string` | Display name of the broadcaster. |
-| `game_id` | `string` | ID of the category being streamed. An empty string when none is set. |
-| `game_name` | `string` | Name of the category being streamed. An empty string when none is set. |
-| `type` | `"" \| "live"` | `"live"`, or an empty string when Twitch hit an error. |
-| `title` | `string` | Title of the stream. An empty string when none is set. |
-| `tags` | `string[]` | Tags applied to the stream. |
-| `viewer_count` | `number` | Number of viewers right now. |
-| `started_at` | `string` | When the broadcast started, as an RFC 3339 timestamp. |
-| `language` | `string` | Language of the stream: an ISO 639-1 code, or `"other"`. |
-| `thumbnail_url` | `string` | URL of a recent frame of the stream. Replace `&#123;width}` and `&#123;height}` with the size you want, in pixels. |
-| `tag_ids` | `string[]` | Deprecated. Always empty. Use `tags`. |
-| `is_mature` | `boolean` | Deprecated. Always `false`. |
+| `id` | `string` | Identifiant du stream. Il permet de retrouver plus tard la rediffusion correspondante. |
+| `user_id` | `string` | Identifiant du diffuseur. |
+| `user_login` | `string` | Nom de connexion du diffuseur. |
+| `user_name` | `string` | Nom d'affichage du diffuseur. |
+| `game_id` | `string` | Identifiant de la catégorie en cours de diffusion. Une chaîne vide quand aucune n'est définie. |
+| `game_name` | `string` | Nom de la catégorie en cours de diffusion. Une chaîne vide quand aucune n'est définie. |
+| `type` | `"" \| "live"` | `"live"`, ou une chaîne vide quand Twitch a rencontré une erreur. |
+| `title` | `string` | Titre du stream. Une chaîne vide quand aucun n'est défini. |
+| `tags` | `string[]` | Tags appliqués au stream. |
+| `viewer_count` | `number` | Nombre de spectateurs en ce moment. |
+| `started_at` | `string` | Début de la diffusion, sous forme d'horodatage RFC 3339. |
+| `language` | `string` | Langue du stream : un code ISO 639-1, ou `"other"`. |
+| `thumbnail_url` | `string` | URL d'une image récente du stream. Remplacez `&#123;width}` et `&#123;height}` par la taille voulue, en pixels. |
+| `tag_ids` | `string[]` | Obsolète. Toujours vide. Utilisez `tags`. |
+| `is_mature` | `boolean` | Obsolète. Toujours `false`. |
 
 </details>
 
@@ -82,19 +76,19 @@ for await (const stream of twitch.streams.get({ language: "fr" })) {
 twitch.streams.followed(params?, options?): Paginator<Stream>
 ```
 
-Lists the live streams of the channels a user follows, most viewers first.
+Liste les streams en direct des chaînes que suit un utilisateur, en commençant par ceux qui ont le plus de spectateurs.
 
-**Jeton:** user, scope `user:read:follows`.
+**Jeton :** utilisateur, scope `user:read:follows`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | User whose followed channels to check. Defaults to the user making the call. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 100. |
-| `after` | `string` | Cursor of the next page. |
+| `user_id` | `string` | Utilisateur dont on consulte les chaînes suivies. Par défaut, l'utilisateur qui fait l'appel. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 100 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -105,21 +99,21 @@ Lists the live streams of the channels a user follows, most viewers first.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the stream. The VOD of the broadcast can be looked up with it later. |
-| `user_id` | `string` | ID of the broadcaster. |
-| `user_login` | `string` | Login name of the broadcaster. |
-| `user_name` | `string` | Display name of the broadcaster. |
-| `game_id` | `string` | ID of the category being streamed. An empty string when none is set. |
-| `game_name` | `string` | Name of the category being streamed. An empty string when none is set. |
-| `type` | `"" \| "live"` | `"live"`, or an empty string when Twitch hit an error. |
-| `title` | `string` | Title of the stream. An empty string when none is set. |
-| `tags` | `string[]` | Tags applied to the stream. |
-| `viewer_count` | `number` | Number of viewers right now. |
-| `started_at` | `string` | When the broadcast started, as an RFC 3339 timestamp. |
-| `language` | `string` | Language of the stream: an ISO 639-1 code, or `"other"`. |
-| `thumbnail_url` | `string` | URL of a recent frame of the stream. Replace `&#123;width}` and `&#123;height}` with the size you want, in pixels. |
-| `tag_ids` | `string[]` | Deprecated. Always empty. Use `tags`. |
-| `is_mature` | `boolean` | Deprecated. Always `false`. |
+| `id` | `string` | Identifiant du stream. Il permet de retrouver plus tard la rediffusion correspondante. |
+| `user_id` | `string` | Identifiant du diffuseur. |
+| `user_login` | `string` | Nom de connexion du diffuseur. |
+| `user_name` | `string` | Nom d'affichage du diffuseur. |
+| `game_id` | `string` | Identifiant de la catégorie en cours de diffusion. Une chaîne vide quand aucune n'est définie. |
+| `game_name` | `string` | Nom de la catégorie en cours de diffusion. Une chaîne vide quand aucune n'est définie. |
+| `type` | `"" \| "live"` | `"live"`, ou une chaîne vide quand Twitch a rencontré une erreur. |
+| `title` | `string` | Titre du stream. Une chaîne vide quand aucun n'est défini. |
+| `tags` | `string[]` | Tags appliqués au stream. |
+| `viewer_count` | `number` | Nombre de spectateurs en ce moment. |
+| `started_at` | `string` | Début de la diffusion, sous forme d'horodatage RFC 3339. |
+| `language` | `string` | Langue du stream : un code ISO 639-1, ou `"other"`. |
+| `thumbnail_url` | `string` | URL d'une image récente du stream. Remplacez `&#123;width}` et `&#123;height}` par la taille voulue, en pixels. |
+| `tag_ids` | `string[]` | Obsolète. Toujours vide. Utilisez `tags`. |
+| `is_mature` | `boolean` | Obsolète. Toujours `false`. |
 
 </details>
 
@@ -137,17 +131,17 @@ const streams = await twitch.streams.followed().all();
 twitch.streams.key(params?, options?): Promise<string>
 ```
 
-Gets the stream key of a channel. Treat it like a password.
+Renvoie la clé de stream d'une chaîne. Traitez-la comme un mot de passe.
 
-**Jeton:** user, scope `channel:read:stream_key`.
+**Jeton :** utilisateur, scope `channel:read:stream_key`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the channel. Defaults to the user making the call. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient la chaîne. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -167,19 +161,18 @@ const key = await twitch.streams.key();
 twitch.streams.createMarker(params?, options?): Promise<StreamMarker>
 ```
 
-Marks the current position of a live stream. Fails when the channel is
-offline, has VODs disabled or is airing a rerun.
+Marque la position actuelle d'un stream en direct. Échoue quand la chaîne est hors ligne, ne conserve pas les enregistrements de ses streams ou diffuse une rediffusion.
 
-**Jeton:** user, scope `channel:manage:broadcast`.
+**Jeton :** utilisateur, scope `channel:manage:broadcast`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | Broadcaster who is live. Defaults to the user making the call. |
-| `description` | `string` | Note to attach to the marker, 140 characters at most. |
+| `user_id` | `string` | Diffuseur en direct. Par défaut, l'utilisateur qui fait l'appel. |
+| `description` | `string` | Note à associer au marqueur, 140 caractères au plus. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -190,10 +183,10 @@ offline, has VODs disabled or is airing a rerun.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the marker. |
-| `created_at` | `string` | When the marker was created, as an RFC 3339 timestamp. |
-| `position_seconds` | `number` | Offset of the marker from the start of the stream, in seconds. |
-| `description` | `string` | Note attached to the marker. An empty string when there is none. |
+| `id` | `string` | Identifiant du marqueur. |
+| `created_at` | `string` | Date de création du marqueur, sous forme d'horodatage RFC 3339. |
+| `position_seconds` | `number` | Position du marqueur depuis le début du stream, en secondes. |
+| `description` | `string` | Note associée au marqueur. Une chaîne vide quand il n'y en a pas. |
 
 </details>
 
@@ -211,21 +204,21 @@ const marker = await twitch.streams.createMarker({ description: "Boss fight" });
 twitch.streams.markers(params, options?): Paginator<StreamMarkerGroup>
 ```
 
-Lists the markers of a user's most recent video, or of a given video.
+Liste les marqueurs de la vidéo la plus récente d'un utilisateur, ou d'une vidéo donnée.
 
-**Jeton:** user, scope `user:read:broadcast` or `channel:manage:broadcast`.
+**Jeton :** utilisateur, scope `user:read:broadcast` ou `channel:manage:broadcast`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | Reads the markers of this user's most recent video. |
-| `video_id` | `string` | Reads the markers of this video. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `before` | `string` | Cursor of the previous page. |
-| `after` | `string` | Cursor of the next page. |
+| `user_id` | `string` | Lit les marqueurs de la vidéo la plus récente de cet utilisateur. |
+| `video_id` | `string` | Lit les marqueurs de cette vidéo. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `before` | `string` | Curseur de la page précédente. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -236,10 +229,10 @@ Lists the markers of a user's most recent video, or of a given video.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the user who created the markers. |
-| `user_name` | `string` | Display name of that user. |
-| `user_login` | `string` | Login name of that user. |
-| `videos` | `{ video_id: string; markers: VideoStreamMarker[]; }[]` | Videos that contain markers. Holds a single video. |
+| `user_id` | `string` | Identifiant de l'utilisateur qui a créé les marqueurs. |
+| `user_name` | `string` | Nom d'affichage de cet utilisateur. |
+| `user_login` | `string` | Nom de connexion de cet utilisateur. |
+| `videos` | `{ video_id: string; markers: VideoStreamMarker[]; }[]` | Vidéos qui contiennent des marqueurs. Contient une seule vidéo. |
 
 </details>
 

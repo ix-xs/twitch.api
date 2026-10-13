@@ -1,15 +1,11 @@
 ---
 title: twitch.extensions
-description: "Extensions: configuration, secrets, PubSub and chat messages, Bits products."
+description: "Extensions : configuration, secrets, messages PubSub et de chat, produits Bits."
 sidebar:
   label: extensions
 ---
 
 Toutes les méthodes de `twitch.extensions`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## configuration
 
@@ -17,20 +13,19 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.extensions.configuration(params, options?): Promise<ExtensionConfigurationSegment[]>
 ```
 
-Reads one or more configuration segments of an extension, in the order
-you asked for them. Limited to 20 reads per minute for each segment.
+Lit un ou plusieurs segments de configuration d'une extension, dans l'ordre où vous les avez demandés. Limité à 20 lectures par minute pour chaque segment.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension that owns the segments. |
-| `segment` <small>requis</small> | `ExtensionConfigurationSegmentName \| readonly ExtensionConfigurationSegmentName[]` | Segments to read. Duplicates are ignored. |
-| `broadcaster_id` | `string` | Broadcaster who installed the extension. Required for the broadcaster and developer segments, leave it out when you only read the global one. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension à laquelle appartiennent les segments. |
+| `segment` <small>requis</small> | `ExtensionConfigurationSegmentName \| readonly ExtensionConfigurationSegmentName[]` | Segments à lire. Les doublons sont ignorés. |
+| `broadcaster_id` | `string` | Diffuseur qui a installé l'extension. Obligatoire pour les segments du diffuseur et du développeur, à omettre quand vous ne lisez que le segment global. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -41,10 +36,10 @@ you asked for them. Limited to 20 reads per minute for each segment.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `segment` | `ExtensionConfigurationSegmentName` | Which segment this is. |
-| `broadcaster_id` | `string` | ID of the broadcaster the segment belongs to. Absent on the global segment. |
-| `content` | `string` | What the segment holds: plain text, or JSON encoded as a string. |
-| `version` | `string` | Version of the stored data, as chosen by the extension. |
+| `segment` | `ExtensionConfigurationSegmentName` | Le segment dont il s'agit. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur auquel appartient le segment. Absent du segment global. |
+| `content` | `string` | Contenu du segment : du texte brut, ou du JSON encodé dans une chaîne de caractères. |
+| `version` | `string` | Version des données stockées, telle que l'extension l'a choisie. |
 
 </details>
 
@@ -65,23 +60,21 @@ const [global] = await twitch.extensions.configuration(
 twitch.extensions.setConfiguration(params, options?): Promise<void>
 ```
 
-Writes a configuration segment. Copies of the extension that are already
-running on a channel do not get the new content. Limited to 20 writes per
-minute.
+Écrit un segment de configuration. Les copies de l'extension déjà en cours d'exécution sur une chaîne ne reçoivent pas le nouveau contenu. Limité à 20 écritures par minute.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension to update. |
-| `segment` <small>requis</small> | `ExtensionConfigurationSegmentName` | Segment to write. |
-| `broadcaster_id` | `string` | Broadcaster who installed the extension. Only for the broadcaster and developer segments. |
-| `content` | `string` | New content, 5 KB at most: plain text, or JSON encoded as a string. |
-| `version` | `string` | Version of the data to write. Without it the latest one is replaced. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension à mettre à jour. |
+| `segment` <small>requis</small> | `ExtensionConfigurationSegmentName` | Segment à écrire. |
+| `broadcaster_id` | `string` | Diffuseur qui a installé l'extension. Uniquement pour les segments du diffuseur et du développeur. |
+| `content` | `string` | Nouveau contenu, 5 ko au plus : du texte brut, ou du JSON encodé dans une chaîne de caractères. |
+| `version` | `string` | Version des données à écrire. Sans elle, la plus récente est remplacée. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -104,21 +97,20 @@ await twitch.extensions.setConfiguration(
 twitch.extensions.setRequiredConfiguration(params, options?): Promise<void>
 ```
 
-Sets the required configuration string of a channel, for extensions that
-must be configured by the broadcaster before they can be activated.
+Définit, pour une chaîne, la chaîne de caractères de configuration requise, dans le cas des extensions que le diffuseur doit configurer avant de pouvoir les activer.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who installed the extension on their channel. |
-| `extension_id` <small>requis</small> | `string` | ID of the extension to update. |
-| `extension_version` <small>requis</small> | `string` | Version of the extension to update. |
-| `required_configuration` <small>requis</small> | `string` | The string that marks the channel as configured for this version. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur qui a installé l'extension sur sa chaîne. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension à mettre à jour. |
+| `extension_version` <small>requis</small> | `string` | Version de l'extension à mettre à jour. |
+| `required_configuration` <small>requis</small> | `string` | La chaîne de caractères qui marque la chaîne comme configurée pour cette version. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -141,22 +133,20 @@ await twitch.extensions.setRequiredConfiguration(
 twitch.extensions.sendPubSub(params, options?): Promise<void>
 ```
 
-Pushes a message to the running copies of an extension: on one channel,
-on every channel, or for a single viewer. Limited to 100 messages per
-minute for each channel.
+Envoie un message aux copies d'une extension en cours d'exécution : sur une chaîne, sur toutes les chaînes, ou pour un seul spectateur. Limité à 100 messages par minute pour chaque chaîne.
 
-**Jeton:** signed extension JWT, passed with the `token` request option. Its `channel_id` and `pubsub_perms` claims must allow the targets.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`. Ses revendications `channel_id` et `pubsub_perms` doivent autoriser les destinataires.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `target` <small>requis</small> | `readonly ExtensionPubSubTarget[]` | Recipients. `"broadcast"` and `"global"` cannot be combined. |
-| `broadcaster_id` | `string` | Channel to send the message to. Leave it out when `is_global_broadcast` is `true`. |
-| `is_global_broadcast` | `boolean` | Sends the message to every channel the extension is active on. `target` must then be `["global"]`. Twitch defaults to `false`. |
-| `message` <small>requis</small> | `string` | The message, 5 KB at most: plain text, or JSON encoded as a string. |
+| `target` <small>requis</small> | `readonly ExtensionPubSubTarget[]` | Destinataires. `"broadcast"` et `"global"` ne peuvent pas être combinés. |
+| `broadcaster_id` | `string` | Chaîne à laquelle envoyer le message. À omettre quand `is_global_broadcast` vaut `true`. |
+| `is_global_broadcast` | `boolean` | Envoie le message à toutes les chaînes sur lesquelles l'extension est active. `target` doit alors valoir `["global"]`. Twitch prend `false` par défaut. |
+| `message` <small>requis</small> | `string` | Le message, 5 ko au plus : du texte brut, ou du JSON encodé dans une chaîne de caractères. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -179,20 +169,19 @@ await twitch.extensions.sendPubSub(
 twitch.extensions.liveChannels(params, options?): Paginator<ExtensionLiveChannel>
 ```
 
-Lists the channels that are live with an extension installed or
-activated. A channel can take a few minutes to appear or disappear.
+Liste les chaînes en direct qui ont installé ou activé une extension. Une chaîne peut mettre quelques minutes à apparaître ou à disparaître.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension to look for. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension à rechercher. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -203,11 +192,11 @@ activated. A channel can take a few minutes to appear or disappear.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `game_name` | `string` | Name of the category being streamed. |
-| `game_id` | `string` | ID of the category being streamed. |
-| `title` | `string` | Title of the stream. An empty string when none is set. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `game_name` | `string` | Nom de la catégorie en cours de diffusion. |
+| `game_id` | `string` | Identifiant de la catégorie en cours de diffusion. |
+| `title` | `string` | Titre du stream. Une chaîne vide quand aucun n'est défini. |
 
 </details>
 
@@ -227,17 +216,17 @@ for await (const channel of twitch.extensions.liveChannels({ extension_id })) {
 twitch.extensions.secrets(params, options?): Promise<ExtensionSecrets>
 ```
 
-Gets the shared secrets of an extension.
+Renvoie les secrets partagés d'une extension.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension whose secrets to read. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension dont on lit les secrets. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -248,8 +237,8 @@ Gets the shared secrets of an extension.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `format_version` | `number` | Version of the layout of this object. |
-| `secrets` | `ExtensionSecret[]` | The secrets. Several overlap while a new one is being rolled out. |
+| `format_version` | `number` | Version du format de cet objet. |
+| `secrets` | `ExtensionSecret[]` | Les secrets. Plusieurs coexistent pendant le déploiement d'un nouveau. |
 
 </details>
 
@@ -267,19 +256,18 @@ const { secrets } = await twitch.extensions.secrets({ extension_id }, { token: j
 twitch.extensions.createSecret(params, options?): Promise<ExtensionSecrets>
 ```
 
-Creates a new shared secret. The current ones are retired once the new
-one becomes active, so call this only when you are ready to switch.
+Crée un nouveau secret partagé. Les secrets en cours sont retirés dès que le nouveau devient actif : n'appelez donc cette méthode que lorsque vous êtes prêt à basculer.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension that gets the new secret. |
-| `delay` | `number` | Seconds to wait before the new secret becomes active, so that running copies of the extension have time to switch. 300 at least, which is also the default. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension qui reçoit le nouveau secret. |
+| `delay` | `number` | Nombre de secondes à attendre avant que le nouveau secret devienne actif, pour laisser aux copies de l'extension en cours d'exécution le temps de basculer. 300 au moins, ce qui est aussi la valeur par défaut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -290,8 +278,8 @@ one becomes active, so call this only when you are ready to switch.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `format_version` | `number` | Version of the layout of this object. |
-| `secrets` | `ExtensionSecret[]` | The secrets. Several overlap while a new one is being rolled out. |
+| `format_version` | `number` | Version du format de cet objet. |
+| `secrets` | `ExtensionSecret[]` | Les secrets. Plusieurs coexistent pendant le déploiement d'un nouveau. |
 
 </details>
 
@@ -309,22 +297,20 @@ const { secrets } = await twitch.extensions.createSecret({ extension_id, delay: 
 twitch.extensions.sendChatMessage(params, options?): Promise<void>
 ```
 
-Posts a message in a channel's chat under the name of the extension. The
-extension needs the chat capability. Limited to 12 messages per minute
-for each channel.
+Publie un message dans le chat d'une chaîne sous le nom de l'extension. L'extension doit disposer de la capacité de chat. Limité à 12 messages par minute pour chaque chaîne.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster who has the extension active, and whose chat receives the message. |
-| `text` <small>requis</small> | `string` | The message, 280 characters at most. |
-| `extension_id` <small>requis</small> | `string` | ID of the extension that sends the message. |
-| `extension_version` <small>requis</small> | `string` | Version of the extension. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur chez qui l'extension est active, et dont le chat reçoit le message. |
+| `text` <small>requis</small> | `string` | Le message, 280 caractères au plus. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension qui envoie le message. |
+| `extension_version` <small>requis</small> | `string` | Version de l'extension. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -347,19 +333,18 @@ await twitch.extensions.sendChatMessage(
 twitch.extensions.get(params, options?): Promise<ExtensionDetails | null>
 ```
 
-Gets the description of an extension, released or not. Resolves with
-`null` when no version is given and the extension was never released.
+Renvoie la description d'une extension, publiée ou non. Renvoie `null` quand aucune version n'est indiquée et que l'extension n'a jamais été publiée.
 
-**Jeton:** signed extension JWT, passed with the `token` request option.
+**Jeton :** JWT d'extension signé, passé avec l'option de requête `token`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension to get. |
-| `extension_version` | `string` | Version to get. Defaults to the latest released one, so it is needed for an extension that was never released. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension à récupérer. |
+| `extension_version` | `string` | Version à récupérer. Par défaut, la dernière publiée : il faut donc l'indiquer pour une extension qui n'a jamais été publiée. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -370,29 +355,29 @@ Gets the description of an extension, released or not. Resolves with
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `author_name` | `string` | Name of the user or organisation that owns the extension. |
-| `bits_enabled` | `boolean` | Whether the extension has features that use Bits. |
-| `can_install` | `boolean` | Whether a user can install it. Usually `false` while it is tested with an allowlist. |
-| `configuration_location` | `"none" \| "hosted" \| "custom"` | Where the configuration lives: `"hosted"` by Twitch, `"custom"` on the extension's own backend, or `"none"` when there is nothing to configure. |
-| `description` | `string` | Long description, shown on the details page. |
-| `eula_tos_url` | `string` | URL of the terms of service. |
-| `has_chat_support` | `boolean` | Whether the extension can talk in the chat of the channels it is installed on. |
-| `icon_url` | `string` | URL of the default icon. |
-| `icon_urls` | `Record<string, string>` | URLs of the icon in several sizes, keyed by size such as `"24x24"`. |
-| `id` | `string` | ID of the extension. |
-| `name` | `string` | Name of the extension. |
-| `privacy_policy_url` | `string` | URL of the privacy policy. |
-| `request_identity_link` | `boolean` | Whether the extension asks viewers to share their Twitch identity. |
-| `screenshot_urls` | `string[]` | URLs of the screenshots shown in the marketplace. |
-| `state` | `ExtensionState` | Where the extension is in its review and release cycle. |
-| `subscriptions_support_level` | `"none" \| "optional"` | Whether the extension can see the viewer's subscription level on the channel. |
-| `summary` | `string` | Short description shown to streamers in the Extension Manager. |
-| `support_email` | `string` | Email address users can write to for support. |
-| `version` | `string` | Version number of the extension. |
-| `viewer_summary` | `string` | Short description shown to viewers on the channel. |
-| `views` | `ExtensionViews` | How the extension is displayed in each place it supports. |
-| `allowlisted_config_urls` | `string[]` | URLs allowed to display the configuration page. |
-| `allowlisted_panel_urls` | `string[]` | URLs allowed to display the panel. |
+| `author_name` | `string` | Nom de l'utilisateur ou de l'organisation à qui appartient l'extension. |
+| `bits_enabled` | `boolean` | Indique si l'extension a des fonctionnalités qui utilisent les Bits. |
+| `can_install` | `boolean` | Indique si un utilisateur peut l'installer. Généralement `false` tant qu'elle est testée avec une liste d'autorisation. |
+| `configuration_location` | `"none" \| "hosted" \| "custom"` | Emplacement de la configuration : `"hosted"` chez Twitch, `"custom"` sur le backend de l'extension, ou `"none"` quand il n'y a rien à configurer. |
+| `description` | `string` | Description longue, affichée sur la page de détails. |
+| `eula_tos_url` | `string` | URL des conditions d'utilisation. |
+| `has_chat_support` | `boolean` | Indique si l'extension peut écrire dans le chat des chaînes sur lesquelles elle est installée. |
+| `icon_url` | `string` | URL de l'icône par défaut. |
+| `icon_urls` | `Record<string, string>` | URL de l'icône en plusieurs tailles, indexées par taille, par exemple `"24x24"`. |
+| `id` | `string` | Identifiant de l'extension. |
+| `name` | `string` | Nom de l'extension. |
+| `privacy_policy_url` | `string` | URL de la politique de confidentialité. |
+| `request_identity_link` | `boolean` | Indique si l'extension demande aux spectateurs de partager leur identité Twitch. |
+| `screenshot_urls` | `string[]` | URL des captures d'écran affichées dans la place de marché. |
+| `state` | `ExtensionState` | Étape où se trouve l'extension dans son cycle de validation et de publication. |
+| `subscriptions_support_level` | `"none" \| "optional"` | Indique si l'extension peut voir le niveau d'abonnement du spectateur sur la chaîne. |
+| `summary` | `string` | Description courte présentée aux streamers dans l'Extension Manager. |
+| `support_email` | `string` | Adresse e-mail à laquelle les utilisateurs peuvent écrire pour obtenir de l'aide. |
+| `version` | `string` | Numéro de version de l'extension. |
+| `viewer_summary` | `string` | Description courte présentée aux spectateurs sur la chaîne. |
+| `views` | `ExtensionViews` | Façon dont l'extension s'affiche à chacun des emplacements qu'elle prend en charge. |
+| `allowlisted_config_urls` | `string[]` | URL autorisées à afficher la page de configuration. |
+| `allowlisted_panel_urls` | `string[]` | URL autorisées à afficher le panneau. |
 
 </details>
 
@@ -410,19 +395,18 @@ const extension = await twitch.extensions.get({ extension_id, extension_version:
 twitch.extensions.released(params, options?): Promise<ExtensionDetails>
 ```
 
-Gets the description of a released extension. Fails with a 404 when the
-extension does not exist or is not released.
+Renvoie la description d'une extension publiée. Échoue avec une erreur 404 quand l'extension n'existe pas ou n'est pas publiée.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_id` <small>requis</small> | `string` | ID of the extension to get. |
-| `extension_version` | `string` | Version to get. Defaults to the latest one. |
+| `extension_id` <small>requis</small> | `string` | Identifiant de l'extension à récupérer. |
+| `extension_version` | `string` | Version à récupérer. Par défaut, la plus récente. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -433,29 +417,29 @@ extension does not exist or is not released.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `author_name` | `string` | Name of the user or organisation that owns the extension. |
-| `bits_enabled` | `boolean` | Whether the extension has features that use Bits. |
-| `can_install` | `boolean` | Whether a user can install it. Usually `false` while it is tested with an allowlist. |
-| `configuration_location` | `"none" \| "hosted" \| "custom"` | Where the configuration lives: `"hosted"` by Twitch, `"custom"` on the extension's own backend, or `"none"` when there is nothing to configure. |
-| `description` | `string` | Long description, shown on the details page. |
-| `eula_tos_url` | `string` | URL of the terms of service. |
-| `has_chat_support` | `boolean` | Whether the extension can talk in the chat of the channels it is installed on. |
-| `icon_url` | `string` | URL of the default icon. |
-| `icon_urls` | `Record<string, string>` | URLs of the icon in several sizes, keyed by size such as `"24x24"`. |
-| `id` | `string` | ID of the extension. |
-| `name` | `string` | Name of the extension. |
-| `privacy_policy_url` | `string` | URL of the privacy policy. |
-| `request_identity_link` | `boolean` | Whether the extension asks viewers to share their Twitch identity. |
-| `screenshot_urls` | `string[]` | URLs of the screenshots shown in the marketplace. |
-| `state` | `ExtensionState` | Where the extension is in its review and release cycle. |
-| `subscriptions_support_level` | `"none" \| "optional"` | Whether the extension can see the viewer's subscription level on the channel. |
-| `summary` | `string` | Short description shown to streamers in the Extension Manager. |
-| `support_email` | `string` | Email address users can write to for support. |
-| `version` | `string` | Version number of the extension. |
-| `viewer_summary` | `string` | Short description shown to viewers on the channel. |
-| `views` | `ExtensionViews` | How the extension is displayed in each place it supports. |
-| `allowlisted_config_urls` | `string[]` | URLs allowed to display the configuration page. |
-| `allowlisted_panel_urls` | `string[]` | URLs allowed to display the panel. |
+| `author_name` | `string` | Nom de l'utilisateur ou de l'organisation à qui appartient l'extension. |
+| `bits_enabled` | `boolean` | Indique si l'extension a des fonctionnalités qui utilisent les Bits. |
+| `can_install` | `boolean` | Indique si un utilisateur peut l'installer. Généralement `false` tant qu'elle est testée avec une liste d'autorisation. |
+| `configuration_location` | `"none" \| "hosted" \| "custom"` | Emplacement de la configuration : `"hosted"` chez Twitch, `"custom"` sur le backend de l'extension, ou `"none"` quand il n'y a rien à configurer. |
+| `description` | `string` | Description longue, affichée sur la page de détails. |
+| `eula_tos_url` | `string` | URL des conditions d'utilisation. |
+| `has_chat_support` | `boolean` | Indique si l'extension peut écrire dans le chat des chaînes sur lesquelles elle est installée. |
+| `icon_url` | `string` | URL de l'icône par défaut. |
+| `icon_urls` | `Record<string, string>` | URL de l'icône en plusieurs tailles, indexées par taille, par exemple `"24x24"`. |
+| `id` | `string` | Identifiant de l'extension. |
+| `name` | `string` | Nom de l'extension. |
+| `privacy_policy_url` | `string` | URL de la politique de confidentialité. |
+| `request_identity_link` | `boolean` | Indique si l'extension demande aux spectateurs de partager leur identité Twitch. |
+| `screenshot_urls` | `string[]` | URL des captures d'écran affichées dans la place de marché. |
+| `state` | `ExtensionState` | Étape où se trouve l'extension dans son cycle de validation et de publication. |
+| `subscriptions_support_level` | `"none" \| "optional"` | Indique si l'extension peut voir le niveau d'abonnement du spectateur sur la chaîne. |
+| `summary` | `string` | Description courte présentée aux streamers dans l'Extension Manager. |
+| `support_email` | `string` | Adresse e-mail à laquelle les utilisateurs peuvent écrire pour obtenir de l'aide. |
+| `version` | `string` | Numéro de version de l'extension. |
+| `viewer_summary` | `string` | Description courte présentée aux spectateurs sur la chaîne. |
+| `views` | `ExtensionViews` | Façon dont l'extension s'affiche à chacun des emplacements qu'elle prend en charge. |
+| `allowlisted_config_urls` | `string[]` | URL autorisées à afficher la page de configuration. |
+| `allowlisted_panel_urls` | `string[]` | URL autorisées à afficher le panneau. |
 
 </details>
 
@@ -474,18 +458,17 @@ console.log(extension.name, extension.version);
 twitch.extensions.bitsProducts(params?, options?): Promise<ExtensionBitsProduct[]>
 ```
 
-Lists the Bits products of the extension your client ID belongs to,
-sorted by SKU.
+Liste les produits Bits de l'extension à laquelle appartient votre identifiant client, triés par SKU.
 
-**Jeton:** app, issued for the client ID of the extension.
+**Jeton :** application, émis pour l'identifiant client de l'extension.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `should_include_all` | `boolean` | Also lists disabled and expired products. Twitch defaults to `false`. |
+| `should_include_all` | `boolean` | Liste aussi les produits désactivés et expirés. Twitch prend `false` par défaut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -496,12 +479,12 @@ sorted by SKU.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `sku` | `string` | SKU of the product, unique within the extension. |
-| `cost` | `ExtensionBitsProductCost` | Price of the product. |
-| `in_development` | `boolean` | Whether the product is still in development, and so hidden from the public. |
-| `display_name` | `string` | Name of the product as the extension displays it. |
-| `expiration` | `string` | When the product stops being sold, as an RFC 3339 timestamp. |
-| `is_broadcast` | `boolean` | Whether a purchase is announced to every instance of the extension on the channel. |
+| `sku` | `string` | SKU du produit, unique au sein de l'extension. |
+| `cost` | `ExtensionBitsProductCost` | Prix du produit. |
+| `in_development` | `boolean` | Indique si le produit est encore en développement, et donc caché du public. |
+| `display_name` | `string` | Nom du produit tel que l'extension l'affiche. |
+| `expiration` | `string` | Moment où le produit cesse d'être vendu, sous forme d'horodatage RFC 3339. |
+| `is_broadcast` | `boolean` | Indique si un achat est annoncé à toutes les instances de l'extension sur la chaîne. |
 
 </details>
 
@@ -519,22 +502,22 @@ const products = await twitch.extensions.bitsProducts({ should_include_all: true
 twitch.extensions.updateBitsProduct(params, options?): Promise<ExtensionBitsProduct>
 ```
 
-Creates a Bits product, or updates the one that already has this SKU.
+Crée un produit Bits, ou met à jour celui qui porte déjà ce SKU.
 
-**Jeton:** app, issued for the client ID of the extension.
+**Jeton :** application, émis pour l'identifiant client de l'extension.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `sku` <small>requis</small> | `string` | SKU of the product to create or update, 255 characters at most: letters, digits, dashes, underscores and full stops. It can never be changed. |
-| `cost` <small>requis</small> | `ExtensionBitsProductCost` | Price of the product. |
-| `display_name` <small>requis</small> | `string` | Name of the product as the extension displays it, 255 characters at most. |
-| `in_development` | `boolean` | Keeps the product hidden from the public. Twitch defaults to `false`. |
-| `expiration` | `string \| Date` | When the product expires. Never, when left out. A date in the past disables it. |
-| `is_broadcast` | `boolean` | Announces purchases to every instance of the extension on the channel. Twitch defaults to `false`. |
+| `sku` <small>requis</small> | `string` | SKU du produit à créer ou à mettre à jour, 255 caractères au plus : lettres, chiffres, tirets, tirets bas et points. Il ne peut jamais être modifié. |
+| `cost` <small>requis</small> | `ExtensionBitsProductCost` | Prix du produit. |
+| `display_name` <small>requis</small> | `string` | Nom du produit tel que l'extension l'affiche, 255 caractères au plus. |
+| `in_development` | `boolean` | Garde le produit caché du public. Twitch prend `false` par défaut. |
+| `expiration` | `string \| Date` | Moment où le produit expire. Jamais, si la valeur est omise. Une date passée le désactive. |
+| `is_broadcast` | `boolean` | Annonce les achats à toutes les instances de l'extension sur la chaîne. Twitch prend `false` par défaut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -545,12 +528,12 @@ Creates a Bits product, or updates the one that already has this SKU.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `sku` | `string` | SKU of the product, unique within the extension. |
-| `cost` | `ExtensionBitsProductCost` | Price of the product. |
-| `in_development` | `boolean` | Whether the product is still in development, and so hidden from the public. |
-| `display_name` | `string` | Name of the product as the extension displays it. |
-| `expiration` | `string` | When the product stops being sold, as an RFC 3339 timestamp. |
-| `is_broadcast` | `boolean` | Whether a purchase is announced to every instance of the extension on the channel. |
+| `sku` | `string` | SKU du produit, unique au sein de l'extension. |
+| `cost` | `ExtensionBitsProductCost` | Prix du produit. |
+| `in_development` | `boolean` | Indique si le produit est encore en développement, et donc caché du public. |
+| `display_name` | `string` | Nom du produit tel que l'extension l'affiche. |
+| `expiration` | `string` | Moment où le produit cesse d'être vendu, sous forme d'horodatage RFC 3339. |
+| `is_broadcast` | `boolean` | Indique si un achat est annoncé à toutes les instances de l'extension sur la chaîne. |
 
 </details>
 

@@ -1,0 +1,8 @@
+{
+ "Content classification labels and their localized names.": "Étiquettes de classification du contenu et leurs noms traduits.",
+ "ID of the label, such as `\"Gambling\"`.": "Identifiant de l'étiquette, par exemple `\"Gambling\"`.",
+ "Language of the names and descriptions. Twitch defaults to `\"en-US\"`.": "Langue des noms et des descriptions. Twitch prend `\"en-US\"` par défaut.",
+ "Lists every content classification label, with its name and description in the language you ask for.": "Liste toutes les étiquettes de classification du contenu, avec leur nom et leur description dans la langue demandée.",
+ "Name of the label, in the requested language.": "Nom de l'étiquette, dans la langue demandée.",
+ "What the label covers, in the requested language.": "Ce que couvre l'étiquette, dans la langue demandée."
+}

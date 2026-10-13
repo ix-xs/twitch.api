@@ -1,0 +1,20 @@
+{
+ "Analytics: downloadable reports for your extensions and games.": "Rapports téléchargeables pour vos extensions et vos jeux.",
+ "Cursor of the next page. Ignored when `extension_id` is set.": "Curseur de la page suivante. Ignoré quand `extension_id` est renseigné.",
+ "Cursor of the next page. Ignored when `game_id` is set.": "Curseur de la page suivante. Ignoré quand `game_id` est renseigné.",
+ "First day of the report, at midnight UTC. Goes with `ended_at`: set both or neither. Days before January 31, 2018 are not available.": "Premier jour du rapport, à minuit UTC. Va de pair avec `ended_at` : renseignez les deux ou aucun. Les jours antérieurs au 31 janvier 2018 ne sont pas disponibles.",
+ "First day of the report, at midnight UTC. Goes with `ended_at`: set both or neither. Days older than one year are not available.": "Premier jour du rapport, à minuit UTC. Va de pair avec `ended_at` : renseignez les deux ou aucun. Les jours qui remontent à plus d'un an ne sont pas disponibles.",
+ "ID of the extension the report is about.": "Identifiant de l'extension sur laquelle porte le rapport.",
+ "ID of the game the report is about.": "Identifiant du jeu sur lequel porte le rapport.",
+ "Items per page, 1 to 100. Twitch defaults to 20, and never sends more than 20 whatever you ask.": "Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut, et jamais plus de 20 quoi que vous demandiez.",
+ "Kind of report.": "Type de rapport.",
+ "Last day of the report, at midnight UTC, included. Twitch pulls it back when it is too recent, since data takes up to two days to arrive.": "Dernier jour du rapport, à minuit UTC, inclus. Twitch le ramène en arrière quand il est trop récent, car les données mettent jusqu'à deux jours à arriver.",
+ "Lists the reports available for the extensions of the user making the call. Each one is a link to a CSV file with one row per day of use.": "Liste les rapports disponibles pour les extensions de l'utilisateur qui fait l'appel. Chacun est un lien vers un fichier CSV qui compte une ligne par jour d'utilisation.",
+ "Lists the reports available for the games of the user making the call. Each one is a link to a CSV file with one row per day. A game needs at least 5 hours of broadcast over the period to get a report.": "Liste les rapports disponibles pour les jeux de l'utilisateur qui fait l'appel. Chacun est un lien vers un fichier CSV qui compte une ligne par jour. Un jeu doit totaliser au moins 5 heures de diffusion sur la période pour avoir un rapport.",
+ "Only this extension. Without it you get one report per extension the user owns.": "Uniquement cette extension. Sans lui, vous obtenez un rapport par extension appartenant à l'utilisateur.",
+ "Only this game. Without it you get one report per game the user owns.": "Uniquement ce jeu. Sans lui, vous obtenez un rapport par jeu appartenant à l'utilisateur.",
+ "The days the report covers.": "Les jours couverts par le rapport.",
+ "URL of the CSV file. It stops working after 5 minutes.": "URL du fichier CSV. Elle cesse de fonctionner au bout de 5 minutes.",
+ "user, scope `analytics:read:extensions`.": "utilisateur, scope `analytics:read:extensions`.",
+ "user, scope `analytics:read:games`.": "utilisateur, scope `analytics:read:games`."
+}

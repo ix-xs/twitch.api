@@ -1,0 +1,13 @@
+{
+ "Broadcaster who created the goals. Defaults to the user making the call.": "Diffuseur qui a créé les objectifs. Par défaut, l'utilisateur qui fait l'appel.",
+ "Creator goals of a channel.": "Objectifs de créateur d'une chaîne.",
+ "ID of the broadcaster who created the goal.": "Identifiant du diffuseur qui a créé l'objectif.",
+ "ID of the goal.": "Identifiant de l'objectif.",
+ "Lists the active goals of a broadcaster with their current progress.": "Liste les objectifs actifs d'un diffuseur avec leur progression actuelle.",
+ "Text of the goal. An empty string when the broadcaster wrote none.": "Texte de l'objectif. Une chaîne vide quand le diffuseur n'en a pas écrit.",
+ "Value the broadcaster wants to reach.": "Valeur que le diffuseur veut atteindre.",
+ "What the goal counts.": "Ce que compte l'objectif.",
+ "When the goal was created, as an RFC 3339 timestamp.": "Date de création de l'objectif, sous forme d'horodatage RFC 3339.",
+ "Where the count stands now. For `follower` this is the whole follower count of the channel.": "Valeur actuelle du compteur. Pour `follower`, c'est le nombre total de followers de la chaîne.",
+ "user, scope `channel:read:goals`.": "utilisateur, scope `channel:read:goals`."
+}

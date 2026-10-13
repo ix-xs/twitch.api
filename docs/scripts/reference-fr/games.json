@@ -1,0 +1,10 @@
+{
+ "Exact names of the categories to get. Any number: long lists are split for you.": "Noms exacts des catégories à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous.",
+ "Games and categories: look them up, list the most watched.": "Jeux et catégories : les retrouver, lister les plus regardés.",
+ "Gets categories by ID, by exact name, by IGDB ID, or any mix of them. Categories that do not exist are left out of the result.": "Renvoie des catégories d'après leur identifiant, leur nom exact, leur identifiant IGDB, ou n'importe quelle combinaison des trois. Les catégories qui n'existent pas sont absentes du résultat.",
+ "ID of the game on IGDB. An empty string when Twitch does not know it.": "Identifiant du jeu sur IGDB. Une chaîne vide quand Twitch ne le connaît pas.",
+ "IDs of the categories to get. Any number: long lists are split for you.": "Identifiants des catégories à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous.",
+ "IGDB IDs of the games to get. Any number: long lists are split for you.": "Identifiants IGDB des jeux à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous.",
+ "Lists the categories with the most viewers right now, most watched first.": "Liste les catégories qui ont le plus de spectateurs en ce moment, en commençant par les plus regardées.",
+ "URL of the box art. Replace `{width}` and `{height}` with the size you want, in pixels.": "URL de la jaquette. Remplacez `{width}` et `{height}` par la taille voulue, en pixels."
+}

@@ -28,6 +28,20 @@ Run it after changing a method, a type or a doc comment, and commit the
 result. `npm run docs:check` fails when the pages are out of date, and CI runs
 it.
 
+The doc comments are in English. The French pages take their descriptions from
+`scripts/reference-fr/`: one JSON file per page, plus `common.json` for the
+sentences several pages share, each mapping an English sentence to its French.
+After changing a doc comment:
+
+```bash
+node docs/scripts/reference.mjs --catalog   # from the repository root
+```
+
+It adds the new sentences with an empty value and drops the ones the source no
+longer says. Fill in the empty values, run `npm run docs:reference` and commit.
+A translation keeps every piece of code (between backticks) of its original.
+`npm run docs:check` fails when a sentence has no French.
+
 ## Examples are compiled
 
 Every `ts` code block of the English pages is compiled against the library by
@@ -63,7 +77,8 @@ it. After changing an English page, change its translations in the same commit.
 
 The words of the interface (header, search, home page) are in `src/i18n.ts`
 and `src/console/scenes.ts`; Starlight translates its own. The generated
-reference has its French labels in `scripts/reference.mjs`.
+reference has its French labels in `scripts/reference.mjs` and its French
+descriptions in `scripts/reference-fr/`.
 
 The site icon is drawn in `public/favicon.svg`. After changing it, run
 `node scripts/icons.mjs` and commit the two PNG files it writes.

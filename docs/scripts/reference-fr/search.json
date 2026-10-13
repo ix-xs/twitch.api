@@ -1,0 +1,13 @@
+{
+ "Finds channels that streamed in the last six months. The query is matched against the start of the login name, or with `live_only` against the start of the broadcaster's name and of the category name.": "Trouve les chaînes qui ont streamé au cours des six derniers mois. La recherche porte sur le début du nom de connexion ou, avec `live_only`, sur le début du nom du diffuseur et du nom de la catégorie.",
+ "Finds the categories whose name contains every word of the query, in any order and whatever the case.": "Trouve les catégories dont le nom contient tous les mots de la recherche, dans n'importe quel ordre et sans tenir compte de la casse.",
+ "ID of the category being streamed, or of the last one that was.": "Identifiant de la catégorie en cours de diffusion, ou de la dernière diffusée.",
+ "Name of the category being streamed, or of the last one that was.": "Nom de la catégorie en cours de diffusion, ou de la dernière diffusée.",
+ "Search for categories and channels.": "Recherche de catégories et de chaînes.",
+ "Text to look for. Pass it as is, it is URL encoded for you.": "Texte à rechercher. Passez-le tel quel, il est encodé pour l'URL à votre place.",
+ "URL of the box art.": "URL de la jaquette.",
+ "URL of the broadcaster's profile picture.": "URL de la photo de profil du diffuseur.",
+ "When the stream started, as an RFC 3339 timestamp. An empty string when the channel is offline.": "Début du stream, sous forme d'horodatage RFC 3339. Une chaîne vide quand la chaîne est hors ligne.",
+ "Whether the channel is live right now.": "Indique si la chaîne est en direct en ce moment.",
+ "`true` to keep only channels that are live. Twitch defaults to `false`.": "`true` pour ne garder que les chaînes en direct. Twitch prend `false` par défaut."
+}

@@ -1,15 +1,11 @@
 ---
 title: twitch.channelPoints
-description: "Channel Points: custom rewards and their redemptions."
+description: "Points de chaîne : récompenses personnalisées et leurs utilisations."
 sidebar:
   label: channelPoints
 ---
 
 Toutes les méthodes de `twitch.channelPoints`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## createReward
 
@@ -17,31 +13,30 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.channelPoints.createReward(params, options?): Promise<CustomReward>
 ```
 
-Adds a custom reward to a channel. A channel holds 50 rewards at most,
-disabled ones included.
+Ajoute une récompense personnalisée à une chaîne. Une chaîne compte 50 récompenses au plus, récompenses désactivées comprises.
 
-**Jeton:** user, scope `channel:manage:redemptions`.
+**Jeton :** utilisateur, scope `channel:manage:redemptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who gets the reward. Defaults to the user making the call. |
-| `title` <small>requis</small> | `string` | Title, 45 characters at most. Must be unique among the rewards of the channel. |
-| `cost` <small>requis</small> | `number` | Price in Channel Points, 1 or more. |
-| `prompt` | `string` | Text shown to the viewer when redeeming, 200 characters at most. Goes with `is_user_input_required`. |
-| `is_enabled` | `boolean` | Whether viewers can see the reward. Twitch defaults to `true`. |
-| `background_color` | `string` | Background colour as a hex code, for example `"#9147FF"`. |
-| `is_user_input_required` | `boolean` | Whether the viewer has to type something when redeeming. Twitch defaults to `false`. |
-| `is_max_per_stream_enabled` | `boolean` | Turns on the cap set by `max_per_stream`. Twitch defaults to `false`. |
-| `max_per_stream` | `number` | Redemptions allowed per stream, 1 or more. |
-| `is_max_per_user_per_stream_enabled` | `boolean` | Turns on the cap set by `max_per_user_per_stream`. Twitch defaults to `false`. |
-| `max_per_user_per_stream` | `number` | Redemptions allowed per viewer per stream, 1 or more. |
-| `is_global_cooldown_enabled` | `boolean` | Turns on the cooldown set by `global_cooldown_seconds`. Twitch defaults to `false`. |
-| `global_cooldown_seconds` | `number` | Seconds between two redemptions, 1 or more. Viewers only see it from 60 up. |
-| `should_redemptions_skip_request_queue` | `boolean` | Marks redemptions `FULFILLED` right away instead of queueing them. Twitch defaults to `false`. |
+| `broadcaster_id` | `string` | Diffuseur qui reçoit la récompense. Par défaut, l'utilisateur qui fait l'appel. |
+| `title` <small>requis</small> | `string` | Titre, 45 caractères au plus. Doit être unique parmi les récompenses de la chaîne. |
+| `cost` <small>requis</small> | `number` | Prix en points de chaîne, 1 ou plus. |
+| `prompt` | `string` | Texte présenté au spectateur au moment de l'utilisation, 200 caractères au plus. Va de pair avec `is_user_input_required`. |
+| `is_enabled` | `boolean` | Indique si les spectateurs peuvent voir la récompense. Twitch prend `true` par défaut. |
+| `background_color` | `string` | Couleur de fond sous forme de code hexadécimal, par exemple `"#9147FF"`. |
+| `is_user_input_required` | `boolean` | Indique si le spectateur doit saisir un texte en utilisant la récompense. Twitch prend `false` par défaut. |
+| `is_max_per_stream_enabled` | `boolean` | Active le plafond défini par `max_per_stream`. Twitch prend `false` par défaut. |
+| `max_per_stream` | `number` | Nombre d'utilisations autorisées par stream, 1 ou plus. |
+| `is_max_per_user_per_stream_enabled` | `boolean` | Active le plafond défini par `max_per_user_per_stream`. Twitch prend `false` par défaut. |
+| `max_per_user_per_stream` | `number` | Nombre d'utilisations autorisées par spectateur et par stream, 1 ou plus. |
+| `is_global_cooldown_enabled` | `boolean` | Active le temps d'attente défini par `global_cooldown_seconds`. Twitch prend `false` par défaut. |
+| `global_cooldown_seconds` | `number` | Nombre de secondes entre deux utilisations, 1 ou plus. Les spectateurs ne le voient qu'à partir de 60. |
+| `should_redemptions_skip_request_queue` | `boolean` | Marque aussitôt les utilisations comme `FULFILLED` au lieu de les mettre en file d'attente. Twitch prend `false` par défaut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -52,26 +47,26 @@ disabled ones included.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the reward. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `id` | `string` | ID of the reward. |
-| `title` | `string` | Title of the reward. |
-| `prompt` | `string` | Text shown to the viewer when the reward asks for input. |
-| `cost` | `number` | Price in Channel Points. |
-| `image` | `CustomRewardImage \| null` | Icon uploaded by the broadcaster, or `null` when the default one is used. |
-| `default_image` | `CustomRewardImage` | Icon Twitch falls back to. |
-| `background_color` | `string` | Background colour as a hex code, for example `"#00E5CB"`. |
-| `is_enabled` | `boolean` | Whether viewers can see the reward. |
-| `is_user_input_required` | `boolean` | Whether the viewer has to type something when redeeming. |
-| `max_per_stream_setting` | `{ is_enabled: boolean; max_per_stream: number; }` | Cap on redemptions during one stream. |
-| `max_per_user_per_stream_setting` | `{ is_enabled: boolean; max_per_user_per_stream: number; }` | Cap on redemptions by one viewer during one stream. |
-| `global_cooldown_setting` | `{ is_enabled: boolean; global_cooldown_seconds: number; }` | Waiting time imposed between two redemptions. |
-| `is_paused` | `boolean` | Whether the reward is paused. A paused reward cannot be redeemed. |
-| `is_in_stock` | `boolean` | Whether the reward can still be redeemed, given its caps. |
-| `should_redemptions_skip_request_queue` | `boolean` | Whether redemptions are marked `FULFILLED` right away instead of waiting in the queue. |
-| `redemptions_redeemed_current_stream` | `number \| null` | Redemptions made during the current stream. `null` when the channel is offline or the per stream cap is off. |
-| `cooldown_expires_at` | `string \| null` | When the running cooldown ends, as an RFC 3339 timestamp. `null` when there is none. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la récompense. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `id` | `string` | Identifiant de la récompense. |
+| `title` | `string` | Titre de la récompense. |
+| `prompt` | `string` | Texte présenté au spectateur quand la récompense demande une saisie. |
+| `cost` | `number` | Prix en points de chaîne. |
+| `image` | `CustomRewardImage \| null` | Icône mise en ligne par le diffuseur, ou `null` quand l'icône par défaut est utilisée. |
+| `default_image` | `CustomRewardImage` | Icône que Twitch utilise à défaut. |
+| `background_color` | `string` | Couleur de fond sous forme de code hexadécimal, par exemple `"#00E5CB"`. |
+| `is_enabled` | `boolean` | Indique si les spectateurs peuvent voir la récompense. |
+| `is_user_input_required` | `boolean` | Indique si le spectateur doit saisir un texte en utilisant la récompense. |
+| `max_per_stream_setting` | `{ is_enabled: boolean; max_per_stream: number; }` | Plafond d'utilisations au cours d'un même stream. |
+| `max_per_user_per_stream_setting` | `{ is_enabled: boolean; max_per_user_per_stream: number; }` | Plafond d'utilisations par spectateur au cours d'un même stream. |
+| `global_cooldown_setting` | `{ is_enabled: boolean; global_cooldown_seconds: number; }` | Temps d'attente imposé entre deux utilisations. |
+| `is_paused` | `boolean` | Indique si la récompense est en pause. Une récompense en pause ne peut pas être utilisée. |
+| `is_in_stock` | `boolean` | Indique si la récompense peut encore être utilisée, compte tenu de ses plafonds. |
+| `should_redemptions_skip_request_queue` | `boolean` | Indique si les utilisations sont aussitôt marquées comme `FULFILLED` au lieu d'attendre dans la file. |
+| `redemptions_redeemed_current_stream` | `number \| null` | Nombre d'utilisations pendant le stream en cours. `null` quand la chaîne est hors ligne ou que le plafond par stream est désactivé. |
+| `cooldown_expires_at` | `string \| null` | Moment où le temps d'attente en cours prend fin, sous forme d'horodatage RFC 3339. `null` quand il n'y en a aucun. |
 
 </details>
 
@@ -89,19 +84,18 @@ const reward = await twitch.channelPoints.createReward({ title: "Hydrate", cost:
 twitch.channelPoints.deleteReward(params, options?): Promise<void>
 ```
 
-Deletes a custom reward. Only the application that created the reward can
-do it. Redemptions still waiting in the queue are marked as fulfilled.
+Supprime une récompense personnalisée. Seule l'application qui a créé la récompense peut le faire. Les utilisations qui attendent encore dans la file sont marquées comme honorées.
 
-**Jeton:** user, scope `channel:manage:redemptions`.
+**Jeton :** utilisateur, scope `channel:manage:redemptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the reward. Defaults to the user making the call. |
-| `id` <small>requis</small> | `string` | ID of the reward to delete. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient la récompense. Par défaut, l'utilisateur qui fait l'appel. |
+| `id` <small>requis</small> | `string` | Identifiant de la récompense à supprimer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -121,20 +115,19 @@ await twitch.channelPoints.deleteReward({ id: "b045196d-9ce7-4a27-a9b9-279ed341a
 twitch.channelPoints.rewards(params?, options?): Promise<CustomReward[]>
 ```
 
-Lists the custom rewards of a channel, sorted by ID. Asking for IDs that
-all turn out to be unknown fails with a 404.
+Liste les récompenses personnalisées d'une chaîne, triées par identifiant. Si tous les identifiants demandés se révèlent inconnus, l'appel échoue avec une erreur 404.
 
-**Jeton:** user, scope `channel:read:redemptions` or `channel:manage:redemptions`.
+**Jeton :** utilisateur, scope `channel:read:redemptions` ou `channel:manage:redemptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose rewards to list. Defaults to the user making the call. |
-| `id` | `string \| readonly string[]` | Only these rewards. Any number: long lists are split for you. |
-| `only_manageable_rewards` | `boolean` | Only the rewards your application created and can therefore manage. Twitch defaults to `false`. |
+| `broadcaster_id` | `string` | Diffuseur dont on liste les récompenses. Par défaut, l'utilisateur qui fait l'appel. |
+| `id` | `string \| readonly string[]` | Uniquement ces récompenses. Autant que vous voulez : les longues listes sont découpées pour vous. |
+| `only_manageable_rewards` | `boolean` | Uniquement les récompenses que votre application a créées et qu'elle peut donc gérer. Twitch prend `false` par défaut. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -145,26 +138,26 @@ all turn out to be unknown fails with a 404.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the reward. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `id` | `string` | ID of the reward. |
-| `title` | `string` | Title of the reward. |
-| `prompt` | `string` | Text shown to the viewer when the reward asks for input. |
-| `cost` | `number` | Price in Channel Points. |
-| `image` | `CustomRewardImage \| null` | Icon uploaded by the broadcaster, or `null` when the default one is used. |
-| `default_image` | `CustomRewardImage` | Icon Twitch falls back to. |
-| `background_color` | `string` | Background colour as a hex code, for example `"#00E5CB"`. |
-| `is_enabled` | `boolean` | Whether viewers can see the reward. |
-| `is_user_input_required` | `boolean` | Whether the viewer has to type something when redeeming. |
-| `max_per_stream_setting` | `{ is_enabled: boolean; max_per_stream: number; }` | Cap on redemptions during one stream. |
-| `max_per_user_per_stream_setting` | `{ is_enabled: boolean; max_per_user_per_stream: number; }` | Cap on redemptions by one viewer during one stream. |
-| `global_cooldown_setting` | `{ is_enabled: boolean; global_cooldown_seconds: number; }` | Waiting time imposed between two redemptions. |
-| `is_paused` | `boolean` | Whether the reward is paused. A paused reward cannot be redeemed. |
-| `is_in_stock` | `boolean` | Whether the reward can still be redeemed, given its caps. |
-| `should_redemptions_skip_request_queue` | `boolean` | Whether redemptions are marked `FULFILLED` right away instead of waiting in the queue. |
-| `redemptions_redeemed_current_stream` | `number \| null` | Redemptions made during the current stream. `null` when the channel is offline or the per stream cap is off. |
-| `cooldown_expires_at` | `string \| null` | When the running cooldown ends, as an RFC 3339 timestamp. `null` when there is none. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la récompense. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `id` | `string` | Identifiant de la récompense. |
+| `title` | `string` | Titre de la récompense. |
+| `prompt` | `string` | Texte présenté au spectateur quand la récompense demande une saisie. |
+| `cost` | `number` | Prix en points de chaîne. |
+| `image` | `CustomRewardImage \| null` | Icône mise en ligne par le diffuseur, ou `null` quand l'icône par défaut est utilisée. |
+| `default_image` | `CustomRewardImage` | Icône que Twitch utilise à défaut. |
+| `background_color` | `string` | Couleur de fond sous forme de code hexadécimal, par exemple `"#00E5CB"`. |
+| `is_enabled` | `boolean` | Indique si les spectateurs peuvent voir la récompense. |
+| `is_user_input_required` | `boolean` | Indique si le spectateur doit saisir un texte en utilisant la récompense. |
+| `max_per_stream_setting` | `{ is_enabled: boolean; max_per_stream: number; }` | Plafond d'utilisations au cours d'un même stream. |
+| `max_per_user_per_stream_setting` | `{ is_enabled: boolean; max_per_user_per_stream: number; }` | Plafond d'utilisations par spectateur au cours d'un même stream. |
+| `global_cooldown_setting` | `{ is_enabled: boolean; global_cooldown_seconds: number; }` | Temps d'attente imposé entre deux utilisations. |
+| `is_paused` | `boolean` | Indique si la récompense est en pause. Une récompense en pause ne peut pas être utilisée. |
+| `is_in_stock` | `boolean` | Indique si la récompense peut encore être utilisée, compte tenu de ses plafonds. |
+| `should_redemptions_skip_request_queue` | `boolean` | Indique si les utilisations sont aussitôt marquées comme `FULFILLED` au lieu d'attendre dans la file. |
+| `redemptions_redeemed_current_stream` | `number \| null` | Nombre d'utilisations pendant le stream en cours. `null` quand la chaîne est hors ligne ou que le plafond par stream est désactivé. |
+| `cooldown_expires_at` | `string \| null` | Moment où le temps d'attente en cours prend fin, sous forme d'horodatage RFC 3339. `null` quand il n'y en a aucun. |
 
 </details>
 
@@ -183,24 +176,23 @@ const mine = await twitch.channelPoints.rewards({ only_manageable_rewards: true 
 twitch.channelPoints.redemptions(params, options?): Paginator<CustomRewardRedemption>
 ```
 
-Lists the redemptions of a custom reward. Only the application that
-created the reward can read them.
+Liste les utilisations d'une récompense personnalisée. Seule l'application qui a créé la récompense peut les lire.
 
-**Jeton:** user, scope `channel:read:redemptions` or `channel:manage:redemptions`.
+**Jeton :** utilisateur, scope `channel:read:redemptions` ou `channel:manage:redemptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the reward. Defaults to the user making the call. |
-| `reward_id` <small>requis</small> | `string` | ID of the reward whose redemptions to list. |
-| `status` | `CustomRewardRedemptionStatus` | Only redemptions with this status. Required unless you pass `id`. Canceled and fulfilled redemptions stay listed for a few days only. |
-| `id` | `string \| readonly string[]` | Only these redemptions. Up to 50 IDs. |
-| `sort` | `"OLDEST" \| "NEWEST"` | Sort order. Twitch defaults to `"OLDEST"`. |
-| `first` | `number` | Items per page, 1 to 50. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient la récompense. Par défaut, l'utilisateur qui fait l'appel. |
+| `reward_id` <small>requis</small> | `string` | Identifiant de la récompense dont on liste les utilisations. |
+| `status` | `CustomRewardRedemptionStatus` | Uniquement les utilisations qui ont ce statut. Obligatoire sauf si vous passez `id`. Les utilisations annulées et honorées ne restent listées que quelques jours. |
+| `id` | `string \| readonly string[]` | Uniquement ces utilisations. Jusqu'à 50 identifiants. |
+| `sort` | `"OLDEST" \| "NEWEST"` | Ordre de tri. Twitch prend `"OLDEST"` par défaut. |
+| `first` | `number` | Éléments par page, de 1 à 50. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -211,17 +203,17 @@ created the reward can read them.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the reward. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `id` | `string` | ID of the redemption. |
-| `user_id` | `string` | ID of the viewer who redeemed the reward. |
-| `user_login` | `string` | Login name of the viewer. |
-| `user_name` | `string` | Display name of the viewer. |
-| `user_input` | `string` | What the viewer typed. An empty string when the reward asks for no input. |
-| `status` | `CustomRewardRedemptionStatus` | Current status of the redemption. |
-| `redeemed_at` | `string` | When the reward was redeemed, as an RFC 3339 timestamp. |
-| `reward` | `{ id: string; title: string; prompt: string; cost: number; }` | The reward that was redeemed. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la récompense. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `id` | `string` | Identifiant de l'utilisation. |
+| `user_id` | `string` | Identifiant du spectateur qui a utilisé la récompense. |
+| `user_login` | `string` | Nom de connexion du spectateur. |
+| `user_name` | `string` | Nom d'affichage du spectateur. |
+| `user_input` | `string` | Texte saisi par le spectateur. Une chaîne vide quand la récompense ne demande aucune saisie. |
+| `status` | `CustomRewardRedemptionStatus` | Statut actuel de l'utilisation. |
+| `redeemed_at` | `string` | Moment où la récompense a été utilisée, sous forme d'horodatage RFC 3339. |
+| `reward` | `{ id: string; title: string; prompt: string; cost: number; }` | La récompense utilisée. |
 
 </details>
 
@@ -240,33 +232,32 @@ for await (const redemption of pending) console.log(redemption.user_name, redemp
 twitch.channelPoints.updateReward(params, options?): Promise<CustomReward>
 ```
 
-Changes a custom reward. Only the application that created the reward can
-do it.
+Modifie une récompense personnalisée. Seule l'application qui a créé la récompense peut le faire.
 
-**Jeton:** user, scope `channel:manage:redemptions`.
+**Jeton :** utilisateur, scope `channel:manage:redemptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the reward. Defaults to the user making the call. |
-| `id` <small>requis</small> | `string` | ID of the reward to update. |
-| `title` | `string` | New title, 45 characters at most. Must be unique among the rewards of the channel. |
-| `prompt` | `string` | Text shown to the viewer when redeeming, 200 characters at most. Goes with `is_user_input_required`. |
-| `cost` | `number` | New price in Channel Points, 1 or more. |
-| `background_color` | `string` | Background colour as a hex code, for example `"#00E5CB"`. |
-| `is_enabled` | `boolean` | Whether viewers can see the reward. |
-| `is_user_input_required` | `boolean` | Whether the viewer has to type something when redeeming. |
-| `is_max_per_stream_enabled` | `boolean` | Turns the cap set by `max_per_stream` on or off. |
-| `max_per_stream` | `number` | Redemptions allowed per stream, 1 or more. |
-| `is_max_per_user_per_stream_enabled` | `boolean` | Turns the cap set by `max_per_user_per_stream` on or off. |
-| `max_per_user_per_stream` | `number` | Redemptions allowed per viewer per stream, 1 or more. |
-| `is_global_cooldown_enabled` | `boolean` | Turns the cooldown set by `global_cooldown_seconds` on or off. |
-| `global_cooldown_seconds` | `number` | Seconds between two redemptions, 1 to 604800. Viewers only see it from 60 up. |
-| `is_paused` | `boolean` | Pauses or resumes the reward. A paused reward cannot be redeemed. |
-| `should_redemptions_skip_request_queue` | `boolean` | Marks redemptions `FULFILLED` right away instead of queueing them. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient la récompense. Par défaut, l'utilisateur qui fait l'appel. |
+| `id` <small>requis</small> | `string` | Identifiant de la récompense à modifier. |
+| `title` | `string` | Nouveau titre, 45 caractères au plus. Doit être unique parmi les récompenses de la chaîne. |
+| `prompt` | `string` | Texte présenté au spectateur au moment de l'utilisation, 200 caractères au plus. Va de pair avec `is_user_input_required`. |
+| `cost` | `number` | Nouveau prix en points de chaîne, 1 ou plus. |
+| `background_color` | `string` | Couleur de fond sous forme de code hexadécimal, par exemple `"#00E5CB"`. |
+| `is_enabled` | `boolean` | Indique si les spectateurs peuvent voir la récompense. |
+| `is_user_input_required` | `boolean` | Indique si le spectateur doit saisir un texte en utilisant la récompense. |
+| `is_max_per_stream_enabled` | `boolean` | Active ou désactive le plafond défini par `max_per_stream`. |
+| `max_per_stream` | `number` | Nombre d'utilisations autorisées par stream, 1 ou plus. |
+| `is_max_per_user_per_stream_enabled` | `boolean` | Active ou désactive le plafond défini par `max_per_user_per_stream`. |
+| `max_per_user_per_stream` | `number` | Nombre d'utilisations autorisées par spectateur et par stream, 1 ou plus. |
+| `is_global_cooldown_enabled` | `boolean` | Active ou désactive le temps d'attente défini par `global_cooldown_seconds`. |
+| `global_cooldown_seconds` | `number` | Nombre de secondes entre deux utilisations, de 1 à 604800. Les spectateurs ne le voient qu'à partir de 60. |
+| `is_paused` | `boolean` | Met la récompense en pause ou la réactive. Une récompense en pause ne peut pas être utilisée. |
+| `should_redemptions_skip_request_queue` | `boolean` | Marque aussitôt les utilisations comme `FULFILLED` au lieu de les mettre en file d'attente. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -277,26 +268,26 @@ do it.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the reward. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `id` | `string` | ID of the reward. |
-| `title` | `string` | Title of the reward. |
-| `prompt` | `string` | Text shown to the viewer when the reward asks for input. |
-| `cost` | `number` | Price in Channel Points. |
-| `image` | `CustomRewardImage \| null` | Icon uploaded by the broadcaster, or `null` when the default one is used. |
-| `default_image` | `CustomRewardImage` | Icon Twitch falls back to. |
-| `background_color` | `string` | Background colour as a hex code, for example `"#00E5CB"`. |
-| `is_enabled` | `boolean` | Whether viewers can see the reward. |
-| `is_user_input_required` | `boolean` | Whether the viewer has to type something when redeeming. |
-| `max_per_stream_setting` | `{ is_enabled: boolean; max_per_stream: number; }` | Cap on redemptions during one stream. |
-| `max_per_user_per_stream_setting` | `{ is_enabled: boolean; max_per_user_per_stream: number; }` | Cap on redemptions by one viewer during one stream. |
-| `global_cooldown_setting` | `{ is_enabled: boolean; global_cooldown_seconds: number; }` | Waiting time imposed between two redemptions. |
-| `is_paused` | `boolean` | Whether the reward is paused. A paused reward cannot be redeemed. |
-| `is_in_stock` | `boolean` | Whether the reward can still be redeemed, given its caps. |
-| `should_redemptions_skip_request_queue` | `boolean` | Whether redemptions are marked `FULFILLED` right away instead of waiting in the queue. |
-| `redemptions_redeemed_current_stream` | `number \| null` | Redemptions made during the current stream. `null` when the channel is offline or the per stream cap is off. |
-| `cooldown_expires_at` | `string \| null` | When the running cooldown ends, as an RFC 3339 timestamp. `null` when there is none. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la récompense. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `id` | `string` | Identifiant de la récompense. |
+| `title` | `string` | Titre de la récompense. |
+| `prompt` | `string` | Texte présenté au spectateur quand la récompense demande une saisie. |
+| `cost` | `number` | Prix en points de chaîne. |
+| `image` | `CustomRewardImage \| null` | Icône mise en ligne par le diffuseur, ou `null` quand l'icône par défaut est utilisée. |
+| `default_image` | `CustomRewardImage` | Icône que Twitch utilise à défaut. |
+| `background_color` | `string` | Couleur de fond sous forme de code hexadécimal, par exemple `"#00E5CB"`. |
+| `is_enabled` | `boolean` | Indique si les spectateurs peuvent voir la récompense. |
+| `is_user_input_required` | `boolean` | Indique si le spectateur doit saisir un texte en utilisant la récompense. |
+| `max_per_stream_setting` | `{ is_enabled: boolean; max_per_stream: number; }` | Plafond d'utilisations au cours d'un même stream. |
+| `max_per_user_per_stream_setting` | `{ is_enabled: boolean; max_per_user_per_stream: number; }` | Plafond d'utilisations par spectateur au cours d'un même stream. |
+| `global_cooldown_setting` | `{ is_enabled: boolean; global_cooldown_seconds: number; }` | Temps d'attente imposé entre deux utilisations. |
+| `is_paused` | `boolean` | Indique si la récompense est en pause. Une récompense en pause ne peut pas être utilisée. |
+| `is_in_stock` | `boolean` | Indique si la récompense peut encore être utilisée, compte tenu de ses plafonds. |
+| `should_redemptions_skip_request_queue` | `boolean` | Indique si les utilisations sont aussitôt marquées comme `FULFILLED` au lieu d'attendre dans la file. |
+| `redemptions_redeemed_current_stream` | `number \| null` | Nombre d'utilisations pendant le stream en cours. `null` quand la chaîne est hors ligne ou que le plafond par stream est désactivé. |
+| `cooldown_expires_at` | `string \| null` | Moment où le temps d'attente en cours prend fin, sous forme d'horodatage RFC 3339. `null` quand il n'y en a aucun. |
 
 </details>
 
@@ -314,21 +305,20 @@ const reward = await twitch.channelPoints.updateReward({ id: rewardId, is_paused
 twitch.channelPoints.updateRedemptions(params, options?): Promise<CustomRewardRedemption[]>
 ```
 
-Fulfills or cancels redemptions that are still waiting in the queue, and
-returns them. Only the application that created the reward can do it.
+Honore ou annule des utilisations qui attendent encore dans la file, et les renvoie. Seule l'application qui a créé la récompense peut le faire.
 
-**Jeton:** user, scope `channel:manage:redemptions`.
+**Jeton :** utilisateur, scope `channel:manage:redemptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the reward. Defaults to the user making the call. |
-| `reward_id` <small>requis</small> | `string` | ID of the reward that was redeemed. |
-| `id` <small>requis</small> | `string \| readonly string[]` | Redemptions to update. Up to 50 IDs. |
-| `status` <small>requis</small> | `"CANCELED" \| "FULFILLED"` | New status. `"CANCELED"` gives the viewer their points back. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient la récompense. Par défaut, l'utilisateur qui fait l'appel. |
+| `reward_id` <small>requis</small> | `string` | Identifiant de la récompense utilisée. |
+| `id` <small>requis</small> | `string \| readonly string[]` | Utilisations à mettre à jour. Jusqu'à 50 identifiants. |
+| `status` <small>requis</small> | `"CANCELED" \| "FULFILLED"` | Nouveau statut. `"CANCELED"` rend ses points au spectateur. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -339,17 +329,17 @@ returns them. Only the application that created the reward can do it.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster who owns the reward. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `id` | `string` | ID of the redemption. |
-| `user_id` | `string` | ID of the viewer who redeemed the reward. |
-| `user_login` | `string` | Login name of the viewer. |
-| `user_name` | `string` | Display name of the viewer. |
-| `user_input` | `string` | What the viewer typed. An empty string when the reward asks for no input. |
-| `status` | `CustomRewardRedemptionStatus` | Current status of the redemption. |
-| `redeemed_at` | `string` | When the reward was redeemed, as an RFC 3339 timestamp. |
-| `reward` | `{ id: string; title: string; prompt: string; cost: number; }` | The reward that was redeemed. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur à qui appartient la récompense. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `id` | `string` | Identifiant de l'utilisation. |
+| `user_id` | `string` | Identifiant du spectateur qui a utilisé la récompense. |
+| `user_login` | `string` | Nom de connexion du spectateur. |
+| `user_name` | `string` | Nom d'affichage du spectateur. |
+| `user_input` | `string` | Texte saisi par le spectateur. Une chaîne vide quand la récompense ne demande aucune saisie. |
+| `status` | `CustomRewardRedemptionStatus` | Statut actuel de l'utilisation. |
+| `redeemed_at` | `string` | Moment où la récompense a été utilisée, sous forme d'horodatage RFC 3339. |
+| `reward` | `{ id: string; title: string; prompt: string; cost: number; }` | La récompense utilisée. |
 
 </details>
 

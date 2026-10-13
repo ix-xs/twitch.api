@@ -8,12 +8,13 @@
 // script only times the lines and wires the tabs and the chat box.
 import { Code } from "@astrojs/starlight/components";
 import { useT } from "../i18n";
-import { SCENES, type Line } from "../console/scenes";
+import { SCENES, codeOf, type Line } from "../console/scenes";
 
 const { locale } = Astro.locals.starlightRoute;
 const t = useT(locale);
 const language = locale === "fr" ? "fr" : "en";
 const noteOf = (line: Extract<Line, { kind: "note" }>) => line.text[language];
+const said = (line: Extract<Line, { kind: "chat" }>) => (typeof line.text === "string" ? line.text : line.text[language]);
 ---
 
 <div class="tw-console" data-console data-you={t("console.you")}>
@@ -35,7 +36,7 @@ const noteOf = (line: Extract<Line, { kind: "note" }>) => line.text[language];
 
   {SCENES.map((scene, index) => (
     <div class="tw-scene" role="tabpanel" id={`tw-scene-${scene.id}`} aria-labelledby={`tw-tab-${scene.id}`} hidden={index !== 0}>
-      <div class="tw-code"><Code code={scene.code} lang="ts" frame="none" /></div>
+      <div class="tw-code"><Code code={codeOf(scene, language)} lang="ts" frame="none" locale={language} /></div>
       <div class="tw-out">
         <div class="tw-out-head">
           <span>{t("console.simulated")}</span>
@@ -67,7 +68,7 @@ const noteOf = (line: Extract<Line, { kind: "note" }>) => line.text[language];
                 <>
                   <span class="tw-who" style={`--hue: ${line.hue}`}>{line.from}</span>
                   {line.bot && <small>bot</small>}
-                  <span class="tw-text">{line.text}</span>
+                  <span class="tw-text">{said(line)}</span>
                 </>
               )}
             </li>

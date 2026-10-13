@@ -10,8 +10,16 @@
 //   src/content/docs/reference/scopes.md        every scope and the methods it unlocks
 // and src/data/api-index.json, the list the home page searches.
 //
-// Descriptions come from the doc comments, so they stay in English on the
-// French pages too: only the headings and labels around them are translated.
+// Descriptions come from the doc comments, which are in English. Their French
+// is kept in scripts/reference-fr/, one file per page plus common.json for the
+// sentences several pages share:
+//
+//   node docs/scripts/reference.mjs --catalog  add what is new there, with an
+//                                              empty value to fill in, and drop
+//                                              what the source no longer says
+//
+// --check also fails when a sentence has no French or when a translation lost
+// a piece of code or a link of its original.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -22,6 +30,7 @@ const repo = path.resolve(here, "..", "..");
 const docs = path.resolve(here, "..");
 const ts = createRequire(path.join(repo, "package.json"))("typescript");
 const check = process.argv.includes("--check");
+const catalog = process.argv.includes("--catalog");
 
 // --------------------------------------------------------------- the program
 const program = ts.createProgram([path.join(repo, "src/index.ts")], {
@@ -44,7 +53,7 @@ const oneLine = (text) => text.replace(/\s+/g, " ").trim();
 const firstSentence = (text) => {
   const flat = oneLine(text);
   const end = flat.search(/[.:](\s|$)/);
-  return end < 0 ? flat : flat.slice(0, end + 1).replace(/:$/, ".");
+  return end < 0 ? flat : flat.slice(0, end + 1).replace(/\s*:$/, ".");
 };
 /** A type as text, in the quoting style of the docs, without the noise. */
 const typeText = (type) =>
@@ -78,7 +87,8 @@ function fieldsOf(type) {
         name: property.name,
         optional,
         type: typeText(optional ? checker.getNonNullableType(propertyType) : propertyType),
-        doc: (deprecated ? `Deprecated. ${deprecated.text} ` : "") + docOf(property),
+        deprecated: deprecated?.text,
+        doc: docOf(property),
       };
     });
 }
@@ -195,10 +205,42 @@ for (const file of ["activity.ts", "channel.ts", "chat.ts"]) {
 }
 events.sort((a, b) => a.key.localeCompare(b.key));
 
+// --------------------------------------------------------------------- French
+const catalogDir = path.join(here, "reference-fr");
+/** English sentence to its French. */
+const french = new Map();
+if (existsSync(catalogDir)) {
+  for (const file of readdirSync(catalogDir).filter((name) => name.endsWith(".json")).sort()) {
+    for (const [english, translation] of Object.entries(JSON.parse(readFileSync(path.join(catalogDir, file), "utf8")))) {
+      if (translation || !french.has(english)) french.set(english, translation);
+    }
+  }
+}
+/** English sentence to the pages that use it. */
+const usedBy = new Map();
+/** The page being written, which is the catalog file its sentences go to. */
+let page = "";
+/** A description in the language of the page, paragraph by paragraph. */
+function say(text, locale) {
+  if (locale !== "fr" || !text) return text;
+  return text
+    .split(/\n\s*\n/)
+    .map((paragraph) => {
+      const english = oneLine(paragraph);
+      if (!usedBy.has(english)) usedBy.set(english, new Set());
+      usedBy.get(english).add(page);
+      return french.get(english) || english;
+    })
+    .join("\n\n");
+}
+/** What a translation must keep from its original: the code and the link targets. */
+const kept = (text) => [...text.matchAll(/`[^`]*`|\]\([^)]*\)|\{@link [^}]+\}/g)].map((match) => match[0]).sort().join(" ");
+const DASHES = new RegExp(`[${String.fromCharCode(0x2014, 0x2013)}]`);
+
 // ---------------------------------------------------------------------- words
 const WORDS = {
   en: {
-    note: "",
+    colon: ":",
     token: "Token",
     parameters: "Parameters",
     noParameters: "This method takes no parameters of its own.",
@@ -236,7 +278,7 @@ const WORDS = {
     eventsOnly: "Used by event subscriptions only.",
   },
   fr: {
-    note: "Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.",
+    colon: " :",
     token: "Jeton",
     parameters: "Paramètres",
     noParameters: "Cette méthode ne prend aucun paramètre propre.",
@@ -275,25 +317,29 @@ const WORDS = {
   },
 };
 
-const fieldTable = (fields, w, withRequired) =>
-  [
+const fieldTable = (fields, locale, withRequired) => {
+  const w = WORDS[locale];
+  return [
     `| ${w.name} | ${w.type} | ${w.description} |`,
     "| --- | --- | --- |",
     ...fields.map((field) => {
       const name = code(field.name) + (withRequired && !field.optional ? ` <small>${w.required}</small>` : "");
-      return `| ${name} | ${code(field.type)} | ${cell(field.doc)} |`;
+      const doc = (field.deprecated === undefined ? "" : `${w.deprecated} ${say(field.deprecated, locale)} `) + say(field.doc, locale);
+      return `| ${name} | ${code(field.type)} | ${cell(doc)} |`;
     }),
   ].join("\n");
+};
 
 /** Turns `{@link Class.method}` into plain code. */
 const prose = (text) => text.replace(/\{@link ([^}]+)\}/g, (_, target) => "`" + target.split(".").pop() + "`");
 
 function groupPage(group, locale) {
   const w = WORDS[locale];
+  page = fileOf(group);
   const out = [
     "---",
     `title: twitch.${group.getter}`,
-    `description: ${JSON.stringify(prose(group.doc))}`,
+    `description: ${JSON.stringify(say(prose(group.doc), locale))}`,
     "sidebar:",
     `  label: ${group.getter}`,
     "---",
@@ -301,15 +347,14 @@ function groupPage(group, locale) {
     w.groupLead(group),
     "",
   ];
-  if (w.note) out.push(`:::note`, w.note, `:::`, "");
   for (const method of group.methods) {
     const [first, ...rest] = method.parameters;
     const args = method.parameters.map((parameter) => parameter.name + (parameter.optional ? "?" : "")).join(", ");
     out.push(`## ${method.name}`, "");
     out.push("```ts nocheck", `twitch.${group.getter}.${method.name}(${args}): ${method.returns}`, "```", "");
-    if (method.deprecated !== undefined) out.push(`**${w.deprecated}** ${prose(method.deprecated)}`, "");
-    out.push(prose(method.summary), "");
-    if (method.token) out.push(`**${w.token}:** ${method.token}`, "");
+    if (method.deprecated !== undefined) out.push(`**${w.deprecated}** ${say(prose(method.deprecated), locale)}`, "");
+    out.push(say(prose(method.summary), locale), "");
+    if (method.token) out.push(`**${w.token}${w.colon}** ${say(method.token, locale)}`, "");
 
     out.push(`### ${w.parameters}`, "");
     const own = first && first.name !== "options" ? first : undefined;
@@ -317,18 +362,18 @@ function groupPage(group, locale) {
     if (!own) {
       out.push(w.noParameters, "");
     } else if (ownFields.length > 0) {
-      out.push(fieldTable(ownFields, w, true), "");
+      out.push(fieldTable(ownFields, locale, true), "");
     } else {
-      out.push(`${code(own.name)}: ${code(own.typeName)}`, "");
+      out.push(`${code(own.name)}${w.colon} ${code(own.typeName)}`, "");
     }
     for (const extra of own ? rest : method.parameters) {
-      if (extra.name === "options") out.push(`${code("options")}: ${w.options}`, "");
-      else out.push(`${code(extra.name)}: ${code(extra.typeName)}`, "");
+      if (extra.name === "options") out.push(`${code("options")}${w.colon} ${w.options}`, "");
+      else out.push(`${code(extra.name)}${w.colon} ${code(extra.typeName)}`, "");
     }
 
     out.push(`### ${w.returns}`, "", code(method.returns), "");
     if (method.payloadFields.length > 0 && method.payloadName && !method.payloadName.startsWith("__")) {
-      out.push("<details>", `<summary>${w.fields(method.payloadName)}</summary>`, "", fieldTable(method.payloadFields, w, false), "", "</details>", "");
+      out.push("<details>", `<summary>${w.fields(method.payloadName)}</summary>`, "", fieldTable(method.payloadFields, locale, false), "", "</details>", "");
     }
     if (method.example) out.push(`### ${w.example}`, "", "```ts", method.example, "```", "");
     if (method.see) out.push(`[${w.twitch}](${method.see})`, "");
@@ -338,18 +383,18 @@ function groupPage(group, locale) {
 
 function eventsPage(locale) {
   const w = WORDS[locale];
+  page = "event-types";
   const anchor = (key) => key.toLowerCase().replace(/[^a-z0-9_-]/g, "");
   const out = ["---", `title: ${w.eventsTitle}`, `description: ${JSON.stringify(w.eventsLead)}`, "---", "", w.eventsIntro, ""];
-  if (w.note) out.push(`:::note`, w.note, `:::`, "");
   out.push(`## ${w.all}`, "", `| ${w.type} | ${w.version} | ${w.when} |`, "| --- | --- | --- |");
-  for (const event of events) out.push(`| [${code(event.key)}](#${anchor(event.key)}) | ${event.version} | ${cell(event.summary)} |`);
+  for (const event of events) out.push(`| [${code(event.key)}](#${anchor(event.key)}) | ${event.version} | ${cell(say(event.summary, locale))} |`);
   out.push("");
   for (const event of events) {
-    out.push(`## ${event.key}`, "", event.summary, "");
-    if (event.scope) out.push(`**${w.scope}:** ${event.scope}`, "");
+    out.push(`## ${event.key}`, "", say(event.summary, locale), "");
+    if (event.scope) out.push(`**${w.scope}${w.colon}** ${say(event.scope, locale)}`, "");
     out.push(`**${w.condition}**`, "");
-    out.push(event.conditionFields.length > 0 ? fieldTable(event.conditionFields, w, true) : w.noCondition, "");
-    out.push(`**${w.event}:** ${code(event.eventName)}`, "");
+    out.push(event.conditionFields.length > 0 ? fieldTable(event.conditionFields, locale, true) : w.noCondition, "");
+    out.push(`**${w.event}${w.colon}** ${code(event.eventName)}`, "");
     if (event.see) out.push(`[${w.twitch}](${event.see})`, "");
   }
   return out.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd() + "\n";
@@ -368,40 +413,6 @@ function scopesPage(locale) {
   for (const scope of scopes) out.push(`| ${code(scope)} | ${users.get(scope).length > 0 ? users.get(scope).join(", ") : w.eventsOnly} |`);
   return out.join("\n") + "\n";
 }
-
-/** What each group covers, in French. English comes from the doc comment of the class. */
-const GROUPS_FR = {
-  ads: "Publicités : lancer une coupure, lire le planning, repousser la prochaine.",
-  analytics: "Rapports téléchargeables pour vos extensions et vos jeux.",
-  bits: "Bits : classement, Cheermotes, Power-ups personnalisés et transactions d'extension.",
-  channelPoints: "Points de chaîne : récompenses personnalisées et leurs utilisations.",
-  channels: "Chaînes : titre, catégorie et tags, éditeurs, abonnements suivis et followers.",
-  charity: "Collectes caritatives : la campagne en cours et ses dons.",
-  chat: "Chat : messages, annonces, spectateurs présents, emotes, badges, réglages, couleurs, épingles et shoutouts.",
-  clips: "Clips : créer, retrouver et télécharger.",
-  conduits: "Conduits : le transport EventSub qui répartit les événements sur plusieurs shards.",
-  contentLabels: "Étiquettes de classification du contenu et leurs noms traduits.",
-  entitlements: "Droits liés aux Drops : les lister et les marquer comme remis.",
-  eventsub: "EventSub : abonnements, et écouteurs WebSocket, webhook et conduit.",
-  extensions: "Extensions : configuration, secrets, messages PubSub et de chat, produits Bits.",
-  games: "Jeux et catégories : les retrouver, lister les plus regardés.",
-  goals: "Objectifs de créateur d'une chaîne.",
-  guestStar: "Guest Star (bêta) : sessions, invitations et emplacements.",
-  hypeTrain: "Hype Train : le train en cours et les records de la chaîne.",
-  moderation: "Modération : bannissements, exclusions temporaires, avertissements, AutoMod, termes bloqués, modérateurs, VIP et mode Bouclier.",
-  polls: "Sondages : créer, lire et clore.",
-  predictions: "Prédictions : créer, lire, verrouiller et résoudre.",
-  raids: "Raids : en lancer un, annuler celui en attente.",
-  schedule: "Planning de diffusion : créneaux, vacances et flux iCalendar.",
-  search: "Recherche de catégories et de chaînes.",
-  streams: "Streams : qui est en direct, clés de stream et marqueurs.",
-  subscriptions: "Abonnements : les abonnés d'une chaîne, et savoir si un utilisateur l'est.",
-  tags: "Tags de stream (abandonnés par Twitch, conservés par souci d'exhaustivité).",
-  teams: "Équipes : en retrouver une, lister celles d'une chaîne.",
-  users: "Utilisateurs : profils, liste de blocage et extensions installées.",
-  videos: "Vidéos : rediffusions, temps forts et mises en ligne.",
-  whispers: "Chuchotements : envoyer un message privé à un utilisateur.",
-};
 
 function overviewPage(locale) {
   const fr = locale === "fr";
@@ -423,7 +434,10 @@ function overviewPage(locale) {
     "",
     `| ${fr ? "Groupe" : "Group"} | ${fr ? "Couvre" : "Covers"} | ${fr ? "Méthodes" : "Methods"} |`,
     "| --- | --- | --- |",
-    ...groups.map((group) => `| [\`twitch.${group.getter}\`](/reference/api/${fileOf(group)}/) | ${cell(fr ? (GROUPS_FR[group.getter] ?? prose(group.doc)) : prose(group.doc))} | ${group.methods.length} |`),
+    ...groups.map((group) => {
+      page = fileOf(group);
+      return `| [\`twitch.${group.getter}\`](/reference/api/${fileOf(group)}/) | ${cell(say(prose(group.doc), locale))} | ${group.methods.length} |`;
+    }),
     "",
     `## ${fr ? "Le reste de la référence" : "The rest of the reference"}`,
     "",
@@ -460,12 +474,18 @@ for (const locale of ["en", "fr"]) {
   files.set(path.join(root, "scopes.md"), scopesPage(locale));
 }
 
+/** The French of a description, for the list the home page searches. */
+function inFrench(home, text) {
+  page = home;
+  return say(text, "fr");
+}
 const index = [
   ...groups.flatMap((group) =>
     group.methods.map((method) => ({
       kind: "method",
       name: `twitch.${group.getter}.${method.name}()`,
       summary: firstSentence(prose(method.summary)),
+      fr: firstSentence(inFrench(fileOf(group), prose(method.summary))),
       token: /^app or user/.test(method.token) ? "any" : /^app/.test(method.token) ? "app" : /^user/.test(method.token) ? "user" : "other",
       href: `/reference/api/${fileOf(group)}/#${method.name.toLowerCase()}`,
     })),
@@ -474,11 +494,45 @@ const index = [
     kind: "event",
     name: event.key,
     summary: firstSentence(event.summary),
+    fr: firstSentence(inFrench("event-types", event.summary)),
     token: "",
     href: `/reference/event-types/#${event.key.toLowerCase().replace(/[^a-z0-9_-]/g, "")}`,
   })),
 ];
 files.set(path.join(docs, "src/data/api-index.json"), JSON.stringify({ counts, entries: index }, null, 1) + "\n");
+
+// ------------------------------------------------------------ French catalog
+const missing = [...usedBy.keys()].filter((english) => !french.get(english));
+const unused = [...french.keys()].filter((english) => !usedBy.has(english));
+const broken = [...usedBy.keys()].filter((english) => {
+  const translation = french.get(english);
+  return translation && (kept(translation) !== kept(english) || DASHES.test(translation));
+});
+if (catalog) {
+  // A sentence lives in the file of the only page that uses it, or in common.json.
+  const byFile = new Map();
+  for (const english of [...usedBy.keys()].sort()) {
+    const pages = [...usedBy.get(english)];
+    const name = pages.length === 1 ? pages[0] : "common";
+    if (!byFile.has(name)) byFile.set(name, {});
+    byFile.get(name)[english] = french.get(english) ?? "";
+  }
+  rmSync(catalogDir, { recursive: true, force: true });
+  mkdirSync(catalogDir, { recursive: true });
+  for (const [name, entries] of byFile) writeFileSync(path.join(catalogDir, `${name}.json`), JSON.stringify(entries, null, 1) + "\n");
+  console.log(`French catalog: ${usedBy.size} sentence(s) in ${byFile.size} file(s), ${missing.length} to translate, ${unused.length} dropped`);
+}
+for (const english of broken) console.error(`French translation does not keep the code or the links of: ${english}`);
+if (check) {
+  for (const english of missing) console.error(`no French for: ${english}`);
+  for (const english of unused) console.error(`French catalog entry no longer used: ${english}`);
+  if (missing.length + unused.length + broken.length > 0) {
+    console.error(`\nThe French catalog is out of date. Run: node docs/scripts/reference.mjs --catalog, then fill in docs/scripts/reference-fr/`);
+    process.exit(1);
+  }
+} else if (missing.length > 0) {
+  console.warn(`${missing.length} description(s) have no French yet and stay in English on the French pages.`);
+}
 
 let stale = 0;
 if (!check) {

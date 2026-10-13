@@ -1,0 +1,20 @@
+{
+ "Drops entitlements: list them and mark them fulfilled.": "Droits liés aux Drops : les lister et les marquer comme remis.",
+ "ID of the entitlement.": "Identifiant du droit.",
+ "ID of the game the reward belongs to.": "Identifiant du jeu auquel appartient la récompense.",
+ "ID of the user who earned the reward.": "Identifiant de l'utilisateur qui a gagné la récompense.",
+ "IDs of the entitlements this status applies to.": "Identifiants des droits auxquels ce statut s'applique.",
+ "IDs of the entitlements to change. Up to 100.": "Identifiants des droits à modifier. Jusqu'à 100.",
+ "Items per page, 1 to 1000. Twitch defaults to 20.": "Éléments par page, de 1 à 1000. Twitch en renvoie 20 par défaut.",
+ "Lists the Drops entitlements of your organization, in no particular order. An app token reads those of every user, a user token only those of its own user. Your client ID must belong to the organization that owns the game.": "Liste les droits liés aux Drops de votre organisation, sans ordre particulier. Un jeton d'application lit ceux de tous les utilisateurs, un jeton utilisateur uniquement ceux de son propre utilisateur. Votre identifiant client doit appartenir à l'organisation propriétaire du jeu.",
+ "Only entitlements of this game.": "Uniquement les droits de ce jeu.",
+ "Only entitlements of this user. App tokens only: a user token always reads its own user.": "Uniquement les droits de cet utilisateur. Réservé aux jetons d'application : un jeton utilisateur lit toujours ceux de son propre utilisateur.",
+ "Only entitlements with this status.": "Uniquement les droits qui ont ce statut.",
+ "Only these entitlements. Up to 100 IDs.": "Uniquement ces droits. Jusqu'à 100 identifiants.",
+ "Sets the status of Drops entitlements, typically to `\"FULFILLED\"` once the reward was delivered in game. The result groups the IDs by outcome, so check it: a call can succeed for some entitlements only.": "Définit le statut de droits liés aux Drops, en général `\"FULFILLED\"` une fois la récompense remise en jeu. Le résultat regroupe les identifiants selon l'issue obtenue : vérifiez-le, car un appel peut ne réussir que pour certains droits.",
+ "Status to give them.": "Statut à leur donner.",
+ "What happened to the entitlements listed in `ids`. `\"UPDATE_FAILED\"` is temporary: try those again later.": "Ce qu'il est advenu des droits listés dans `ids`. `\"UPDATE_FAILED\"` est temporaire : réessayez ceux-là plus tard.",
+ "When the entitlement last changed, as an RFC 3339 timestamp.": "Moment de la dernière modification du droit, sous forme d'horodatage RFC 3339.",
+ "When the entitlement was granted, as an RFC 3339 timestamp.": "Moment où le droit a été accordé, sous forme d'horodatage RFC 3339.",
+ "Whether the reward was only claimed or already delivered.": "Indique si la récompense a seulement été réclamée ou si elle a déjà été remise."
+}

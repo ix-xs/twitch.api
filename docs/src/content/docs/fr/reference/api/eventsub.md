@@ -1,15 +1,11 @@
 ---
 title: twitch.eventsub
-description: "EventSub: subscriptions, and the WebSocket, webhook and conduit listeners."
+description: "EventSub : abonnements, et écouteurs WebSocket, webhook et conduit."
 sidebar:
   label: eventsub
 ---
 
 Toutes les méthodes de `twitch.eventsub`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## subscribe
 
@@ -17,21 +13,19 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.eventsub.subscribe(params, options?): Promise<EventSubSubscription<string, EventSubCondition<T>>>
 ```
 
-Creates a subscription by hand. You rarely need it: the listeners returned
-by `websocket`, `webhook` and
-`conduit` subscribe for you.
+Crée un abonnement à la main. Vous en avez rarement besoin : les écouteurs renvoyés par `websocket`, `webhook` et `conduit` s'abonnent pour vous.
 
-**Jeton:** user for the WebSocket transport, app for webhooks and conduits. The scopes depend on the subscription type.
+**Jeton :** utilisateur pour le transport WebSocket, application pour les webhooks et les conduits. Les scopes dépendent du type d'abonnement.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `type` <small>requis</small> | `T` | Subscription type, such as `channel.follow`. |
-| `condition` <small>requis</small> | `EventSubCondition<T>` | What to listen to: which channel, which user... Its shape depends on the type. |
-| `transport` <small>requis</small> | `EventSubTransportInput` | Where Twitch delivers the events. |
+| `type` <small>requis</small> | `T` | Type d'abonnement, par exemple `channel.follow`. |
+| `condition` <small>requis</small> | `EventSubCondition<T>` | Ce qu'il faut écouter : quelle chaîne, quel utilisateur... Sa forme dépend du type. |
+| `transport` <small>requis</small> | `EventSubTransportInput` | Endroit où Twitch livre les événements. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -42,14 +36,14 @@ by `websocket`, `webhook` and
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the subscription. |
-| `status` | `EventSubSubscriptionStatus` | Current state. Only `enabled` subscriptions deliver events. |
-| `type` | `string` | Subscription type, such as `channel.follow`. |
-| `version` | `string` | Version of the subscription type. |
-| `condition` | `EventSubCondition<T>` | Condition the subscription was created with. |
-| `created_at` | `string` | When the subscription was created, as an RFC 3339 timestamp. |
-| `transport` | `EventSubTransport` | Where the events are delivered. |
-| `cost` | `number` | How much the subscription counts against your cost limit. |
+| `id` | `string` | Identifiant de l'abonnement. |
+| `status` | `EventSubSubscriptionStatus` | État actuel. Seuls les abonnements `enabled` livrent des événements. |
+| `type` | `string` | Type d'abonnement, par exemple `channel.follow`. |
+| `version` | `string` | Version du type d'abonnement. |
+| `condition` | `EventSubCondition<T>` | Condition avec laquelle l'abonnement a été créé. |
+| `created_at` | `string` | Date de création de l'abonnement, sous forme d'horodatage RFC 3339. |
+| `transport` | `EventSubTransport` | Endroit où les événements sont livrés. |
+| `cost` | `number` | Part de votre limite de coût consommée par l'abonnement. |
 
 </details>
 
@@ -71,17 +65,15 @@ await twitch.eventsub.subscribe({
 twitch.eventsub.unsubscribe(id, options?): Promise<void>
 ```
 
-Deletes a subscription. The app token is used unless you say otherwise:
-for a subscription created over WebSocket, pass `{ as: userId }` with the
-user whose token created it.
+Supprime un abonnement. Le jeton d'application est utilisé sauf indication contraire : pour un abonnement créé par WebSocket, passez `{ as: userId }` avec l'utilisateur dont le jeton l'a créé.
 
-**Jeton:** user for a WebSocket subscription, app otherwise.
+**Jeton :** utilisateur pour un abonnement WebSocket, application sinon.
 
 ### Paramètres
 
-`id`: `string`
+`id` : `string`
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -101,24 +93,22 @@ await twitch.eventsub.unsubscribe(subscription.id);
 twitch.eventsub.subscriptions(params?, options?): Paginator<EventSubSubscription<string, Record<string, string>>, GetEventSubSubscriptionsBody>
 ```
 
-Lists your subscriptions, oldest first. With the app token you get the
-webhook and conduit ones. Pass `{ as: userId }` to get the WebSocket
-subscriptions created with that user's token.
+Liste vos abonnements, du plus ancien au plus récent. Avec le jeton d'application, vous obtenez ceux des webhooks et des conduits. Passez `{ as: userId }` pour obtenir les abonnements WebSocket créés avec le jeton de cet utilisateur.
 
-**Jeton:** app or user, see above.
+**Jeton :** application ou utilisateur, voir ci-dessus.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `status` | `EventSubSubscriptionStatus` | Only subscriptions in this state. |
-| `type` | `(string & {}) \| keyof EventSubTypes` | Only subscriptions of this type. |
-| `user_id` | `string` | Only subscriptions whose condition mentions this user. |
-| `subscription_id` | `string` | Only the subscription with this ID. |
-| `conduit_id` | `string` | Only subscriptions delivered through this conduit. |
-| `after` | `string` | Cursor of the next page. |
+| `status` | `EventSubSubscriptionStatus` | Uniquement les abonnements dans cet état. |
+| `type` | `(string & {}) \| keyof EventSubTypes` | Uniquement les abonnements de ce type. |
+| `user_id` | `string` | Uniquement les abonnements dont la condition mentionne cet utilisateur. |
+| `subscription_id` | `string` | Uniquement l'abonnement qui porte cet identifiant. |
+| `conduit_id` | `string` | Uniquement les abonnements livrés par ce conduit. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -129,14 +119,14 @@ subscriptions created with that user's token.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the subscription. |
-| `status` | `EventSubSubscriptionStatus` | Current state. Only `enabled` subscriptions deliver events. |
-| `type` | `string` | Subscription type, such as `channel.follow`. |
-| `version` | `string` | Version of the subscription type. |
-| `condition` | `Record<string, string>` | Condition the subscription was created with. |
-| `created_at` | `string` | When the subscription was created, as an RFC 3339 timestamp. |
-| `transport` | `EventSubTransport` | Where the events are delivered. |
-| `cost` | `number` | How much the subscription counts against your cost limit. |
+| `id` | `string` | Identifiant de l'abonnement. |
+| `status` | `EventSubSubscriptionStatus` | État actuel. Seuls les abonnements `enabled` livrent des événements. |
+| `type` | `string` | Type d'abonnement, par exemple `channel.follow`. |
+| `version` | `string` | Version du type d'abonnement. |
+| `condition` | `Record<string, string>` | Condition avec laquelle l'abonnement a été créé. |
+| `created_at` | `string` | Date de création de l'abonnement, sous forme d'horodatage RFC 3339. |
+| `transport` | `EventSubTransport` | Endroit où les événements sont livrés. |
+| `cost` | `number` | Part de votre limite de coût consommée par l'abonnement. |
 
 </details>
 
@@ -155,14 +145,13 @@ console.log(page.raw.total_cost, "of", page.raw.max_total_cost);
 twitch.eventsub.websocket(options?): EventSubWebSocket
 ```
 
-Opens a WebSocket listener: the simplest way to receive events, with
-nothing to host. Subscriptions are created with a user token.
+Ouvre un écouteur WebSocket : le moyen le plus simple de recevoir des événements, sans rien à héberger. Les abonnements sont créés avec un jeton utilisateur.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -181,12 +170,12 @@ Cette méthode ne prend aucun paramètre propre.
 | `#where` | `Map<Entry, Connection>` |  |
 | `#seen` | `BoundedMap<string, true>` |  |
 | `#lifecycle` | `Emitter<SocketEvents>` |  |
-| `sessionIds` | `string[]` | IDs of the sessions currently established. Empty while disconnected. |
-| `connected` | `boolean` | Whether at least one session is established. |
+| `sessionIds` | `string[]` | Identifiants des sessions actuellement établies. Vide tant que la connexion est coupée. |
+| `connected` | `boolean` | Indique si au moins une session est établie. |
 | `entries` | `Map<string, Entry>` |  |
 | `#byId` | `Map<string, Entry>` |  |
 | `#events` | `Emitter<ListenerEvents>` |  |
-| `size` | `number` | Number of active subscriptions. |
+| `size` | `number` | Nombre d'abonnements actifs. |
 
 </details>
 
@@ -207,14 +196,13 @@ events.on("channel.follow", { broadcaster_user_id: id, moderator_user_id: id }, 
 twitch.eventsub.webhook(options): EventSubWebhook
 ```
 
-Creates a webhook listener, for servers reachable from the internet.
-Subscriptions are created with the app token and survive restarts.
+Crée un écouteur webhook, pour les serveurs joignables depuis Internet. Les abonnements sont créés avec le jeton d'application et survivent aux redémarrages.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -230,11 +218,11 @@ Cette méthode ne prend aucun paramètre propre.
 | `#secret` | `string` |  |
 | `#subscribe` | `boolean` |  |
 | `#maxAge` | `number` |  |
-| `#seen` | `Map<string, number>` | Message IDs already handled, with the time each one was seen. Oldest first. |
+| `#seen` | `Map<string, number>` | Identifiants des messages déjà traités, avec le moment où chacun a été vu. Du plus ancien au plus récent. |
 | `entries` | `Map<string, Entry>` |  |
 | `#byId` | `Map<string, Entry>` |  |
 | `#events` | `Emitter<ListenerEvents>` |  |
-| `size` | `number` | Number of active subscriptions. |
+| `size` | `number` | Nombre d'abonnements actifs. |
 
 </details>
 
@@ -256,16 +244,13 @@ export default { fetch: (request: Request) => hooks.handle(request) };
 twitch.eventsub.conduit(options?): EventSubWebSocket
 ```
 
-Opens a WebSocket that serves one shard of a conduit. Subscriptions are
-created with the app token, so one process can follow any number of
-channels without holding a connection per user, and they survive
-restarts. Run one process per shard to spread the load.
+Ouvre un WebSocket qui dessert un shard d'un conduit. Les abonnements sont créés avec le jeton d'application : un seul processus peut donc suivre autant de chaînes qu'il le faut sans garder une connexion par utilisateur, et ils survivent aux redémarrages. Lancez un processus par shard pour répartir la charge.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -284,12 +269,12 @@ Cette méthode ne prend aucun paramètre propre.
 | `#where` | `Map<Entry, Connection>` |  |
 | `#seen` | `BoundedMap<string, true>` |  |
 | `#lifecycle` | `Emitter<SocketEvents>` |  |
-| `sessionIds` | `string[]` | IDs of the sessions currently established. Empty while disconnected. |
-| `connected` | `boolean` | Whether at least one session is established. |
+| `sessionIds` | `string[]` | Identifiants des sessions actuellement établies. Vide tant que la connexion est coupée. |
+| `connected` | `boolean` | Indique si au moins une session est établie. |
 | `entries` | `Map<string, Entry>` |  |
 | `#byId` | `Map<string, Entry>` |  |
 | `#events` | `Emitter<ListenerEvents>` |  |
-| `size` | `number` | Number of active subscriptions. |
+| `size` | `number` | Nombre d'abonnements actifs. |
 
 </details>
 

@@ -1,15 +1,11 @@
 ---
 title: twitch.predictions
-description: "Predictions: create, read, lock and resolve them."
+description: "Prédictions : créer, lire, verrouiller et résoudre."
 sidebar:
   label: predictions
 ---
 
 Toutes les méthodes de `twitch.predictions`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,20 +13,20 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.predictions.get(params?, options?): Paginator<Prediction>
 ```
 
-Lists the predictions of a channel, most recent first.
+Liste les prédictions d'une chaîne, de la plus récente à la plus ancienne.
 
-**Jeton:** user, scope `channel:read:predictions` or `channel:manage:predictions`.
+**Jeton :** utilisateur, scope `channel:read:predictions` ou `channel:manage:predictions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose predictions to list. Defaults to the user making the call. |
-| `id` | `string \| readonly string[]` | Only these predictions. Up to 25 IDs. |
-| `first` | `number` | Items per page, 1 to 25. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` | `string` | Diffuseur dont on liste les prédictions. Par défaut, l'utilisateur qui fait l'appel. |
+| `id` | `string \| readonly string[]` | Uniquement ces prédictions. Jusqu'à 25 identifiants. |
+| `first` | `number` | Éléments par page, de 1 à 25. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -41,18 +37,18 @@ Lists the predictions of a channel, most recent first.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the prediction. |
-| `broadcaster_id` | `string` | ID of the broadcaster who ran the prediction. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `title` | `string` | Question the viewers bet on. |
-| `winning_outcome_id` | `string \| null` | ID of the outcome that won. `null` until the prediction is resolved. |
-| `outcomes` | `PredictionOutcome[]` | Outcomes viewers can pick. |
-| `prediction_window` | `number` | How long viewers can bet, in seconds. |
-| `status` | `PredictionStatus` | State of the prediction: `ACTIVE` while bets are open, `LOCKED` once they are closed, `RESOLVED` when a winner was picked and points paid out, `CANCELED` when everyone was refunded. |
-| `created_at` | `string` | When the prediction started, as an RFC 3339 timestamp. |
-| `ended_at` | `string \| null` | When the prediction ended, as an RFC 3339 timestamp. `null` while it is active. |
-| `locked_at` | `string \| null` | When bets were closed, as an RFC 3339 timestamp. `null` when the prediction is not locked. |
+| `id` | `string` | Identifiant de la prédiction. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui a organisé la prédiction. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `title` | `string` | Question sur laquelle les spectateurs parient. |
+| `winning_outcome_id` | `string \| null` | Identifiant de l'issue gagnante. `null` tant que la prédiction n'est pas résolue. |
+| `outcomes` | `PredictionOutcome[]` | Issues que les spectateurs peuvent choisir. |
+| `prediction_window` | `number` | Durée pendant laquelle les spectateurs peuvent parier, en secondes. |
+| `status` | `PredictionStatus` | État de la prédiction : `ACTIVE` tant que les paris sont ouverts, `LOCKED` une fois qu'ils sont fermés, `RESOLVED` quand une issue gagnante a été choisie et les points versés, `CANCELED` quand tout le monde a été remboursé. |
+| `created_at` | `string` | Début de la prédiction, sous forme d'horodatage RFC 3339. |
+| `ended_at` | `string \| null` | Fin de la prédiction, sous forme d'horodatage RFC 3339. `null` tant qu'elle est active. |
+| `locked_at` | `string \| null` | Moment où les paris ont été fermés, sous forme d'horodatage RFC 3339. `null` quand la prédiction n'est pas verrouillée. |
 
 </details>
 
@@ -70,21 +66,20 @@ const latest = await twitch.predictions.get().first();
 twitch.predictions.create(params, options?): Promise<Prediction>
 ```
 
-Starts a prediction in a channel. Bets open at once, and a channel can
-only run one prediction at a time.
+Lance une prédiction sur une chaîne. Les paris ouvrent aussitôt, et une chaîne ne peut avoir qu'une prédiction en cours à la fois.
 
-**Jeton:** user, scope `channel:manage:predictions`.
+**Jeton :** utilisateur, scope `channel:manage:predictions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who runs the prediction. Defaults to the user making the call. |
-| `title` <small>requis</small> | `string` | Question the viewers bet on, 45 characters at most. |
-| `outcomes` <small>requis</small> | `readonly (string \| { title: string; })[]` | Two to ten outcomes, each 25 characters at most. Plain strings work too. |
-| `prediction_window` <small>requis</small> | `number` | How long viewers can bet, in seconds, 30 to 1800. |
+| `broadcaster_id` | `string` | Diffuseur qui organise la prédiction. Par défaut, l'utilisateur qui fait l'appel. |
+| `title` <small>requis</small> | `string` | Question sur laquelle les spectateurs parient, 45 caractères au plus. |
+| `outcomes` <small>requis</small> | `readonly (string \| { title: string; })[]` | De deux à dix issues, de 25 caractères au plus chacune. De simples chaînes de caractères conviennent aussi. |
+| `prediction_window` <small>requis</small> | `number` | Durée pendant laquelle les spectateurs peuvent parier, en secondes, de 30 à 1800. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -95,18 +90,18 @@ only run one prediction at a time.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the prediction. |
-| `broadcaster_id` | `string` | ID of the broadcaster who ran the prediction. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `title` | `string` | Question the viewers bet on. |
-| `winning_outcome_id` | `string \| null` | ID of the outcome that won. `null` until the prediction is resolved. |
-| `outcomes` | `PredictionOutcome[]` | Outcomes viewers can pick. |
-| `prediction_window` | `number` | How long viewers can bet, in seconds. |
-| `status` | `PredictionStatus` | State of the prediction: `ACTIVE` while bets are open, `LOCKED` once they are closed, `RESOLVED` when a winner was picked and points paid out, `CANCELED` when everyone was refunded. |
-| `created_at` | `string` | When the prediction started, as an RFC 3339 timestamp. |
-| `ended_at` | `string \| null` | When the prediction ended, as an RFC 3339 timestamp. `null` while it is active. |
-| `locked_at` | `string \| null` | When bets were closed, as an RFC 3339 timestamp. `null` when the prediction is not locked. |
+| `id` | `string` | Identifiant de la prédiction. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui a organisé la prédiction. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `title` | `string` | Question sur laquelle les spectateurs parient. |
+| `winning_outcome_id` | `string \| null` | Identifiant de l'issue gagnante. `null` tant que la prédiction n'est pas résolue. |
+| `outcomes` | `PredictionOutcome[]` | Issues que les spectateurs peuvent choisir. |
+| `prediction_window` | `number` | Durée pendant laquelle les spectateurs peuvent parier, en secondes. |
+| `status` | `PredictionStatus` | État de la prédiction : `ACTIVE` tant que les paris sont ouverts, `LOCKED` une fois qu'ils sont fermés, `RESOLVED` quand une issue gagnante a été choisie et les points versés, `CANCELED` quand tout le monde a été remboursé. |
+| `created_at` | `string` | Début de la prédiction, sous forme d'horodatage RFC 3339. |
+| `ended_at` | `string \| null` | Fin de la prédiction, sous forme d'horodatage RFC 3339. `null` tant qu'elle est active. |
+| `locked_at` | `string \| null` | Moment où les paris ont été fermés, sous forme d'horodatage RFC 3339. `null` quand la prédiction n'est pas verrouillée. |
 
 </details>
 
@@ -128,21 +123,20 @@ const prediction = await twitch.predictions.create({
 twitch.predictions.end(params, options?): Promise<Prediction>
 ```
 
-Locks, resolves or cancels a prediction. One left unresolved for 24 hours
-after its window closed is canceled by Twitch and the points are refunded.
+Verrouille, résout ou annule une prédiction. Une prédiction restée sans résolution 24 heures après la fermeture des paris est annulée par Twitch, et les points sont remboursés.
 
-**Jeton:** user, scope `channel:manage:predictions`.
+**Jeton :** utilisateur, scope `channel:manage:predictions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who runs the prediction. Defaults to the user making the call. |
-| `id` <small>requis</small> | `string` | ID of the prediction to update. |
-| `status` <small>requis</small> | `"CANCELED" \| "LOCKED" \| "RESOLVED"` | `"LOCKED"` closes the bets, `"RESOLVED"` pays out the winners, `"CANCELED"` refunds everyone. A locked prediction can still be resolved or canceled. |
-| `winning_outcome_id` | `string` | ID of the outcome that won. Required when `status` is `"RESOLVED"`. |
+| `broadcaster_id` | `string` | Diffuseur qui organise la prédiction. Par défaut, l'utilisateur qui fait l'appel. |
+| `id` <small>requis</small> | `string` | Identifiant de la prédiction à mettre à jour. |
+| `status` <small>requis</small> | `"CANCELED" \| "LOCKED" \| "RESOLVED"` | `"LOCKED"` ferme les paris, `"RESOLVED"` paie les gagnants, `"CANCELED"` rembourse tout le monde. Une prédiction verrouillée peut encore être résolue ou annulée. |
+| `winning_outcome_id` | `string` | Identifiant de l'issue gagnante. Obligatoire quand `status` vaut `"RESOLVED"`. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -153,18 +147,18 @@ after its window closed is canceled by Twitch and the points are refunded.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the prediction. |
-| `broadcaster_id` | `string` | ID of the broadcaster who ran the prediction. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `title` | `string` | Question the viewers bet on. |
-| `winning_outcome_id` | `string \| null` | ID of the outcome that won. `null` until the prediction is resolved. |
-| `outcomes` | `PredictionOutcome[]` | Outcomes viewers can pick. |
-| `prediction_window` | `number` | How long viewers can bet, in seconds. |
-| `status` | `PredictionStatus` | State of the prediction: `ACTIVE` while bets are open, `LOCKED` once they are closed, `RESOLVED` when a winner was picked and points paid out, `CANCELED` when everyone was refunded. |
-| `created_at` | `string` | When the prediction started, as an RFC 3339 timestamp. |
-| `ended_at` | `string \| null` | When the prediction ended, as an RFC 3339 timestamp. `null` while it is active. |
-| `locked_at` | `string \| null` | When bets were closed, as an RFC 3339 timestamp. `null` when the prediction is not locked. |
+| `id` | `string` | Identifiant de la prédiction. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur qui a organisé la prédiction. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `title` | `string` | Question sur laquelle les spectateurs parient. |
+| `winning_outcome_id` | `string \| null` | Identifiant de l'issue gagnante. `null` tant que la prédiction n'est pas résolue. |
+| `outcomes` | `PredictionOutcome[]` | Issues que les spectateurs peuvent choisir. |
+| `prediction_window` | `number` | Durée pendant laquelle les spectateurs peuvent parier, en secondes. |
+| `status` | `PredictionStatus` | État de la prédiction : `ACTIVE` tant que les paris sont ouverts, `LOCKED` une fois qu'ils sont fermés, `RESOLVED` quand une issue gagnante a été choisie et les points versés, `CANCELED` quand tout le monde a été remboursé. |
+| `created_at` | `string` | Début de la prédiction, sous forme d'horodatage RFC 3339. |
+| `ended_at` | `string \| null` | Fin de la prédiction, sous forme d'horodatage RFC 3339. `null` tant qu'elle est active. |
+| `locked_at` | `string \| null` | Moment où les paris ont été fermés, sous forme d'horodatage RFC 3339. `null` quand la prédiction n'est pas verrouillée. |
 
 </details>
 

@@ -1,0 +1,17 @@
+{
+ "Broadcaster whose teams to list.": "Diffuseur dont on liste les équipes.",
+ "Description of the team. May hold HTML, Markdown and line breaks.": "Description de l'équipe. Peut contenir du HTML, du Markdown et des sauts de ligne.",
+ "Display name of the team.": "Nom d'affichage de l'équipe.",
+ "Gets a team and its members, by name or by ID. Resolves with `null` when Twitch returns no team.": "Renvoie une équipe et ses membres, d'après son nom ou son identifiant. Se résout avec `null` quand Twitch ne renvoie aucune équipe.",
+ "ID of the team.": "Identifiant de l'équipe.",
+ "Lists the teams a broadcaster is a member of. The list is empty when there are none.": "Liste les équipes dont un diffuseur est membre. La liste est vide quand il n'y en a aucune.",
+ "Members of the team.": "Membres de l'équipe.",
+ "Name of the team.": "Nom de l'équipe.",
+ "Name of the team: the one that appears in URLs.": "Nom de l'équipe : celui qui apparaît dans les URL.",
+ "Teams: look one up, list the teams of a channel.": "Équipes : en retrouver une, lister celles d'une chaîne.",
+ "URL of the background image, or `null` when the team has none.": "URL de l'image d'arrière-plan, ou `null` quand l'équipe n'en a pas.",
+ "URL of the banner, or `null` when the team has none.": "URL de la bannière, ou `null` quand l'équipe n'en a pas.",
+ "URL of the team logo.": "URL du logo de l'équipe.",
+ "When the team was created, as an RFC 3339 timestamp.": "Date de création de l'équipe, sous forme d'horodatage RFC 3339.",
+ "When the team was last changed, as an RFC 3339 timestamp.": "Date de dernière modification de l'équipe, sous forme d'horodatage RFC 3339."
+}

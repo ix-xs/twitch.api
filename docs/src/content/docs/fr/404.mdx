@@ -1,0 +1,21 @@
+---
+title: "404"
+description: Cette page n'existe pas.
+template: splash
+editUrl: false
+pagefind: false
+hero:
+  title: "404"
+  tagline: Cette page n'existe pas. Vérifiez l'adresse, ou utilisez la recherche pour retrouver ce que vous cherchiez.
+  actions:
+    - text: Retour à l'accueil
+      link: /
+      variant: primary
+    - text: Démarrage rapide
+      link: /quick-start/
+      variant: secondary
+---
+
+import NotFound from '../../../components/NotFound.astro';
+
+<NotFound />

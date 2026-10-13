@@ -27,6 +27,8 @@ const entries = [
   ...FEATURED.map((name) => data.entries.find((entry) => entry.name === name)).filter((entry) => entry !== undefined),
   ...data.entries.filter((entry) => !featured.has(entry.name)),
 ];
+/** What an entry does, in the language of the page. */
+const summary = (entry: (typeof entries)[number]): string => (locale === "fr" ? entry.fr : entry.summary);
 /** Splits a sentence on its backticks: odd pieces are code. */
 const pieces = (text: string): string[] => text.split("`");
 const badge = (entry: (typeof entries)[number]): string =>
@@ -50,10 +52,10 @@ const badge = (entry: (typeof entries)[number]): string =>
   </div>
   <ul class="tw-results" data-results>
     {entries.map((entry) => (
-      <li hidden={!featured.has(entry.name)} data-search={`${entry.name} ${entry.summary}`.toLowerCase()} data-name={entry.name.toLowerCase()}>
+      <li hidden={!featured.has(entry.name)} data-search={`${entry.name} ${summary(entry)}`.toLowerCase()} data-name={entry.name.toLowerCase()}>
         <a href={href(entry.href, locale)}>
           <code>{entry.name}</code>
-          <span class="tw-sum">{pieces(entry.summary).map((piece, index) => (index % 2 === 1 ? <code>{piece}</code> : piece))}</span>
+          <span class="tw-sum">{pieces(summary(entry)).map((piece, index) => (index % 2 === 1 ? <code>{piece}</code> : piece))}</span>
           <small>{badge(entry)}</small>
         </a>
       </li>

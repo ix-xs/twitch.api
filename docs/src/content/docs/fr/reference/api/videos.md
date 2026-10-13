@@ -1,15 +1,11 @@
 ---
 title: twitch.videos
-description: "Videos: VODs, highlights and uploads."
+description: "Vidéos : rediffusions, temps forts et mises en ligne."
 sidebar:
   label: videos
 ---
 
 Toutes les méthodes de `twitch.videos`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,27 +13,26 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.videos.get(params, options?): Paginator<Video>
 ```
 
-Gets videos by ID, or lists the videos of a user or of a category. The
-filters only apply when listing by user or by category.
+Renvoie des vidéos d'après leur identifiant, ou liste les vidéos d'un utilisateur ou d'une catégorie. Les filtres ne s'appliquent qu'aux listes par utilisateur ou par catégorie.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string \| readonly string[]` | These videos. Up to 100 IDs. |
-| `user_id` | `string` | Videos of this user. |
-| `game_id` | `string` | Videos in this category. Twitch returns 500 of them at most. |
-| `language` | `string` | Only videos in this language: an ISO 639-1 code, or `"other"`. Only with `game_id`. |
-| `period` | `"day" \| "week" \| "month" \| "all"` | Only videos published within this period. Twitch defaults to `"all"`. Only with `game_id` or `user_id`. |
-| `sort` | `"time" \| "trending" \| "views"` | Order of the results: newest first, fastest growing first or most viewed first. Twitch defaults to `"time"`. Only with `game_id` or `user_id`. |
-| `type` | `"archive" \| "highlight" \| "upload" \| "all"` | Only videos of this kind. Twitch defaults to `"all"`. Only with `game_id` or `user_id`. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. Only with `game_id` or `user_id`. |
-| `after` | `string` | Cursor of the next page. Only with `user_id`. |
-| `before` | `string` | Cursor of the previous page. Only with `user_id`. |
+| `id` | `string \| readonly string[]` | Ces vidéos. Jusqu'à 100 identifiants. |
+| `user_id` | `string` | Vidéos de cet utilisateur. |
+| `game_id` | `string` | Vidéos de cette catégorie. Twitch en renvoie 500 au plus. |
+| `language` | `string` | Uniquement les vidéos dans cette langue : un code ISO 639-1, ou `"other"`. Uniquement avec `game_id`. |
+| `period` | `"day" \| "week" \| "month" \| "all"` | Uniquement les vidéos publiées pendant cette période. Twitch prend `"all"` par défaut. Uniquement avec `game_id` ou `user_id`. |
+| `sort` | `"time" \| "trending" \| "views"` | Ordre des résultats : les plus récentes d'abord, celles qui progressent le plus vite d'abord ou les plus vues d'abord. Twitch prend `"time"` par défaut. Uniquement avec `game_id` ou `user_id`. |
+| `type` | `"archive" \| "highlight" \| "upload" \| "all"` | Uniquement les vidéos de ce type. Twitch prend `"all"` par défaut. Uniquement avec `game_id` ou `user_id`. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. Uniquement avec `game_id` ou `user_id`. |
+| `after` | `string` | Curseur de la page suivante. Uniquement avec `user_id`. |
+| `before` | `string` | Curseur de la page précédente. Uniquement avec `user_id`. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -48,23 +43,23 @@ filters only apply when listing by user or by category.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the video. |
-| `stream_id` | `string \| null` | ID of the stream the video was recorded from. `null` unless `type` is `"archive"`. |
-| `user_id` | `string` | ID of the broadcaster who owns the video. |
-| `user_login` | `string` | Login name of the broadcaster. |
-| `user_name` | `string` | Display name of the broadcaster. |
-| `title` | `string` | Title of the video. |
-| `description` | `string` | Description of the video. |
-| `created_at` | `string` | When the video was created, as an RFC 3339 timestamp. |
-| `published_at` | `string` | When the video was published, as an RFC 3339 timestamp. |
-| `url` | `string` | URL of the video page. |
-| `thumbnail_url` | `string` | URL of a preview image. Replace `%&#123;width}` and `%&#123;height}` with the size you want, in pixels. Twitch currently only serves 320 by 180. |
-| `viewable` | `"public"` | Who can watch the video. Always `"public"`. |
-| `view_count` | `number` | Number of views. |
-| `language` | `string` | Language of the video: an ISO 639-1 code, or `"other"`. |
-| `type` | `"archive" \| "highlight" \| "upload"` | Kind of video: a past broadcast, a highlight or an upload. |
-| `duration` | `string` | Length of the video, written like `"3m21s"`. |
-| `muted_segments` | `VideoMutedSegment[] \| null` | Passages muted by Twitch, or `null` when there are none. |
+| `id` | `string` | Identifiant de la vidéo. |
+| `stream_id` | `string \| null` | Identifiant du stream dont la vidéo est l'enregistrement. `null` sauf si `type` vaut `"archive"`. |
+| `user_id` | `string` | Identifiant du diffuseur à qui appartient la vidéo. |
+| `user_login` | `string` | Nom de connexion du diffuseur. |
+| `user_name` | `string` | Nom d'affichage du diffuseur. |
+| `title` | `string` | Titre de la vidéo. |
+| `description` | `string` | Description de la vidéo. |
+| `created_at` | `string` | Date de création de la vidéo, sous forme d'horodatage RFC 3339. |
+| `published_at` | `string` | Date de publication de la vidéo, sous forme d'horodatage RFC 3339. |
+| `url` | `string` | URL de la page de la vidéo. |
+| `thumbnail_url` | `string` | URL d'une image d'aperçu. Remplacez `%&#123;width}` et `%&#123;height}` par la taille voulue, en pixels. Twitch ne sert pour l'instant que du 320 par 180. |
+| `viewable` | `"public"` | Qui peut regarder la vidéo. Toujours `"public"`. |
+| `view_count` | `number` | Nombre de vues. |
+| `language` | `string` | Langue de la vidéo : un code ISO 639-1, ou `"other"`. |
+| `type` | `"archive" \| "highlight" \| "upload"` | Type de vidéo : une rediffusion, un temps fort ou une mise en ligne. |
+| `duration` | `string` | Durée de la vidéo, écrite sous la forme `"3m21s"`. |
+| `muted_segments` | `VideoMutedSegment[] \| null` | Passages rendus muets par Twitch, ou `null` quand il n'y en a pas. |
 
 </details>
 
@@ -85,20 +80,17 @@ for await (const vod of twitch.videos.get({ user_id: "141981764", type: "archive
 twitch.videos.delete(params, options?): Promise<string[]>
 ```
 
-Deletes videos and resolves with the IDs that were deleted. Twitch takes
-5 IDs per request, so longer lists go out as several requests, one after
-the other. Within one request, a single video the user may not delete
-keeps all 5 from being deleted.
+Supprime des vidéos et se résout avec les identifiants supprimés. Twitch accepte 5 identifiants par requête : les listes plus longues partent donc en plusieurs requêtes, l'une après l'autre. Dans une même requête, une seule vidéo que l'utilisateur n'a pas le droit de supprimer empêche la suppression des 5.
 
-**Jeton:** user, scope `channel:manage:videos`.
+**Jeton :** utilisateur, scope `channel:manage:videos`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` <small>requis</small> | `string \| readonly string[]` | IDs of the videos to delete. Any number: long lists are split for you. |
+| `id` <small>requis</small> | `string \| readonly string[]` | Identifiants des vidéos à supprimer. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 

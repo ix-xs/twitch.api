@@ -1,0 +1,8 @@
+{
+ "Sends a whisper to a user. Twitch can discard a whisper it finds suspicious and still report success, so a resolved call is no proof of delivery. Limited to 40 different recipients per day, 3 whispers per second and 100 per minute.": "Envoie un chuchotement à un utilisateur. Twitch peut écarter un chuchotement qu'il juge suspect tout en signalant un succès : un appel résolu ne prouve donc pas que le message a été remis. Limité à 40 destinataires différents par jour, 3 chuchotements par seconde et 100 par minute.",
+ "Text of the whisper. Twitch cuts it at 500 characters when the recipient never whispered the sender, at 10,000 otherwise.": "Texte du chuchotement. Twitch le coupe à 500 caractères quand le destinataire n'a jamais envoyé de chuchotement à l'expéditeur, à 10 000 sinon.",
+ "User who receives the whisper.": "Utilisateur qui reçoit le chuchotement.",
+ "User who sends the whisper. Their account needs a verified phone number. Defaults to the user making the call.": "Utilisateur qui envoie le chuchotement. Son compte doit avoir un numéro de téléphone vérifié. Par défaut, l'utilisateur qui fait l'appel.",
+ "Whispers: send a private message to a user.": "Chuchotements : envoyer un message privé à un utilisateur.",
+ "user, scope `user:manage:whispers`.": "utilisateur, scope `user:manage:whispers`."
+}

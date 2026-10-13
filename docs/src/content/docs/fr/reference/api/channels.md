@@ -1,15 +1,11 @@
 ---
 title: twitch.channels
-description: "Channels: title, category and tags, editors, follows and followers."
+description: "Chaînes : titre, catégorie et tags, éditeurs, abonnements suivis et followers."
 sidebar:
   label: channels
 ---
 
 Toutes les méthodes de `twitch.channels`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,18 +13,17 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.channels.get(params, options?): Promise<ChannelInformation[]>
 ```
 
-Gets the title, category, language and tags of one or more channels.
-Channels that do not exist are left out of the result.
+Renvoie le titre, la catégorie, la langue et les tags d'une ou de plusieurs chaînes. Les chaînes qui n'existent pas sont absentes du résultat.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string \| readonly string[]` | IDs of the broadcasters to get. Any number: long lists are split for you. |
+| `broadcaster_id` <small>requis</small> | `string \| readonly string[]` | Identifiants des diffuseurs à récupérer. Autant que vous voulez : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -39,17 +34,17 @@ Channels that do not exist are left out of the result.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `broadcaster_language` | `string` | Language of the channel: an ISO 639-1 code, or `"other"`. |
-| `game_name` | `string` | Name of the current or last category. An empty string when the channel never had one. |
-| `game_id` | `string` | ID of the current or last category. An empty string when the channel never had one. |
-| `title` | `string` | Title of the current or last stream. An empty string when the channel never streamed. |
-| `delay` | `number` | Stream delay in seconds. Stays at `0` unless the call is made with the token of this broadcaster, who must be a partner with a delay set. |
-| `tags` | `string[]` | Tags applied to the channel. |
-| `content_classification_labels` | `string[]` | IDs of the content classification labels applied to the channel. |
-| `is_branded_content` | `boolean` | Whether the channel is flagged as showing branded content. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `broadcaster_language` | `string` | Langue de la chaîne : un code ISO 639-1, ou `"other"`. |
+| `game_name` | `string` | Nom de la catégorie actuelle ou de la dernière. Une chaîne vide quand la chaîne n'en a jamais eu. |
+| `game_id` | `string` | Identifiant de la catégorie actuelle ou de la dernière. Une chaîne vide quand la chaîne n'en a jamais eu. |
+| `title` | `string` | Titre du stream en cours ou du dernier. Une chaîne vide quand la chaîne n'a jamais diffusé. |
+| `delay` | `number` | Délai du stream en secondes. Reste à `0` sauf si l'appel est fait avec le jeton de ce diffuseur, qui doit être partenaire et avoir réglé un délai. |
+| `tags` | `string[]` | Tags appliqués à la chaîne. |
+| `content_classification_labels` | `string[]` | Identifiants des étiquettes de classification du contenu appliquées à la chaîne. |
+| `is_branded_content` | `boolean` | Indique si la chaîne est signalée comme diffusant du contenu sponsorisé. |
 
 </details>
 
@@ -68,25 +63,24 @@ console.log(channel?.title, channel?.game_name);
 twitch.channels.update(params?, options?): Promise<void>
 ```
 
-Changes the title, category, language, tags, delay or content labels of a
-channel. Only the fields you set are touched.
+Modifie le titre, la catégorie, la langue, les tags, le délai ou les étiquettes de classification du contenu d'une chaîne. Seuls les champs que vous renseignez sont modifiés.
 
-**Jeton:** user, scope `channel:manage:broadcast`.
+**Jeton :** utilisateur, scope `channel:manage:broadcast`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose channel to update. Defaults to the user making the call. |
-| `game_id` | `string` | ID of the category to set. `"0"` or an empty string clears it. |
-| `broadcaster_language` | `string` | Language of the channel: an ISO 639-1 code, or `"other"`. |
-| `title` | `string` | Stream title, 140 characters at most. Cannot be empty. |
-| `delay` | `number` | Stream delay in seconds, 900 at most. Partners only. |
-| `tags` | `readonly string[]` | Tags to apply, replacing the current ones. Up to 10, each 25 characters at most, without spaces or special characters. An empty array removes them all. |
-| `content_classification_labels` | `readonly ChannelContentLabel[]` | Labels to switch on or off. Labels you leave out keep their current state. |
-| `is_branded_content` | `boolean` | Whether the channel shows branded content. |
+| `broadcaster_id` | `string` | Diffuseur dont on met à jour la chaîne. Par défaut, l'utilisateur qui fait l'appel. |
+| `game_id` | `string` | Identifiant de la catégorie à définir. `"0"` ou une chaîne vide la retire. |
+| `broadcaster_language` | `string` | Langue de la chaîne : un code ISO 639-1, ou `"other"`. |
+| `title` | `string` | Titre du stream, 140 caractères au plus. Ne peut pas être vide. |
+| `delay` | `number` | Délai du stream en secondes, 900 au plus. Réservé aux partenaires. |
+| `tags` | `readonly string[]` | Tags à appliquer, à la place des tags actuels. Jusqu'à 10, de 25 caractères au plus chacun, sans espaces ni caractères spéciaux. Un tableau vide les retire tous. |
+| `content_classification_labels` | `readonly ChannelContentLabel[]` | Étiquettes à activer ou à désactiver. Celles que vous omettez gardent leur état actuel. |
+| `is_branded_content` | `boolean` | Indique si la chaîne diffuse du contenu sponsorisé. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -106,17 +100,17 @@ await twitch.channels.update({ title: "Speedrun practice", game_id: "33214", tag
 twitch.channels.editors(params?, options?): Promise<ChannelEditor[]>
 ```
 
-Lists the editors of a channel.
+Liste les éditeurs d'une chaîne.
 
-**Jeton:** user, scope `channel:read:editors`.
+**Jeton :** utilisateur, scope `channel:read:editors`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster who owns the channel. Defaults to the user making the call. |
+| `broadcaster_id` | `string` | Diffuseur à qui appartient la chaîne. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -127,9 +121,9 @@ Lists the editors of a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the editor. |
-| `user_name` | `string` | Display name of the editor. |
-| `created_at` | `string` | When the user was made an editor, as an RFC 3339 timestamp. |
+| `user_id` | `string` | Identifiant de l'éditeur. |
+| `user_name` | `string` | Nom d'affichage de l'éditeur. |
+| `created_at` | `string` | Moment où l'utilisateur est devenu éditeur, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -147,21 +141,20 @@ const editors = await twitch.channels.editors();
 twitch.channels.followed(params?, options?): Paginator<FollowedChannel>
 ```
 
-Lists the channels a user follows, most recent follow first. With
-`broadcaster_id` it tells whether the user follows that one channel.
+Liste les chaînes qu'un utilisateur suit, de la plus récemment suivie à la plus ancienne. Avec `broadcaster_id`, indique si l'utilisateur suit cette chaîne en particulier.
 
-**Jeton:** user, scope `user:read:follows`.
+**Jeton :** utilisateur, scope `user:read:follows`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | User whose follows to list. Defaults to the user making the call. |
-| `broadcaster_id` | `string` | Only this broadcaster: the list holds one item when the user follows them, none otherwise. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `user_id` | `string` | Utilisateur dont on liste les chaînes suivies. Par défaut, l'utilisateur qui fait l'appel. |
+| `broadcaster_id` | `string` | Uniquement ce diffuseur : la liste contient un élément quand l'utilisateur le suit, aucun sinon. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -172,10 +165,10 @@ Lists the channels a user follows, most recent follow first. With
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the followed broadcaster. |
-| `broadcaster_login` | `string` | Login name of the followed broadcaster. |
-| `broadcaster_name` | `string` | Display name of the followed broadcaster. |
-| `followed_at` | `string` | When the user started following, as an RFC 3339 timestamp. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur suivi. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur suivi. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur suivi. |
+| `followed_at` | `string` | Moment où l'utilisateur a commencé à suivre la chaîne, sous forme d'horodatage RFC 3339. |
 
 </details>
 
@@ -195,24 +188,20 @@ const follows = (await twitch.channels.followed({ broadcaster_id: "141981764" })
 twitch.channels.followers(params, options?): Paginator<ChannelFollower>
 ```
 
-Lists the followers of a channel, most recent first. The list itself is
-only returned to the broadcaster or one of their moderators, with the
-`moderator:read:followers` scope. Any other token gets an empty list but
-still gets the follower count, which is what `total()` reads. With
-`user_id` it tells whether that one user follows the channel.
+Liste les followers d'une chaîne, du plus récent au plus ancien. La liste elle-même n'est renvoyée qu'au diffuseur ou à l'un de ses modérateurs, avec le scope `moderator:read:followers`. Tout autre jeton reçoit une liste vide, mais obtient quand même le nombre de followers, celui que lit `total()`. Avec `user_id`, indique si cet utilisateur en particulier suit la chaîne.
 
-**Jeton:** app or user. Scope `moderator:read:followers` to get the list.
+**Jeton :** application ou utilisateur. Scope `moderator:read:followers` pour obtenir la liste.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose followers to list. |
-| `user_id` | `string` | Only this user: the list holds one item when they follow the broadcaster, none otherwise. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on liste les followers. |
+| `user_id` | `string` | Uniquement cet utilisateur : la liste contient un élément quand il suit le diffuseur, aucun sinon. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -223,10 +212,10 @@ still gets the follower count, which is what `total()` reads. With
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` | `string` | ID of the follower. |
-| `user_login` | `string` | Login name of the follower. |
-| `user_name` | `string` | Display name of the follower. |
-| `followed_at` | `string` | When the user started following, as an RFC 3339 timestamp. |
+| `user_id` | `string` | Identifiant du follower. |
+| `user_login` | `string` | Nom de connexion du follower. |
+| `user_name` | `string` | Nom d'affichage du follower. |
+| `followed_at` | `string` | Moment où l'utilisateur a commencé à suivre la chaîne, sous forme d'horodatage RFC 3339. |
 
 </details>
 

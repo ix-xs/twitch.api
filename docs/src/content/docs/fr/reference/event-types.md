@@ -5,1462 +5,1458 @@ description: "Tous les types d'abonnement EventSub connus de la bibliothèque, a
 
 Le nom s'autocomplète dans `on()` et `subscribe()`, et la condition comme l'événement sont typés à partir de lui. Un type qui existe en plusieurs versions figure sous son nom simple pour la plus récente et sous `nom@version` pour les anciennes.
 
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
-
 ## Tous les types
 
 | Type | Version | Se déclenche quand |
 | --- | --- | --- |
-| [`automod.message.hold`](#automodmessagehold) | 2 | AutoMod held a message for review. Only public blocked terms trigger it, not private ones. |
-| [`automod.message.hold@1`](#automodmessagehold1) | 1 | AutoMod held a message for review (older payload, without the reason). |
-| [`automod.message.update`](#automodmessageupdate) | 2 | A message waiting in the AutoMod queue was approved, denied or expired. Only public blocked terms trigger it, not private ones. |
-| [`automod.message.update@1`](#automodmessageupdate1) | 1 | A message waiting in the AutoMod queue was approved, denied or expired (older payload, without the reason). |
-| [`automod.settings.update`](#automodsettingsupdate) | 1 | The AutoMod settings of the channel changed. |
-| [`automod.terms.update`](#automodtermsupdate) | 1 | Permitted or blocked terms of the channel changed. Changes to private terms are not sent. |
-| [`channel.ad_break.begin`](#channelad_breakbegin) | 1 | A midroll ad break started, run by hand or scheduled by Ads Manager. |
-| [`channel.ban`](#channelban) | 1 | A viewer was banned or timed out in the channel. |
-| [`channel.bits.use`](#channelbitsuse) | 1 | Bits were used in the channel, through a cheer or a Power-up. Bits spent in Extensions are not included. |
-| [`channel.channel_points_automatic_reward_redemption.add`](#channelchannel_points_automatic_reward_redemptionadd) | 2 | A viewer redeemed an automatic channel points reward (version 2, message split into fragments). |
-| [`channel.channel_points_automatic_reward_redemption.add@1`](#channelchannel_points_automatic_reward_redemptionadd1) | 1 | A viewer redeemed an automatic channel points reward (version 1, message with emote positions). |
-| [`channel.channel_points_custom_reward_redemption.add`](#channelchannel_points_custom_reward_redemptionadd) | 1 | A viewer redeemed a custom channel points reward. |
-| [`channel.channel_points_custom_reward_redemption.update`](#channelchannel_points_custom_reward_redemptionupdate) | 1 | A redemption of a custom channel points reward was fulfilled or canceled. |
-| [`channel.channel_points_custom_reward.add`](#channelchannel_points_custom_rewardadd) | 1 | The broadcaster created a custom channel points reward. |
-| [`channel.channel_points_custom_reward.remove`](#channelchannel_points_custom_rewardremove) | 1 | A custom channel points reward was deleted. |
-| [`channel.channel_points_custom_reward.update`](#channelchannel_points_custom_rewardupdate) | 1 | A custom channel points reward was edited. |
-| [`channel.charity_campaign.donate`](#channelcharity_campaigndonate) | 1 | A viewer donated to the broadcaster's charity campaign. |
-| [`channel.charity_campaign.progress`](#channelcharity_campaignprogress) | 1 | A charity campaign moved toward its goal, or the broadcaster changed the goal. |
-| [`channel.charity_campaign.start`](#channelcharity_campaignstart) | 1 | The broadcaster started a charity campaign. May arrive after the first progress event. |
-| [`channel.charity_campaign.stop`](#channelcharity_campaignstop) | 1 | The broadcaster stopped a charity campaign. |
-| [`channel.chat_settings.update`](#channelchat_settingsupdate) | 1 | The chat settings of the channel changed (emote, follower, slow, subscriber or unique chat mode). |
-| [`channel.chat.clear`](#channelchatclear) | 1 | A moderator or a bot cleared every message of the chat room. |
-| [`channel.chat.clear_user_messages`](#channelchatclear_user_messages) | 1 | A moderator or a bot cleared every message of one user, after a ban or a timeout. |
-| [`channel.chat.message`](#channelchatmessage) | 1 | A user sent a message in the chat room. |
-| [`channel.chat.message_delete`](#channelchatmessage_delete) | 1 | A moderator removed one message from the chat room. |
-| [`channel.chat.notification`](#channelchatnotification) | 1 | Something shown as a notice in chat happened, such as a subscription, a gift, a raid or an announcement. |
-| [`channel.chat.user_message_hold`](#channelchatuser_message_hold) | 1 | A message of the user in `user_id` was held by AutoMod. |
-| [`channel.chat.user_message_update`](#channelchatuser_message_update) | 1 | The AutoMod status of a held message of the user in `user_id` changed. |
-| [`channel.cheer`](#channelcheer) | 1 | A user cheered Bits in the channel. |
-| [`channel.custom_power_up_redemption.add`](#channelcustom_power_up_redemptionadd) | 1 | A viewer redeemed a custom Power-up. |
-| [`channel.follow`](#channelfollow) | 2 | Someone followed the channel. |
-| [`channel.goal.begin`](#channelgoalbegin) | 1 | The broadcaster started a creator goal. May arrive after the first progress events. |
-| [`channel.goal.end`](#channelgoalend) | 1 | The broadcaster ended a creator goal. |
-| [`channel.goal.progress`](#channelgoalprogress) | 1 | A creator goal moved forward or backward. |
-| [`channel.guest_star_guest.update`](#channelguest_star_guestupdate) | beta | A guest or a slot changed in a running Guest Star session. |
-| [`channel.guest_star_session.begin`](#channelguest_star_sessionbegin) | beta | The host started a Guest Star session. |
-| [`channel.guest_star_session.end`](#channelguest_star_sessionend) | beta | A Guest Star session ended, closed by the host or by Twitch. |
-| [`channel.guest_star_settings.update`](#channelguest_star_settingsupdate) | beta | The host changed the Guest Star preferences of the channel. |
-| [`channel.hype_train.begin`](#channelhype_trainbegin) | 2 | A Hype Train started on the channel. The first progress events may arrive before this one. |
-| [`channel.hype_train.end`](#channelhype_trainend) | 2 | A Hype Train ended on the channel. |
-| [`channel.hype_train.progress`](#channelhype_trainprogress) | 2 | A contribution moved a running Hype Train forward. |
-| [`channel.moderate`](#channelmoderate) | 2 | A moderator took a moderation action in the channel, warnings included. Narrow the event on `action` to read the matching details. |
-| [`channel.moderate@1`](#channelmoderate1) | 1 | A moderator took a moderation action in the channel. Version 1 does not report warnings. Narrow the event on `action` to read the matching details. |
-| [`channel.moderator.add`](#channelmoderatoradd) | 1 | A user was made moderator of the channel. |
-| [`channel.moderator.remove`](#channelmoderatorremove) | 1 | A user lost moderator status in the channel. |
-| [`channel.poll.begin`](#channelpollbegin) | 1 | A poll started on the channel. |
-| [`channel.poll.end`](#channelpollend) | 1 | A poll ended on the channel. |
-| [`channel.poll.progress`](#channelpollprogress) | 1 | Viewers voted in a running poll. |
-| [`channel.prediction.begin`](#channelpredictionbegin) | 1 | A Prediction started on the channel. |
-| [`channel.prediction.end`](#channelpredictionend) | 1 | A Prediction ended, resolved or canceled. |
-| [`channel.prediction.lock`](#channelpredictionlock) | 1 | Betting closed on a Prediction. |
-| [`channel.prediction.progress`](#channelpredictionprogress) | 1 | Viewers bet on a running Prediction. |
-| [`channel.raid`](#channelraid) | 1 | A broadcaster raided another channel. |
-| [`channel.shared_chat.begin`](#channelshared_chatbegin) | 1 | The channel became active in a shared chat session. |
-| [`channel.shared_chat.end`](#channelshared_chatend) | 1 | The channel left a shared chat session, or the session ended. |
-| [`channel.shared_chat.update`](#channelshared_chatupdate) | 1 | The shared chat session the channel is in changed, for example its participants. |
-| [`channel.shield_mode.begin`](#channelshield_modebegin) | 1 | Shield Mode was turned on in the channel. |
-| [`channel.shield_mode.end`](#channelshield_modeend) | 1 | Shield Mode was turned off in the channel. |
-| [`channel.shoutout.create`](#channelshoutoutcreate) | 1 | The broadcaster sent a Shoutout to another channel. |
-| [`channel.shoutout.receive`](#channelshoutoutreceive) | 1 | The broadcaster received a Shoutout from another channel. Fires only when Twitch posts the Shoutout to the activity feed of the broadcaster. |
-| [`channel.subscribe`](#channelsubscribe) | 1 | A user subscribed to the channel. Resubscriptions are not included. |
-| [`channel.subscription.end`](#channelsubscriptionend) | 1 | A subscription to the channel ended. |
-| [`channel.subscription.gift`](#channelsubscriptiongift) | 1 | A viewer gifted one or more subscriptions in the channel. |
-| [`channel.subscription.message`](#channelsubscriptionmessage) | 1 | A subscriber shared a resubscription message in chat. |
-| [`channel.suspicious_user.message`](#channelsuspicious_usermessage) | 1 | A user flagged as suspicious sent a chat message. |
-| [`channel.suspicious_user.update`](#channelsuspicious_userupdate) | 1 | A moderator changed the treatment applied to a suspicious user. |
-| [`channel.unban`](#channelunban) | 1 | A viewer was unbanned in the channel. |
-| [`channel.unban_request.create`](#channelunban_requestcreate) | 1 | A banned user created an unban request. |
-| [`channel.unban_request.resolve`](#channelunban_requestresolve) | 1 | An unban request was approved, denied or canceled. |
-| [`channel.update`](#channelupdate) | 2 | The broadcaster changed the title, category, language or content classification labels of the channel. |
-| [`channel.vip.add`](#channelvipadd) | 1 | A user was made VIP of the channel. |
-| [`channel.vip.remove`](#channelvipremove) | 1 | A user lost VIP status in the channel. |
-| [`channel.warning.acknowledge`](#channelwarningacknowledge) | 1 | A user acknowledged a warning they received in the channel. |
-| [`channel.warning.send`](#channelwarningsend) | 1 | A warning was sent to a user in the channel. |
-| [`conduit.shard.disabled`](#conduitsharddisabled) | 1 | EventSub disabled a conduit shard because the state of its transport changed. |
-| [`drop.entitlement.grant`](#dropentitlementgrant) | 1 | Viewers were granted Drop entitlements. Delivered in batches: the event is an array of entitlements, and the subscription must be created with batching enabled. Webhooks and conduits only. |
-| [`extension.bits_transaction.create`](#extensionbits_transactioncreate) | 1 | A Bits transaction was made in an extension. Webhooks and conduits only. |
-| [`stream.offline`](#streamoffline) | 1 | The broadcaster stopped streaming. |
-| [`stream.online`](#streamonline) | 1 | The broadcaster started a stream. |
-| [`user.authorization.grant`](#userauthorizationgrant) | 1 | A user authorized the application. Webhooks and conduits only. |
-| [`user.authorization.revoke`](#userauthorizationrevoke) | 1 | The application lost a user's authorization. Webhooks and conduits only. |
-| [`user.update`](#userupdate) | 1 | A user changed their account (name, description, email...). |
-| [`user.whisper.message`](#userwhispermessage) | 1 | The user received a whisper. |
+| [`automod.message.hold`](#automodmessagehold) | 2 | AutoMod a retenu un message pour examen. Seuls les termes bloqués publics le déclenchent, pas les termes privés. |
+| [`automod.message.hold@1`](#automodmessagehold1) | 1 | AutoMod a retenu un message pour examen (ancien format, sans la raison). |
+| [`automod.message.update`](#automodmessageupdate) | 2 | Un message en attente dans la file d'AutoMod a été approuvé ou refusé, ou a expiré. Seuls les termes bloqués publics le déclenchent, pas les termes privés. |
+| [`automod.message.update@1`](#automodmessageupdate1) | 1 | Un message en attente dans la file d'AutoMod a été approuvé ou refusé, ou a expiré (ancien format, sans la raison). |
+| [`automod.settings.update`](#automodsettingsupdate) | 1 | Les réglages AutoMod de la chaîne ont changé. |
+| [`automod.terms.update`](#automodtermsupdate) | 1 | Les termes autorisés ou bloqués de la chaîne ont changé. Les changements de termes privés ne sont pas envoyés. |
+| [`channel.ad_break.begin`](#channelad_breakbegin) | 1 | Une coupure publicitaire mid-roll a commencé, lancée à la main ou programmée par Ads Manager. |
+| [`channel.ban`](#channelban) | 1 | Un spectateur a été banni ou mis sous timeout sur la chaîne. |
+| [`channel.bits.use`](#channelbitsuse) | 1 | Des Bits ont été utilisés sur la chaîne, par un cheer ou un Power-up. Les Bits dépensés dans les extensions ne sont pas compris. |
+| [`channel.channel_points_automatic_reward_redemption.add`](#channelchannel_points_automatic_reward_redemptionadd) | 2 | Un spectateur a utilisé une récompense automatique de points de chaîne (version 2, message découpé en fragments). |
+| [`channel.channel_points_automatic_reward_redemption.add@1`](#channelchannel_points_automatic_reward_redemptionadd1) | 1 | Un spectateur a utilisé une récompense automatique de points de chaîne (version 1, message avec la position des emotes). |
+| [`channel.channel_points_custom_reward_redemption.add`](#channelchannel_points_custom_reward_redemptionadd) | 1 | Un spectateur a utilisé une récompense personnalisée de points de chaîne. |
+| [`channel.channel_points_custom_reward_redemption.update`](#channelchannel_points_custom_reward_redemptionupdate) | 1 | Une utilisation d'une récompense personnalisée de points de chaîne a été honorée ou annulée. |
+| [`channel.channel_points_custom_reward.add`](#channelchannel_points_custom_rewardadd) | 1 | Le diffuseur a créé une récompense personnalisée de points de chaîne. |
+| [`channel.channel_points_custom_reward.remove`](#channelchannel_points_custom_rewardremove) | 1 | Une récompense personnalisée de points de chaîne a été supprimée. |
+| [`channel.channel_points_custom_reward.update`](#channelchannel_points_custom_rewardupdate) | 1 | Une récompense personnalisée de points de chaîne a été modifiée. |
+| [`channel.charity_campaign.donate`](#channelcharity_campaigndonate) | 1 | Un spectateur a fait un don à la collecte caritative du diffuseur. |
+| [`channel.charity_campaign.progress`](#channelcharity_campaignprogress) | 1 | Une collecte caritative a progressé vers son objectif, ou le diffuseur a modifié cet objectif. |
+| [`channel.charity_campaign.start`](#channelcharity_campaignstart) | 1 | Le diffuseur a lancé une collecte caritative. Peut arriver après le premier événement de progression. |
+| [`channel.charity_campaign.stop`](#channelcharity_campaignstop) | 1 | Le diffuseur a arrêté une collecte caritative. |
+| [`channel.chat_settings.update`](#channelchat_settingsupdate) | 1 | Les réglages du chat de la chaîne ont changé (mode emotes seules, followers, lent, abonnés ou messages uniques). |
+| [`channel.chat.clear`](#channelchatclear) | 1 | Un modérateur ou un bot a effacé tous les messages du chat. |
+| [`channel.chat.clear_user_messages`](#channelchatclear_user_messages) | 1 | Un modérateur ou un bot a effacé tous les messages d'un utilisateur, après un bannissement ou un timeout. |
+| [`channel.chat.message`](#channelchatmessage) | 1 | Un utilisateur a envoyé un message dans le chat. |
+| [`channel.chat.message_delete`](#channelchatmessage_delete) | 1 | Un modérateur a supprimé un message du chat. |
+| [`channel.chat.notification`](#channelchatnotification) | 1 | Il s'est produit quelque chose que le chat affiche comme une notification, par exemple un abonnement, un abonnement offert, un raid ou une annonce. |
+| [`channel.chat.user_message_hold`](#channelchatuser_message_hold) | 1 | Un message de l'utilisateur indiqué dans `user_id` a été retenu par AutoMod. |
+| [`channel.chat.user_message_update`](#channelchatuser_message_update) | 1 | Le statut AutoMod d'un message retenu de l'utilisateur indiqué dans `user_id` a changé. |
+| [`channel.cheer`](#channelcheer) | 1 | Un utilisateur a envoyé un cheer en Bits sur la chaîne. |
+| [`channel.custom_power_up_redemption.add`](#channelcustom_power_up_redemptionadd) | 1 | Un spectateur a utilisé un Power-up personnalisé. |
+| [`channel.follow`](#channelfollow) | 2 | Quelqu'un s'est mis à suivre la chaîne. |
+| [`channel.goal.begin`](#channelgoalbegin) | 1 | Le diffuseur a lancé un objectif de créateur. Peut arriver après les premiers événements de progression. |
+| [`channel.goal.end`](#channelgoalend) | 1 | Le diffuseur a mis fin à un objectif de créateur. |
+| [`channel.goal.progress`](#channelgoalprogress) | 1 | Un objectif de créateur a progressé ou reculé. |
+| [`channel.guest_star_guest.update`](#channelguest_star_guestupdate) | beta | Un invité ou un emplacement a changé dans une session Guest Star en cours. |
+| [`channel.guest_star_session.begin`](#channelguest_star_sessionbegin) | beta | L'hôte a lancé une session Guest Star. |
+| [`channel.guest_star_session.end`](#channelguest_star_sessionend) | beta | Une session Guest Star s'est terminée, fermée par l'hôte ou par Twitch. |
+| [`channel.guest_star_settings.update`](#channelguest_star_settingsupdate) | beta | L'hôte a changé les préférences Guest Star de la chaîne. |
+| [`channel.hype_train.begin`](#channelhype_trainbegin) | 2 | Un Hype Train a démarré sur la chaîne. Les premiers événements de progression peuvent arriver avant celui-ci. |
+| [`channel.hype_train.end`](#channelhype_trainend) | 2 | Un Hype Train s'est terminé sur la chaîne. |
+| [`channel.hype_train.progress`](#channelhype_trainprogress) | 2 | Une contribution a fait avancer un Hype Train en cours. |
+| [`channel.moderate`](#channelmoderate) | 2 | Un modérateur a effectué une action de modération sur la chaîne, avertissements compris. Affinez l'événement sur `action` pour lire les détails correspondants. |
+| [`channel.moderate@1`](#channelmoderate1) | 1 | Un modérateur a effectué une action de modération sur la chaîne. La version 1 ne signale pas les avertissements. Affinez l'événement sur `action` pour lire les détails correspondants. |
+| [`channel.moderator.add`](#channelmoderatoradd) | 1 | Un utilisateur est devenu modérateur de la chaîne. |
+| [`channel.moderator.remove`](#channelmoderatorremove) | 1 | Un utilisateur a perdu le statut de modérateur sur la chaîne. |
+| [`channel.poll.begin`](#channelpollbegin) | 1 | Un sondage a démarré sur la chaîne. |
+| [`channel.poll.end`](#channelpollend) | 1 | Un sondage s'est terminé sur la chaîne. |
+| [`channel.poll.progress`](#channelpollprogress) | 1 | Des spectateurs ont voté dans un sondage en cours. |
+| [`channel.prediction.begin`](#channelpredictionbegin) | 1 | Une prédiction a démarré sur la chaîne. |
+| [`channel.prediction.end`](#channelpredictionend) | 1 | Une prédiction s'est terminée, résolue ou annulée. |
+| [`channel.prediction.lock`](#channelpredictionlock) | 1 | Les paris d'une prédiction ont été clos. |
+| [`channel.prediction.progress`](#channelpredictionprogress) | 1 | Des spectateurs ont parié sur une prédiction en cours. |
+| [`channel.raid`](#channelraid) | 1 | Un diffuseur a lancé un raid sur une autre chaîne. |
+| [`channel.shared_chat.begin`](#channelshared_chatbegin) | 1 | La chaîne est devenue active dans une session de chat partagé. |
+| [`channel.shared_chat.end`](#channelshared_chatend) | 1 | La chaîne a quitté une session de chat partagé, ou la session s'est terminée. |
+| [`channel.shared_chat.update`](#channelshared_chatupdate) | 1 | La session de chat partagé à laquelle la chaîne participe a changé, par exemple ses participants. |
+| [`channel.shield_mode.begin`](#channelshield_modebegin) | 1 | Le Shield Mode a été activé sur la chaîne. |
+| [`channel.shield_mode.end`](#channelshield_modeend) | 1 | Le Shield Mode a été désactivé sur la chaîne. |
+| [`channel.shoutout.create`](#channelshoutoutcreate) | 1 | Le diffuseur a envoyé un shoutout à une autre chaîne. |
+| [`channel.shoutout.receive`](#channelshoutoutreceive) | 1 | Le diffuseur a reçu un shoutout d'une autre chaîne. Ne se déclenche que lorsque Twitch publie le shoutout dans le fil d'activité du diffuseur. |
+| [`channel.subscribe`](#channelsubscribe) | 1 | Un utilisateur s'est abonné à la chaîne. Les réabonnements ne sont pas compris. |
+| [`channel.subscription.end`](#channelsubscriptionend) | 1 | Un abonnement à la chaîne a pris fin. |
+| [`channel.subscription.gift`](#channelsubscriptiongift) | 1 | Un spectateur a offert un ou plusieurs abonnements sur la chaîne. |
+| [`channel.subscription.message`](#channelsubscriptionmessage) | 1 | Un abonné a partagé un message de réabonnement dans le chat. |
+| [`channel.suspicious_user.message`](#channelsuspicious_usermessage) | 1 | Un utilisateur signalé comme suspect a envoyé un message dans le chat. |
+| [`channel.suspicious_user.update`](#channelsuspicious_userupdate) | 1 | Un modérateur a changé le traitement appliqué à un utilisateur suspect. |
+| [`channel.unban`](#channelunban) | 1 | Un spectateur a été débanni sur la chaîne. |
+| [`channel.unban_request.create`](#channelunban_requestcreate) | 1 | Un utilisateur banni a déposé une demande de débannissement. |
+| [`channel.unban_request.resolve`](#channelunban_requestresolve) | 1 | Une demande de débannissement a été approuvée, refusée ou annulée. |
+| [`channel.update`](#channelupdate) | 2 | Le diffuseur a changé le titre, la catégorie, la langue ou les étiquettes de classification du contenu de la chaîne. |
+| [`channel.vip.add`](#channelvipadd) | 1 | Un utilisateur est devenu VIP de la chaîne. |
+| [`channel.vip.remove`](#channelvipremove) | 1 | Un utilisateur a perdu le statut VIP sur la chaîne. |
+| [`channel.warning.acknowledge`](#channelwarningacknowledge) | 1 | Un utilisateur a pris acte d'un avertissement reçu sur la chaîne. |
+| [`channel.warning.send`](#channelwarningsend) | 1 | Un avertissement a été envoyé à un utilisateur sur la chaîne. |
+| [`conduit.shard.disabled`](#conduitsharddisabled) | 1 | EventSub a désactivé un shard de conduit parce que l'état de son transport a changé. |
+| [`drop.entitlement.grant`](#dropentitlementgrant) | 1 | Des spectateurs ont reçu des droits liés aux Drops. Livré par lots : l'événement est un tableau de droits, et l'abonnement doit être créé avec la livraison par lots activée. Webhooks et conduits uniquement. |
+| [`extension.bits_transaction.create`](#extensionbits_transactioncreate) | 1 | Une transaction en Bits a eu lieu dans une extension. Webhooks et conduits uniquement. |
+| [`stream.offline`](#streamoffline) | 1 | Le diffuseur a arrêté de diffuser. |
+| [`stream.online`](#streamonline) | 1 | Le diffuseur a lancé un stream. |
+| [`user.authorization.grant`](#userauthorizationgrant) | 1 | Un utilisateur a autorisé l'application. Webhooks et conduits uniquement. |
+| [`user.authorization.revoke`](#userauthorizationrevoke) | 1 | L'application a perdu l'autorisation d'un utilisateur. Webhooks et conduits uniquement. |
+| [`user.update`](#userupdate) | 1 | Un utilisateur a modifié son compte (nom, description, e-mail...). |
+| [`user.whisper.message`](#userwhispermessage) | 1 | L'utilisateur a reçu un chuchotement. |
 
 ## automod.message.hold
 
-AutoMod held a message for review. Only public blocked terms trigger it, not private ones.
+AutoMod a retenu un message pour examen. Seuls les termes bloqués publics le déclenchent, pas les termes privés.
 
-**Scope:** `moderator:manage:automod`, granted by the moderator in `moderator_user_id`, who must be the broadcaster or one of their moderators.
+**Scope :** `moderator:manage:automod`, accordé par le modérateur indiqué dans `moderator_user_id`, qui doit être le diffuseur ou l'un de ses modérateurs.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the moderator who subscribes. Must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du modérateur qui s'abonne. Ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `AutomodMessageHoldEvent`
+**Événement :** `AutomodMessageHoldEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#automodmessagehold-v2)
 
 ## automod.message.hold@1
 
-AutoMod held a message for review (older payload, without the reason).
+AutoMod a retenu un message pour examen (ancien format, sans la raison).
 
-**Scope:** `moderator:manage:automod`, granted by the moderator in `moderator_user_id`, who must be the broadcaster or one of their moderators.
+**Scope :** `moderator:manage:automod`, accordé par le modérateur indiqué dans `moderator_user_id`, qui doit être le diffuseur ou l'un de ses modérateurs.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the moderator who subscribes. Must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du modérateur qui s'abonne. Ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `AutomodMessageHoldV1Event`
+**Événement :** `AutomodMessageHoldV1Event`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#automodmessagehold)
 
 ## automod.message.update
 
-A message waiting in the AutoMod queue was approved, denied or expired. Only public blocked terms trigger it, not private ones.
+Un message en attente dans la file d'AutoMod a été approuvé ou refusé, ou a expiré. Seuls les termes bloqués publics le déclenchent, pas les termes privés.
 
-**Scope:** `moderator:manage:automod`, granted by the moderator in `moderator_user_id`, who must be the broadcaster or one of their moderators.
+**Scope :** `moderator:manage:automod`, accordé par le modérateur indiqué dans `moderator_user_id`, qui doit être le diffuseur ou l'un de ses modérateurs.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the moderator who subscribes. Must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du modérateur qui s'abonne. Ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `AutomodMessageUpdateEvent`
+**Événement :** `AutomodMessageUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#automodmessageupdate-v2)
 
 ## automod.message.update@1
 
-A message waiting in the AutoMod queue was approved, denied or expired (older payload, without the reason).
+Un message en attente dans la file d'AutoMod a été approuvé ou refusé, ou a expiré (ancien format, sans la raison).
 
-**Scope:** `moderator:manage:automod`, granted by the moderator in `moderator_user_id`, who must be the broadcaster or one of their moderators.
+**Scope :** `moderator:manage:automod`, accordé par le modérateur indiqué dans `moderator_user_id`, qui doit être le diffuseur ou l'un de ses modérateurs.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the moderator who subscribes. Must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du modérateur qui s'abonne. Ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `AutomodMessageUpdateV1Event`
+**Événement :** `AutomodMessageUpdateV1Event`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#automodmessageupdate)
 
 ## automod.settings.update
 
-The AutoMod settings of the channel changed.
+Les réglages AutoMod de la chaîne ont changé.
 
-**Scope:** `moderator:read:automod_settings`, granted by the moderator in `moderator_user_id`, who must be the broadcaster or one of their moderators.
+**Scope :** `moderator:read:automod_settings`, accordé par le modérateur indiqué dans `moderator_user_id`, qui doit être le diffuseur ou l'un de ses modérateurs.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the moderator who subscribes. Must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du modérateur qui s'abonne. Ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `AutomodSettingsUpdateEvent`
+**Événement :** `AutomodSettingsUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#automodsettingsupdate)
 
 ## automod.terms.update
 
-Permitted or blocked terms of the channel changed. Changes to private terms are not sent.
+Les termes autorisés ou bloqués de la chaîne ont changé. Les changements de termes privés ne sont pas envoyés.
 
-**Scope:** `moderator:manage:automod`, granted by the moderator in `moderator_user_id`, who must be the broadcaster or one of their moderators.
+**Scope :** `moderator:manage:automod`, accordé par le modérateur indiqué dans `moderator_user_id`, qui doit être le diffuseur ou l'un de ses modérateurs.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the moderator who subscribes. Must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du modérateur qui s'abonne. Ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `AutomodTermsUpdateEvent`
+**Événement :** `AutomodTermsUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#automodtermsupdate)
 
 ## channel.ad_break.begin
 
-A midroll ad break started, run by hand or scheduled by Ads Manager.
+Une coupure publicitaire mid-roll a commencé, lancée à la main ou programmée par Ads Manager.
 
-**Scope:** `channel:read:ads`, granted by the broadcaster.
+**Scope :** `channel:read:ads`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose ad breaks to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les coupures publicitaires. |
 
-**Événement:** `ChannelAdBreakBeginEvent`
+**Événement :** `ChannelAdBreakBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelad_breakbegin)
 
 ## channel.ban
 
-A viewer was banned or timed out in the channel.
+Un spectateur a été banni ou mis sous timeout sur la chaîne.
 
-**Scope:** `channel:moderate`, granted by the broadcaster.
+**Scope :** `channel:moderate`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose bans and timeouts to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les bannissements et les timeouts. |
 
-**Événement:** `ChannelBanEvent`
+**Événement :** `ChannelBanEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelban)
 
 ## channel.bits.use
 
-Bits were used in the channel, through a cheer or a Power-up. Bits spent in Extensions are not included.
+Des Bits ont été utilisés sur la chaîne, par un cheer ou un Power-up. Les Bits dépensés dans les extensions ne sont pas compris.
 
-**Scope:** `bits:read`, with a user access token.
+**Scope :** `bits:read`, avec un jeton utilisateur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
 
-**Événement:** `ChannelBitsUseEvent`
+**Événement :** `ChannelBitsUseEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelbitsuse)
 
 ## channel.channel_points_automatic_reward_redemption.add
 
-A viewer redeemed an automatic channel points reward (version 2, message split into fragments).
+Un spectateur a utilisé une récompense automatique de points de chaîne (version 2, message découpé en fragments).
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose automatic reward redemptions are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les utilisations de récompenses automatiques. |
 
-**Événement:** `ChannelChannelPointsAutomaticRewardRedemptionAddEvent`
+**Événement :** `ChannelChannelPointsAutomaticRewardRedemptionAddEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_automatic_reward_redemptionadd-v2)
 
 ## channel.channel_points_automatic_reward_redemption.add@1
 
-A viewer redeemed an automatic channel points reward (version 1, message with emote positions).
+Un spectateur a utilisé une récompense automatique de points de chaîne (version 1, message avec la position des emotes).
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose automatic reward redemptions are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les utilisations de récompenses automatiques. |
 
-**Événement:** `ChannelChannelPointsAutomaticRewardRedemptionAddV1Event`
+**Événement :** `ChannelChannelPointsAutomaticRewardRedemptionAddV1Event`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_automatic_reward_redemptionadd)
 
 ## channel.channel_points_custom_reward_redemption.add
 
-A viewer redeemed a custom channel points reward.
+Un spectateur a utilisé une récompense personnalisée de points de chaîne.
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose redemptions are wanted. |
-| `reward_id` | `string` | Limits the notifications to this reward. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les utilisations de récompenses. |
+| `reward_id` | `string` | Limite les notifications à cette récompense. |
 
-**Événement:** `ChannelChannelPointsCustomRewardRedemption`
+**Événement :** `ChannelChannelPointsCustomRewardRedemption`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionadd)
 
 ## channel.channel_points_custom_reward_redemption.update
 
-A redemption of a custom channel points reward was fulfilled or canceled.
+Une utilisation d'une récompense personnalisée de points de chaîne a été honorée ou annulée.
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose redemptions are wanted. |
-| `reward_id` | `string` | Limits the notifications to this reward. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les utilisations de récompenses. |
+| `reward_id` | `string` | Limite les notifications à cette récompense. |
 
-**Événement:** `ChannelChannelPointsCustomRewardRedemption`
+**Événement :** `ChannelChannelPointsCustomRewardRedemption`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionupdate)
 
 ## channel.channel_points_custom_reward.add
 
-The broadcaster created a custom channel points reward.
+Le diffuseur a créé une récompense personnalisée de points de chaîne.
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose new custom rewards are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les nouvelles récompenses personnalisées. |
 
-**Événement:** `ChannelChannelPointsCustomReward`
+**Événement :** `ChannelChannelPointsCustomReward`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardadd)
 
 ## channel.channel_points_custom_reward.remove
 
-A custom channel points reward was deleted.
+Une récompense personnalisée de points de chaîne a été supprimée.
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel that owns the rewards. |
-| `reward_id` | `string` | Limits the notifications to this reward. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne à qui appartiennent les récompenses. |
+| `reward_id` | `string` | Limite les notifications à cette récompense. |
 
-**Événement:** `ChannelChannelPointsCustomReward`
+**Événement :** `ChannelChannelPointsCustomReward`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardremove)
 
 ## channel.channel_points_custom_reward.update
 
-A custom channel points reward was edited.
+Une récompense personnalisée de points de chaîne a été modifiée.
 
-**Scope:** one of `channel:read:redemptions`, `channel:manage:redemptions`, from the broadcaster.
+**Scope :** l'un de `channel:read:redemptions`, `channel:manage:redemptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel that owns the rewards. |
-| `reward_id` | `string` | Limits the notifications to this reward. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne à qui appartiennent les récompenses. |
+| `reward_id` | `string` | Limite les notifications à cette récompense. |
 
-**Événement:** `ChannelChannelPointsCustomReward`
+**Événement :** `ChannelChannelPointsCustomReward`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardupdate)
 
 ## channel.charity_campaign.donate
 
-A viewer donated to the broadcaster's charity campaign.
+Un spectateur a fait un don à la collecte caritative du diffuseur.
 
-**Scope:** `channel:read:charity`, from the broadcaster.
+**Scope :** `channel:read:charity`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel running the charity campaign. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui mène la collecte caritative. |
 
-**Événement:** `ChannelCharityCampaignDonateEvent`
+**Événement :** `ChannelCharityCampaignDonateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcharity_campaigndonate)
 
 ## channel.charity_campaign.progress
 
-A charity campaign moved toward its goal, or the broadcaster changed the goal.
+Une collecte caritative a progressé vers son objectif, ou le diffuseur a modifié cet objectif.
 
-**Scope:** `channel:read:charity`, from the broadcaster.
+**Scope :** `channel:read:charity`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel running the charity campaign. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui mène la collecte caritative. |
 
-**Événement:** `ChannelCharityCampaignBase`
+**Événement :** `ChannelCharityCampaignBase`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcharity_campaignprogress)
 
 ## channel.charity_campaign.start
 
-The broadcaster started a charity campaign. May arrive after the first progress event.
+Le diffuseur a lancé une collecte caritative. Peut arriver après le premier événement de progression.
 
-**Scope:** `channel:read:charity`, from the broadcaster.
+**Scope :** `channel:read:charity`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel running the charity campaign. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui mène la collecte caritative. |
 
-**Événement:** `ChannelCharityCampaignStartEvent`
+**Événement :** `ChannelCharityCampaignStartEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcharity_campaignstart)
 
 ## channel.charity_campaign.stop
 
-The broadcaster stopped a charity campaign.
+Le diffuseur a arrêté une collecte caritative.
 
-**Scope:** `channel:read:charity`, from the broadcaster.
+**Scope :** `channel:read:charity`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel running the charity campaign. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui mène la collecte caritative. |
 
-**Événement:** `ChannelCharityCampaignStopEvent`
+**Événement :** `ChannelCharityCampaignStopEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcharity_campaignstop)
 
 ## channel.chat_settings.update
 
-The chat settings of the channel changed (emote, follower, slow, subscriber or unique chat mode).
+Les réglages du chat de la chaîne ont changé (mode emotes seules, followers, lent, abonnés ou messages uniques).
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user, plus either `channel:bot` from the broadcaster or moderator status in the channel.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur, et soit `channel:bot` de la part du diffuseur, soit le statut de modérateur sur la chaîne.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatSettingsUpdateEvent`
+**Événement :** `ChannelChatSettingsUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchat_settingsupdate)
 
 ## channel.chat.clear
 
-A moderator or a bot cleared every message of the chat room.
+Un modérateur ou un bot a effacé tous les messages du chat.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user, plus either `channel:bot` from the broadcaster or moderator status in the channel.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur, et soit `channel:bot` de la part du diffuseur, soit le statut de modérateur sur la chaîne.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatClearEvent`
+**Événement :** `ChannelChatClearEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatclear)
 
 ## channel.chat.clear_user_messages
 
-A moderator or a bot cleared every message of one user, after a ban or a timeout.
+Un modérateur ou un bot a effacé tous les messages d'un utilisateur, après un bannissement ou un timeout.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user, plus either `channel:bot` from the broadcaster or moderator status in the channel.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur, et soit `channel:bot` de la part du diffuseur, soit le statut de modérateur sur la chaîne.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatClearUserMessagesEvent`
+**Événement :** `ChannelChatClearUserMessagesEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatclear_user_messages)
 
 ## channel.chat.message
 
-A user sent a message in the chat room.
+Un utilisateur a envoyé un message dans le chat.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user, plus either `channel:bot` from the broadcaster or moderator status in the channel.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur, et soit `channel:bot` de la part du diffuseur, soit le statut de modérateur sur la chaîne.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatMessageEvent`
+**Événement :** `ChannelChatMessageEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatmessage)
 
 ## channel.chat.message_delete
 
-A moderator removed one message from the chat room.
+Un modérateur a supprimé un message du chat.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user, plus either `channel:bot` from the broadcaster or moderator status in the channel.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur, et soit `channel:bot` de la part du diffuseur, soit le statut de modérateur sur la chaîne.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatMessageDeleteEvent`
+**Événement :** `ChannelChatMessageDeleteEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatmessage_delete)
 
 ## channel.chat.notification
 
-Something shown as a notice in chat happened, such as a subscription, a gift, a raid or an announcement.
+Il s'est produit quelque chose que le chat affiche comme une notification, par exemple un abonnement, un abonnement offert, un raid ou une annonce.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user, plus either `channel:bot` from the broadcaster or moderator status in the channel.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur, et soit `channel:bot` de la part du diffuseur, soit le statut de modérateur sur la chaîne.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatNotificationEvent`
+**Événement :** `ChannelChatNotificationEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatnotification)
 
 ## channel.chat.user_message_hold
 
-A message of the user in `user_id` was held by AutoMod.
+Un message de l'utilisateur indiqué dans `user_id` a été retenu par AutoMod.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatUserMessageHoldEvent`
+**Événement :** `ChannelChatUserMessageHoldEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatuser_message_hold)
 
 ## channel.chat.user_message_update
 
-The AutoMod status of a held message of the user in `user_id` changed.
+Le statut AutoMod d'un message retenu de l'utilisateur indiqué dans `user_id` a changé.
 
-**Scope:** `user:read:chat` from the user in `user_id`. With an app access token, also `user:bot` from that user.
+**Scope :** `user:read:chat`, accordé par l'utilisateur indiqué dans `user_id`. Avec un jeton d'application, il faut aussi `user:bot` de la part de cet utilisateur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat room is watched. |
-| `user_id` <small>requis</small> | `string` | ID of the user to read chat as. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont le chat est surveillé. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur au nom duquel le chat est lu. |
 
-**Événement:** `ChannelChatUserMessageUpdateEvent`
+**Événement :** `ChannelChatUserMessageUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatuser_message_update)
 
 ## channel.cheer
 
-A user cheered Bits in the channel.
+Un utilisateur a envoyé un cheer en Bits sur la chaîne.
 
-**Scope:** `bits:read`, granted by the broadcaster.
+**Scope :** `bits:read`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose cheers to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les cheers. |
 
-**Événement:** `ChannelCheerEvent`
+**Événement :** `ChannelCheerEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcheer)
 
 ## channel.custom_power_up_redemption.add
 
-A viewer redeemed a custom Power-up.
+Un spectateur a utilisé un Power-up personnalisé.
 
-**Scope:** `bits:read`, from the broadcaster.
+**Scope :** `bits:read`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose custom Power-up redemptions are wanted. |
-| `reward_id` | `string` | Limits the notifications to this custom Power-up. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les utilisations de Power-ups personnalisés. |
+| `reward_id` | `string` | Limite les notifications à ce Power-up personnalisé. |
 
-**Événement:** `ChannelCustomPowerUpRedemptionAddEvent`
+**Événement :** `ChannelCustomPowerUpRedemptionAddEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcustom_power_up_redemptionadd)
 
 ## channel.follow
 
-Someone followed the channel.
+Quelqu'un s'est mis à suivre la chaîne.
 
-**Scope:** `moderator:read:followers`, granted by the user set as `moderator_user_id`.
+**Scope :** `moderator:read:followers`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose new followers to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of a moderator of the channel, or of the broadcaster when the authorization comes from the broadcaster. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les nouveaux followers. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant d'un modérateur de la chaîne, ou du diffuseur quand l'autorisation vient de lui. |
 
-**Événement:** `ChannelFollowEvent`
+**Événement :** `ChannelFollowEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelfollow)
 
 ## channel.goal.begin
 
-The broadcaster started a creator goal. May arrive after the first progress events.
+Le diffuseur a lancé un objectif de créateur. Peut arriver après les premiers événements de progression.
 
-**Scope:** `channel:read:goals`, from the broadcaster.
+**Scope :** `channel:read:goals`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster; it must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ; ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `ChannelGoalBase`
+**Événement :** `ChannelGoalBase`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelgoalbegin)
 
 ## channel.goal.end
 
-The broadcaster ended a creator goal.
+Le diffuseur a mis fin à un objectif de créateur.
 
-**Scope:** `channel:read:goals`, from the broadcaster.
+**Scope :** `channel:read:goals`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster; it must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ; ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `ChannelGoalEndEvent`
+**Événement :** `ChannelGoalEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelgoalend)
 
 ## channel.goal.progress
 
-A creator goal moved forward or backward.
+Un objectif de créateur a progressé ou reculé.
 
-**Scope:** `channel:read:goals`, from the broadcaster.
+**Scope :** `channel:read:goals`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster; it must be the user of the access token. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ; ce doit être l'utilisateur du jeton d'accès. |
 
-**Événement:** `ChannelGoalBase`
+**Événement :** `ChannelGoalBase`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelgoalprogress)
 
 ## channel.guest_star_guest.update
 
-A guest or a slot changed in a running Guest Star session.
+Un invité ou un emplacement a changé dans une session Guest Star en cours.
 
-**Scope:** one of `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, from the user given as `moderator_user_id`.
+**Scope :** l'un de `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel that hosts the Guest Star session. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of one of the channel's moderators; the token must belong to this user. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui accueille la session Guest Star. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou de l'un des modérateurs de la chaîne ; le jeton doit appartenir à cet utilisateur. |
 
-**Événement:** `ChannelGuestStarGuestUpdateEvent`
+**Événement :** `ChannelGuestStarGuestUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelguest_star_guestupdate)
 
 ## channel.guest_star_session.begin
 
-The host started a Guest Star session.
+L'hôte a lancé une session Guest Star.
 
-**Scope:** one of `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, from the user given as `moderator_user_id`.
+**Scope :** l'un de `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel that hosts the Guest Star session. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of one of the channel's moderators; the token must belong to this user. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui accueille la session Guest Star. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou de l'un des modérateurs de la chaîne ; le jeton doit appartenir à cet utilisateur. |
 
-**Événement:** `ChannelGuestStarSessionBeginEvent`
+**Événement :** `ChannelGuestStarSessionBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelguest_star_sessionbegin)
 
 ## channel.guest_star_session.end
 
-A Guest Star session ended, closed by the host or by Twitch.
+Une session Guest Star s'est terminée, fermée par l'hôte ou par Twitch.
 
-**Scope:** one of `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, from the user given as `moderator_user_id`.
+**Scope :** l'un de `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel that hosts the Guest Star session. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of one of the channel's moderators; the token must belong to this user. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui accueille la session Guest Star. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou de l'un des modérateurs de la chaîne ; le jeton doit appartenir à cet utilisateur. |
 
-**Événement:** `ChannelGuestStarSessionEndEvent`
+**Événement :** `ChannelGuestStarSessionEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelguest_star_sessionend)
 
 ## channel.guest_star_settings.update
 
-The host changed the Guest Star preferences of the channel.
+L'hôte a changé les préférences Guest Star de la chaîne.
 
-**Scope:** one of `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, from the user given as `moderator_user_id`.
+**Scope :** l'un de `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star`, `moderator:manage:guest_star`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel that hosts the Guest Star session. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of one of the channel's moderators; the token must belong to this user. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne qui accueille la session Guest Star. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou de l'un des modérateurs de la chaîne ; le jeton doit appartenir à cet utilisateur. |
 
-**Événement:** `ChannelGuestStarSettingsUpdateEvent`
+**Événement :** `ChannelGuestStarSettingsUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelguest_star_settingsupdate)
 
 ## channel.hype_train.begin
 
-A Hype Train started on the channel. The first progress events may arrive before this one.
+Un Hype Train a démarré sur la chaîne. Les premiers événements de progression peuvent arriver avant celui-ci.
 
-**Scope:** `channel:read:hype_train`, from the broadcaster.
+**Scope :** `channel:read:hype_train`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Hype Trains are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les Hype Trains. |
 
-**Événement:** `ChannelHypeTrainBeginEvent`
+**Événement :** `ChannelHypeTrainBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelhype_trainbegin)
 
 ## channel.hype_train.end
 
-A Hype Train ended on the channel.
+Un Hype Train s'est terminé sur la chaîne.
 
-**Scope:** `channel:read:hype_train`, from the broadcaster.
+**Scope :** `channel:read:hype_train`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Hype Trains are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les Hype Trains. |
 
-**Événement:** `ChannelHypeTrainEndEvent`
+**Événement :** `ChannelHypeTrainEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelhype_trainend)
 
 ## channel.hype_train.progress
 
-A contribution moved a running Hype Train forward.
+Une contribution a fait avancer un Hype Train en cours.
 
-**Scope:** `channel:read:hype_train`, from the broadcaster.
+**Scope :** `channel:read:hype_train`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Hype Trains are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les Hype Trains. |
 
-**Événement:** `ChannelHypeTrainProgressEvent`
+**Événement :** `ChannelHypeTrainProgressEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelhype_trainprogress)
 
 ## channel.moderate
 
-A moderator took a moderation action in the channel, warnings included. Narrow the event on `action` to read the matching details.
+Un modérateur a effectué une action de modération sur la chaîne, avertissements compris. Affinez l'événement sur `action` pour lire les détails correspondants.
 
-**Scope:** all of the following, granted by the user set as `moderator_user_id`: one of `moderator:read:blocked_terms`, `moderator:manage:blocked_terms`; one of `moderator:read:chat_settings`, `moderator:manage:chat_settings`; one of `moderator:read:unban_requests`, `moderator:manage:unban_requests`; one of `moderator:read:banned_users`, `moderator:manage:banned_users`; one of `moderator:read:chat_messages`, `moderator:manage:chat_messages`; one of `moderator:read:warnings`, `moderator:manage:warnings`; `moderator:read:moderators`; `moderator:read:vips`.
+**Scope :** tous les suivants, accordés par l'utilisateur indiqué dans `moderator_user_id` : l'un de `moderator:read:blocked_terms`, `moderator:manage:blocked_terms` ; l'un de `moderator:read:chat_settings`, `moderator:manage:chat_settings` ; l'un de `moderator:read:unban_requests`, `moderator:manage:unban_requests` ; l'un de `moderator:read:banned_users`, `moderator:manage:banned_users` ; l'un de `moderator:read:chat_messages`, `moderator:manage:chat_messages` ; l'un de `moderator:read:warnings`, `moderator:manage:warnings` ; `moderator:read:moderators` ; `moderator:read:vips`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose moderation actions to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scopes. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les actions de modération. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé les scopes. |
 
-**Événement:** `ChannelModerateEvent`
+**Événement :** `ChannelModerateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelmoderate-v2)
 
 ## channel.moderate@1
 
-A moderator took a moderation action in the channel. Version 1 does not report warnings. Narrow the event on `action` to read the matching details.
+Un modérateur a effectué une action de modération sur la chaîne. La version 1 ne signale pas les avertissements. Affinez l'événement sur `action` pour lire les détails correspondants.
 
-**Scope:** all of the following, granted by the user set as `moderator_user_id`: one of `moderator:read:blocked_terms`, `moderator:manage:blocked_terms`; one of `moderator:read:chat_settings`, `moderator:manage:chat_settings`; one of `moderator:read:unban_requests`, `moderator:manage:unban_requests`; one of `moderator:read:banned_users`, `moderator:manage:banned_users`; one of `moderator:read:chat_messages`, `moderator:manage:chat_messages`; `moderator:read:moderators`; `moderator:read:vips`.
+**Scope :** tous les suivants, accordés par l'utilisateur indiqué dans `moderator_user_id` : l'un de `moderator:read:blocked_terms`, `moderator:manage:blocked_terms` ; l'un de `moderator:read:chat_settings`, `moderator:manage:chat_settings` ; l'un de `moderator:read:unban_requests`, `moderator:manage:unban_requests` ; l'un de `moderator:read:banned_users`, `moderator:manage:banned_users` ; l'un de `moderator:read:chat_messages`, `moderator:manage:chat_messages` ; `moderator:read:moderators` ; `moderator:read:vips`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose moderation actions to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scopes. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les actions de modération. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé les scopes. |
 
-**Événement:** `ChannelModerateV1Event`
+**Événement :** `ChannelModerateV1Event`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelmoderate)
 
 ## channel.moderator.add
 
-A user was made moderator of the channel.
+Un utilisateur est devenu modérateur de la chaîne.
 
-**Scope:** `moderation:read`, granted by the broadcaster.
+**Scope :** `moderation:read`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose new moderators to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les nouveaux modérateurs. |
 
-**Événement:** `ChannelModeratorAddEvent`
+**Événement :** `ChannelModeratorAddEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelmoderatoradd)
 
 ## channel.moderator.remove
 
-A user lost moderator status in the channel.
+Un utilisateur a perdu le statut de modérateur sur la chaîne.
 
-**Scope:** `moderation:read`, granted by the broadcaster.
+**Scope :** `moderation:read`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose removed moderators to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les retraits de modérateur. |
 
-**Événement:** `ChannelModeratorRemoveEvent`
+**Événement :** `ChannelModeratorRemoveEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelmoderatorremove)
 
 ## channel.poll.begin
 
-A poll started on the channel.
+Un sondage a démarré sur la chaîne.
 
-**Scope:** one of `channel:read:polls`, `channel:manage:polls`, from the broadcaster.
+**Scope :** l'un de `channel:read:polls`, `channel:manage:polls`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose polls are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les sondages. |
 
-**Événement:** `ChannelPollBeginEvent`
+**Événement :** `ChannelPollBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpollbegin)
 
 ## channel.poll.end
 
-A poll ended on the channel.
+Un sondage s'est terminé sur la chaîne.
 
-**Scope:** one of `channel:read:polls`, `channel:manage:polls`, from the broadcaster.
+**Scope :** l'un de `channel:read:polls`, `channel:manage:polls`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose polls are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les sondages. |
 
-**Événement:** `ChannelPollEndEvent`
+**Événement :** `ChannelPollEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpollend)
 
 ## channel.poll.progress
 
-Viewers voted in a running poll.
+Des spectateurs ont voté dans un sondage en cours.
 
-**Scope:** one of `channel:read:polls`, `channel:manage:polls`, from the broadcaster.
+**Scope :** l'un de `channel:read:polls`, `channel:manage:polls`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose polls are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les sondages. |
 
-**Événement:** `ChannelPollProgressEvent`
+**Événement :** `ChannelPollProgressEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpollprogress)
 
 ## channel.prediction.begin
 
-A Prediction started on the channel.
+Une prédiction a démarré sur la chaîne.
 
-**Scope:** one of `channel:read:predictions`, `channel:manage:predictions`, from the broadcaster.
+**Scope :** l'un de `channel:read:predictions`, `channel:manage:predictions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Predictions are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les prédictions. |
 
-**Événement:** `ChannelPredictionBeginEvent`
+**Événement :** `ChannelPredictionBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpredictionbegin)
 
 ## channel.prediction.end
 
-A Prediction ended, resolved or canceled.
+Une prédiction s'est terminée, résolue ou annulée.
 
-**Scope:** one of `channel:read:predictions`, `channel:manage:predictions`, from the broadcaster.
+**Scope :** l'un de `channel:read:predictions`, `channel:manage:predictions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Predictions are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les prédictions. |
 
-**Événement:** `ChannelPredictionEndEvent`
+**Événement :** `ChannelPredictionEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpredictionend)
 
 ## channel.prediction.lock
 
-Betting closed on a Prediction.
+Les paris d'une prédiction ont été clos.
 
-**Scope:** one of `channel:read:predictions`, `channel:manage:predictions`, from the broadcaster.
+**Scope :** l'un de `channel:read:predictions`, `channel:manage:predictions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Predictions are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les prédictions. |
 
-**Événement:** `ChannelPredictionLockEvent`
+**Événement :** `ChannelPredictionLockEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpredictionlock)
 
 ## channel.prediction.progress
 
-Viewers bet on a running Prediction.
+Des spectateurs ont parié sur une prédiction en cours.
 
-**Scope:** one of `channel:read:predictions`, `channel:manage:predictions`, from the broadcaster.
+**Scope :** l'un de `channel:read:predictions`, `channel:manage:predictions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the channel whose Predictions are wanted. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant de la chaîne dont on veut les prédictions. |
 
-**Événement:** `ChannelPredictionProgressEvent`
+**Événement :** `ChannelPredictionProgressEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelpredictionprogress)
 
 ## channel.raid
 
-A broadcaster raided another channel.
+Un diffuseur a lancé un raid sur une autre chaîne.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `from_broadcaster_user_id` | `string` | ID of the broadcaster whose outgoing raids to watch. |
-| `to_broadcaster_user_id` | `string` | ID of the broadcaster whose incoming raids to watch. |
+| `from_broadcaster_user_id` | `string` | Identifiant du diffuseur dont on surveille les raids lancés. |
+| `to_broadcaster_user_id` | `string` | Identifiant du diffuseur dont on surveille les raids reçus. |
 
-**Événement:** `ChannelRaidEvent`
+**Événement :** `ChannelRaidEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelraid)
 
 ## channel.shared_chat.begin
 
-The channel became active in a shared chat session.
+La chaîne est devenue active dans une session de chat partagé.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
 
-**Événement:** `ChannelSharedChatBeginEvent`
+**Événement :** `ChannelSharedChatBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshared_chatbegin)
 
 ## channel.shared_chat.end
 
-The channel left a shared chat session, or the session ended.
+La chaîne a quitté une session de chat partagé, ou la session s'est terminée.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
 
-**Événement:** `ChannelSharedChatEndEvent`
+**Événement :** `ChannelSharedChatEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshared_chatend)
 
 ## channel.shared_chat.update
 
-The shared chat session the channel is in changed, for example its participants.
+La session de chat partagé à laquelle la chaîne participe a changé, par exemple ses participants.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel is watched. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont la chaîne est surveillée. |
 
-**Événement:** `ChannelSharedChatUpdateEvent`
+**Événement :** `ChannelSharedChatUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshared_chatupdate)
 
 ## channel.shield_mode.begin
 
-Shield Mode was turned on in the channel.
+Le Shield Mode a été activé sur la chaîne.
 
-**Scope:** one of `moderator:read:shield_mode`, `moderator:manage:shield_mode`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:shield_mode`, `moderator:manage:shield_mode`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose Shield Mode to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille le Shield Mode. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelShieldModeBeginEvent`
+**Événement :** `ChannelShieldModeBeginEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshield_modebegin)
 
 ## channel.shield_mode.end
 
-Shield Mode was turned off in the channel.
+Le Shield Mode a été désactivé sur la chaîne.
 
-**Scope:** one of `moderator:read:shield_mode`, `moderator:manage:shield_mode`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:shield_mode`, `moderator:manage:shield_mode`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose Shield Mode to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille le Shield Mode. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelShieldModeEndEvent`
+**Événement :** `ChannelShieldModeEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshield_modeend)
 
 ## channel.shoutout.create
 
-The broadcaster sent a Shoutout to another channel.
+Le diffuseur a envoyé un shoutout à une autre chaîne.
 
-**Scope:** one of `moderator:read:shoutouts`, `moderator:manage:shoutouts`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:shoutouts`, `moderator:manage:shoutouts`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose sent Shoutouts to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les shoutouts envoyés. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelShoutoutCreateEvent`
+**Événement :** `ChannelShoutoutCreateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshoutoutcreate)
 
 ## channel.shoutout.receive
 
-The broadcaster received a Shoutout from another channel. Fires only when Twitch posts the Shoutout to the activity feed of the broadcaster.
+Le diffuseur a reçu un shoutout d'une autre chaîne. Ne se déclenche que lorsque Twitch publie le shoutout dans le fil d'activité du diffuseur.
 
-**Scope:** one of `moderator:read:shoutouts`, `moderator:manage:shoutouts`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:shoutouts`, `moderator:manage:shoutouts`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose received Shoutouts to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les shoutouts reçus. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelShoutoutReceiveEvent`
+**Événement :** `ChannelShoutoutReceiveEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelshoutoutreceive)
 
 ## channel.subscribe
 
-A user subscribed to the channel. Resubscriptions are not included.
+Un utilisateur s'est abonné à la chaîne. Les réabonnements ne sont pas compris.
 
-**Scope:** `channel:read:subscriptions`, granted by the broadcaster.
+**Scope :** `channel:read:subscriptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose new subscribers to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les nouveaux abonnés. |
 
-**Événement:** `ChannelSubscribeEvent`
+**Événement :** `ChannelSubscribeEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe)
 
 ## channel.subscription.end
 
-A subscription to the channel ended.
+Un abonnement à la chaîne a pris fin.
 
-**Scope:** `channel:read:subscriptions`, granted by the broadcaster.
+**Scope :** `channel:read:subscriptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose ending subscriptions to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les fins d'abonnement. |
 
-**Événement:** `ChannelSubscriptionEndEvent`
+**Événement :** `ChannelSubscriptionEndEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscriptionend)
 
 ## channel.subscription.gift
 
-A viewer gifted one or more subscriptions in the channel.
+Un spectateur a offert un ou plusieurs abonnements sur la chaîne.
 
-**Scope:** `channel:read:subscriptions`, granted by the broadcaster.
+**Scope :** `channel:read:subscriptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose gifted subscriptions to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les abonnements offerts. |
 
-**Événement:** `ChannelSubscriptionGiftEvent`
+**Événement :** `ChannelSubscriptionGiftEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscriptiongift)
 
 ## channel.subscription.message
 
-A subscriber shared a resubscription message in chat.
+Un abonné a partagé un message de réabonnement dans le chat.
 
-**Scope:** `channel:read:subscriptions`, granted by the broadcaster.
+**Scope :** `channel:read:subscriptions`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose resubscription messages to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les messages de réabonnement. |
 
-**Événement:** `ChannelSubscriptionMessageEvent`
+**Événement :** `ChannelSubscriptionMessageEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscriptionmessage)
 
 ## channel.suspicious_user.message
 
-A user flagged as suspicious sent a chat message.
+Un utilisateur signalé comme suspect a envoyé un message dans le chat.
 
-**Scope:** `moderator:read:suspicious_users`, granted by the user set as `moderator_user_id`.
+**Scope :** `moderator:read:suspicious_users`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose chat to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille le chat. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelSuspiciousUserMessageEvent`
+**Événement :** `ChannelSuspiciousUserMessageEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsuspicious_usermessage)
 
 ## channel.suspicious_user.update
 
-A moderator changed the treatment applied to a suspicious user.
+Un modérateur a changé le traitement appliqué à un utilisateur suspect.
 
-**Scope:** `moderator:read:suspicious_users`, granted by the user set as `moderator_user_id`.
+**Scope :** `moderator:read:suspicious_users`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose suspicious users to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les utilisateurs suspects. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelSuspiciousUserUpdateEvent`
+**Événement :** `ChannelSuspiciousUserUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsuspicious_userupdate)
 
 ## channel.unban
 
-A viewer was unbanned in the channel.
+Un spectateur a été débanni sur la chaîne.
 
-**Scope:** `channel:moderate`, granted by the broadcaster.
+**Scope :** `channel:moderate`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose unbans to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les débannissements. |
 
-**Événement:** `ChannelUnbanEvent`
+**Événement :** `ChannelUnbanEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelunban)
 
 ## channel.unban_request.create
 
-A banned user created an unban request.
+Un utilisateur banni a déposé une demande de débannissement.
 
-**Scope:** one of `moderator:read:unban_requests`, `moderator:manage:unban_requests`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:unban_requests`, `moderator:manage:unban_requests`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose unban requests to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les demandes de débannissement. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelUnbanRequestCreateEvent`
+**Événement :** `ChannelUnbanRequestCreateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelunban_requestcreate)
 
 ## channel.unban_request.resolve
 
-An unban request was approved, denied or canceled.
+Une demande de débannissement a été approuvée, refusée ou annulée.
 
-**Scope:** one of `moderator:read:unban_requests`, `moderator:manage:unban_requests`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:unban_requests`, `moderator:manage:unban_requests`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose resolved unban requests to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les demandes de débannissement traitées. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelUnbanRequestResolveEvent`
+**Événement :** `ChannelUnbanRequestResolveEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelunban_requestresolve)
 
 ## channel.update
 
-The broadcaster changed the title, category, language or content classification labels of the channel.
+Le diffuseur a changé le titre, la catégorie, la langue ou les étiquettes de classification du contenu de la chaîne.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose channel settings to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les réglages de chaîne. |
 
-**Événement:** `ChannelUpdateEvent`
+**Événement :** `ChannelUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelupdate)
 
 ## channel.vip.add
 
-A user was made VIP of the channel.
+Un utilisateur est devenu VIP de la chaîne.
 
-**Scope:** one of `channel:read:vips`, `channel:manage:vips`, granted by the broadcaster.
+**Scope :** l'un de `channel:read:vips`, `channel:manage:vips`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose new VIPs to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les nouveaux VIP. |
 
-**Événement:** `ChannelVipAddEvent`
+**Événement :** `ChannelVipAddEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelvipadd)
 
 ## channel.vip.remove
 
-A user lost VIP status in the channel.
+Un utilisateur a perdu le statut VIP sur la chaîne.
 
-**Scope:** one of `channel:read:vips`, `channel:manage:vips`, granted by the broadcaster.
+**Scope :** l'un de `channel:read:vips`, `channel:manage:vips`, accordé par le diffuseur.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose removed VIPs to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les retraits de VIP. |
 
-**Événement:** `ChannelVipRemoveEvent`
+**Événement :** `ChannelVipRemoveEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelvipremove)
 
 ## channel.warning.acknowledge
 
-A user acknowledged a warning they received in the channel.
+Un utilisateur a pris acte d'un avertissement reçu sur la chaîne.
 
-**Scope:** one of `moderator:read:warnings`, `moderator:manage:warnings`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:warnings`, `moderator:manage:warnings`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose warnings to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les avertissements. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelWarningAcknowledgeEvent`
+**Événement :** `ChannelWarningAcknowledgeEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelwarningacknowledge)
 
 ## channel.warning.send
 
-A warning was sent to a user in the channel.
+Un avertissement a été envoyé à un utilisateur sur la chaîne.
 
-**Scope:** one of `moderator:read:warnings`, `moderator:manage:warnings`, granted by the user set as `moderator_user_id`.
+**Scope :** l'un de `moderator:read:warnings`, `moderator:manage:warnings`, accordé par l'utilisateur indiqué dans `moderator_user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose warnings to watch. |
-| `moderator_user_id` <small>requis</small> | `string` | ID of the broadcaster or of a moderator of the channel, who granted the scope. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les avertissements. |
+| `moderator_user_id` <small>requis</small> | `string` | Identifiant du diffuseur ou d'un modérateur de la chaîne, celui qui a accordé le scope. |
 
-**Événement:** `ChannelWarningSendEvent`
+**Événement :** `ChannelWarningSendEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelwarningsend)
 
 ## conduit.shard.disabled
 
-EventSub disabled a conduit shard because the state of its transport changed.
+EventSub a désactivé un shard de conduit parce que l'état de son transport a changé.
 
-**Scope:** none. Needs an app access token whose client ID equals `client_id`; with `conduit_id`, that client must own the conduit.
+**Scope :** aucun. Demande un jeton d'application dont l'identifiant client est égal à `client_id` ; avec `conduit_id`, le conduit doit appartenir à ce client.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `client_id` <small>requis</small> | `string` | Client ID of the application; it must be the one of the app access token. |
-| `conduit_id` | `string` | Limits the notifications to this conduit; every conduit of the client when left out. |
+| `client_id` <small>requis</small> | `string` | Identifiant client de l'application ; ce doit être celui du jeton d'application. |
+| `conduit_id` | `string` | Limite les notifications à ce conduit ; tous les conduits du client quand il est omis. |
 
-**Événement:** `ConduitShardDisabledEvent`
+**Événement :** `ConduitShardDisabledEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#conduitsharddisabled)
 
 ## drop.entitlement.grant
 
-Viewers were granted Drop entitlements. Delivered in batches: the event is an array of entitlements, and the subscription must be created with batching enabled. Webhooks and conduits only.
+Des spectateurs ont reçu des droits liés aux Drops. Livré par lots : l'événement est un tableau de droits, et l'abonnement doit être créé avec la livraison par lots activée. Webhooks et conduits uniquement.
 
-**Scope:** none. Needs an app access token from a client owned by a member of the organization.
+**Scope :** aucun. Demande un jeton d'application d'un client appartenant à un membre de l'organisation.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `organization_id` <small>requis</small> | `string` | ID of the organization that owns the game in the developer console. |
-| `category_id` | `string` | Limits the notifications to this category (game). |
-| `campaign_id` | `string` | Limits the notifications to this Drops campaign. |
+| `organization_id` <small>requis</small> | `string` | Identifiant de l'organisation à qui appartient le jeu dans la console développeur. |
+| `category_id` | `string` | Limite les notifications à cette catégorie (jeu). |
+| `campaign_id` | `string` | Limite les notifications à cette campagne de Drops. |
 
-**Événement:** `DropEntitlementGrantEvent`
+**Événement :** `DropEntitlementGrantEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#dropentitlementgrant)
 
 ## extension.bits_transaction.create
 
-A Bits transaction was made in an extension. Webhooks and conduits only.
+Une transaction en Bits a eu lieu dans une extension. Webhooks et conduits uniquement.
 
-**Scope:** none. The client ID of the token must be the extension's client ID.
+**Scope :** aucun. L'identifiant client du jeton doit être celui de l'extension.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `extension_client_id` <small>requis</small> | `string` | Client ID of the extension. |
+| `extension_client_id` <small>requis</small> | `string` | Identifiant client de l'extension. |
 
-**Événement:** `ExtensionBitsTransactionCreateEvent`
+**Événement :** `ExtensionBitsTransactionCreateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#extensionbits_transactioncreate)
 
 ## stream.offline
 
-The broadcaster stopped streaming.
+Le diffuseur a arrêté de diffuser.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose stream ends to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les fins de stream. |
 
-**Événement:** `StreamOfflineEvent`
+**Événement :** `StreamOfflineEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#streamoffline)
 
 ## stream.online
 
-The broadcaster started a stream.
+Le diffuseur a lancé un stream.
 
-**Scope:** none.
+**Scope :** aucun.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_user_id` <small>requis</small> | `string` | ID of the broadcaster whose stream starts to watch. |
+| `broadcaster_user_id` <small>requis</small> | `string` | Identifiant du diffuseur dont on surveille les débuts de stream. |
 
-**Événement:** `StreamOnlineEvent`
+**Événement :** `StreamOnlineEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#streamonline)
 
 ## user.authorization.grant
 
-A user authorized the application. Webhooks and conduits only.
+Un utilisateur a autorisé l'application. Webhooks et conduits uniquement.
 
-**Scope:** none. Needs an app access token whose client ID equals `client_id`.
+**Scope :** aucun. Demande un jeton d'application dont l'identifiant client est égal à `client_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `client_id` <small>requis</small> | `string` | Client ID of the application; it must be the one of the app access token. |
+| `client_id` <small>requis</small> | `string` | Identifiant client de l'application ; ce doit être celui du jeton d'application. |
 
-**Événement:** `UserAuthorizationGrantEvent`
+**Événement :** `UserAuthorizationGrantEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#userauthorizationgrant)
 
 ## user.authorization.revoke
 
-The application lost a user's authorization. Webhooks and conduits only.
+L'application a perdu l'autorisation d'un utilisateur. Webhooks et conduits uniquement.
 
-**Scope:** none. Needs an app access token whose client ID equals `client_id`.
+**Scope :** aucun. Demande un jeton d'application dont l'identifiant client est égal à `client_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `client_id` <small>requis</small> | `string` | Client ID of the application; it must be the one of the app access token. |
+| `client_id` <small>requis</small> | `string` | Identifiant client de l'application ; ce doit être celui du jeton d'application. |
 
-**Événement:** `UserAuthorizationRevokeEvent`
+**Événement :** `UserAuthorizationRevokeEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#userauthorizationrevoke)
 
 ## user.update
 
-A user changed their account (name, description, email...).
+Un utilisateur a modifié son compte (nom, description, e-mail...).
 
-**Scope:** none. `user:read:email` from that user adds their email address to the event.
+**Scope :** aucun. `user:read:email`, accordé par cet utilisateur, ajoute son adresse e-mail à l'événement.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` <small>requis</small> | `string` | ID of the user to watch. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur à surveiller. |
 
-**Événement:** `UserUpdateEvent`
+**Événement :** `UserUpdateEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#userupdate)
 
 ## user.whisper.message
 
-The user received a whisper.
+L'utilisateur a reçu un chuchotement.
 
-**Scope:** one of `user:read:whispers`, `user:manage:whispers`, from the user given as `user_id`.
+**Scope :** l'un de `user:read:whispers`, `user:manage:whispers`, accordé par l'utilisateur indiqué dans `user_id`.
 
 **Condition**
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `user_id` <small>requis</small> | `string` | ID of the user who receives the whispers. |
+| `user_id` <small>requis</small> | `string` | Identifiant de l'utilisateur qui reçoit les chuchotements. |
 
-**Événement:** `UserWhisperMessageEvent`
+**Événement :** `UserWhisperMessageEvent`
 
 [Référence Twitch](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#userwhispermessage)

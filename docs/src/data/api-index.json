@@ -9,6 +9,7 @@
    "kind": "method",
    "name": "twitch.ads.startCommercial()",
    "summary": "Starts a commercial break on a channel.",
+   "fr": "Lance une coupure publicitaire sur une chaîne.",
    "token": "any",
    "href": "/reference/api/ads/#startcommercial"
   },
@@ -16,6 +17,7 @@
    "kind": "method",
    "name": "twitch.ads.schedule()",
    "summary": "Gets the ad schedule of a channel.",
+   "fr": "Renvoie le planning publicitaire d'une chaîne.",
    "token": "any",
    "href": "/reference/api/ads/#schedule"
   },
@@ -23,6 +25,7 @@
    "kind": "method",
    "name": "twitch.ads.snooze()",
    "summary": "Pushes the next automatic mid-roll ad back by five minutes, at the cost of one snooze.",
+   "fr": "Repousse de cinq minutes la prochaine publicité mid-roll automatique, au prix d'un report.",
    "token": "any",
    "href": "/reference/api/ads/#snooze"
   },
@@ -30,6 +33,7 @@
    "kind": "method",
    "name": "twitch.analytics.extensions()",
    "summary": "Lists the reports available for the extensions of the user making the call.",
+   "fr": "Liste les rapports disponibles pour les extensions de l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/analytics/#extensions"
   },
@@ -37,6 +41,7 @@
    "kind": "method",
    "name": "twitch.analytics.games()",
    "summary": "Lists the reports available for the games of the user making the call.",
+   "fr": "Liste les rapports disponibles pour les jeux de l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/analytics/#games"
   },
@@ -44,6 +49,7 @@
    "kind": "method",
    "name": "twitch.bits.leaderboard()",
    "summary": "Gets the Bits leaderboard of the channel of the user making the call, over its whole life or over a given day, week, month or year.",
+   "fr": "Renvoie le classement des Bits de la chaîne de l'utilisateur qui fait l'appel, depuis sa création ou sur un jour, une semaine, un mois ou une année donnés.",
    "token": "user",
    "href": "/reference/api/bits/#leaderboard"
   },
@@ -51,6 +57,7 @@
    "kind": "method",
    "name": "twitch.bits.cheermotes()",
    "summary": "Lists the Cheermotes usable in every channel, plus the custom ones of a broadcaster when you name one.",
+   "fr": "Liste les Cheermotes utilisables sur toutes les chaînes, ainsi que les Cheermotes personnalisés d'un diffuseur quand vous en indiquez un.",
    "token": "any",
    "href": "/reference/api/bits/#cheermotes"
   },
@@ -58,6 +65,7 @@
    "kind": "method",
    "name": "twitch.bits.customPowerUps()",
    "summary": "Lists the custom Power-ups a broadcaster created, enabled or not.",
+   "fr": "Liste les Power-ups personnalisés créés par un diffuseur, activés ou non.",
    "token": "user",
    "href": "/reference/api/bits/#custompowerups"
   },
@@ -65,6 +73,7 @@
    "kind": "method",
    "name": "twitch.bits.extensionTransactions()",
    "summary": "Lists the purchases made with Bits inside an extension.",
+   "fr": "Liste les achats faits en Bits dans une extension.",
    "token": "app",
    "href": "/reference/api/bits/#extensiontransactions"
   },
@@ -72,6 +81,7 @@
    "kind": "method",
    "name": "twitch.channelPoints.createReward()",
    "summary": "Adds a custom reward to a channel.",
+   "fr": "Ajoute une récompense personnalisée à une chaîne.",
    "token": "user",
    "href": "/reference/api/channel-points/#createreward"
   },
@@ -79,6 +89,7 @@
    "kind": "method",
    "name": "twitch.channelPoints.deleteReward()",
    "summary": "Deletes a custom reward.",
+   "fr": "Supprime une récompense personnalisée.",
    "token": "user",
    "href": "/reference/api/channel-points/#deletereward"
   },
@@ -86,6 +97,7 @@
    "kind": "method",
    "name": "twitch.channelPoints.rewards()",
    "summary": "Lists the custom rewards of a channel, sorted by ID.",
+   "fr": "Liste les récompenses personnalisées d'une chaîne, triées par identifiant.",
    "token": "user",
    "href": "/reference/api/channel-points/#rewards"
   },
@@ -93,6 +105,7 @@
    "kind": "method",
    "name": "twitch.channelPoints.redemptions()",
    "summary": "Lists the redemptions of a custom reward.",
+   "fr": "Liste les utilisations d'une récompense personnalisée.",
    "token": "user",
    "href": "/reference/api/channel-points/#redemptions"
   },
@@ -100,6 +113,7 @@
    "kind": "method",
    "name": "twitch.channelPoints.updateReward()",
    "summary": "Changes a custom reward.",
+   "fr": "Modifie une récompense personnalisée.",
    "token": "user",
    "href": "/reference/api/channel-points/#updatereward"
   },
@@ -107,6 +121,7 @@
    "kind": "method",
    "name": "twitch.channelPoints.updateRedemptions()",
    "summary": "Fulfills or cancels redemptions that are still waiting in the queue, and returns them.",
+   "fr": "Honore ou annule des utilisations qui attendent encore dans la file, et les renvoie.",
    "token": "user",
    "href": "/reference/api/channel-points/#updateredemptions"
   },
@@ -114,6 +129,7 @@
    "kind": "method",
    "name": "twitch.channels.get()",
    "summary": "Gets the title, category, language and tags of one or more channels.",
+   "fr": "Renvoie le titre, la catégorie, la langue et les tags d'une ou de plusieurs chaînes.",
    "token": "any",
    "href": "/reference/api/channels/#get"
   },
@@ -121,6 +137,7 @@
    "kind": "method",
    "name": "twitch.channels.update()",
    "summary": "Changes the title, category, language, tags, delay or content labels of a channel.",
+   "fr": "Modifie le titre, la catégorie, la langue, les tags, le délai ou les étiquettes de classification du contenu d'une chaîne.",
    "token": "user",
    "href": "/reference/api/channels/#update"
   },
@@ -128,6 +145,7 @@
    "kind": "method",
    "name": "twitch.channels.editors()",
    "summary": "Lists the editors of a channel.",
+   "fr": "Liste les éditeurs d'une chaîne.",
    "token": "user",
    "href": "/reference/api/channels/#editors"
   },
@@ -135,6 +153,7 @@
    "kind": "method",
    "name": "twitch.channels.followed()",
    "summary": "Lists the channels a user follows, most recent follow first.",
+   "fr": "Liste les chaînes qu'un utilisateur suit, de la plus récemment suivie à la plus ancienne.",
    "token": "user",
    "href": "/reference/api/channels/#followed"
   },
@@ -142,6 +161,7 @@
    "kind": "method",
    "name": "twitch.channels.followers()",
    "summary": "Lists the followers of a channel, most recent first.",
+   "fr": "Liste les followers d'une chaîne, du plus récent au plus ancien.",
    "token": "any",
    "href": "/reference/api/channels/#followers"
   },
@@ -149,6 +169,7 @@
    "kind": "method",
    "name": "twitch.charity.campaign()",
    "summary": "Gets the charity campaign a broadcaster is running, or `null` when there is none.",
+   "fr": "Renvoie la collecte caritative que mène un diffuseur, ou `null` quand il n'y en a pas.",
    "token": "user",
    "href": "/reference/api/charity/#campaign"
   },
@@ -156,6 +177,7 @@
    "kind": "method",
    "name": "twitch.charity.donations()",
    "summary": "Lists the donations made to the campaign a broadcaster is running.",
+   "fr": "Liste les dons faits à la collecte que mène un diffuseur.",
    "token": "user",
    "href": "/reference/api/charity/#donations"
   },
@@ -163,6 +185,7 @@
    "kind": "method",
    "name": "twitch.chat.chatters()",
    "summary": "Lists the users connected to a channel's chat.",
+   "fr": "Liste les utilisateurs connectés au chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#chatters"
   },
@@ -170,6 +193,7 @@
    "kind": "method",
    "name": "twitch.chat.channelEmotes()",
    "summary": "Gets the custom emotes of a channel.",
+   "fr": "Renvoie les emotes personnalisées d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#channelemotes"
   },
@@ -177,6 +201,7 @@
    "kind": "method",
    "name": "twitch.chat.globalEmotes()",
    "summary": "Gets the emotes made by Twitch that work in every chat.",
+   "fr": "Renvoie les emotes créées par Twitch, utilisables dans tous les chats.",
    "token": "any",
    "href": "/reference/api/chat/#globalemotes"
   },
@@ -184,6 +209,7 @@
    "kind": "method",
    "name": "twitch.chat.emoteSets()",
    "summary": "Gets the emotes of one or more emote sets.",
+   "fr": "Renvoie les emotes d'un ou de plusieurs ensembles d'emotes.",
    "token": "any",
    "href": "/reference/api/chat/#emotesets"
   },
@@ -191,6 +217,7 @@
    "kind": "method",
    "name": "twitch.chat.channelBadges()",
    "summary": "Gets the custom chat badges of a channel, such as its subscriber and Bits badges.",
+   "fr": "Renvoie les badges de chat personnalisés d'une chaîne, comme ses badges d'abonné et de Bits.",
    "token": "any",
    "href": "/reference/api/chat/#channelbadges"
   },
@@ -198,6 +225,7 @@
    "kind": "method",
    "name": "twitch.chat.globalBadges()",
    "summary": "Gets the chat badges made by Twitch that can show up in every chat.",
+   "fr": "Renvoie les badges de chat créés par Twitch, qui peuvent apparaître dans tous les chats.",
    "token": "any",
    "href": "/reference/api/chat/#globalbadges"
   },
@@ -205,6 +233,7 @@
    "kind": "method",
    "name": "twitch.chat.settings()",
    "summary": "Gets the chat settings of a channel.",
+   "fr": "Renvoie les réglages du chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#settings"
   },
@@ -212,6 +241,7 @@
    "kind": "method",
    "name": "twitch.chat.sharedSession()",
    "summary": "Gets the shared chat session a channel is part of, or `null` when it is not in one.",
+   "fr": "Renvoie la session de chat partagé à laquelle une chaîne participe, ou `null` quand elle ne participe à aucune.",
    "token": "any",
    "href": "/reference/api/chat/#sharedsession"
   },
@@ -219,6 +249,7 @@
    "kind": "method",
    "name": "twitch.chat.userEmotes()",
    "summary": "Lists every emote a user can post, across all channels.",
+   "fr": "Liste toutes les emotes qu'un utilisateur peut envoyer, toutes chaînes confondues.",
    "token": "user",
    "href": "/reference/api/chat/#useremotes"
   },
@@ -226,6 +257,7 @@
    "kind": "method",
    "name": "twitch.chat.updateSettings()",
    "summary": "Changes the chat settings of a channel and returns the new ones.",
+   "fr": "Modifie les réglages du chat d'une chaîne et renvoie les nouveaux.",
    "token": "any",
    "href": "/reference/api/chat/#updatesettings"
   },
@@ -233,6 +265,7 @@
    "kind": "method",
    "name": "twitch.chat.announce()",
    "summary": "Posts a highlighted announcement in a channel's chat.",
+   "fr": "Publie une annonce mise en avant dans le chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#announce"
   },
@@ -240,6 +273,7 @@
    "kind": "method",
    "name": "twitch.chat.shoutout()",
    "summary": "Gives a shoutout to another broadcaster, which shows their channel with a follow button in chat.",
+   "fr": "Fait un shoutout à un autre diffuseur, ce qui affiche sa chaîne dans le chat avec un bouton pour la suivre.",
    "token": "any",
    "href": "/reference/api/chat/#shoutout"
   },
@@ -247,6 +281,7 @@
    "kind": "method",
    "name": "twitch.chat.send()",
    "summary": "Sends a message to a channel's chat.",
+   "fr": "Envoie un message dans le chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#send"
   },
@@ -254,6 +289,7 @@
    "kind": "method",
    "name": "twitch.chat.pinnedMessage()",
    "summary": "Gets the message pinned in a channel's chat, or `null` when nothing is pinned.",
+   "fr": "Renvoie le message épinglé dans le chat d'une chaîne, ou `null` quand rien n'est épinglé.",
    "token": "any",
    "href": "/reference/api/chat/#pinnedmessage"
   },
@@ -261,6 +297,7 @@
    "kind": "method",
    "name": "twitch.chat.pin()",
    "summary": "Pins a message at the top of a channel's chat.",
+   "fr": "Épingle un message en haut du chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#pin"
   },
@@ -268,6 +305,7 @@
    "kind": "method",
    "name": "twitch.chat.updatePin()",
    "summary": "Changes how long a pinned message stays pinned.",
+   "fr": "Modifie la durée pendant laquelle un message épinglé le reste.",
    "token": "any",
    "href": "/reference/api/chat/#updatepin"
   },
@@ -275,6 +313,7 @@
    "kind": "method",
    "name": "twitch.chat.unpin()",
    "summary": "Removes a pinned message from the top of a channel's chat.",
+   "fr": "Retire un message épinglé du haut du chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/chat/#unpin"
   },
@@ -282,6 +321,7 @@
    "kind": "method",
    "name": "twitch.chat.colors()",
    "summary": "Gets the color users have for their name in chat.",
+   "fr": "Renvoie la couleur du nom des utilisateurs dans le chat.",
    "token": "any",
    "href": "/reference/api/chat/#colors"
   },
@@ -289,6 +329,7 @@
    "kind": "method",
    "name": "twitch.chat.setColor()",
    "summary": "Changes the color of a user's name in chat.",
+   "fr": "Modifie la couleur du nom d'un utilisateur dans le chat.",
    "token": "user",
    "href": "/reference/api/chat/#setcolor"
   },
@@ -296,6 +337,7 @@
    "kind": "method",
    "name": "twitch.clips.create()",
    "summary": "Clips the last seconds of a live stream.",
+   "fr": "Met en clip les dernières secondes d'un stream en direct.",
    "token": "user",
    "href": "/reference/api/clips/#create"
   },
@@ -303,6 +345,7 @@
    "kind": "method",
    "name": "twitch.clips.createFromVod()",
    "summary": "Clips a passage of a video, as the broadcaster or one of the channel's editors.",
+   "fr": "Met en clip un passage d'une vidéo, en tant que diffuseur ou éditeur de la chaîne.",
    "token": "any",
    "href": "/reference/api/clips/#createfromvod"
   },
@@ -310,6 +353,7 @@
    "kind": "method",
    "name": "twitch.clips.get()",
    "summary": "Lists the clips of a broadcaster or of a category, most viewed first, or gets clips by ID.",
+   "fr": "Liste les clips d'un diffuseur ou d'une catégorie, du plus vu au moins vu, ou renvoie des clips d'après leur identifiant.",
    "token": "any",
    "href": "/reference/api/clips/#get"
   },
@@ -317,6 +361,7 @@
    "kind": "method",
    "name": "twitch.clips.downloads()",
    "summary": "Gets temporary links to the video files of clips, as the broadcaster or one of the channel's editors.",
+   "fr": "Renvoie des liens temporaires vers les fichiers vidéo de clips, en tant que diffuseur ou éditeur de la chaîne.",
    "token": "any",
    "href": "/reference/api/clips/#downloads"
   },
@@ -324,6 +369,7 @@
    "kind": "method",
    "name": "twitch.conduits.list()",
    "summary": "Lists the conduits of your application.",
+   "fr": "Liste les conduits de votre application.",
    "token": "app",
    "href": "/reference/api/conduits/#list"
   },
@@ -331,6 +377,7 @@
    "kind": "method",
    "name": "twitch.conduits.create()",
    "summary": "Creates a conduit with the given number of shards.",
+   "fr": "Crée un conduit avec le nombre de shards donné.",
    "token": "app",
    "href": "/reference/api/conduits/#create"
   },
@@ -338,6 +385,7 @@
    "kind": "method",
    "name": "twitch.conduits.update()",
    "summary": "Changes the number of shards of a conduit.",
+   "fr": "Change le nombre de shards d'un conduit.",
    "token": "app",
    "href": "/reference/api/conduits/#update"
   },
@@ -345,6 +393,7 @@
    "kind": "method",
    "name": "twitch.conduits.delete()",
    "summary": "Deletes a conduit.",
+   "fr": "Supprime un conduit.",
    "token": "app",
    "href": "/reference/api/conduits/#delete"
   },
@@ -352,6 +401,7 @@
    "kind": "method",
    "name": "twitch.conduits.shards()",
    "summary": "Lists the shards of a conduit and where each one delivers events.",
+   "fr": "Liste les shards d'un conduit et l'endroit où chacun livre les événements.",
    "token": "app",
    "href": "/reference/api/conduits/#shards"
   },
@@ -359,6 +409,7 @@
    "kind": "method",
    "name": "twitch.conduits.updateShards()",
    "summary": "Points shards at a webhook callback or a WebSocket session.",
+   "fr": "Dirige des shards vers un callback de webhook ou une session WebSocket.",
    "token": "app",
    "href": "/reference/api/conduits/#updateshards"
   },
@@ -366,6 +417,7 @@
    "kind": "method",
    "name": "twitch.contentLabels.list()",
    "summary": "Lists every content classification label, with its name and description in the language you ask for.",
+   "fr": "Liste toutes les étiquettes de classification du contenu, avec leur nom et leur description dans la langue demandée.",
    "token": "any",
    "href": "/reference/api/content-labels/#list"
   },
@@ -373,6 +425,7 @@
    "kind": "method",
    "name": "twitch.entitlements.drops()",
    "summary": "Lists the Drops entitlements of your organization, in no particular order.",
+   "fr": "Liste les droits liés aux Drops de votre organisation, sans ordre particulier.",
    "token": "any",
    "href": "/reference/api/entitlements/#drops"
   },
@@ -380,6 +433,7 @@
    "kind": "method",
    "name": "twitch.entitlements.updateDrops()",
    "summary": "Sets the status of Drops entitlements, typically to `\"FULFILLED\"` once the reward was delivered in game.",
+   "fr": "Définit le statut de droits liés aux Drops, en général `\"FULFILLED\"` une fois la récompense remise en jeu.",
    "token": "any",
    "href": "/reference/api/entitlements/#updatedrops"
   },
@@ -387,6 +441,7 @@
    "kind": "method",
    "name": "twitch.eventsub.subscribe()",
    "summary": "Creates a subscription by hand.",
+   "fr": "Crée un abonnement à la main.",
    "token": "user",
    "href": "/reference/api/eventsub/#subscribe"
   },
@@ -394,6 +449,7 @@
    "kind": "method",
    "name": "twitch.eventsub.unsubscribe()",
    "summary": "Deletes a subscription.",
+   "fr": "Supprime un abonnement.",
    "token": "user",
    "href": "/reference/api/eventsub/#unsubscribe"
   },
@@ -401,6 +457,7 @@
    "kind": "method",
    "name": "twitch.eventsub.subscriptions()",
    "summary": "Lists your subscriptions, oldest first.",
+   "fr": "Liste vos abonnements, du plus ancien au plus récent.",
    "token": "any",
    "href": "/reference/api/eventsub/#subscriptions"
   },
@@ -408,6 +465,7 @@
    "kind": "method",
    "name": "twitch.eventsub.websocket()",
    "summary": "Opens a WebSocket listener.",
+   "fr": "Ouvre un écouteur WebSocket.",
    "token": "other",
    "href": "/reference/api/eventsub/#websocket"
   },
@@ -415,6 +473,7 @@
    "kind": "method",
    "name": "twitch.eventsub.webhook()",
    "summary": "Creates a webhook listener, for servers reachable from the internet.",
+   "fr": "Crée un écouteur webhook, pour les serveurs joignables depuis Internet.",
    "token": "other",
    "href": "/reference/api/eventsub/#webhook"
   },
@@ -422,6 +481,7 @@
    "kind": "method",
    "name": "twitch.eventsub.conduit()",
    "summary": "Opens a WebSocket that serves one shard of a conduit.",
+   "fr": "Ouvre un WebSocket qui dessert un shard d'un conduit.",
    "token": "other",
    "href": "/reference/api/eventsub/#conduit"
   },
@@ -429,6 +489,7 @@
    "kind": "method",
    "name": "twitch.extensions.configuration()",
    "summary": "Reads one or more configuration segments of an extension, in the order you asked for them.",
+   "fr": "Lit un ou plusieurs segments de configuration d'une extension, dans l'ordre où vous les avez demandés.",
    "token": "other",
    "href": "/reference/api/extensions/#configuration"
   },
@@ -436,6 +497,7 @@
    "kind": "method",
    "name": "twitch.extensions.setConfiguration()",
    "summary": "Writes a configuration segment.",
+   "fr": "Écrit un segment de configuration.",
    "token": "other",
    "href": "/reference/api/extensions/#setconfiguration"
   },
@@ -443,6 +505,7 @@
    "kind": "method",
    "name": "twitch.extensions.setRequiredConfiguration()",
    "summary": "Sets the required configuration string of a channel, for extensions that must be configured by the broadcaster before they can be activated.",
+   "fr": "Définit, pour une chaîne, la chaîne de caractères de configuration requise, dans le cas des extensions que le diffuseur doit configurer avant de pouvoir les activer.",
    "token": "other",
    "href": "/reference/api/extensions/#setrequiredconfiguration"
   },
@@ -450,6 +513,7 @@
    "kind": "method",
    "name": "twitch.extensions.sendPubSub()",
    "summary": "Pushes a message to the running copies of an extension.",
+   "fr": "Envoie un message aux copies d'une extension en cours d'exécution.",
    "token": "other",
    "href": "/reference/api/extensions/#sendpubsub"
   },
@@ -457,6 +521,7 @@
    "kind": "method",
    "name": "twitch.extensions.liveChannels()",
    "summary": "Lists the channels that are live with an extension installed or activated.",
+   "fr": "Liste les chaînes en direct qui ont installé ou activé une extension.",
    "token": "any",
    "href": "/reference/api/extensions/#livechannels"
   },
@@ -464,6 +529,7 @@
    "kind": "method",
    "name": "twitch.extensions.secrets()",
    "summary": "Gets the shared secrets of an extension.",
+   "fr": "Renvoie les secrets partagés d'une extension.",
    "token": "other",
    "href": "/reference/api/extensions/#secrets"
   },
@@ -471,6 +537,7 @@
    "kind": "method",
    "name": "twitch.extensions.createSecret()",
    "summary": "Creates a new shared secret.",
+   "fr": "Crée un nouveau secret partagé.",
    "token": "other",
    "href": "/reference/api/extensions/#createsecret"
   },
@@ -478,6 +545,7 @@
    "kind": "method",
    "name": "twitch.extensions.sendChatMessage()",
    "summary": "Posts a message in a channel's chat under the name of the extension.",
+   "fr": "Publie un message dans le chat d'une chaîne sous le nom de l'extension.",
    "token": "other",
    "href": "/reference/api/extensions/#sendchatmessage"
   },
@@ -485,6 +553,7 @@
    "kind": "method",
    "name": "twitch.extensions.get()",
    "summary": "Gets the description of an extension, released or not.",
+   "fr": "Renvoie la description d'une extension, publiée ou non.",
    "token": "other",
    "href": "/reference/api/extensions/#get"
   },
@@ -492,6 +561,7 @@
    "kind": "method",
    "name": "twitch.extensions.released()",
    "summary": "Gets the description of a released extension.",
+   "fr": "Renvoie la description d'une extension publiée.",
    "token": "any",
    "href": "/reference/api/extensions/#released"
   },
@@ -499,6 +569,7 @@
    "kind": "method",
    "name": "twitch.extensions.bitsProducts()",
    "summary": "Lists the Bits products of the extension your client ID belongs to, sorted by SKU.",
+   "fr": "Liste les produits Bits de l'extension à laquelle appartient votre identifiant client, triés par SKU.",
    "token": "app",
    "href": "/reference/api/extensions/#bitsproducts"
   },
@@ -506,6 +577,7 @@
    "kind": "method",
    "name": "twitch.extensions.updateBitsProduct()",
    "summary": "Creates a Bits product, or updates the one that already has this SKU.",
+   "fr": "Crée un produit Bits, ou met à jour celui qui porte déjà ce SKU.",
    "token": "app",
    "href": "/reference/api/extensions/#updatebitsproduct"
   },
@@ -513,6 +585,7 @@
    "kind": "method",
    "name": "twitch.games.top()",
    "summary": "Lists the categories with the most viewers right now, most watched first.",
+   "fr": "Liste les catégories qui ont le plus de spectateurs en ce moment, en commençant par les plus regardées.",
    "token": "any",
    "href": "/reference/api/games/#top"
   },
@@ -520,6 +593,7 @@
    "kind": "method",
    "name": "twitch.games.get()",
    "summary": "Gets categories by ID, by exact name, by IGDB ID, or any mix of them.",
+   "fr": "Renvoie des catégories d'après leur identifiant, leur nom exact, leur identifiant IGDB, ou n'importe quelle combinaison des trois.",
    "token": "any",
    "href": "/reference/api/games/#get"
   },
@@ -527,6 +601,7 @@
    "kind": "method",
    "name": "twitch.goals.get()",
    "summary": "Lists the active goals of a broadcaster with their current progress.",
+   "fr": "Liste les objectifs actifs d'un diffuseur avec leur progression actuelle.",
    "token": "user",
    "href": "/reference/api/goals/#get"
   },
@@ -534,6 +609,7 @@
    "kind": "method",
    "name": "twitch.guestStar.settings()",
    "summary": "Gets the Guest Star settings of a channel.",
+   "fr": "Renvoie les réglages Guest Star d'une chaîne.",
    "token": "user",
    "href": "/reference/api/guest-star/#settings"
   },
@@ -541,6 +617,7 @@
    "kind": "method",
    "name": "twitch.guestStar.updateSettings()",
    "summary": "Changes the Guest Star settings of a channel.",
+   "fr": "Modifie les réglages Guest Star d'une chaîne.",
    "token": "user",
    "href": "/reference/api/guest-star/#updatesettings"
   },
@@ -548,6 +625,7 @@
    "kind": "method",
    "name": "twitch.guestStar.session()",
    "summary": "Gets the Guest Star session a channel is running, or `null` when there is none.",
+   "fr": "Renvoie la session Guest Star en cours sur une chaîne, ou `null` quand il n'y en a aucune.",
    "token": "user",
    "href": "/reference/api/guest-star/#session"
   },
@@ -555,6 +633,7 @@
    "kind": "method",
    "name": "twitch.guestStar.createSession()",
    "summary": "Starts a Guest Star session with the broadcaster as its only member.",
+   "fr": "Lance une session Guest Star dont le diffuseur est le seul membre.",
    "token": "user",
    "href": "/reference/api/guest-star/#createsession"
   },
@@ -562,6 +641,7 @@
    "kind": "method",
    "name": "twitch.guestStar.endSession()",
    "summary": "Ends a Guest Star session, like the host pressing \"End Call\".",
+   "fr": "Met fin à une session Guest Star, comme si l'hôte appuyait sur « End Call ».",
    "token": "user",
    "href": "/reference/api/guest-star/#endsession"
   },
@@ -569,6 +649,7 @@
    "kind": "method",
    "name": "twitch.guestStar.invites()",
    "summary": "Lists the pending invitations of a session, with how far each invited user is in the waiting room.",
+   "fr": "Liste les invitations en attente d'une session, en indiquant où en est chaque utilisateur invité dans la salle d'attente.",
    "token": "user",
    "href": "/reference/api/guest-star/#invites"
   },
@@ -576,6 +657,7 @@
    "kind": "method",
    "name": "twitch.guestStar.invite()",
    "summary": "Invites a user to a session in progress.",
+   "fr": "Invite un utilisateur à une session en cours.",
    "token": "user",
    "href": "/reference/api/guest-star/#invite"
   },
@@ -583,6 +665,7 @@
    "kind": "method",
    "name": "twitch.guestStar.deleteInvite()",
    "summary": "Takes back an invitation to a session.",
+   "fr": "Retire une invitation à une session.",
    "token": "user",
    "href": "/reference/api/guest-star/#deleteinvite"
   },
@@ -590,6 +673,7 @@
    "kind": "method",
    "name": "twitch.guestStar.assignSlot()",
    "summary": "Seats an invited user in a slot of the session, once they are ready to join.",
+   "fr": "Installe un utilisateur invité à un emplacement de la session, une fois qu'il est prêt à la rejoindre.",
    "token": "user",
    "href": "/reference/api/guest-star/#assignslot"
   },
@@ -597,6 +681,7 @@
    "kind": "method",
    "name": "twitch.guestStar.updateSlot()",
    "summary": "Moves a guest to another slot.",
+   "fr": "Déplace un invité vers un autre emplacement.",
    "token": "user",
    "href": "/reference/api/guest-star/#updateslot"
   },
@@ -604,6 +689,7 @@
    "kind": "method",
    "name": "twitch.guestStar.deleteSlot()",
    "summary": "Removes a guest from their slot.",
+   "fr": "Retire un invité de son emplacement.",
    "token": "user",
    "href": "/reference/api/guest-star/#deleteslot"
   },
@@ -611,6 +697,7 @@
    "kind": "method",
    "name": "twitch.guestStar.updateSlotSettings()",
    "summary": "Changes what a slot may share and how it comes out on stream.",
+   "fr": "Modifie ce qu'un emplacement peut partager et la façon dont il apparaît dans le stream.",
    "token": "user",
    "href": "/reference/api/guest-star/#updateslotsettings"
   },
@@ -618,6 +705,7 @@
    "kind": "method",
    "name": "twitch.hypeTrain.status()",
    "summary": "Gets the Hype Train running on a channel, if any, along with the records of the channel.",
+   "fr": "Renvoie le Hype Train en cours sur une chaîne, s'il y en a un, ainsi que les records de la chaîne.",
    "token": "user",
    "href": "/reference/api/hype-train/#status"
   },
@@ -625,6 +713,7 @@
    "kind": "method",
    "name": "twitch.moderation.checkAutoMod()",
    "summary": "Tells whether AutoMod would let messages through in a channel, without sending them.",
+   "fr": "Indique si AutoMod laisserait passer des messages sur une chaîne, sans les envoyer.",
    "token": "any",
    "href": "/reference/api/moderation/#checkautomod"
   },
@@ -632,6 +721,7 @@
    "kind": "method",
    "name": "twitch.moderation.manageAutoModMessage()",
    "summary": "Approves or denies a message that AutoMod is holding for review.",
+   "fr": "Approuve ou refuse un message qu'AutoMod retient pour examen.",
    "token": "any",
    "href": "/reference/api/moderation/#manageautomodmessage"
   },
@@ -639,6 +729,7 @@
    "kind": "method",
    "name": "twitch.moderation.autoModSettings()",
    "summary": "Gets the AutoMod levels of a channel.",
+   "fr": "Renvoie les niveaux AutoMod d'une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#automodsettings"
   },
@@ -646,6 +737,7 @@
    "kind": "method",
    "name": "twitch.moderation.updateAutoModSettings()",
    "summary": "Replaces the AutoMod levels of a channel.",
+   "fr": "Remplace les niveaux AutoMod d'une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#updateautomodsettings"
   },
@@ -653,6 +745,7 @@
    "kind": "method",
    "name": "twitch.moderation.bans()",
    "summary": "Lists the users who are banned or timed out in a channel.",
+   "fr": "Liste les utilisateurs bannis ou sous timeout sur une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#bans"
   },
@@ -660,6 +753,7 @@
    "kind": "method",
    "name": "twitch.moderation.ban()",
    "summary": "Bans a user from a channel's chat.",
+   "fr": "Bannit un utilisateur du chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#ban"
   },
@@ -667,6 +761,7 @@
    "kind": "method",
    "name": "twitch.moderation.unban()",
    "summary": "Lifts the ban or the timeout of a user.",
+   "fr": "Lève le bannissement ou le timeout d'un utilisateur.",
    "token": "any",
    "href": "/reference/api/moderation/#unban"
   },
@@ -674,6 +769,7 @@
    "kind": "method",
    "name": "twitch.moderation.unbanRequests()",
    "summary": "Lists the unban requests of a channel that are in a given state.",
+   "fr": "Liste les demandes de débannissement d'une chaîne qui sont dans un état donné.",
    "token": "user",
    "href": "/reference/api/moderation/#unbanrequests"
   },
@@ -681,6 +777,7 @@
    "kind": "method",
    "name": "twitch.moderation.resolveUnbanRequest()",
    "summary": "Approves or denies an unban request.",
+   "fr": "Approuve ou refuse une demande de débannissement.",
    "token": "user",
    "href": "/reference/api/moderation/#resolveunbanrequest"
   },
@@ -688,6 +785,7 @@
    "kind": "method",
    "name": "twitch.moderation.blockedTerms()",
    "summary": "Lists the blocked terms of a channel, newest first.",
+   "fr": "Liste les termes bloqués d'une chaîne, du plus récent au plus ancien.",
    "token": "any",
    "href": "/reference/api/moderation/#blockedterms"
   },
@@ -695,6 +793,7 @@
    "kind": "method",
    "name": "twitch.moderation.addBlockedTerm()",
    "summary": "Blocks a word or phrase in a channel's chat.",
+   "fr": "Bloque un mot ou une expression dans le chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#addblockedterm"
   },
@@ -702,6 +801,7 @@
    "kind": "method",
    "name": "twitch.moderation.removeBlockedTerm()",
    "summary": "Removes a term from a channel's blocked terms.",
+   "fr": "Retire un terme des termes bloqués d'une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#removeblockedterm"
   },
@@ -709,6 +809,7 @@
    "kind": "method",
    "name": "twitch.moderation.deleteMessages()",
    "summary": "Removes one message from a channel's chat, or every message when no `message_id` is given.",
+   "fr": "Supprime un message du chat d'une chaîne, ou tous les messages quand aucun `message_id` n'est donné.",
    "token": "any",
    "href": "/reference/api/moderation/#deletemessages"
   },
@@ -716,6 +817,7 @@
    "kind": "method",
    "name": "twitch.moderation.moderatedChannels()",
    "summary": "Lists the channels in which a user is a moderator.",
+   "fr": "Liste les chaînes dont un utilisateur est modérateur.",
    "token": "any",
    "href": "/reference/api/moderation/#moderatedchannels"
   },
@@ -723,6 +825,7 @@
    "kind": "method",
    "name": "twitch.moderation.moderators()",
    "summary": "Lists the moderators of a channel.",
+   "fr": "Liste les modérateurs d'une chaîne.",
    "token": "user",
    "href": "/reference/api/moderation/#moderators"
   },
@@ -730,6 +833,7 @@
    "kind": "method",
    "name": "twitch.moderation.addModerator()",
    "summary": "Makes a user a moderator of the channel.",
+   "fr": "Nomme un utilisateur modérateur de la chaîne.",
    "token": "user",
    "href": "/reference/api/moderation/#addmoderator"
   },
@@ -737,6 +841,7 @@
    "kind": "method",
    "name": "twitch.moderation.removeModerator()",
    "summary": "Takes the moderator role away from a user.",
+   "fr": "Retire le rôle de modérateur à un utilisateur.",
    "token": "user",
    "href": "/reference/api/moderation/#removemoderator"
   },
@@ -744,6 +849,7 @@
    "kind": "method",
    "name": "twitch.moderation.vips()",
    "summary": "Lists the VIPs of a channel.",
+   "fr": "Liste les VIP d'une chaîne.",
    "token": "user",
    "href": "/reference/api/moderation/#vips"
   },
@@ -751,6 +857,7 @@
    "kind": "method",
    "name": "twitch.moderation.addVip()",
    "summary": "Makes a user a VIP of the channel.",
+   "fr": "Nomme un utilisateur VIP de la chaîne.",
    "token": "user",
    "href": "/reference/api/moderation/#addvip"
   },
@@ -758,6 +865,7 @@
    "kind": "method",
    "name": "twitch.moderation.removeVip()",
    "summary": "Takes the VIP status away from a user.",
+   "fr": "Retire le statut VIP à un utilisateur.",
    "token": "user",
    "href": "/reference/api/moderation/#removevip"
   },
@@ -765,6 +873,7 @@
    "kind": "method",
    "name": "twitch.moderation.updateShieldMode()",
    "summary": "Turns Shield Mode on or off in a channel.",
+   "fr": "Active ou désactive le Shield Mode sur une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#updateshieldmode"
   },
@@ -772,6 +881,7 @@
    "kind": "method",
    "name": "twitch.moderation.shieldMode()",
    "summary": "Tells whether Shield Mode is on in a channel and who turned it on last.",
+   "fr": "Indique si le Shield Mode est activé sur une chaîne et qui l'a activé en dernier.",
    "token": "any",
    "href": "/reference/api/moderation/#shieldmode"
   },
@@ -779,6 +889,7 @@
    "kind": "method",
    "name": "twitch.moderation.warn()",
    "summary": "Sends a warning to a chat user, who cannot chat again until they acknowledge it.",
+   "fr": "Envoie un avertissement à un utilisateur du chat, qui ne peut plus y écrire tant qu'il n'en a pas pris acte.",
    "token": "any",
    "href": "/reference/api/moderation/#warn"
   },
@@ -786,6 +897,7 @@
    "kind": "method",
    "name": "twitch.moderation.addSuspiciousStatus()",
    "summary": "Flags a chatter as suspicious in a channel, either to keep an eye on them or to restrict their messages.",
+   "fr": "Signale comme suspect un spectateur présent dans le chat d'une chaîne, soit pour le surveiller, soit pour restreindre ses messages.",
    "token": "any",
    "href": "/reference/api/moderation/#addsuspiciousstatus"
   },
@@ -793,6 +905,7 @@
    "kind": "method",
    "name": "twitch.moderation.removeSuspiciousStatus()",
    "summary": "Clears the suspicious status of a chatter in a channel.",
+   "fr": "Retire le statut suspect d'un spectateur présent dans le chat d'une chaîne.",
    "token": "any",
    "href": "/reference/api/moderation/#removesuspiciousstatus"
   },
@@ -800,6 +913,7 @@
    "kind": "method",
    "name": "twitch.polls.get()",
    "summary": "Lists the polls of a channel, most recent first.",
+   "fr": "Liste les sondages d'une chaîne, du plus récent au plus ancien.",
    "token": "user",
    "href": "/reference/api/polls/#get"
   },
@@ -807,6 +921,7 @@
    "kind": "method",
    "name": "twitch.polls.create()",
    "summary": "Starts a poll in a channel.",
+   "fr": "Lance un sondage sur une chaîne.",
    "token": "user",
    "href": "/reference/api/polls/#create"
   },
@@ -814,6 +929,7 @@
    "kind": "method",
    "name": "twitch.polls.end()",
    "summary": "Ends a running poll before its time is up, and optionally hides it.",
+   "fr": "Clôt un sondage en cours avant la fin de sa durée et, si vous le demandez, le masque.",
    "token": "user",
    "href": "/reference/api/polls/#end"
   },
@@ -821,6 +937,7 @@
    "kind": "method",
    "name": "twitch.predictions.get()",
    "summary": "Lists the predictions of a channel, most recent first.",
+   "fr": "Liste les prédictions d'une chaîne, de la plus récente à la plus ancienne.",
    "token": "user",
    "href": "/reference/api/predictions/#get"
   },
@@ -828,6 +945,7 @@
    "kind": "method",
    "name": "twitch.predictions.create()",
    "summary": "Starts a prediction in a channel.",
+   "fr": "Lance une prédiction sur une chaîne.",
    "token": "user",
    "href": "/reference/api/predictions/#create"
   },
@@ -835,6 +953,7 @@
    "kind": "method",
    "name": "twitch.predictions.end()",
    "summary": "Locks, resolves or cancels a prediction.",
+   "fr": "Verrouille, résout ou annule une prédiction.",
    "token": "user",
    "href": "/reference/api/predictions/#end"
   },
@@ -842,6 +961,7 @@
    "kind": "method",
    "name": "twitch.raids.start()",
    "summary": "Prepares a raid on another channel.",
+   "fr": "Prépare un raid vers une autre chaîne.",
    "token": "user",
    "href": "/reference/api/raids/#start"
   },
@@ -849,6 +969,7 @@
    "kind": "method",
    "name": "twitch.raids.cancel()",
    "summary": "Cancels a raid that has not left yet.",
+   "fr": "Annule un raid qui n'est pas encore parti.",
    "token": "user",
    "href": "/reference/api/raids/#cancel"
   },
@@ -856,6 +977,7 @@
    "kind": "method",
    "name": "twitch.schedule.get()",
    "summary": "Lists the planned broadcasts of a channel.",
+   "fr": "Liste les diffusions prévues d'une chaîne.",
    "token": "any",
    "href": "/reference/api/schedule/#get"
   },
@@ -863,6 +985,7 @@
    "kind": "method",
    "name": "twitch.schedule.icalendar()",
    "summary": "Gets the schedule of a channel as iCalendar text, ready to be saved as an `.ics` file.",
+   "fr": "Renvoie le planning d'une chaîne sous forme de texte iCalendar, prêt à être enregistré dans un fichier `.ics`.",
    "token": "any",
    "href": "/reference/api/schedule/#icalendar"
   },
@@ -870,6 +993,7 @@
    "kind": "method",
    "name": "twitch.schedule.updateSettings()",
    "summary": "Plans or cancels the vacation of a channel.",
+   "fr": "Planifie ou annule les vacances d'une chaîne.",
    "token": "user",
    "href": "/reference/api/schedule/#updatesettings"
   },
@@ -877,6 +1001,7 @@
    "kind": "method",
    "name": "twitch.schedule.createSegment()",
    "summary": "Adds a one-time or weekly broadcast to the schedule of a channel.",
+   "fr": "Ajoute une diffusion ponctuelle ou hebdomadaire au planning d'une chaîne.",
    "token": "user",
    "href": "/reference/api/schedule/#createsegment"
   },
@@ -884,6 +1009,7 @@
    "kind": "method",
    "name": "twitch.schedule.updateSegment()",
    "summary": "Changes or cancels a planned broadcast.",
+   "fr": "Modifie ou annule une diffusion prévue.",
    "token": "user",
    "href": "/reference/api/schedule/#updatesegment"
   },
@@ -891,6 +1017,7 @@
    "kind": "method",
    "name": "twitch.schedule.deleteSegment()",
    "summary": "Removes a planned broadcast.",
+   "fr": "Supprime une diffusion prévue.",
    "token": "user",
    "href": "/reference/api/schedule/#deletesegment"
   },
@@ -898,6 +1025,7 @@
    "kind": "method",
    "name": "twitch.search.categories()",
    "summary": "Finds the categories whose name contains every word of the query, in any order and whatever the case.",
+   "fr": "Trouve les catégories dont le nom contient tous les mots de la recherche, dans n'importe quel ordre et sans tenir compte de la casse.",
    "token": "any",
    "href": "/reference/api/search/#categories"
   },
@@ -905,6 +1033,7 @@
    "kind": "method",
    "name": "twitch.search.channels()",
    "summary": "Finds channels that streamed in the last six months.",
+   "fr": "Trouve les chaînes qui ont streamé au cours des six derniers mois.",
    "token": "any",
    "href": "/reference/api/search/#channels"
   },
@@ -912,6 +1041,7 @@
    "kind": "method",
    "name": "twitch.streams.get()",
    "summary": "Lists live streams, most viewers first.",
+   "fr": "Liste les streams en direct, en commençant par ceux qui ont le plus de spectateurs.",
    "token": "any",
    "href": "/reference/api/streams/#get"
   },
@@ -919,6 +1049,7 @@
    "kind": "method",
    "name": "twitch.streams.followed()",
    "summary": "Lists the live streams of the channels a user follows, most viewers first.",
+   "fr": "Liste les streams en direct des chaînes que suit un utilisateur, en commençant par ceux qui ont le plus de spectateurs.",
    "token": "user",
    "href": "/reference/api/streams/#followed"
   },
@@ -926,6 +1057,7 @@
    "kind": "method",
    "name": "twitch.streams.key()",
    "summary": "Gets the stream key of a channel.",
+   "fr": "Renvoie la clé de stream d'une chaîne.",
    "token": "user",
    "href": "/reference/api/streams/#key"
   },
@@ -933,6 +1065,7 @@
    "kind": "method",
    "name": "twitch.streams.createMarker()",
    "summary": "Marks the current position of a live stream.",
+   "fr": "Marque la position actuelle d'un stream en direct.",
    "token": "user",
    "href": "/reference/api/streams/#createmarker"
   },
@@ -940,6 +1073,7 @@
    "kind": "method",
    "name": "twitch.streams.markers()",
    "summary": "Lists the markers of a user's most recent video, or of a given video.",
+   "fr": "Liste les marqueurs de la vidéo la plus récente d'un utilisateur, ou d'une vidéo donnée.",
    "token": "user",
    "href": "/reference/api/streams/#markers"
   },
@@ -947,6 +1081,7 @@
    "kind": "method",
    "name": "twitch.subscriptions.get()",
    "summary": "Lists the subscribers of a channel.",
+   "fr": "Liste les abonnés d'une chaîne.",
    "token": "user",
    "href": "/reference/api/subscriptions/#get"
   },
@@ -954,6 +1089,7 @@
    "kind": "method",
    "name": "twitch.subscriptions.check()",
    "summary": "Gets the subscription of a user to a channel, or `null` when the user is not subscribed.",
+   "fr": "Renvoie l'abonnement d'un utilisateur à une chaîne, ou `null` quand il n'y est pas abonné.",
    "token": "user",
    "href": "/reference/api/subscriptions/#check"
   },
@@ -961,6 +1097,7 @@
    "kind": "method",
    "name": "twitch.tags.all()",
    "summary": "Lists the stream tags defined by Twitch.",
+   "fr": "Liste les tags de stream définis par Twitch.",
    "token": "any",
    "href": "/reference/api/tags/#all"
   },
@@ -968,6 +1105,7 @@
    "kind": "method",
    "name": "twitch.tags.ofChannel()",
    "summary": "Lists the Twitch defined tags applied to a channel.",
+   "fr": "Liste les tags définis par Twitch appliqués à une chaîne.",
    "token": "any",
    "href": "/reference/api/tags/#ofchannel"
   },
@@ -975,6 +1113,7 @@
    "kind": "method",
    "name": "twitch.teams.ofChannel()",
    "summary": "Lists the teams a broadcaster is a member of.",
+   "fr": "Liste les équipes dont un diffuseur est membre.",
    "token": "any",
    "href": "/reference/api/teams/#ofchannel"
   },
@@ -982,6 +1121,7 @@
    "kind": "method",
    "name": "twitch.teams.get()",
    "summary": "Gets a team and its members, by name or by ID.",
+   "fr": "Renvoie une équipe et ses membres, d'après son nom ou son identifiant.",
    "token": "any",
    "href": "/reference/api/teams/#get"
   },
@@ -989,6 +1129,7 @@
    "kind": "method",
    "name": "twitch.users.get()",
    "summary": "Gets users by ID, by login name, or both.",
+   "fr": "Renvoie des utilisateurs d'après leur identifiant, leur nom de connexion, ou les deux.",
    "token": "any",
    "href": "/reference/api/users/#get"
   },
@@ -996,6 +1137,7 @@
    "kind": "method",
    "name": "twitch.users.getById()",
    "summary": "Gets one user by ID, or `null` when there is no such user.",
+   "fr": "Renvoie un utilisateur d'après son identifiant, ou `null` quand il n'existe pas.",
    "token": "any",
    "href": "/reference/api/users/#getbyid"
   },
@@ -1003,6 +1145,7 @@
    "kind": "method",
    "name": "twitch.users.getByLogin()",
    "summary": "Gets one user by login name, or `null` when there is no such user.",
+   "fr": "Renvoie un utilisateur d'après son nom de connexion, ou `null` quand il n'existe pas.",
    "token": "any",
    "href": "/reference/api/users/#getbylogin"
   },
@@ -1010,6 +1153,7 @@
    "kind": "method",
    "name": "twitch.users.me()",
    "summary": "Gets the user who owns the token the call is made with.",
+   "fr": "Renvoie l'utilisateur à qui appartient le jeton utilisé pour l'appel.",
    "token": "user",
    "href": "/reference/api/users/#me"
   },
@@ -1017,6 +1161,7 @@
    "kind": "method",
    "name": "twitch.users.update()",
    "summary": "Updates the description of the user making the call.",
+   "fr": "Met à jour la description de l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/users/#update"
   },
@@ -1024,6 +1169,7 @@
    "kind": "method",
    "name": "twitch.users.authorization()",
    "summary": "Tells which scopes the given users granted to your application.",
+   "fr": "Indique quels scopes les utilisateurs donnés ont accordés à votre application.",
    "token": "app",
    "href": "/reference/api/users/#authorization"
   },
@@ -1031,6 +1177,7 @@
    "kind": "method",
    "name": "twitch.users.blocks()",
    "summary": "Lists the users a broadcaster has blocked, most recent first.",
+   "fr": "Liste les utilisateurs bloqués par un diffuseur, du plus récent au plus ancien.",
    "token": "user",
    "href": "/reference/api/users/#blocks"
   },
@@ -1038,6 +1185,7 @@
    "kind": "method",
    "name": "twitch.users.block()",
    "summary": "Blocks a user on behalf of the user making the call.",
+   "fr": "Bloque un utilisateur au nom de l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/users/#block"
   },
@@ -1045,6 +1193,7 @@
    "kind": "method",
    "name": "twitch.users.unblock()",
    "summary": "Removes a block set by the user making the call.",
+   "fr": "Lève un blocage posé par l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/users/#unblock"
   },
@@ -1052,6 +1201,7 @@
    "kind": "method",
    "name": "twitch.users.extensions()",
    "summary": "Lists the extensions installed by the user making the call.",
+   "fr": "Liste les extensions installées par l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/users/#extensions"
   },
@@ -1059,6 +1209,7 @@
    "kind": "method",
    "name": "twitch.users.activeExtensions()",
    "summary": "Gets the extensions a broadcaster has active in each slot.",
+   "fr": "Renvoie les extensions actives d'un diffuseur, emplacement par emplacement.",
    "token": "any",
    "href": "/reference/api/users/#activeextensions"
   },
@@ -1066,6 +1217,7 @@
    "kind": "method",
    "name": "twitch.users.updateExtensions()",
    "summary": "Activates, deactivates or moves the extensions of the user making the call.",
+   "fr": "Active, désactive ou déplace les extensions de l'utilisateur qui fait l'appel.",
    "token": "user",
    "href": "/reference/api/users/#updateextensions"
   },
@@ -1073,6 +1225,7 @@
    "kind": "method",
    "name": "twitch.videos.get()",
    "summary": "Gets videos by ID, or lists the videos of a user or of a category.",
+   "fr": "Renvoie des vidéos d'après leur identifiant, ou liste les vidéos d'un utilisateur ou d'une catégorie.",
    "token": "any",
    "href": "/reference/api/videos/#get"
   },
@@ -1080,6 +1233,7 @@
    "kind": "method",
    "name": "twitch.videos.delete()",
    "summary": "Deletes videos and resolves with the IDs that were deleted.",
+   "fr": "Supprime des vidéos et se résout avec les identifiants supprimés.",
    "token": "user",
    "href": "/reference/api/videos/#delete"
   },
@@ -1087,6 +1241,7 @@
    "kind": "method",
    "name": "twitch.whispers.send()",
    "summary": "Sends a whisper to a user.",
+   "fr": "Envoie un chuchotement à un utilisateur.",
    "token": "user",
    "href": "/reference/api/whispers/#send"
   },
@@ -1094,6 +1249,7 @@
    "kind": "event",
    "name": "automod.message.hold",
    "summary": "AutoMod held a message for review.",
+   "fr": "AutoMod a retenu un message pour examen.",
    "token": "",
    "href": "/reference/event-types/#automodmessagehold"
   },
@@ -1101,6 +1257,7 @@
    "kind": "event",
    "name": "automod.message.hold@1",
    "summary": "AutoMod held a message for review (older payload, without the reason).",
+   "fr": "AutoMod a retenu un message pour examen (ancien format, sans la raison).",
    "token": "",
    "href": "/reference/event-types/#automodmessagehold1"
   },
@@ -1108,6 +1265,7 @@
    "kind": "event",
    "name": "automod.message.update",
    "summary": "A message waiting in the AutoMod queue was approved, denied or expired.",
+   "fr": "Un message en attente dans la file d'AutoMod a été approuvé ou refusé, ou a expiré.",
    "token": "",
    "href": "/reference/event-types/#automodmessageupdate"
   },
@@ -1115,6 +1273,7 @@
    "kind": "event",
    "name": "automod.message.update@1",
    "summary": "A message waiting in the AutoMod queue was approved, denied or expired (older payload, without the reason).",
+   "fr": "Un message en attente dans la file d'AutoMod a été approuvé ou refusé, ou a expiré (ancien format, sans la raison).",
    "token": "",
    "href": "/reference/event-types/#automodmessageupdate1"
   },
@@ -1122,6 +1281,7 @@
    "kind": "event",
    "name": "automod.settings.update",
    "summary": "The AutoMod settings of the channel changed.",
+   "fr": "Les réglages AutoMod de la chaîne ont changé.",
    "token": "",
    "href": "/reference/event-types/#automodsettingsupdate"
   },
@@ -1129,6 +1289,7 @@
    "kind": "event",
    "name": "automod.terms.update",
    "summary": "Permitted or blocked terms of the channel changed.",
+   "fr": "Les termes autorisés ou bloqués de la chaîne ont changé.",
    "token": "",
    "href": "/reference/event-types/#automodtermsupdate"
   },
@@ -1136,6 +1297,7 @@
    "kind": "event",
    "name": "channel.ad_break.begin",
    "summary": "A midroll ad break started, run by hand or scheduled by Ads Manager.",
+   "fr": "Une coupure publicitaire mid-roll a commencé, lancée à la main ou programmée par Ads Manager.",
    "token": "",
    "href": "/reference/event-types/#channelad_breakbegin"
   },
@@ -1143,6 +1305,7 @@
    "kind": "event",
    "name": "channel.ban",
    "summary": "A viewer was banned or timed out in the channel.",
+   "fr": "Un spectateur a été banni ou mis sous timeout sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelban"
   },
@@ -1150,6 +1313,7 @@
    "kind": "event",
    "name": "channel.bits.use",
    "summary": "Bits were used in the channel, through a cheer or a Power-up.",
+   "fr": "Des Bits ont été utilisés sur la chaîne, par un cheer ou un Power-up.",
    "token": "",
    "href": "/reference/event-types/#channelbitsuse"
   },
@@ -1157,6 +1321,7 @@
    "kind": "event",
    "name": "channel.channel_points_automatic_reward_redemption.add",
    "summary": "A viewer redeemed an automatic channel points reward (version 2, message split into fragments).",
+   "fr": "Un spectateur a utilisé une récompense automatique de points de chaîne (version 2, message découpé en fragments).",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_automatic_reward_redemptionadd"
   },
@@ -1164,6 +1329,7 @@
    "kind": "event",
    "name": "channel.channel_points_automatic_reward_redemption.add@1",
    "summary": "A viewer redeemed an automatic channel points reward (version 1, message with emote positions).",
+   "fr": "Un spectateur a utilisé une récompense automatique de points de chaîne (version 1, message avec la position des emotes).",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_automatic_reward_redemptionadd1"
   },
@@ -1171,6 +1337,7 @@
    "kind": "event",
    "name": "channel.channel_points_custom_reward_redemption.add",
    "summary": "A viewer redeemed a custom channel points reward.",
+   "fr": "Un spectateur a utilisé une récompense personnalisée de points de chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_custom_reward_redemptionadd"
   },
@@ -1178,6 +1345,7 @@
    "kind": "event",
    "name": "channel.channel_points_custom_reward_redemption.update",
    "summary": "A redemption of a custom channel points reward was fulfilled or canceled.",
+   "fr": "Une utilisation d'une récompense personnalisée de points de chaîne a été honorée ou annulée.",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_custom_reward_redemptionupdate"
   },
@@ -1185,6 +1353,7 @@
    "kind": "event",
    "name": "channel.channel_points_custom_reward.add",
    "summary": "The broadcaster created a custom channel points reward.",
+   "fr": "Le diffuseur a créé une récompense personnalisée de points de chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_custom_rewardadd"
   },
@@ -1192,6 +1361,7 @@
    "kind": "event",
    "name": "channel.channel_points_custom_reward.remove",
    "summary": "A custom channel points reward was deleted.",
+   "fr": "Une récompense personnalisée de points de chaîne a été supprimée.",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_custom_rewardremove"
   },
@@ -1199,6 +1369,7 @@
    "kind": "event",
    "name": "channel.channel_points_custom_reward.update",
    "summary": "A custom channel points reward was edited.",
+   "fr": "Une récompense personnalisée de points de chaîne a été modifiée.",
    "token": "",
    "href": "/reference/event-types/#channelchannel_points_custom_rewardupdate"
   },
@@ -1206,6 +1377,7 @@
    "kind": "event",
    "name": "channel.charity_campaign.donate",
    "summary": "A viewer donated to the broadcaster's charity campaign.",
+   "fr": "Un spectateur a fait un don à la collecte caritative du diffuseur.",
    "token": "",
    "href": "/reference/event-types/#channelcharity_campaigndonate"
   },
@@ -1213,6 +1385,7 @@
    "kind": "event",
    "name": "channel.charity_campaign.progress",
    "summary": "A charity campaign moved toward its goal, or the broadcaster changed the goal.",
+   "fr": "Une collecte caritative a progressé vers son objectif, ou le diffuseur a modifié cet objectif.",
    "token": "",
    "href": "/reference/event-types/#channelcharity_campaignprogress"
   },
@@ -1220,6 +1393,7 @@
    "kind": "event",
    "name": "channel.charity_campaign.start",
    "summary": "The broadcaster started a charity campaign.",
+   "fr": "Le diffuseur a lancé une collecte caritative.",
    "token": "",
    "href": "/reference/event-types/#channelcharity_campaignstart"
   },
@@ -1227,6 +1401,7 @@
    "kind": "event",
    "name": "channel.charity_campaign.stop",
    "summary": "The broadcaster stopped a charity campaign.",
+   "fr": "Le diffuseur a arrêté une collecte caritative.",
    "token": "",
    "href": "/reference/event-types/#channelcharity_campaignstop"
   },
@@ -1234,6 +1409,7 @@
    "kind": "event",
    "name": "channel.chat_settings.update",
    "summary": "The chat settings of the channel changed (emote, follower, slow, subscriber or unique chat mode).",
+   "fr": "Les réglages du chat de la chaîne ont changé (mode emotes seules, followers, lent, abonnés ou messages uniques).",
    "token": "",
    "href": "/reference/event-types/#channelchat_settingsupdate"
   },
@@ -1241,6 +1417,7 @@
    "kind": "event",
    "name": "channel.chat.clear",
    "summary": "A moderator or a bot cleared every message of the chat room.",
+   "fr": "Un modérateur ou un bot a effacé tous les messages du chat.",
    "token": "",
    "href": "/reference/event-types/#channelchatclear"
   },
@@ -1248,6 +1425,7 @@
    "kind": "event",
    "name": "channel.chat.clear_user_messages",
    "summary": "A moderator or a bot cleared every message of one user, after a ban or a timeout.",
+   "fr": "Un modérateur ou un bot a effacé tous les messages d'un utilisateur, après un bannissement ou un timeout.",
    "token": "",
    "href": "/reference/event-types/#channelchatclear_user_messages"
   },
@@ -1255,6 +1433,7 @@
    "kind": "event",
    "name": "channel.chat.message",
    "summary": "A user sent a message in the chat room.",
+   "fr": "Un utilisateur a envoyé un message dans le chat.",
    "token": "",
    "href": "/reference/event-types/#channelchatmessage"
   },
@@ -1262,6 +1441,7 @@
    "kind": "event",
    "name": "channel.chat.message_delete",
    "summary": "A moderator removed one message from the chat room.",
+   "fr": "Un modérateur a supprimé un message du chat.",
    "token": "",
    "href": "/reference/event-types/#channelchatmessage_delete"
   },
@@ -1269,6 +1449,7 @@
    "kind": "event",
    "name": "channel.chat.notification",
    "summary": "Something shown as a notice in chat happened, such as a subscription, a gift, a raid or an announcement.",
+   "fr": "Il s'est produit quelque chose que le chat affiche comme une notification, par exemple un abonnement, un abonnement offert, un raid ou une annonce.",
    "token": "",
    "href": "/reference/event-types/#channelchatnotification"
   },
@@ -1276,6 +1457,7 @@
    "kind": "event",
    "name": "channel.chat.user_message_hold",
    "summary": "A message of the user in `user_id` was held by AutoMod.",
+   "fr": "Un message de l'utilisateur indiqué dans `user_id` a été retenu par AutoMod.",
    "token": "",
    "href": "/reference/event-types/#channelchatuser_message_hold"
   },
@@ -1283,6 +1465,7 @@
    "kind": "event",
    "name": "channel.chat.user_message_update",
    "summary": "The AutoMod status of a held message of the user in `user_id` changed.",
+   "fr": "Le statut AutoMod d'un message retenu de l'utilisateur indiqué dans `user_id` a changé.",
    "token": "",
    "href": "/reference/event-types/#channelchatuser_message_update"
   },
@@ -1290,6 +1473,7 @@
    "kind": "event",
    "name": "channel.cheer",
    "summary": "A user cheered Bits in the channel.",
+   "fr": "Un utilisateur a envoyé un cheer en Bits sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelcheer"
   },
@@ -1297,6 +1481,7 @@
    "kind": "event",
    "name": "channel.custom_power_up_redemption.add",
    "summary": "A viewer redeemed a custom Power-up.",
+   "fr": "Un spectateur a utilisé un Power-up personnalisé.",
    "token": "",
    "href": "/reference/event-types/#channelcustom_power_up_redemptionadd"
   },
@@ -1304,6 +1489,7 @@
    "kind": "event",
    "name": "channel.follow",
    "summary": "Someone followed the channel.",
+   "fr": "Quelqu'un s'est mis à suivre la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelfollow"
   },
@@ -1311,6 +1497,7 @@
    "kind": "event",
    "name": "channel.goal.begin",
    "summary": "The broadcaster started a creator goal.",
+   "fr": "Le diffuseur a lancé un objectif de créateur.",
    "token": "",
    "href": "/reference/event-types/#channelgoalbegin"
   },
@@ -1318,6 +1505,7 @@
    "kind": "event",
    "name": "channel.goal.end",
    "summary": "The broadcaster ended a creator goal.",
+   "fr": "Le diffuseur a mis fin à un objectif de créateur.",
    "token": "",
    "href": "/reference/event-types/#channelgoalend"
   },
@@ -1325,6 +1513,7 @@
    "kind": "event",
    "name": "channel.goal.progress",
    "summary": "A creator goal moved forward or backward.",
+   "fr": "Un objectif de créateur a progressé ou reculé.",
    "token": "",
    "href": "/reference/event-types/#channelgoalprogress"
   },
@@ -1332,6 +1521,7 @@
    "kind": "event",
    "name": "channel.guest_star_guest.update",
    "summary": "A guest or a slot changed in a running Guest Star session.",
+   "fr": "Un invité ou un emplacement a changé dans une session Guest Star en cours.",
    "token": "",
    "href": "/reference/event-types/#channelguest_star_guestupdate"
   },
@@ -1339,6 +1529,7 @@
    "kind": "event",
    "name": "channel.guest_star_session.begin",
    "summary": "The host started a Guest Star session.",
+   "fr": "L'hôte a lancé une session Guest Star.",
    "token": "",
    "href": "/reference/event-types/#channelguest_star_sessionbegin"
   },
@@ -1346,6 +1537,7 @@
    "kind": "event",
    "name": "channel.guest_star_session.end",
    "summary": "A Guest Star session ended, closed by the host or by Twitch.",
+   "fr": "Une session Guest Star s'est terminée, fermée par l'hôte ou par Twitch.",
    "token": "",
    "href": "/reference/event-types/#channelguest_star_sessionend"
   },
@@ -1353,6 +1545,7 @@
    "kind": "event",
    "name": "channel.guest_star_settings.update",
    "summary": "The host changed the Guest Star preferences of the channel.",
+   "fr": "L'hôte a changé les préférences Guest Star de la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelguest_star_settingsupdate"
   },
@@ -1360,6 +1553,7 @@
    "kind": "event",
    "name": "channel.hype_train.begin",
    "summary": "A Hype Train started on the channel.",
+   "fr": "Un Hype Train a démarré sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelhype_trainbegin"
   },
@@ -1367,6 +1561,7 @@
    "kind": "event",
    "name": "channel.hype_train.end",
    "summary": "A Hype Train ended on the channel.",
+   "fr": "Un Hype Train s'est terminé sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelhype_trainend"
   },
@@ -1374,6 +1569,7 @@
    "kind": "event",
    "name": "channel.hype_train.progress",
    "summary": "A contribution moved a running Hype Train forward.",
+   "fr": "Une contribution a fait avancer un Hype Train en cours.",
    "token": "",
    "href": "/reference/event-types/#channelhype_trainprogress"
   },
@@ -1381,6 +1577,7 @@
    "kind": "event",
    "name": "channel.moderate",
    "summary": "A moderator took a moderation action in the channel, warnings included.",
+   "fr": "Un modérateur a effectué une action de modération sur la chaîne, avertissements compris.",
    "token": "",
    "href": "/reference/event-types/#channelmoderate"
   },
@@ -1388,6 +1585,7 @@
    "kind": "event",
    "name": "channel.moderate@1",
    "summary": "A moderator took a moderation action in the channel.",
+   "fr": "Un modérateur a effectué une action de modération sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelmoderate1"
   },
@@ -1395,6 +1593,7 @@
    "kind": "event",
    "name": "channel.moderator.add",
    "summary": "A user was made moderator of the channel.",
+   "fr": "Un utilisateur est devenu modérateur de la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelmoderatoradd"
   },
@@ -1402,6 +1601,7 @@
    "kind": "event",
    "name": "channel.moderator.remove",
    "summary": "A user lost moderator status in the channel.",
+   "fr": "Un utilisateur a perdu le statut de modérateur sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelmoderatorremove"
   },
@@ -1409,6 +1609,7 @@
    "kind": "event",
    "name": "channel.poll.begin",
    "summary": "A poll started on the channel.",
+   "fr": "Un sondage a démarré sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelpollbegin"
   },
@@ -1416,6 +1617,7 @@
    "kind": "event",
    "name": "channel.poll.end",
    "summary": "A poll ended on the channel.",
+   "fr": "Un sondage s'est terminé sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelpollend"
   },
@@ -1423,6 +1625,7 @@
    "kind": "event",
    "name": "channel.poll.progress",
    "summary": "Viewers voted in a running poll.",
+   "fr": "Des spectateurs ont voté dans un sondage en cours.",
    "token": "",
    "href": "/reference/event-types/#channelpollprogress"
   },
@@ -1430,6 +1633,7 @@
    "kind": "event",
    "name": "channel.prediction.begin",
    "summary": "A Prediction started on the channel.",
+   "fr": "Une prédiction a démarré sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelpredictionbegin"
   },
@@ -1437,6 +1641,7 @@
    "kind": "event",
    "name": "channel.prediction.end",
    "summary": "A Prediction ended, resolved or canceled.",
+   "fr": "Une prédiction s'est terminée, résolue ou annulée.",
    "token": "",
    "href": "/reference/event-types/#channelpredictionend"
   },
@@ -1444,6 +1649,7 @@
    "kind": "event",
    "name": "channel.prediction.lock",
    "summary": "Betting closed on a Prediction.",
+   "fr": "Les paris d'une prédiction ont été clos.",
    "token": "",
    "href": "/reference/event-types/#channelpredictionlock"
   },
@@ -1451,6 +1657,7 @@
    "kind": "event",
    "name": "channel.prediction.progress",
    "summary": "Viewers bet on a running Prediction.",
+   "fr": "Des spectateurs ont parié sur une prédiction en cours.",
    "token": "",
    "href": "/reference/event-types/#channelpredictionprogress"
   },
@@ -1458,6 +1665,7 @@
    "kind": "event",
    "name": "channel.raid",
    "summary": "A broadcaster raided another channel.",
+   "fr": "Un diffuseur a lancé un raid sur une autre chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelraid"
   },
@@ -1465,6 +1673,7 @@
    "kind": "event",
    "name": "channel.shared_chat.begin",
    "summary": "The channel became active in a shared chat session.",
+   "fr": "La chaîne est devenue active dans une session de chat partagé.",
    "token": "",
    "href": "/reference/event-types/#channelshared_chatbegin"
   },
@@ -1472,6 +1681,7 @@
    "kind": "event",
    "name": "channel.shared_chat.end",
    "summary": "The channel left a shared chat session, or the session ended.",
+   "fr": "La chaîne a quitté une session de chat partagé, ou la session s'est terminée.",
    "token": "",
    "href": "/reference/event-types/#channelshared_chatend"
   },
@@ -1479,6 +1689,7 @@
    "kind": "event",
    "name": "channel.shared_chat.update",
    "summary": "The shared chat session the channel is in changed, for example its participants.",
+   "fr": "La session de chat partagé à laquelle la chaîne participe a changé, par exemple ses participants.",
    "token": "",
    "href": "/reference/event-types/#channelshared_chatupdate"
   },
@@ -1486,6 +1697,7 @@
    "kind": "event",
    "name": "channel.shield_mode.begin",
    "summary": "Shield Mode was turned on in the channel.",
+   "fr": "Le Shield Mode a été activé sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelshield_modebegin"
   },
@@ -1493,6 +1705,7 @@
    "kind": "event",
    "name": "channel.shield_mode.end",
    "summary": "Shield Mode was turned off in the channel.",
+   "fr": "Le Shield Mode a été désactivé sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelshield_modeend"
   },
@@ -1500,6 +1713,7 @@
    "kind": "event",
    "name": "channel.shoutout.create",
    "summary": "The broadcaster sent a Shoutout to another channel.",
+   "fr": "Le diffuseur a envoyé un shoutout à une autre chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelshoutoutcreate"
   },
@@ -1507,6 +1721,7 @@
    "kind": "event",
    "name": "channel.shoutout.receive",
    "summary": "The broadcaster received a Shoutout from another channel.",
+   "fr": "Le diffuseur a reçu un shoutout d'une autre chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelshoutoutreceive"
   },
@@ -1514,6 +1729,7 @@
    "kind": "event",
    "name": "channel.subscribe",
    "summary": "A user subscribed to the channel.",
+   "fr": "Un utilisateur s'est abonné à la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelsubscribe"
   },
@@ -1521,6 +1737,7 @@
    "kind": "event",
    "name": "channel.subscription.end",
    "summary": "A subscription to the channel ended.",
+   "fr": "Un abonnement à la chaîne a pris fin.",
    "token": "",
    "href": "/reference/event-types/#channelsubscriptionend"
   },
@@ -1528,6 +1745,7 @@
    "kind": "event",
    "name": "channel.subscription.gift",
    "summary": "A viewer gifted one or more subscriptions in the channel.",
+   "fr": "Un spectateur a offert un ou plusieurs abonnements sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelsubscriptiongift"
   },
@@ -1535,6 +1753,7 @@
    "kind": "event",
    "name": "channel.subscription.message",
    "summary": "A subscriber shared a resubscription message in chat.",
+   "fr": "Un abonné a partagé un message de réabonnement dans le chat.",
    "token": "",
    "href": "/reference/event-types/#channelsubscriptionmessage"
   },
@@ -1542,6 +1761,7 @@
    "kind": "event",
    "name": "channel.suspicious_user.message",
    "summary": "A user flagged as suspicious sent a chat message.",
+   "fr": "Un utilisateur signalé comme suspect a envoyé un message dans le chat.",
    "token": "",
    "href": "/reference/event-types/#channelsuspicious_usermessage"
   },
@@ -1549,6 +1769,7 @@
    "kind": "event",
    "name": "channel.suspicious_user.update",
    "summary": "A moderator changed the treatment applied to a suspicious user.",
+   "fr": "Un modérateur a changé le traitement appliqué à un utilisateur suspect.",
    "token": "",
    "href": "/reference/event-types/#channelsuspicious_userupdate"
   },
@@ -1556,6 +1777,7 @@
    "kind": "event",
    "name": "channel.unban",
    "summary": "A viewer was unbanned in the channel.",
+   "fr": "Un spectateur a été débanni sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelunban"
   },
@@ -1563,6 +1785,7 @@
    "kind": "event",
    "name": "channel.unban_request.create",
    "summary": "A banned user created an unban request.",
+   "fr": "Un utilisateur banni a déposé une demande de débannissement.",
    "token": "",
    "href": "/reference/event-types/#channelunban_requestcreate"
   },
@@ -1570,6 +1793,7 @@
    "kind": "event",
    "name": "channel.unban_request.resolve",
    "summary": "An unban request was approved, denied or canceled.",
+   "fr": "Une demande de débannissement a été approuvée, refusée ou annulée.",
    "token": "",
    "href": "/reference/event-types/#channelunban_requestresolve"
   },
@@ -1577,6 +1801,7 @@
    "kind": "event",
    "name": "channel.update",
    "summary": "The broadcaster changed the title, category, language or content classification labels of the channel.",
+   "fr": "Le diffuseur a changé le titre, la catégorie, la langue ou les étiquettes de classification du contenu de la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelupdate"
   },
@@ -1584,6 +1809,7 @@
    "kind": "event",
    "name": "channel.vip.add",
    "summary": "A user was made VIP of the channel.",
+   "fr": "Un utilisateur est devenu VIP de la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelvipadd"
   },
@@ -1591,6 +1817,7 @@
    "kind": "event",
    "name": "channel.vip.remove",
    "summary": "A user lost VIP status in the channel.",
+   "fr": "Un utilisateur a perdu le statut VIP sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelvipremove"
   },
@@ -1598,6 +1825,7 @@
    "kind": "event",
    "name": "channel.warning.acknowledge",
    "summary": "A user acknowledged a warning they received in the channel.",
+   "fr": "Un utilisateur a pris acte d'un avertissement reçu sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelwarningacknowledge"
   },
@@ -1605,6 +1833,7 @@
    "kind": "event",
    "name": "channel.warning.send",
    "summary": "A warning was sent to a user in the channel.",
+   "fr": "Un avertissement a été envoyé à un utilisateur sur la chaîne.",
    "token": "",
    "href": "/reference/event-types/#channelwarningsend"
   },
@@ -1612,6 +1841,7 @@
    "kind": "event",
    "name": "conduit.shard.disabled",
    "summary": "EventSub disabled a conduit shard because the state of its transport changed.",
+   "fr": "EventSub a désactivé un shard de conduit parce que l'état de son transport a changé.",
    "token": "",
    "href": "/reference/event-types/#conduitsharddisabled"
   },
@@ -1619,6 +1849,7 @@
    "kind": "event",
    "name": "drop.entitlement.grant",
    "summary": "Viewers were granted Drop entitlements.",
+   "fr": "Des spectateurs ont reçu des droits liés aux Drops.",
    "token": "",
    "href": "/reference/event-types/#dropentitlementgrant"
   },
@@ -1626,6 +1857,7 @@
    "kind": "event",
    "name": "extension.bits_transaction.create",
    "summary": "A Bits transaction was made in an extension.",
+   "fr": "Une transaction en Bits a eu lieu dans une extension.",
    "token": "",
    "href": "/reference/event-types/#extensionbits_transactioncreate"
   },
@@ -1633,6 +1865,7 @@
    "kind": "event",
    "name": "stream.offline",
    "summary": "The broadcaster stopped streaming.",
+   "fr": "Le diffuseur a arrêté de diffuser.",
    "token": "",
    "href": "/reference/event-types/#streamoffline"
   },
@@ -1640,6 +1873,7 @@
    "kind": "event",
    "name": "stream.online",
    "summary": "The broadcaster started a stream.",
+   "fr": "Le diffuseur a lancé un stream.",
    "token": "",
    "href": "/reference/event-types/#streamonline"
   },
@@ -1647,6 +1881,7 @@
    "kind": "event",
    "name": "user.authorization.grant",
    "summary": "A user authorized the application.",
+   "fr": "Un utilisateur a autorisé l'application.",
    "token": "",
    "href": "/reference/event-types/#userauthorizationgrant"
   },
@@ -1654,6 +1889,7 @@
    "kind": "event",
    "name": "user.authorization.revoke",
    "summary": "The application lost a user's authorization.",
+   "fr": "L'application a perdu l'autorisation d'un utilisateur.",
    "token": "",
    "href": "/reference/event-types/#userauthorizationrevoke"
   },
@@ -1661,6 +1897,7 @@
    "kind": "event",
    "name": "user.update",
    "summary": "A user changed their account (name, description, email...).",
+   "fr": "Un utilisateur a modifié son compte (nom, description, e-mail...).",
    "token": "",
    "href": "/reference/event-types/#userupdate"
   },
@@ -1668,6 +1905,7 @@
    "kind": "event",
    "name": "user.whisper.message",
    "summary": "The user received a whisper.",
+   "fr": "L'utilisateur a reçu un chuchotement.",
    "token": "",
    "href": "/reference/event-types/#userwhispermessage"
   }

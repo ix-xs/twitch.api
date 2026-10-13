@@ -1,15 +1,11 @@
 ---
 title: twitch.tags
-description: "Stream tags (deprecated by Twitch, kept for completeness)."
+description: "Tags de stream (abandonnés par Twitch, conservés par souci d'exhaustivité)."
 sidebar:
   label: tags
 ---
 
 Toutes les méthodes de `twitch.tags`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## all
 
@@ -17,22 +13,21 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.tags.all(params?, options?): Paginator<StreamTag>
 ```
 
-**Obsolète.** Twitch replaced these tags with free text ones in 2023 and
-this endpoint no longer returns any.
+**Obsolète.** Twitch a remplacé ces tags par des tags en texte libre en 2023 et cet endpoint n'en renvoie plus aucun.
 
-Lists the stream tags defined by Twitch.
+Liste les tags de stream définis par Twitch.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `tag_id` | `string \| readonly string[]` | Only these tags. Up to 100 IDs. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
+| `tag_id` | `string \| readonly string[]` | Uniquement ces tags. Jusqu'à 100 identifiants. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -43,10 +38,10 @@ Lists the stream tags defined by Twitch.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `tag_id` | `string` | ID of the tag. |
-| `is_auto` | `boolean` | Whether Twitch applies the tag by itself. Broadcasters cannot add such a tag. |
-| `localization_names` | `Record<string, string>` | Name of the tag in each language. Keys are locales such as `"en-us"`. |
-| `localization_descriptions` | `Record<string, string>` | Description of the tag in each language. Keys are locales such as `"en-us"`. |
+| `tag_id` | `string` | Identifiant du tag. |
+| `is_auto` | `boolean` | Indique si Twitch applique le tag de lui-même. Les diffuseurs ne peuvent pas ajouter un tel tag. |
+| `localization_names` | `Record<string, string>` | Nom du tag dans chaque langue. Les clés sont des codes de langue tels que `"en-us"`. |
+| `localization_descriptions` | `Record<string, string>` | Description du tag dans chaque langue. Les clés sont des codes de langue tels que `"en-us"`. |
 
 </details>
 
@@ -64,20 +59,19 @@ const tags = await twitch.tags.all().all();
 twitch.tags.ofChannel(params, options?): Promise<StreamTag[]>
 ```
 
-**Obsolète.** Twitch replaced these tags with free text ones in 2023. Read
-the `tags` field of the channel information instead.
+**Obsolète.** Twitch a remplacé ces tags par des tags en texte libre en 2023. Lisez plutôt le champ `tags` des informations de la chaîne.
 
-Lists the Twitch defined tags applied to a channel.
+Liste les tags définis par Twitch appliqués à une chaîne.
 
-**Jeton:** app or user.
+**Jeton :** application ou utilisateur.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster whose tags to list. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur dont on liste les tags. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -88,10 +82,10 @@ Lists the Twitch defined tags applied to a channel.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `tag_id` | `string` | ID of the tag. |
-| `is_auto` | `boolean` | Whether Twitch applies the tag by itself. Broadcasters cannot add such a tag. |
-| `localization_names` | `Record<string, string>` | Name of the tag in each language. Keys are locales such as `"en-us"`. |
-| `localization_descriptions` | `Record<string, string>` | Description of the tag in each language. Keys are locales such as `"en-us"`. |
+| `tag_id` | `string` | Identifiant du tag. |
+| `is_auto` | `boolean` | Indique si Twitch applique le tag de lui-même. Les diffuseurs ne peuvent pas ajouter un tel tag. |
+| `localization_names` | `Record<string, string>` | Nom du tag dans chaque langue. Les clés sont des codes de langue tels que `"en-us"`. |
+| `localization_descriptions` | `Record<string, string>` | Description du tag dans chaque langue. Les clés sont des codes de langue tels que `"en-us"`. |
 
 </details>
 

@@ -1,15 +1,11 @@
 ---
 title: twitch.subscriptions
-description: "Subscriptions: the subscribers of a channel, and whether a user is one."
+description: "Abonnements : les abonnés d'une chaîne, et savoir si un utilisateur l'est."
 sidebar:
   label: subscriptions
 ---
 
 Toutes les méthodes de `twitch.subscriptions`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## get
 
@@ -17,22 +13,21 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.subscriptions.get(params?, options?): Paginator<BroadcasterSubscription, BroadcasterSubscriptionsBody>
 ```
 
-Lists the subscribers of a channel. Each page also carries the subscriber
-points of the channel, in `page.raw.points`.
+Liste les abonnés d'une chaîne. Chaque page porte aussi les points d'abonnés de la chaîne, dans `page.raw.points`.
 
-**Jeton:** user, scope `channel:read:subscriptions`.
+**Jeton :** utilisateur, scope `channel:read:subscriptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | Broadcaster whose subscribers to list. Defaults to the user making the call. |
-| `user_id` | `string \| readonly string[]` | Only these subscribers. Up to 100 IDs. Cannot be combined with a cursor. |
-| `first` | `number` | Items per page, 1 to 100. Twitch defaults to 20. |
-| `after` | `string` | Cursor of the next page. |
-| `before` | `string` | Cursor of the previous page. |
+| `broadcaster_id` | `string` | Diffuseur dont on liste les abonnés. Par défaut, l'utilisateur qui fait l'appel. |
+| `user_id` | `string \| readonly string[]` | Uniquement ces abonnés. Jusqu'à 100 identifiants. Ne peut pas être combiné avec un curseur. |
+| `first` | `number` | Éléments par page, de 1 à 100. Twitch en renvoie 20 par défaut. |
+| `after` | `string` | Curseur de la page suivante. |
+| `before` | `string` | Curseur de la page précédente. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -43,18 +38,18 @@ points of the channel, in `page.raw.points`.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `gifter_id` | `string` | ID of the user who offered the subscription. An empty string when it is not a gift. |
-| `gifter_login` | `string` | Login name of that user. An empty string when it is not a gift. |
-| `gifter_name` | `string` | Display name of that user. An empty string when it is not a gift. |
-| `is_gift` | `boolean` | Whether the subscription was offered by someone else. |
-| `plan_name` | `string` | Name of the subscription plan. |
-| `tier` | `SubscriptionTier` | Level of the subscription. |
-| `user_id` | `string` | ID of the subscriber. |
-| `user_name` | `string` | Display name of the subscriber. |
-| `user_login` | `string` | Login name of the subscriber. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `gifter_id` | `string` | Identifiant de l'utilisateur qui a offert l'abonnement. Une chaîne vide quand l'abonnement n'a pas été offert. |
+| `gifter_login` | `string` | Nom de connexion de cet utilisateur. Une chaîne vide quand l'abonnement n'a pas été offert. |
+| `gifter_name` | `string` | Nom d'affichage de cet utilisateur. Une chaîne vide quand l'abonnement n'a pas été offert. |
+| `is_gift` | `boolean` | Indique si l'abonnement a été offert par quelqu'un d'autre. |
+| `plan_name` | `string` | Nom de la formule d'abonnement. |
+| `tier` | `SubscriptionTier` | Niveau de l'abonnement. |
+| `user_id` | `string` | Identifiant de l'abonné. |
+| `user_name` | `string` | Nom d'affichage de l'abonné. |
+| `user_login` | `string` | Nom de connexion de l'abonné. |
 
 </details>
 
@@ -74,19 +69,18 @@ for await (const sub of twitch.subscriptions.get()) console.log(sub.user_name, s
 twitch.subscriptions.check(params, options?): Promise<UserSubscription | null>
 ```
 
-Gets the subscription of a user to a channel, or `null` when the user is
-not subscribed.
+Renvoie l'abonnement d'un utilisateur à une chaîne, ou `null` quand il n'y est pas abonné.
 
-**Jeton:** user, scope `user:read:subscriptions`.
+**Jeton :** utilisateur, scope `user:read:subscriptions`.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` <small>requis</small> | `string` | Broadcaster the user may be subscribed to. Must be a partner or an affiliate. |
-| `user_id` | `string` | User to check. Defaults to the user making the call. |
+| `broadcaster_id` <small>requis</small> | `string` | Diffuseur auquel l'utilisateur est peut-être abonné. Doit être partenaire ou affilié. |
+| `user_id` | `string` | Utilisateur à vérifier. Par défaut, l'utilisateur qui fait l'appel. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -97,14 +91,14 @@ not subscribed.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `broadcaster_id` | `string` | ID of the broadcaster. |
-| `broadcaster_login` | `string` | Login name of the broadcaster. |
-| `broadcaster_name` | `string` | Display name of the broadcaster. |
-| `gifter_id` | `string` | ID of the user who offered the subscription. Only present on a gift. |
-| `gifter_login` | `string` | Login name of that user. Only present on a gift. |
-| `gifter_name` | `string` | Display name of that user. Only present on a gift. |
-| `is_gift` | `boolean` | Whether the subscription was offered by someone else. |
-| `tier` | `SubscriptionTier` | Level of the subscription. |
+| `broadcaster_id` | `string` | Identifiant du diffuseur. |
+| `broadcaster_login` | `string` | Nom de connexion du diffuseur. |
+| `broadcaster_name` | `string` | Nom d'affichage du diffuseur. |
+| `gifter_id` | `string` | Identifiant de l'utilisateur qui a offert l'abonnement. Présent uniquement sur un abonnement offert. |
+| `gifter_login` | `string` | Nom de connexion de cet utilisateur. Présent uniquement sur un abonnement offert. |
+| `gifter_name` | `string` | Nom d'affichage de cet utilisateur. Présent uniquement sur un abonnement offert. |
+| `is_gift` | `boolean` | Indique si l'abonnement a été offert par quelqu'un d'autre. |
+| `tier` | `SubscriptionTier` | Niveau de l'abonnement. |
 
 </details>
 

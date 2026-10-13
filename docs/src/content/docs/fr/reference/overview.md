@@ -28,7 +28,7 @@ Chaque groupe est une propriété du client : `twitch.chat`, `twitch.moderation`
 | [`twitch.goals`](/reference/api/goals/) | Objectifs de créateur d'une chaîne. | 1 |
 | [`twitch.guestStar`](/reference/api/guest-star/) | Guest Star (bêta) : sessions, invitations et emplacements. | 12 |
 | [`twitch.hypeTrain`](/reference/api/hype-train/) | Hype Train : le train en cours et les records de la chaîne. | 1 |
-| [`twitch.moderation`](/reference/api/moderation/) | Modération : bannissements, exclusions temporaires, avertissements, AutoMod, termes bloqués, modérateurs, VIP et mode Bouclier. | 25 |
+| [`twitch.moderation`](/reference/api/moderation/) | Modération : bannissements, timeouts, avertissements, AutoMod, termes bloqués, modérateurs, VIP et Shield Mode. | 25 |
 | [`twitch.polls`](/reference/api/polls/) | Sondages : créer, lire et clore. | 3 |
 | [`twitch.predictions`](/reference/api/predictions/) | Prédictions : créer, lire, verrouiller et résoudre. | 3 |
 | [`twitch.raids`](/reference/api/raids/) | Raids : en lancer un, annuler celui en attente. | 2 |

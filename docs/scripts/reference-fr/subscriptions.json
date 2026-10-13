@@ -1,0 +1,23 @@
+{
+ "Broadcaster the user may be subscribed to. Must be a partner or an affiliate.": "Diffuseur auquel l'utilisateur est peut-être abonné. Doit être partenaire ou affilié.",
+ "Broadcaster whose subscribers to list. Defaults to the user making the call.": "Diffuseur dont on liste les abonnés. Par défaut, l'utilisateur qui fait l'appel.",
+ "Display name of that user. An empty string when it is not a gift.": "Nom d'affichage de cet utilisateur. Une chaîne vide quand l'abonnement n'a pas été offert.",
+ "Display name of that user. Only present on a gift.": "Nom d'affichage de cet utilisateur. Présent uniquement sur un abonnement offert.",
+ "Display name of the subscriber.": "Nom d'affichage de l'abonné.",
+ "Gets the subscription of a user to a channel, or `null` when the user is not subscribed.": "Renvoie l'abonnement d'un utilisateur à une chaîne, ou `null` quand il n'y est pas abonné.",
+ "ID of the subscriber.": "Identifiant de l'abonné.",
+ "ID of the user who offered the subscription. An empty string when it is not a gift.": "Identifiant de l'utilisateur qui a offert l'abonnement. Une chaîne vide quand l'abonnement n'a pas été offert.",
+ "ID of the user who offered the subscription. Only present on a gift.": "Identifiant de l'utilisateur qui a offert l'abonnement. Présent uniquement sur un abonnement offert.",
+ "Level of the subscription.": "Niveau de l'abonnement.",
+ "Lists the subscribers of a channel. Each page also carries the subscriber points of the channel, in `page.raw.points`.": "Liste les abonnés d'une chaîne. Chaque page porte aussi les points d'abonnés de la chaîne, dans `page.raw.points`.",
+ "Login name of that user. An empty string when it is not a gift.": "Nom de connexion de cet utilisateur. Une chaîne vide quand l'abonnement n'a pas été offert.",
+ "Login name of that user. Only present on a gift.": "Nom de connexion de cet utilisateur. Présent uniquement sur un abonnement offert.",
+ "Login name of the subscriber.": "Nom de connexion de l'abonné.",
+ "Name of the subscription plan.": "Nom de la formule d'abonnement.",
+ "Only these subscribers. Up to 100 IDs. Cannot be combined with a cursor.": "Uniquement ces abonnés. Jusqu'à 100 identifiants. Ne peut pas être combiné avec un curseur.",
+ "Subscriptions: the subscribers of a channel, and whether a user is one.": "Abonnements : les abonnés d'une chaîne, et savoir si un utilisateur l'est.",
+ "User to check. Defaults to the user making the call.": "Utilisateur à vérifier. Par défaut, l'utilisateur qui fait l'appel.",
+ "Whether the subscription was offered by someone else.": "Indique si l'abonnement a été offert par quelqu'un d'autre.",
+ "user, scope `channel:read:subscriptions`.": "utilisateur, scope `channel:read:subscriptions`.",
+ "user, scope `user:read:subscriptions`.": "utilisateur, scope `user:read:subscriptions`."
+}

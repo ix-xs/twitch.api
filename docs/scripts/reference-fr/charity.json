@@ -1,0 +1,21 @@
+{
+ "Broadcaster running the campaign. Defaults to the user making the call.": "Diffuseur qui mène la collecte. Par défaut, l'utilisateur qui fait l'appel.",
+ "Charity: the active campaign and its donations.": "Collectes caritatives : la campagne en cours et ses dons.",
+ "Display name of the donor.": "Nom d'affichage du donateur.",
+ "Gets the charity campaign a broadcaster is running, or `null` when there is none. A campaign can no longer be read once it has ended.": "Renvoie la collecte caritative que mène un diffuseur, ou `null` quand il n'y en a pas. Une collecte ne peut plus être lue une fois terminée.",
+ "ID of the broadcaster running the campaign.": "Identifiant du diffuseur qui mène la collecte.",
+ "ID of the campaign the money went to.": "Identifiant de la collecte à laquelle l'argent a été versé.",
+ "ID of the campaign.": "Identifiant de la collecte.",
+ "ID of the donation, unique across campaigns.": "Identifiant du don, unique d'une collecte à l'autre.",
+ "ID of the donor.": "Identifiant du donateur.",
+ "Lists the donations made to the campaign a broadcaster is running. The list is empty when no campaign is active.": "Liste les dons faits à la collecte que mène un diffuseur. La liste est vide quand aucune collecte n'est en cours.",
+ "Login name of the donor.": "Nom de connexion du donateur.",
+ "Money given.": "Somme donnée.",
+ "Money raised so far.": "Somme récoltée jusqu'ici.",
+ "Money the broadcaster aims to raise, or `null` when no goal is set.": "Somme que le diffuseur vise à récolter, ou `null` quand aucun objectif n'est fixé.",
+ "Name of the charity.": "Nom de l'association caritative.",
+ "URL of the logo of the charity, a 100 by 100 pixels PNG.": "URL du logo de l'association caritative, un PNG de 100 pixels sur 100.",
+ "URL of the website of the charity.": "URL du site web de l'association caritative.",
+ "What the charity does.": "Ce que fait l'association caritative.",
+ "user, scope `channel:read:charity`.": "utilisateur, scope `channel:read:charity`."
+}

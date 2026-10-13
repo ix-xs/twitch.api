@@ -1,0 +1,9 @@
+{
+ "Broadcaster whose Hype Train to read. Defaults to the user making the call.": "Diffuseur dont on lit le Hype Train. Par défaut, l'utilisateur qui fait l'appel.",
+ "Gets the Hype Train running on a channel, if any, along with the records of the channel.": "Renvoie le Hype Train en cours sur une chaîne, s'il y en a un, ainsi que les records de la chaîne.",
+ "Hype Train: the current train and the channel records.": "Hype Train : le train en cours et les records de la chaîne.",
+ "Record of the channel on its own trains, or `null` when it never had one.": "Record de la chaîne sur ses propres trains, ou `null` quand elle n'en a jamais eu.",
+ "Record of the channel on shared trains, or `null` when it never had one.": "Record de la chaîne sur les trains partagés, ou `null` quand elle n'en a jamais eu.",
+ "The train in progress, or `null` when none is running.": "Le train en cours, ou `null` quand il n'y en a pas.",
+ "user, scope `channel:read:hype_train`.": "utilisateur, scope `channel:read:hype_train`."
+}

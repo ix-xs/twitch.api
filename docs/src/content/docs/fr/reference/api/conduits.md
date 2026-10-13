@@ -1,15 +1,11 @@
 ---
 title: twitch.conduits
-description: "Conduits: the EventSub transport that spreads events over several shards."
+description: "Conduits : le transport EventSub qui répartit les événements sur plusieurs shards."
 sidebar:
   label: conduits
 ---
 
 Toutes les méthodes de `twitch.conduits`, avec leurs paramètres, ce qu'elles renvoient et le jeton nécessaire.
-
-:::note
-Les descriptions de cette page sont tirées des commentaires du code source et restent en anglais.
-:::
 
 ## list
 
@@ -17,15 +13,15 @@ Les descriptions de cette page sont tirées des commentaires du code source et r
 twitch.conduits.list(options?): Promise<Conduit[]>
 ```
 
-Lists the conduits of your application.
+Liste les conduits de votre application.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
 Cette méthode ne prend aucun paramètre propre.
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -36,8 +32,8 @@ Cette méthode ne prend aucun paramètre propre.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the conduit. |
-| `shard_count` | `number` | Number of shards the conduit has. |
+| `id` | `string` | Identifiant du conduit. |
+| `shard_count` | `number` | Nombre de shards du conduit. |
 
 </details>
 
@@ -55,17 +51,17 @@ const conduits = await twitch.conduits.list();
 twitch.conduits.create(params, options?): Promise<Conduit>
 ```
 
-Creates a conduit with the given number of shards.
+Crée un conduit avec le nombre de shards donné.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `shard_count` <small>requis</small> | `number` | Number of shards to create. |
+| `shard_count` <small>requis</small> | `number` | Nombre de shards à créer. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -76,8 +72,8 @@ Creates a conduit with the given number of shards.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the conduit. |
-| `shard_count` | `number` | Number of shards the conduit has. |
+| `id` | `string` | Identifiant du conduit. |
+| `shard_count` | `number` | Nombre de shards du conduit. |
 
 </details>
 
@@ -95,18 +91,18 @@ const conduit = await twitch.conduits.create({ shard_count: 2 });
 twitch.conduits.update(params, options?): Promise<Conduit>
 ```
 
-Changes the number of shards of a conduit.
+Change le nombre de shards d'un conduit.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` <small>requis</small> | `string` | ID of the conduit. |
-| `shard_count` <small>requis</small> | `number` | New number of shards. Lowering it removes the shards with the highest IDs. |
+| `id` <small>requis</small> | `string` | Identifiant du conduit. |
+| `shard_count` <small>requis</small> | `number` | Nouveau nombre de shards. Le réduire supprime les shards aux identifiants les plus élevés. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -117,8 +113,8 @@ Changes the number of shards of a conduit.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the conduit. |
-| `shard_count` | `number` | Number of shards the conduit has. |
+| `id` | `string` | Identifiant du conduit. |
+| `shard_count` | `number` | Nombre de shards du conduit. |
 
 </details>
 
@@ -136,15 +132,15 @@ await twitch.conduits.update({ id: conduit.id, shard_count: 5 });
 twitch.conduits.delete(id, options?): Promise<void>
 ```
 
-Deletes a conduit. Its subscriptions stop shortly after.
+Supprime un conduit. Ses abonnements s'arrêtent peu après.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
-`id`: `string`
+`id` : `string`
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -164,19 +160,19 @@ await twitch.conduits.delete(conduit.id);
 twitch.conduits.shards(params, options?): Paginator<ConduitShard>
 ```
 
-Lists the shards of a conduit and where each one delivers events.
+Liste les shards d'un conduit et l'endroit où chacun livre les événements.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `conduit_id` <small>requis</small> | `string` | ID of the conduit. |
-| `status` | `ConduitShardStatus` | Only shards in this state. |
-| `after` | `string` | Cursor of the next page. |
+| `conduit_id` <small>requis</small> | `string` | Identifiant du conduit. |
+| `status` | `ConduitShardStatus` | Uniquement les shards dans cet état. |
+| `after` | `string` | Curseur de la page suivante. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -187,9 +183,9 @@ Lists the shards of a conduit and where each one delivers events.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `id` | `string` | ID of the shard: its index, starting at `"0"`. |
-| `status` | `ConduitShardStatus` | Current state of the shard. |
-| `transport` | `ConduitShardTransport` | Where the shard delivers events. |
+| `id` | `string` | Identifiant du shard : son indice, à partir de `"0"`. |
+| `status` | `ConduitShardStatus` | État actuel du shard. |
+| `transport` | `ConduitShardTransport` | Endroit où le shard livre les événements. |
 
 </details>
 
@@ -207,19 +203,18 @@ const shards = await twitch.conduits.shards({ conduit_id: conduit.id }).all();
 twitch.conduits.updateShards(params, options?): Promise<UpdateConduitShardsResult>
 ```
 
-Points shards at a webhook callback or a WebSocket session. Shards that
-could not be updated are reported in `errors` instead of throwing.
+Dirige des shards vers un callback de webhook ou une session WebSocket. Les shards qui n'ont pas pu être mis à jour sont signalés dans `errors` au lieu de lever une erreur.
 
-**Jeton:** app.
+**Jeton :** application.
 
 ### Paramètres
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `conduit_id` <small>requis</small> | `string` | ID of the conduit. |
-| `shards` <small>requis</small> | `readonly { id: string; transport: ConduitShardTransportInput; }[]` | Shards to update. Any number: long lists are split for you. |
+| `conduit_id` <small>requis</small> | `string` | Identifiant du conduit. |
+| `shards` <small>requis</small> | `readonly { id: string; transport: ConduitShardTransportInput; }[]` | Shards à mettre à jour. En nombre quelconque : les longues listes sont découpées pour vous. |
 
-`options`: Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
+`options` : Options de requête pour cet appel : `as`, `token`, `signal`, `timeout`, `retries`.
 
 ### Renvoie
 
@@ -230,8 +225,8 @@ could not be updated are reported in `errors` instead of throwing.
 
 | Nom | Type | Description |
 | --- | --- | --- |
-| `data` | `ConduitShard[]` | Shards that were updated. |
-| `errors` | `ConduitShardError[]` | Shards that could not be updated. |
+| `data` | `ConduitShard[]` | Shards mis à jour. |
+| `errors` | `ConduitShardError[]` | Shards qui n'ont pas pu être mis à jour. |
 
 </details>
 
